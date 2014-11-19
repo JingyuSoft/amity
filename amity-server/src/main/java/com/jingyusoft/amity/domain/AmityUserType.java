@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.entities;
+package com.jingyusoft.amity.domain;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -12,6 +12,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.jingyusoft.amity.common.SecurityUtils;
+import com.jingyusoft.amity.domain.AmityUserType;
 
 @Entity
 @Table(name = "amity_user")

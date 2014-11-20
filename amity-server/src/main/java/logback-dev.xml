@@ -98,7 +98,8 @@
 
 	<appender name="SPRING"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.spring.log</file>
+		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.spring.log
+		</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
 				%msg%n</Pattern>
@@ -121,7 +122,7 @@
 		<appender-ref ref="HIBERNATE-SQL" />
 	</logger>
 
-	<logger name="org.hibernate.type" level="TRACE" additivity="true">
+	<logger name="org.hibernate.type" level="ALL" additivity="true">
 		<appender-ref ref="HIBERNATE-SQL" />
 	</logger>
 
@@ -130,7 +131,7 @@
 		<appender-ref ref="HIBERNATE-SCHEMA" />
 	</logger>
 
-	<logger name="org.hibernate" level="DEBUG" additivity="false">
+	<logger name="org.hibernate" level="DEBUG" additivity="true">
 		<appender-ref ref="HIBERNATE" />
 	</logger>
 
@@ -142,15 +143,11 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<logger name="org.eclipse.jetty" level="WARN" additivity="false">
-		<appender-ref ref="JETTY" />
-	</logger>
-
-	<logger name="com.jingyusoft.amity" level="DEBUG" additivity="true">
+	<logger name="com.jingyusoft.amity" level="ALL" additivity="true">
 		<appender-ref ref="FILE" />
 	</logger>
 
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
 

@@ -1,0 +1,16 @@
+1. Download File
+wget http://download.maxmind.com/download/worldcities/worldcitiespop.txt.gz
+
+2. Unzip File
+gunzip worldcitiespop.txt.gz
+
+3. Create Table
+CREATE TABLE maxmind_cities (`country` char(2) NOT NULL, `city` varchar(150) NOT NULL, `accent_city` varchar(150) NOT NULL, `region` varchar(150) NOT NULL, `population` int NULL, `latitude` decimal(11,8) NOT NULL, `longitude` decimal(11,8) NOT NULL);
+
+4. Load Data
+mysql --local-infile=1 -u univer -p
+
+load data local infile 'worldcitiespop.txt' into table maxmind_cities character set 'latin1' columns terminated by ',' lines terminated by '\n' ignore 1 lines;
+
+5. Region Codes and be downloaded from
+http://www.maxmind.com/download/geoip/misc/region_codes.csv

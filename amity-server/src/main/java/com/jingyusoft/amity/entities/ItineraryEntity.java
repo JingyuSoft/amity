@@ -3,14 +3,13 @@ package com.jingyusoft.amity.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "itinerary")
@@ -22,8 +21,7 @@ public class ItineraryEntity {
 	private long id;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@ForeignKey(name = "fk_itinerary_user")
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_itinerary_user"))
 	private AmityUserEntity user;
 
 	public long getId() {

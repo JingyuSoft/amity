@@ -1,0 +1,22 @@
+wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City-CSV.zip
+
+create table geolite_city_locations
+(
+	geoname_id int not null,
+	continent_code char(2) not null,
+	continent_name varchar(16) not null,
+	country_iso_code char(2) not null,
+	country_name varchar(64) not null,
+	subdivision_iso_code int null,
+	subdivision_name varchar(64) null,
+	city_name varchar(64) null,
+	metro_code int null,
+	time_zone varchar(32) not null
+);
+
+load data local infile 'GeoLite2-City-Locations.csv' into table geolite_city_locations columns terminated by ',' lines terminated by '\n' ignore 1 lines;
+
+update geolite_city_locations set continent_name = replace(continent_name, '"', '') where continent_name regexp '^\".*\"$';
+update geolite_city_locations set country_name = replace(country_name, '"', '') where country_name regexp '^\".*\"$';
+update geolite_city_locations set subdivision_name = replace(subdivision_name, '"', '') where subdivision_name regexp '^\".*\"$';
+update geolite_city_locations set city_name = replace(city_name, '"', '') where city_name regexp '^\".*\"$';

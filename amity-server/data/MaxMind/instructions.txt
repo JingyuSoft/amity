@@ -12,5 +12,9 @@ mysql --local-infile=1 -u univer -p
 
 load data local infile 'worldcitiespop.txt' into table maxmind_cities character set 'latin1' columns terminated by ',' lines terminated by '\n' ignore 1 lines;
 
+update maxmind_cities set population = null where population = 0;
+update maxmind_cities set city = replace(city, '`', '') where city regexp '^`.*';
+update maxmind_cities set accent_city = replace(accent_city, '`', '') where accent_city regexp '^`.*';
+
 5. Region Codes and be downloaded from
 http://www.maxmind.com/download/geoip/misc/region_codes.csv

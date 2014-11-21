@@ -3,12 +3,11 @@ package com.jingyusoft.amity.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "facebook_user")
@@ -22,8 +21,7 @@ public class FacebookUserEntity {
 	private long facebookId;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "amity_user_id")
-	@ForeignKey(name = "fk_facebook_user_amity_user_id")
+	@JoinColumn(name = "amity_user_id", foreignKey = @ForeignKey(name = "fk_facebook_user_amity_user_id"))
 	private AmityUserEntity amityUser;
 
 	public AmityUserEntity getAmityUser() {

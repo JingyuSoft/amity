@@ -18,7 +18,7 @@ public final class DateTime {
 		return new DateTime(new Date().getTime());
 	}
 
-	public static final DateTime parseUtcDate(final String value) {
+	public static final DateTime parseAsUtc(final String value) {
 		try {
 			Date date = THREAD_LOCAL_DATE_FORMAT.get().parse(value);
 			return new DateTime(date.getTime());
@@ -27,11 +27,15 @@ public final class DateTime {
 		}
 	}
 
+	public static final String DATE_FORMAT_STRING = "yyyy-MM-dd";
+
+	public static final String DATE_TIME_FORMAT_STRING = DATE_FORMAT_STRING + " HH:mm:ss";
+
 	private static final ThreadLocal<DateFormat> THREAD_LOCAL_DATE_FORMAT = new ThreadLocal<DateFormat>() {
 
 		@Override
 		protected DateFormat initialValue() {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_STRING);
 			dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 			return dateFormat;
 		}
@@ -41,7 +45,7 @@ public final class DateTime {
 
 		@Override
 		protected DateFormat initialValue() {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			DateFormat dateFormat = new SimpleDateFormat(DATE_TIME_FORMAT_STRING);
 			dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 			return dateFormat;
 		}
@@ -51,7 +55,7 @@ public final class DateTime {
 
 		@Override
 		protected DateFormat initialValue() {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+			DateFormat dateFormat = new SimpleDateFormat(DATE_TIME_FORMAT_STRING + ".SSS");
 			dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 			return dateFormat;
 		}

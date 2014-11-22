@@ -1,27 +1,25 @@
-package com.jingyusoft.amity.entities;
+package com.jingyusoft.amity.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+public abstract class LocationBase {
 
-@MappedSuperclass
-public abstract class LocationEntityBase {
-
-	@Id
-	@Column(name = "id")
 	private int id;
 
-	@Column(name = "code", length = 12, nullable = false)
 	private String code;
 
-	@Column(name = "name", length = 64, nullable = false)
 	private String name;
 
-	@Column(name = "latitude")
 	private Double latitude;
 
-	@Column(name = "longitude")
 	private Double longitude;
+
+	public LocationBase(int id, String code, String name, Double latitude, Double longitude) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	public String getCode() {
 		return code;

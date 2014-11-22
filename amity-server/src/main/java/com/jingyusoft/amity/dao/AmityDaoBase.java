@@ -7,17 +7,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.jingyusoft.amity.common.AmityLogger;
 
 public abstract class AmityDaoBase<TEntity, TIdentity extends Serializable> implements AmityDao<TEntity, TIdentity> {
 
 	@SuppressWarnings("unused")
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmityDaoBase.class);
+	private static final Logger LOGGER = AmityLogger.getLogger();
 
 	@PersistenceContext
 	protected EntityManager entityManager;

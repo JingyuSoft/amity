@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Repository;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AmityPropertiesRepository {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmityPropertiesRepository.class);
+	private static final Logger LOGGER = AmityLogger.getLogger();
 
 	private Properties mergedProperties;
 

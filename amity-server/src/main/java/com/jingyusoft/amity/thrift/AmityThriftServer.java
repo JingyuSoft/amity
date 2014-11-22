@@ -5,18 +5,17 @@ import javax.annotation.Resource;
 
 import org.apache.thrift.server.TServer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.WrappedException;
-import com.jingyusoft.amity.thrift.ThriftServerFactory;
 import com.jingyusoft.amity.thrift.generated.AmityService;
 
 @Service
 public class AmityThriftServer {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmityThriftServer.class);
+	private static final Logger LOGGER = AmityLogger.getLogger();
 
 	@Resource
 	private ThriftServerFactory thriftServerFactory;

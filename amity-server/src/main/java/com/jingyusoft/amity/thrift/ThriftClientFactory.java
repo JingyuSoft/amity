@@ -15,12 +15,12 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jingyusoft.amity.common.AmityException;
+import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.HostPort;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
@@ -80,7 +80,7 @@ public class ThriftClientFactory {
 
 	private static class ThriftClientPool<U> {
 
-		private static final Logger LOGGER = LoggerFactory.getLogger(ThriftClientPool.class);
+		private static final Logger LOGGER = AmityLogger.getLogger();
 
 		private int poolSize = 0;
 
@@ -112,7 +112,7 @@ public class ThriftClientFactory {
 		}
 	}
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ThriftClientFactory.class);
+	private static final Logger LOGGER = AmityLogger.getLogger();
 
 	private final Map<HostPort, ThriftClientPool<?>> clients = Maps.newHashMap();
 

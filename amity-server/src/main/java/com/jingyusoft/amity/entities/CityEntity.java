@@ -3,12 +3,14 @@ package com.jingyusoft.amity.entities;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "city")
+@Table(name = "city", indexes = { @Index(name = "idx_city_by_region_id", columnList = "region_id"),
+		@Index(name = "idx_city_by_code", columnList = "code", unique = true) })
 public class CityEntity extends LocationEntityBase {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = CountryEntity.class)

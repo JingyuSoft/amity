@@ -1,26 +1,25 @@
 package com.jingyusoft.amity.entities;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "region")
 public class RegionEntity extends LocationEntityBase {
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = CityEntity.class)
-	@JoinColumn(name = "region_id")
-	private List<CityEntity> cities;
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = CountryEntity.class)
+	@JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "fk_region_country_id_country_id"))
+	private CountryEntity country;
 
-	public List<CityEntity> getCities() {
-		return cities;
+	public CountryEntity getCountry() {
+		return country;
 	}
 
-	public void setCities(List<CityEntity> cities) {
-		this.cities = cities;
+	public void setCountry(CountryEntity country) {
+		this.country = country;
 	}
 }

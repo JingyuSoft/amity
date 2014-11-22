@@ -11,7 +11,7 @@ public abstract class LocationEntityBase {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "code", length = 2, nullable = false, unique = true)
+	@Column(name = "code", length = 12, nullable = false, unique = true)
 	private String code;
 
 	@Column(name = "name", length = 64, nullable = false)

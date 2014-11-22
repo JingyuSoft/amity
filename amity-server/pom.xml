@@ -47,11 +47,9 @@
 				<version>1.8.1</version>
 				<executions>
 					<execution>
-						<id>generate-jsw-scripts</id>
 						<phase>package</phase>
 						<goals>
 							<goal>assemble</goal>
-							<goal>generate-daemons</goal>
 						</goals>
 					</execution>
 				</executions>

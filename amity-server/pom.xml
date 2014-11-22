@@ -41,6 +41,77 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.8.1</version>
+				<executions>
+					<execution>
+						<id>generate-jsw-scripts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble</goal>
+							<goal>generate-daemons</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repositoryLayout>flat</repositoryLayout>
+					<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+
+					<!-- Daemons -->
+					<daemons>
+						<daemon>
+							<id>sibyl-data-master-service-qa</id>
+							<wrapperMainClass>org.tanukisoftware.wrapper.WrapperStartStopApp</wrapperMainClass>
+							<mainClass>com.talmmon.sibyl.data.server.DataMaster</mainClass>
+							<platforms>
+								<platform>jsw</platform>
+							</platforms>
+							<jvmSettings>
+								<initialMemorySize>20m</initialMemorySize>
+								<maxMemorySize>256m</maxMemorySize>
+								<maxStackSize>128m</maxStackSize>
+								<extraArguments>
+									<extraArgument>-Dconfig.mode=qa</extraArgument>
+								</extraArguments>
+							</jvmSettings>
+						</daemon>
+					</daemons>
+
+					<!-- Programs -->
+					<programs>
+						<!-- Amity Server -->
+						<program>
+							<mainClass>com.talmmon.sibyl.data.server.DataMaster</mainClass>
+							<id>sibyl-data-master-qa</id>
+							<jvmSettings>
+								<initialMemorySize>20m</initialMemorySize>
+								<maxMemorySize>256m</maxMemorySize>
+								<maxStackSize>128m</maxStackSize>
+								<extraArguments>
+									<extraArgument>-Dconfig.mode=qa</extraArgument>
+								</extraArguments>
+							</jvmSettings>
+						</program>
+					</programs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<argLine>-Dconfig.mode=test</argLine>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.17</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 	<properties>

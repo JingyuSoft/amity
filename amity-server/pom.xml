@@ -62,7 +62,7 @@
 					<!-- Daemons -->
 					<daemons>
 						<daemon>
-							<id>sibyl-data-master-service-qa</id>
+							<id>amity-service-qa</id>
 							<wrapperMainClass>org.tanukisoftware.wrapper.WrapperStartStopApp</wrapperMainClass>
 							<mainClass>com.jingyusoft.amity.programs.SpringMain</mainClass>
 							<platforms>

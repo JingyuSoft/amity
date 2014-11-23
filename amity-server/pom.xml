@@ -109,11 +109,12 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>deploy</phase>
+						<phase>install</phase>
 						<configuration>
 							<tasks>
+								<echo message="Copying Amity service scripts..." />
 								<copy todir="${basedir}/target/appassembler/bin">
-									<fileset dir="${basedir}/scripts/service" includes="**/*" />
+									<fileset dir="${basedir}/scripts/service" includes="*" />
 								</copy>
 							</tasks>
 						</configuration>

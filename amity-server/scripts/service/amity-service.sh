@@ -18,6 +18,7 @@ echo "OUTPUT_FILE_NAME = " $OUTPUT_FILE_NAME
 
 if [ ! -d $TEMP_DIR/$SERVICE_NAME ]; then
 	mkdir -p $TEMP_DIR/$SERVICE_NAME
+	echo "Temp directory created: " $TEMP_DIR/$SERVICE_NAME 
 fi
 
 case $1 in

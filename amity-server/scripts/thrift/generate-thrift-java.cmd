@@ -9,7 +9,11 @@ set SRC_DIR=..\..\src\main\resources\thrift
 set JAVA_DST_DIR=..\..\src\main\java
 set IOS_DST_DIR=..\..\..\amity-app\thrift
 
-%THRIFT% --gen java -out %JAVA_DST_DIR% %SRC_DIR%\amity.thrift
-%THRIFT% --gen cocoa -out %IOS_DST_DIR% %SRC_DIR%\amity.thrift
+del /Sy %JAVA_DST_DIR%\com\jingyusoft\amity\thrift\generated
+
+for /R %SRC_DIR% %%G in (*.thrift) do (
+	%THRIFT% --gen java -out %JAVA_DST_DIR% %%G
+	%THRIFT% --gen cocoa -out %IOS_DST_DIR% %%G
+)
 
 pause

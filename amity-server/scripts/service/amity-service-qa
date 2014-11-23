@@ -2,13 +2,14 @@
 
 export AMITY_ENVIRONMENT=qa
 export AMITY_START_SCRIPT=amity-server-$AMITY_ENVIRONMENT
+export JAVA_HOME=/usr/local/java/jdk1.8.0_20
 
 DIRNAME=`dirname $0`
 BASENAME=`basename $0`
-if [ ! -f $DIRNAME/amity-service.sh ]; then
+if [ ! -f $DIRNAME/amity-service-wrapper ]; then
     ORIGIN_SERVICE_SCRIPT=`readlink $DIRNAME/$BASENAME`
     DIRNAME=`dirname $ORIGIN_SERVICE_SCRIPT`
 fi
 
 cd $DIRNAME
-./amity-service.sh $@
+./amity-service-wrapper $@

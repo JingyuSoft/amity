@@ -1,29 +1,30 @@
 #!/bin/sh
 
-if [ -z $AMITY_ENVIRONMENT ]; then
-	echo "AMITY_ENVIRONMENT not specified. Existing..."
-	exit 1
-fi
-
 if [ -z $AMITY_START_SCRIPT ]; then
 	echo "AMITY_START_SCRIPT not specified. Existing..."
-	exit 2
+	exit 1
 fi
 
 cd `dirname $0`
 
-SERVICE_NAME=amity-service-$AMITY_ENVIRONMENT
-START_SCRIPT=$AMITY_START_SCRIPT
+SERVICE_NAME=$AMITY_START_SCRIPT
+START_SCRIPT=./$AMITY_START_SCRIPT
 TEMP_DIR=/var/tmp/jingyusoft
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
-OUTPUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/output.log
+STDOUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/stdout.log
+STDERR_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/stderr.log
 
+echo "-------------------------------------"
+echo "---   AMITY SERVICE INFORMATION   ---"
+echo "-------------------------------------"
 echo "Current Dir      = " `pwd`
 echo "Service Name     = " $SERVICE_NAME
 echo "Start Script     = " $START_SCRIPT
 echo "Temp Dir         = " $TEMP_DIR
 echo "PID_PATH_NAME    = " $PID_PATH_NAME
-echo "OUTPUT_FILE_NAME = " $OUTPUT_FILE_NAME
+echo "STDOUT_FILE_NAME = " $STDOUT_FILE_NAME
+echo "STDERR_FILE_NAME = " $STDERR_FILE_NAME
+echo "-------------------------------------"
 
 if [ ! -d $TEMP_DIR/$SERVICE_NAME ]; then
 	mkdir -p $TEMP_DIR/$SERVICE_NAME
@@ -34,7 +35,7 @@ case $1 in
     start)
         echo "Starting $SERVICE_NAME ..."
         if [ ! -f $PID_PATH_NAME ]; then
-            $START_SCRIPT >> $OUTPUT_FILE_NAME 2>&1 &
+            $START_SCRIPT 2> $STDERR_FILE_NAME 1> $STDOUT_FILE_NAME &
                         echo $! > $PID_PATH_NAME
             echo "$SERVICE_NAME started ..."
         else
@@ -60,7 +61,7 @@ case $1 in
             echo "$SERVICE_NAME stopped ...";
             rm $PID_PATH_NAME
             echo "$SERVICE_NAME starting ..."
-            $START_SCRIPT >> $OUTPUT_FILE_NAME 2>&1 &
+			$START_SCRIPT 2> $STDERR_FILE_NAME 1> $STDOUT_FILE_NAME &
                         echo $! > $PID_PATH_NAME
             echo "$SERVICE_NAME started ..."
         else

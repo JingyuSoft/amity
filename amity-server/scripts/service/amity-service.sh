@@ -18,6 +18,7 @@ TEMP_DIR=/var/tmp/jingyusoft
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
 OUTPUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/output.log
 
+echo "Current Dir      = " `pwd`
 echo "Service Name     = " $SERVICE_NAME
 echo "Start Script     = " $START_SCRIPT
 echo "Temp Dir         = " $TEMP_DIR

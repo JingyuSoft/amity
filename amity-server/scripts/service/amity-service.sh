@@ -1,13 +1,15 @@
 #!/bin/sh
 SERVICE_NAME=amity-server
-START_SCRIPT=
-PID_PATH_NAME=/var/tmp/${SERVICE_NAME}-pid
+START_SCRIPT=`dirname $0`/${SERVICE_NAME}.sh
+PID_PATH_NAME=/var/tmp/jingyusoft/${SERVICE_NAME}-pid
+TEMP_DIR=/var/tmp/jingyusoft
+OUTPUT_FILE_NAME=output.log
 
 case $1 in
     start)
         echo "Starting $SERVICE_NAME ..."
         if [ ! -f $PID_PATH_NAME ]; then
-            nohup $START_SCRIPT /var/tmp/jingyusoft/$SERVICE_NAME 2>> /dev/null >> /dev/null &
+            nohup $START_SCRIPT $TEMP_DIR/$SERVICE_NAME/$OUTPUT_FILE_NAME 2>> /dev/null >> /dev/null &
                         echo $! > $PID_PATH_NAME
             echo "$SERVICE_NAME started ..."
         else
@@ -33,7 +35,7 @@ case $1 in
             echo "$SERVICE_NAME stopped ...";
             rm $PID_PATH_NAME
             echo "$SERVICE_NAME starting ..."
-            nohup START_SCRIPT /var/tmp/$SERVICE_NAME 2>> /dev/null >> /dev/null &
+            nohup START_SCRIPT $TEMP_DIR/$SERVICE_NAME/$OUTPUT_FILE_NAME 2>> /dev/null >> /dev/null &
                         echo $! > $PID_PATH_NAME
             echo "$SERVICE_NAME started ..."
         else

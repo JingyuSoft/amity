@@ -1,5 +1,10 @@
 package com.jingyusoft.amity.programs;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -7,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.AmityPropertiesRepository;
+import com.jingyusoft.amity.common.WrappedException;
 
 public class SpringMain {
 
@@ -18,13 +24,31 @@ public class SpringMain {
 			return;
 		}
 
-		AmityPropertiesRepository propertiesRepository = new AmityPropertiesRepository();
-		propertiesRepository.initialize();
+		if (StringUtils.isEmpty(System.getProperty("jdbc.password"))) {
+			LOGGER.info("Loading JDBC password from VM arguments [{}]", "jdbc.password");
 
-		final String jdbcPassword = propertiesRepository.getProperty("jdbc.password");
+			if (StringUtils.isEmpty(System.getProperty("jdbc.password.file"))) {
+				LOGGER.info("Loading JDBC password from properties file");
+				AmityPropertiesRepository propertiesRepository = new AmityPropertiesRepository();
+				propertiesRepository.initialize();
 
-		if (StringUtils.isEmpty(System.getProperty("amity_database_password")) && !StringUtils.isEmpty(jdbcPassword)) {
-			System.setProperty("amity_database_password", jdbcPassword);
+				System.setProperty("jdbc.password", propertiesRepository.getProperty("jdbc.password"));
+			} else {
+				final String passwordFileName = System.getProperty("jdbc.password.file");
+				LOGGER.info("Loading JDBC password from file [{}]", passwordFileName);
+				// Load JDBC password from external file
+				try {
+					@SuppressWarnings("unchecked")
+					List<String> lines = IOUtils.readLines(new FileInputStream(passwordFileName));
+					System.setProperty("jdbc.password", lines.stream().findFirst().orElse(null));
+				} catch (IOException e) {
+					throw WrappedException.insteadOf(e);
+				}
+			}
+		}
+
+		if (StringUtils.isEmpty(System.getProperty("jdbc.password"))) {
+			System.err.println("Failed to load Amity database password");
 		}
 
 		applicationContext = new ClassPathXmlApplicationContext(applicationContextFile);

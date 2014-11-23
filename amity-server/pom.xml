@@ -64,7 +64,7 @@
 						<daemon>
 							<id>sibyl-data-master-service-qa</id>
 							<wrapperMainClass>org.tanukisoftware.wrapper.WrapperStartStopApp</wrapperMainClass>
-							<mainClass>com.talmmon.sibyl.data.server.DataMaster</mainClass>
+							<mainClass>com.jingyusoft.amity.programs.SpringMain</mainClass>
 							<platforms>
 								<platform>jsw</platform>
 							</platforms>
@@ -75,7 +75,7 @@
 								<extraArguments>
 									<extraArgument>-Dconfig.mode=qa</extraArgument>
 									<extraArgument>-Djdbc.password=${AMITY_DATABASE_PASSWORD}</extraArgument>
-									<extraArgument>-Djdbc.password.file=</extraArgument>
+									<extraArgument>-Djdbc.password.file=/srv/amity-server/amity-database-password-qa</extraArgument>
 									<extraArgument>-Dlogback.configurationFile=logback-qa.xml</extraArgument>
 								</extraArguments>
 							</jvmSettings>
@@ -95,7 +95,7 @@
 								<extraArguments>
 									<extraArgument>-Dconfig.mode=qa</extraArgument>
 									<extraArgument>-jdbc.password=${AMITY_DATABASE_PASSWORD}</extraArgument>
-									<extraArgument>-Djdbc.password.file=</extraArgument>
+									<extraArgument>-Djdbc.password.file=/srv/amity-server/amity-database-password-qa</extraArgument>
 									<extraArgument>-Dlogback.configurationFile=logback-qa.xml</extraArgument>
 								</extraArguments>
 							</jvmSettings>

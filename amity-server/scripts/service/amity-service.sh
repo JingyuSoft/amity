@@ -1,5 +1,5 @@
 #!/bin/sh
-SERVICE_NAME=MyService
+SERVICE_NAME=amity-server
 START_SCRIPT=
 PID_PATH_NAME=/var/tmp/${SERVICE_NAME}-pid
 
@@ -7,7 +7,7 @@ case $1 in
     start)
         echo "Starting $SERVICE_NAME ..."
         if [ ! -f $PID_PATH_NAME ]; then
-            nohup $START_SCRIPT /var/tmp/$SERVICE_NAME 2>> /dev/null >> /dev/null &
+            nohup $START_SCRIPT /var/tmp/jingyusoft/$SERVICE_NAME 2>> /dev/null >> /dev/null &
                         echo $! > $PID_PATH_NAME
             echo "$SERVICE_NAME started ..."
         else

@@ -2,9 +2,6 @@
 
 cd `dirname $0`
 
-rm -rf ../deploy
-mkdir ../deploy
+rm -rfv target/
 
 mvn package
-
-cp -rfv 

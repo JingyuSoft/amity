@@ -112,8 +112,8 @@
 						<phase>deploy</phase>
 						<configuration>
 							<tasks>
-								<copy todir="scripts">
-									<fileset dir="bin" includes="**" />
+								<copy todir="${basedir}/target/appassembler/bin">
+									<fileset dir="${basedir}/scripts/service" includes="**/*" />
 								</copy>
 							</tasks>
 						</configuration>

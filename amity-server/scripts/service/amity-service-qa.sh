@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export AMITY_ENVIRONMENT=qa
+export AMITY_START_SCRIPT=amity-server-$AMITY_ENVIRONMENT
 
 DIRNAME=`dirname $0`
 BASENAME=`basename $0`

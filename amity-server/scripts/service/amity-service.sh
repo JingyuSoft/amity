@@ -5,10 +5,15 @@ if [ -z $AMITY_ENVIRONMENT ]; then
 	exit 1
 fi
 
+if [ -z $AMITY_START_SCRIPT ]; then
+	echo "AMITY_START_SCRIPT not specified. Existing..."
+	exit 2
+fi
+
 cd `dirname $0`
 
 SERVICE_NAME=amity-service-$AMITY_ENVIRONMENT
-START_SCRIPT=amity-server-$AMITY_ENVIRONMENT.sh
+START_SCRIPT=$AMITY_START_SCRIPT
 TEMP_DIR=/var/tmp/jingyusoft
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
 OUTPUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/output.log

@@ -1,8 +1,11 @@
 #!/bin/sh
 
-cd `dirname $0`
+if [ -z $AMITY_ENVIRONMENT ]; then
+	echo "AMITY_ENVIRONMENT not specified. Existing..."
+	exit 1
+fi
 
-AMITY_ENVIRONMENT=$1
+cd `dirname $0`
 
 SERVICE_NAME=amity-service-$AMITY_ENVIRONMENT
 START_SCRIPT=amity-server-$AMITY_ENVIRONMENT.sh

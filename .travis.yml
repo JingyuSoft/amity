@@ -1,0 +1,7 @@
+jdk:
+ - oraclejdk8
+
+before_script:
+ - chmod +x amity-server/travis-ci.sh
+
+script: ./amity-server/travis-ci.sh

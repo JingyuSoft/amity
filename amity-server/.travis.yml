@@ -1,7 +1,0 @@
-jdk:
- - oraclejdk8
-
-before_script:
- - chmod +x travis-ci.sh
-
-script: ./travis-ci.sh

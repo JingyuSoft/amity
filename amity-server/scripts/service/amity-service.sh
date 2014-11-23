@@ -1,6 +1,13 @@
 #!/bin/sh
+
+cd `dirname $0`
+
 SERVICE_NAME=amity-server
-START_SCRIPT=`dirname $0`/${SERVICE_NAME}.sh
+SERVICE_SCRIPT=`readlink ${SERVICE_NAME}`
+
+cd `dirname $SERVICE_SCRIPT`
+
+START_SCRIPT=amity-server.sh
 TEMP_DIR=/var/tmp/jingyusoft
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
 OUTPUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/output.log

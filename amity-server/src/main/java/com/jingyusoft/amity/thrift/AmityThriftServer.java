@@ -3,6 +3,7 @@ package com.jingyusoft.amity.thrift;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.apache.thrift.TProcessor;
 import org.apache.thrift.server.TServer;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.thrift.generated.AmityService;
+import com.jingyusoft.amity.thrift.generated.ItineraryService;
 
 @Service
 public class AmityThriftServer {
@@ -22,6 +24,9 @@ public class AmityThriftServer {
 
 	@Resource
 	private AmityService.Iface amityService;
+
+	@Resource
+	private ItineraryService.Iface itineraryService;
 
 	@Value("${amity.server.host}")
 	private String host;
@@ -47,8 +52,9 @@ public class AmityThriftServer {
 	private void startDataServer() {
 
 		try {
-			TServer amityServer = thriftServerFactory.create(new AmityService.Processor<AmityService.Iface>(
-					amityService), port, handlers);
+			TServer amityServer = thriftServerFactory.create(new TProcessor[] {
+					new AmityService.Processor<AmityService.Iface>(amityService),
+					new ItineraryService.Processor<ItineraryService.Iface>(itineraryService) }, port, handlers);
 			LOGGER.info("Amity server started on {}:{}", host, port);
 			amityServer.serve();
 

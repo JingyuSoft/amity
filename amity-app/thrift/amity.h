@@ -36,6 +36,26 @@
 - (id<AmityService>) service;
 @end
 
+@protocol ItineraryService <NSObject>
+- (NSString *) echo: (NSString *) request;  // throws TException
+@end
+
+@interface ItineraryServiceClient : NSObject <ItineraryService> {
+id <TProtocol> inProtocol;
+id <TProtocol> outProtocol;
+}
+- (id) initWithProtocol: (id <TProtocol>) protocol;
+- (id) initWithInProtocol: (id <TProtocol>) inProtocol outProtocol: (id <TProtocol>) outProtocol;
+@end
+
+@interface ItineraryServiceProcessor : NSObject <TProcessor> {
+id <ItineraryService> mService;
+NSDictionary * mMethodMap;
+}
+- (id) initWithItineraryService: (id <ItineraryService>) service;
+- (id<ItineraryService>) service;
+@end
+
 @interface amityConstants : NSObject {
 }
 @end

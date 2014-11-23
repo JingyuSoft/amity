@@ -5,7 +5,15 @@ TEMP_DIR=/var/tmp/jingyusoft
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
 OUTPUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/output.log
 
-mkdir -p $TEMP_DIR/$SERVICE_NAME
+echo "Service Name     = " $SERVICE_NAME
+echo "Start Script     = " $START_SCRIPT
+echo "Temp Dir         = " $TEMP_DIR
+echo "PID_PATH_NAME    = " $PID_PATH_NAME
+echo "OUTPUT_FILE_NAME = " $OUTPUT_FILE_NAME
+
+if [ ! -d $TEMP_DIR/$SERVICE_NAME ]; then
+	mkdir -p $TEMP_DIR/$SERVICE_NAME
+fi
 
 case $1 in
     start)

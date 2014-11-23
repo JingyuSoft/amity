@@ -2,9 +2,11 @@
 
 cd `dirname $0`
 
-SERVICE_NAME=amity-server
+AMITY_ENVIRONMENT=$1
+
+SERVICE_NAME=amity-service-$AMITY_ENVIRONMENT
 SERVICE_SCRIPT=`readlink ${SERVICE_NAME}`
-START_SCRIPT=`dirname $SERVICE_SCRIPT`/amity-server.sh
+START_SCRIPT=`dirname $SERVICE_SCRIPT`/amity-server-$AMITY_ENVIRONMENT.sh
 TEMP_DIR=/var/tmp/jingyusoft
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
 OUTPUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/output.log

@@ -16,11 +16,134 @@
 #import "TBase.h"
 
 
-@protocol AmityService <NSObject>
-- (NSString *) echo: (NSString *) request;  // throws TException
+@interface HelperItinerary : NSObject <TBase, NSCoding> {
+  int64_t __id;
+  int64_t __userId;
+  int32_t __fromLocationid;
+  NSString * __latestPickupDate;
+  int32_t __toLocationId;
+  NSString * __latestDeliveryDate;
+
+  BOOL __id_isset;
+  BOOL __userId_isset;
+  BOOL __fromLocationid_isset;
+  BOOL __latestPickupDate_isset;
+  BOOL __toLocationId_isset;
+  BOOL __latestDeliveryDate_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=id, setter=setId:) int64_t id;
+@property (nonatomic, getter=userId, setter=setUserId:) int64_t userId;
+@property (nonatomic, getter=fromLocationid, setter=setFromLocationid:) int32_t fromLocationid;
+@property (nonatomic, retain, getter=latestPickupDate, setter=setLatestPickupDate:) NSString * latestPickupDate;
+@property (nonatomic, getter=toLocationId, setter=setToLocationId:) int32_t toLocationId;
+@property (nonatomic, retain, getter=latestDeliveryDate, setter=setLatestDeliveryDate:) NSString * latestDeliveryDate;
+#endif
+
+- (id) init;
+- (id) initWithId: (int64_t) id userId: (int64_t) userId fromLocationid: (int32_t) fromLocationid latestPickupDate: (NSString *) latestPickupDate toLocationId: (int32_t) toLocationId latestDeliveryDate: (NSString *) latestDeliveryDate;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int64_t) id;
+- (void) setId: (int64_t) id;
+#endif
+- (BOOL) idIsSet;
+
+#if !__has_feature(objc_arc)
+- (int64_t) userId;
+- (void) setUserId: (int64_t) userId;
+#endif
+- (BOOL) userIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (int32_t) fromLocationid;
+- (void) setFromLocationid: (int32_t) fromLocationid;
+#endif
+- (BOOL) fromLocationidIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) latestPickupDate;
+- (void) setLatestPickupDate: (NSString *) latestPickupDate;
+#endif
+- (BOOL) latestPickupDateIsSet;
+
+#if !__has_feature(objc_arc)
+- (int32_t) toLocationId;
+- (void) setToLocationId: (int32_t) toLocationId;
+#endif
+- (BOOL) toLocationIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) latestDeliveryDate;
+- (void) setLatestDeliveryDate: (NSString *) latestDeliveryDate;
+#endif
+- (BOOL) latestDeliveryDateIsSet;
+
 @end
 
-@interface AmityServiceClient : NSObject <AmityService> {
+@interface CreateHelperItineraryRequest : NSObject <TBase, NSCoding> {
+  HelperItinerary * __itinerary;
+
+  BOOL __itinerary_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=itinerary, setter=setItinerary:) HelperItinerary * itinerary;
+#endif
+
+- (id) init;
+- (id) initWithItinerary: (HelperItinerary *) itinerary;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (HelperItinerary *) itinerary;
+- (void) setItinerary: (HelperItinerary *) itinerary;
+#endif
+- (BOOL) itineraryIsSet;
+
+@end
+
+@interface CreateHelperItineraryResponse : NSObject <TBase, NSCoding> {
+  int32_t __itineraryId;
+
+  BOOL __itineraryId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=itineraryId, setter=setItineraryId:) int32_t itineraryId;
+#endif
+
+- (id) init;
+- (id) initWithItineraryId: (int32_t) itineraryId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) itineraryId;
+- (void) setItineraryId: (int32_t) itineraryId;
+#endif
+- (BOOL) itineraryIdIsSet;
+
+@end
+
+@protocol ItineraryService <NSObject>
+- (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request;  // throws TException
+@end
+
+@interface ItineraryServiceClient : NSObject <ItineraryService> {
   id <TProtocol> inProtocol;
   id <TProtocol> outProtocol;
 }
@@ -28,19 +151,19 @@
 - (id) initWithInProtocol: (id <TProtocol>) inProtocol outProtocol: (id <TProtocol>) outProtocol;
 @end
 
-@interface AmityServiceProcessor : NSObject <TProcessor> {
-  id <AmityService> mService;
+@interface ItineraryServiceProcessor : NSObject <TProcessor> {
+  id <ItineraryService> mService;
   NSDictionary * mMethodMap;
 }
-- (id) initWithAmityService: (id <AmityService>) service;
-- (id<AmityService>) service;
+- (id) initWithItineraryService: (id <ItineraryService>) service;
+- (id<ItineraryService>) service;
 @end
 
-@protocol ItineraryService <NSObject>
+@protocol AmityService <NSObject>
 - (NSString *) echo: (NSString *) request;  // throws TException
 @end
 
-@interface ItineraryServiceClient : NSObject <ItineraryService> {
+@interface AmityServiceClient : NSObject <AmityService> {
 id <TProtocol> inProtocol;
 id <TProtocol> outProtocol;
 }
@@ -48,12 +171,12 @@ id <TProtocol> outProtocol;
 - (id) initWithInProtocol: (id <TProtocol>) inProtocol outProtocol: (id <TProtocol>) outProtocol;
 @end
 
-@interface ItineraryServiceProcessor : NSObject <TProcessor> {
-id <ItineraryService> mService;
+@interface AmityServiceProcessor : NSObject <TProcessor> {
+id <AmityService> mService;
 NSDictionary * mMethodMap;
 }
-- (id) initWithItineraryService: (id <ItineraryService>) service;
-- (id<ItineraryService>) service;
+- (id) initWithAmityService: (id <AmityService>) service;
+- (id<AmityService>) service;
 @end
 
 @interface amityConstants : NSObject {

@@ -39,13 +39,13 @@ public class ItineraryService {
 
   public interface Iface {
 
-    public String echo(String request) throws org.apache.thrift.TException;
+    public CreateHelperItineraryResponse createItinerary(CreateHelperItineraryRequest request) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void echo(String request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void createItinerary(CreateHelperItineraryRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -69,27 +69,27 @@ public class ItineraryService {
       super(iprot, oprot);
     }
 
-    public String echo(String request) throws org.apache.thrift.TException
+    public CreateHelperItineraryResponse createItinerary(CreateHelperItineraryRequest request) throws org.apache.thrift.TException
     {
-      send_echo(request);
-      return recv_echo();
+      send_createItinerary(request);
+      return recv_createItinerary();
     }
 
-    public void send_echo(String request) throws org.apache.thrift.TException
+    public void send_createItinerary(CreateHelperItineraryRequest request) throws org.apache.thrift.TException
     {
-      echo_args args = new echo_args();
+      createItinerary_args args = new createItinerary_args();
       args.setRequest(request);
-      sendBase("echo", args);
+      sendBase("createItinerary", args);
     }
 
-    public String recv_echo() throws org.apache.thrift.TException
+    public CreateHelperItineraryResponse recv_createItinerary() throws org.apache.thrift.TException
     {
-      echo_result result = new echo_result();
-      receiveBase(result, "echo");
+      createItinerary_result result = new createItinerary_result();
+      receiveBase(result, "createItinerary");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "echo failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "createItinerary failed: unknown result");
     }
 
   }
@@ -110,35 +110,35 @@ public class ItineraryService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void echo(String request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void createItinerary(CreateHelperItineraryRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      echo_call method_call = new echo_call(request, resultHandler, this, ___protocolFactory, ___transport);
+      createItinerary_call method_call = new createItinerary_call(request, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class echo_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private String request;
-      public echo_call(String request, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class createItinerary_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private CreateHelperItineraryRequest request;
+      public createItinerary_call(CreateHelperItineraryRequest request, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.request = request;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("echo", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        echo_args args = new echo_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("createItinerary", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        createItinerary_args args = new createItinerary_args();
         args.setRequest(request);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public String getResult() throws org.apache.thrift.TException {
+      public CreateHelperItineraryResponse getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_echo();
+        return (new Client(prot)).recv_createItinerary();
       }
     }
 
@@ -155,26 +155,26 @@ public class ItineraryService {
     }
 
     private static <I extends Iface> Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> getProcessMap(Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
-      processMap.put("echo", new echo());
+      processMap.put("createItinerary", new createItinerary());
       return processMap;
     }
 
-    public static class echo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echo_args> {
-      public echo() {
-        super("echo");
+    public static class createItinerary<I extends Iface> extends org.apache.thrift.ProcessFunction<I, createItinerary_args> {
+      public createItinerary() {
+        super("createItinerary");
       }
 
-      public echo_args getEmptyArgsInstance() {
-        return new echo_args();
+      public createItinerary_args getEmptyArgsInstance() {
+        return new createItinerary_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public echo_result getResult(I iface, echo_args args) throws org.apache.thrift.TException {
-        echo_result result = new echo_result();
-        result.success = iface.echo(args.request);
+      public createItinerary_result getResult(I iface, createItinerary_args args) throws org.apache.thrift.TException {
+        createItinerary_result result = new createItinerary_result();
+        result.success = iface.createItinerary(args.request);
         return result;
       }
     }
@@ -192,24 +192,24 @@ public class ItineraryService {
     }
 
     private static <I extends AsyncIface> Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
-      processMap.put("echo", new echo());
+      processMap.put("createItinerary", new createItinerary());
       return processMap;
     }
 
-    public static class echo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, echo_args, String> {
-      public echo() {
-        super("echo");
+    public static class createItinerary<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createItinerary_args, CreateHelperItineraryResponse> {
+      public createItinerary() {
+        super("createItinerary");
       }
 
-      public echo_args getEmptyArgsInstance() {
-        return new echo_args();
+      public createItinerary_args getEmptyArgsInstance() {
+        return new createItinerary_args();
       }
 
-      public AsyncMethodCallback<String> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<CreateHelperItineraryResponse> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<String>() { 
-          public void onComplete(String o) {
-            echo_result result = new echo_result();
+        return new AsyncMethodCallback<CreateHelperItineraryResponse>() { 
+          public void onComplete(CreateHelperItineraryResponse o) {
+            createItinerary_result result = new createItinerary_result();
             result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
@@ -222,7 +222,7 @@ public class ItineraryService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            echo_result result = new echo_result();
+            createItinerary_result result = new createItinerary_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -242,25 +242,25 @@ public class ItineraryService {
         return false;
       }
 
-      public void start(I iface, echo_args args, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws TException {
-        iface.echo(args.request,resultHandler);
+      public void start(I iface, createItinerary_args args, org.apache.thrift.async.AsyncMethodCallback<CreateHelperItineraryResponse> resultHandler) throws TException {
+        iface.createItinerary(args.request,resultHandler);
       }
     }
 
   }
 
-  public static class echo_args implements org.apache.thrift.TBase<echo_args, echo_args._Fields>, java.io.Serializable, Cloneable, Comparable<echo_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echo_args");
+  public static class createItinerary_args implements org.apache.thrift.TBase<createItinerary_args, createItinerary_args._Fields>, java.io.Serializable, Cloneable, Comparable<createItinerary_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createItinerary_args");
 
-    private static final org.apache.thrift.protocol.TField REQUEST_FIELD_DESC = new org.apache.thrift.protocol.TField("request", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField REQUEST_FIELD_DESC = new org.apache.thrift.protocol.TField("request", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new echo_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new echo_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new createItinerary_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new createItinerary_argsTupleSchemeFactory());
     }
 
-    public String request; // required
+    public CreateHelperItineraryRequest request; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -325,16 +325,16 @@ public class ItineraryService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.REQUEST, new org.apache.thrift.meta_data.FieldMetaData("request", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, CreateHelperItineraryRequest.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(echo_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createItinerary_args.class, metaDataMap);
     }
 
-    public echo_args() {
+    public createItinerary_args() {
     }
 
-    public echo_args(
-      String request)
+    public createItinerary_args(
+      CreateHelperItineraryRequest request)
     {
       this();
       this.request = request;
@@ -343,14 +343,14 @@ public class ItineraryService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public echo_args(echo_args other) {
+    public createItinerary_args(createItinerary_args other) {
       if (other.isSetRequest()) {
-        this.request = other.request;
+        this.request = new CreateHelperItineraryRequest(other.request);
       }
     }
 
-    public echo_args deepCopy() {
-      return new echo_args(this);
+    public createItinerary_args deepCopy() {
+      return new createItinerary_args(this);
     }
 
     @Override
@@ -358,11 +358,11 @@ public class ItineraryService {
       this.request = null;
     }
 
-    public String getRequest() {
+    public CreateHelperItineraryRequest getRequest() {
       return this.request;
     }
 
-    public echo_args setRequest(String request) {
+    public createItinerary_args setRequest(CreateHelperItineraryRequest request) {
       this.request = request;
       return this;
     }
@@ -388,7 +388,7 @@ public class ItineraryService {
         if (value == null) {
           unsetRequest();
         } else {
-          setRequest((String)value);
+          setRequest((CreateHelperItineraryRequest)value);
         }
         break;
 
@@ -421,12 +421,12 @@ public class ItineraryService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof echo_args)
-        return this.equals((echo_args)that);
+      if (that instanceof createItinerary_args)
+        return this.equals((createItinerary_args)that);
       return false;
     }
 
-    public boolean equals(echo_args that) {
+    public boolean equals(createItinerary_args that) {
       if (that == null)
         return false;
 
@@ -455,7 +455,7 @@ public class ItineraryService {
     }
 
     @Override
-    public int compareTo(echo_args other) {
+    public int compareTo(createItinerary_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -489,7 +489,7 @@ public class ItineraryService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("echo_args(");
+      StringBuilder sb = new StringBuilder("createItinerary_args(");
       boolean first = true;
 
       sb.append("request:");
@@ -506,6 +506,9 @@ public class ItineraryService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (request != null) {
+        request.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -524,15 +527,15 @@ public class ItineraryService {
       }
     }
 
-    private static class echo_argsStandardSchemeFactory implements SchemeFactory {
-      public echo_argsStandardScheme getScheme() {
-        return new echo_argsStandardScheme();
+    private static class createItinerary_argsStandardSchemeFactory implements SchemeFactory {
+      public createItinerary_argsStandardScheme getScheme() {
+        return new createItinerary_argsStandardScheme();
       }
     }
 
-    private static class echo_argsStandardScheme extends StandardScheme<echo_args> {
+    private static class createItinerary_argsStandardScheme extends StandardScheme<createItinerary_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, echo_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, createItinerary_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -543,8 +546,9 @@ public class ItineraryService {
           }
           switch (schemeField.id) {
             case 1: // REQUEST
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.request = iprot.readString();
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.request = new CreateHelperItineraryRequest();
+                struct.request.read(iprot);
                 struct.setRequestIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -561,13 +565,13 @@ public class ItineraryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, echo_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, createItinerary_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
         if (struct.request != null) {
           oprot.writeFieldBegin(REQUEST_FIELD_DESC);
-          oprot.writeString(struct.request);
+          struct.request.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -576,16 +580,16 @@ public class ItineraryService {
 
     }
 
-    private static class echo_argsTupleSchemeFactory implements SchemeFactory {
-      public echo_argsTupleScheme getScheme() {
-        return new echo_argsTupleScheme();
+    private static class createItinerary_argsTupleSchemeFactory implements SchemeFactory {
+      public createItinerary_argsTupleScheme getScheme() {
+        return new createItinerary_argsTupleScheme();
       }
     }
 
-    private static class echo_argsTupleScheme extends TupleScheme<echo_args> {
+    private static class createItinerary_argsTupleScheme extends TupleScheme<createItinerary_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, echo_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, createItinerary_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetRequest()) {
@@ -593,16 +597,17 @@ public class ItineraryService {
         }
         oprot.writeBitSet(optionals, 1);
         if (struct.isSetRequest()) {
-          oprot.writeString(struct.request);
+          struct.request.write(oprot);
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, echo_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, createItinerary_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.request = iprot.readString();
+          struct.request = new CreateHelperItineraryRequest();
+          struct.request.read(iprot);
           struct.setRequestIsSet(true);
         }
       }
@@ -610,18 +615,18 @@ public class ItineraryService {
 
   }
 
-  public static class echo_result implements org.apache.thrift.TBase<echo_result, echo_result._Fields>, java.io.Serializable, Cloneable, Comparable<echo_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echo_result");
+  public static class createItinerary_result implements org.apache.thrift.TBase<createItinerary_result, createItinerary_result._Fields>, java.io.Serializable, Cloneable, Comparable<createItinerary_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createItinerary_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short)0);
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new echo_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new echo_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new createItinerary_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new createItinerary_resultTupleSchemeFactory());
     }
 
-    public String success; // required
+    public CreateHelperItineraryResponse success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -686,16 +691,16 @@ public class ItineraryService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, CreateHelperItineraryResponse.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(echo_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createItinerary_result.class, metaDataMap);
     }
 
-    public echo_result() {
+    public createItinerary_result() {
     }
 
-    public echo_result(
-      String success)
+    public createItinerary_result(
+      CreateHelperItineraryResponse success)
     {
       this();
       this.success = success;
@@ -704,14 +709,14 @@ public class ItineraryService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public echo_result(echo_result other) {
+    public createItinerary_result(createItinerary_result other) {
       if (other.isSetSuccess()) {
-        this.success = other.success;
+        this.success = new CreateHelperItineraryResponse(other.success);
       }
     }
 
-    public echo_result deepCopy() {
-      return new echo_result(this);
+    public createItinerary_result deepCopy() {
+      return new createItinerary_result(this);
     }
 
     @Override
@@ -719,11 +724,11 @@ public class ItineraryService {
       this.success = null;
     }
 
-    public String getSuccess() {
+    public CreateHelperItineraryResponse getSuccess() {
       return this.success;
     }
 
-    public echo_result setSuccess(String success) {
+    public createItinerary_result setSuccess(CreateHelperItineraryResponse success) {
       this.success = success;
       return this;
     }
@@ -749,7 +754,7 @@ public class ItineraryService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((String)value);
+          setSuccess((CreateHelperItineraryResponse)value);
         }
         break;
 
@@ -782,12 +787,12 @@ public class ItineraryService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof echo_result)
-        return this.equals((echo_result)that);
+      if (that instanceof createItinerary_result)
+        return this.equals((createItinerary_result)that);
       return false;
     }
 
-    public boolean equals(echo_result that) {
+    public boolean equals(createItinerary_result that) {
       if (that == null)
         return false;
 
@@ -816,7 +821,7 @@ public class ItineraryService {
     }
 
     @Override
-    public int compareTo(echo_result other) {
+    public int compareTo(createItinerary_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -850,7 +855,7 @@ public class ItineraryService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("echo_result(");
+      StringBuilder sb = new StringBuilder("createItinerary_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -867,6 +872,9 @@ public class ItineraryService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -885,15 +893,15 @@ public class ItineraryService {
       }
     }
 
-    private static class echo_resultStandardSchemeFactory implements SchemeFactory {
-      public echo_resultStandardScheme getScheme() {
-        return new echo_resultStandardScheme();
+    private static class createItinerary_resultStandardSchemeFactory implements SchemeFactory {
+      public createItinerary_resultStandardScheme getScheme() {
+        return new createItinerary_resultStandardScheme();
       }
     }
 
-    private static class echo_resultStandardScheme extends StandardScheme<echo_result> {
+    private static class createItinerary_resultStandardScheme extends StandardScheme<createItinerary_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, echo_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, createItinerary_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -904,8 +912,9 @@ public class ItineraryService {
           }
           switch (schemeField.id) {
             case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.success = iprot.readString();
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new CreateHelperItineraryResponse();
+                struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -922,13 +931,13 @@ public class ItineraryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, echo_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, createItinerary_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
         if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          oprot.writeString(struct.success);
+          struct.success.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -937,16 +946,16 @@ public class ItineraryService {
 
     }
 
-    private static class echo_resultTupleSchemeFactory implements SchemeFactory {
-      public echo_resultTupleScheme getScheme() {
-        return new echo_resultTupleScheme();
+    private static class createItinerary_resultTupleSchemeFactory implements SchemeFactory {
+      public createItinerary_resultTupleScheme getScheme() {
+        return new createItinerary_resultTupleScheme();
       }
     }
 
-    private static class echo_resultTupleScheme extends TupleScheme<echo_result> {
+    private static class createItinerary_resultTupleScheme extends TupleScheme<createItinerary_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, echo_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, createItinerary_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -954,16 +963,17 @@ public class ItineraryService {
         }
         oprot.writeBitSet(optionals, 1);
         if (struct.isSetSuccess()) {
-          oprot.writeString(struct.success);
+          struct.success.write(oprot);
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, echo_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, createItinerary_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = iprot.readString();
+          struct.success = new CreateHelperItineraryResponse();
+          struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
       }

@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.common;
+package com.jingyusoft.amity;
 
 public class AmityException extends RuntimeException {
 

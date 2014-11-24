@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -54,6 +55,10 @@ public class SpringMain {
 		applicationContext = new ClassPathXmlApplicationContext(applicationContextFile);
 		LOGGER.info("Spring main started successfullly. " + applicationContext.getBeanDefinitionCount()
 				+ " beans created.");
+	}
+
+	static {
+		DateTimeZone.setDefault(DateTimeZone.UTC);
 	}
 
 	private static final Logger LOGGER = AmityLogger.getLogger();

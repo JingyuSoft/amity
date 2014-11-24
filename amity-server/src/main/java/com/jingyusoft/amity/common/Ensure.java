@@ -2,6 +2,8 @@ package com.jingyusoft.amity.common;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.jingyusoft.amity.AmityException;
+
 public final class Ensure {
 
 	public static final void notBlank(final String name, final String value) {

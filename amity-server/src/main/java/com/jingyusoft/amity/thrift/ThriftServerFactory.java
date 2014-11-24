@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import com.jingyusoft.amity.common.AmityException;
+import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.WrappedException;
 

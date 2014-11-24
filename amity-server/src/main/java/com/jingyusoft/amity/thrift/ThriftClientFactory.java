@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.jingyusoft.amity.common.AmityException;
+import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.HostPort;
 import com.jingyusoft.amity.common.StringMessage;

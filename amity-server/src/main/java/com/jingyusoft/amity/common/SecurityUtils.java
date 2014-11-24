@@ -7,6 +7,8 @@ import java.util.Base64;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.jingyusoft.amity.AmityException;
+
 public final class SecurityUtils {
 
 	public static final String getBase64SHA256Hash(final String value) {

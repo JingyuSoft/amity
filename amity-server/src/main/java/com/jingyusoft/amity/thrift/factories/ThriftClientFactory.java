@@ -58,7 +58,7 @@ public class ThriftClientFactory {
 			TProtocol protocol = new TMultiplexedProtocol(new TBinaryProtocol(transport), serviceName);
 			try {
 				T client = clientClass.getConstructor(TProtocol.class).newInstance(protocol);
-				LOGGER.info("Thrift client created for type [{}]", clientClass.getName());
+				LOGGER.debug("Thrift client created for type [{}]", clientClass.getName());
 				return client;
 			} catch (Exception e) {
 				throw WrappedException.insteadOf(e);
@@ -77,6 +77,33 @@ public class ThriftClientFactory {
 				client = createClient();
 				return proxy.invoke(client, args);
 			}
+		}
+	}
+
+	public static class ThriftClientHolder<T> implements AutoCloseable {
+
+		private static <T> ThriftClientHolder<T> create(final ThriftClientFactory thriftClientFactory, T client,
+				final String clientPoolKey) {
+			ThriftClientHolder<T> holder = new ThriftClientHolder<T>();
+			holder.thriftClientFactory = thriftClientFactory;
+			holder.client = client;
+			holder.clientPoolKey = clientPoolKey;
+			return holder;
+		}
+
+		private ThriftClientFactory thriftClientFactory;
+
+		private T client;
+
+		private String clientPoolKey;
+
+		@Override
+		public void close() throws Exception {
+			thriftClientFactory.returnClient(client, clientPoolKey);
+		}
+
+		public T getClient() {
+			return client;
 		}
 	}
 
@@ -122,7 +149,7 @@ public class ThriftClientFactory {
 
 	private final Map<String, ThriftClientPool<?>> clientPools = Maps.newHashMap();
 
-	public synchronized <T extends U, U> U getClient(final HostPort hostPort, Class<T> clientClass,
+	public synchronized <T extends U, U> ThriftClientHolder<U> getClient(final HostPort hostPort, Class<T> clientClass,
 			Class<U> interfaceClass) {
 
 		final String clientPoolKey = getClientPoolKey(hostPort, interfaceClass);
@@ -137,14 +164,26 @@ public class ThriftClientFactory {
 		if (client == null) {
 			U proxiedClient = interfaceClass.cast(Enhancer.create(interfaceClass,
 					new AutoReconnectInvocationHandler<T>(hostPort, clientClass)));
-			return proxiedClient;
+			return ThriftClientHolder.create(this, proxiedClient, clientPoolKey);
 		} else {
-			return interfaceClass.cast(client);
+			return ThriftClientHolder.create(this, interfaceClass.cast(client), clientPoolKey);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public synchronized <U> void returnClient(final U client, final HostPort hostPort) {
+	public synchronized <T extends U, U> ThriftClientHolder<U> getClient(final HostPort hostPort,
+			Class<U> interfaceClass) {
+		try {
+			@SuppressWarnings("unchecked")
+			final Class<T> clientClass = (Class<T>) Class.forName(interfaceClass.getDeclaringClass().getName()
+					+ "$Client");
+			return getClient(hostPort, clientClass, interfaceClass);
+		} catch (Exception e) {
+			throw WrappedException.insteadOf(e);
+		}
+	}
+
+	@SuppressWarnings("unused")
+	private synchronized <U> void returnClient(final U client, final HostPort hostPort) {
 
 		final String clientClassName = client.getClass().getName();
 		final String interfaceClassName = clientClassName.substring(0, clientClassName.indexOf("$$EnhancerByCGLIB"));
@@ -156,6 +195,12 @@ public class ThriftClientFactory {
 			throw WrappedException.insteadOf(e);
 		}
 
+		returnClient(client, clientPoolKey);
+	}
+
+	private synchronized <U> void returnClient(final U client, final String clientPoolKey) {
+
+		@SuppressWarnings("unchecked")
 		ThriftClientPool<U> clientPool = (ThriftClientPool<U>) clientPools.get(clientPoolKey);
 
 		if (clientPool == null) {

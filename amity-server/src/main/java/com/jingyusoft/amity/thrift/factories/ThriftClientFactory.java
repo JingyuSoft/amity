@@ -114,8 +114,8 @@ public class ThriftClientFactory {
 		}
 	}
 
-	private static final String getClientKey(final HostPort hostPort, Class<?> clientClass) {
-		return hostPort + "_" + clientClass.getName();
+	private static final String getClientPoolKey(final HostPort hostPort, Class<?> interfaceClass) {
+		return hostPort + "_" + interfaceClass.getName();
 	}
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
@@ -125,11 +125,12 @@ public class ThriftClientFactory {
 	public synchronized <T extends U, U> U getClient(final HostPort hostPort, Class<T> clientClass,
 			Class<U> interfaceClass) {
 
-		final String clientKey = getClientKey(hostPort, interfaceClass);
-		ThriftClientPool<?> clientPool = clientPools.get(clientKey);
+		final String clientPoolKey = getClientPoolKey(hostPort, interfaceClass);
+		ThriftClientPool<?> clientPool = clientPools.get(clientPoolKey);
 		if (clientPool == null) {
 			clientPool = new ThriftClientPool<T>(clientClass);
-			clientPools.put(clientKey, clientPool);
+			clientPools.put(clientPoolKey, clientPool);
+			LOGGER.debug("Thrift client pool created with key [{}]", clientPoolKey);
 		}
 
 		Object client = clientPool.acquireClient();
@@ -148,13 +149,14 @@ public class ThriftClientFactory {
 		final String clientClassName = client.getClass().getName();
 		final String interfaceClassName = clientClassName.substring(0, clientClassName.indexOf("$$EnhancerByCGLIB"));
 
-		ThriftClientPool<U> clientPool;
+		String clientPoolKey;
 		try {
-			clientPool = (ThriftClientPool<U>) clientPools
-					.get(getClientKey(hostPort, Class.forName(interfaceClassName)));
+			clientPoolKey = getClientPoolKey(hostPort, Class.forName(interfaceClassName));
 		} catch (ClassNotFoundException e) {
 			throw WrappedException.insteadOf(e);
 		}
+
+		ThriftClientPool<U> clientPool = (ThriftClientPool<U>) clientPools.get(clientPoolKey);
 
 		if (clientPool == null) {
 			throw new AmityException("Thrift client pool not found for client class [" + client.getClass().getName()
@@ -162,5 +164,6 @@ public class ThriftClientFactory {
 		}
 
 		clientPool.returnClient(client);
+		LOGGER.debug("Thrift client returned to pool [{}]", clientPoolKey);
 	}
 }

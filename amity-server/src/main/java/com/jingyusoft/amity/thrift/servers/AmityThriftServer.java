@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.thrift;
+package com.jingyusoft.amity.thrift.servers;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.WrappedException;
+import com.jingyusoft.amity.thrift.factories.ThriftServerFactory;
 import com.jingyusoft.amity.thrift.generated.AmityService;
 import com.jingyusoft.amity.thrift.generated.ItineraryService;
 

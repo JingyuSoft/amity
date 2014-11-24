@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.thrift;
+package com.jingyusoft.amity.thrift.factories;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -9,6 +9,7 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TMultiplexedProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
@@ -53,7 +54,8 @@ public class ThriftClientFactory {
 				throw new AmityException(StringMessage.with("Failed to connect to worker server {}", hostPort), e);
 			}
 
-			TProtocol protocol = new TBinaryProtocol(transport);
+			final String serviceName = clientClass.getDeclaringClass().getSimpleName();
+			TProtocol protocol = new TMultiplexedProtocol(new TBinaryProtocol(transport), serviceName);
 			try {
 				T client = clientClass.getConstructor(TProtocol.class).newInstance(protocol);
 				LOGGER.info("Thrift client created for type [{}]", clientClass.getName());
@@ -88,7 +90,7 @@ public class ThriftClientFactory {
 
 		private final List<U> list = Lists.newArrayList();
 
-		ThriftClientPool(Class<U> interfaceClass) {
+		private ThriftClientPool(Class<U> interfaceClass) {
 			this.interfaceClass = interfaceClass;
 			LOGGER.info("Thrift client pool created for client type [{}]", interfaceClass.getName());
 		}
@@ -112,17 +114,22 @@ public class ThriftClientFactory {
 		}
 	}
 
+	private static final String getClientKey(final HostPort hostPort, Class<?> clientClass) {
+		return hostPort + "_" + clientClass.getName();
+	}
+
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
-	private final Map<HostPort, ThriftClientPool<?>> clients = Maps.newHashMap();
+	private final Map<String, ThriftClientPool<?>> clientPools = Maps.newHashMap();
 
 	public synchronized <T extends U, U> U getClient(final HostPort hostPort, Class<T> clientClass,
 			Class<U> interfaceClass) {
 
-		ThriftClientPool<?> clientPool = clients.get(hostPort);
+		final String clientKey = getClientKey(hostPort, interfaceClass);
+		ThriftClientPool<?> clientPool = clientPools.get(clientKey);
 		if (clientPool == null) {
 			clientPool = new ThriftClientPool<T>(clientClass);
-			clients.put(hostPort, clientPool);
+			clientPools.put(clientKey, clientPool);
 		}
 
 		Object client = clientPool.acquireClient();
@@ -135,10 +142,20 @@ public class ThriftClientFactory {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public synchronized <U> void returnClient(final U client, final HostPort hostPort) {
 
-		@SuppressWarnings("unchecked")
-		ThriftClientPool<U> clientPool = (ThriftClientPool<U>) clients.get(hostPort);
+		final String clientClassName = client.getClass().getName();
+		final String interfaceClassName = clientClassName.substring(0, clientClassName.indexOf("$$EnhancerByCGLIB"));
+
+		ThriftClientPool<U> clientPool;
+		try {
+			clientPool = (ThriftClientPool<U>) clientPools
+					.get(getClientKey(hostPort, Class.forName(interfaceClassName)));
+		} catch (ClassNotFoundException e) {
+			throw WrappedException.insteadOf(e);
+		}
+
 		if (clientPool == null) {
 			throw new AmityException("Thrift client pool not found for client class [" + client.getClass().getName()
 					+ "]");

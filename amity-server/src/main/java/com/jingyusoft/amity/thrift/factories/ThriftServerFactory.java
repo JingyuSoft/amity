@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.thrift;
+package com.jingyusoft.amity.thrift.factories;
 
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.TProcessor;

@@ -3,6 +3,7 @@ package com.jingyusoft.amity.entities;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class LocationEntityBase {
@@ -22,6 +23,10 @@ public abstract class LocationEntityBase {
 
 	@Column(name = "longitude")
 	private Double longitude;
+
+	@Version
+	@Column(name = "version_lock")
+	private Integer versionLock;
 
 	public String getCode() {
 		return code;
@@ -43,6 +48,10 @@ public abstract class LocationEntityBase {
 		return name;
 	}
 
+	public Integer getVersionLock() {
+		return versionLock;
+	}
+
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -61,5 +70,9 @@ public abstract class LocationEntityBase {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setVersionLock(Integer versionLock) {
+		this.versionLock = versionLock;
 	}
 }

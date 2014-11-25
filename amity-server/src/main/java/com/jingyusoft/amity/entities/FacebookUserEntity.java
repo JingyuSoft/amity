@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "facebook_user")
@@ -24,6 +25,10 @@ public class FacebookUserEntity {
 	@JoinColumn(name = "amity_user_id", foreignKey = @ForeignKey(name = "fk_facebook_user_amity_user_id"))
 	private AmityUserEntity amityUser;
 
+	@Version
+	@Column(name = "version_lock")
+	private Integer versionLock;
+
 	public AmityUserEntity getAmityUser() {
 		return amityUser;
 	}
@@ -32,11 +37,19 @@ public class FacebookUserEntity {
 		return facebookId;
 	}
 
+	public Integer getVersionLock() {
+		return versionLock;
+	}
+
 	public void setAmityUser(AmityUserEntity amityUser) {
 		this.amityUser = amityUser;
 	}
 
 	public void setFacebookId(long facebookId) {
 		this.facebookId = facebookId;
+	}
+
+	public void setVersionLock(Integer versionLock) {
+		this.versionLock = versionLock;
 	}
 }

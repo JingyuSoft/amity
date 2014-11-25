@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.common.SecurityUtils;
 import com.jingyusoft.amity.domain.AmityUserType;
@@ -64,17 +67,23 @@ public class AmityUserEntity {
 	@Lob
 	private String avatar;
 
-	@Column(name = "register_date", nullable = true)
-	private Date registerDate;
+	@Column(name = "register_date_time", nullable = false)
+	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	private DateTime registerDateTime;
 
-	@Column(name = "last_login_date", nullable = true)
-	private Date lastLoginDate;
+	@Column(name = "last_login_date_time", nullable = true)
+	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	private DateTime lastLoginDateTime;
 
 	@Column(name = "is_active", nullable = true)
 	private boolean isActive;
 
 	@Column(name = "user_type", nullable = false, length = 1)
 	private String userType;
+
+	@Version
+	@Column(name = "version_lock")
+	private Integer versionLock;
 
 	public AmityUserEntity() {
 		setPasswordSand(DEFAULT_PASSWORD_SAND);
@@ -112,8 +121,8 @@ public class AmityUserEntity {
 		return id;
 	}
 
-	public Date getLastLoginDate() {
-		return lastLoginDate;
+	public DateTime getLastLoginDateTime() {
+		return lastLoginDateTime;
 	}
 
 	public String getLastName() {
@@ -124,8 +133,8 @@ public class AmityUserEntity {
 		return passwordSand;
 	}
 
-	public Date getRegisterDate() {
-		return registerDate;
+	public DateTime getRegisterDateTime() {
+		return registerDateTime;
 	}
 
 	public String getUserName() {
@@ -136,13 +145,12 @@ public class AmityUserEntity {
 		return userType;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public Integer getVersionLock() {
+		return versionLock;
 	}
 
-	@PrePersist
-	public void prePersist() {
-		registerDate = new Date();
+	public boolean isActive() {
+		return isActive;
 	}
 
 	public void setActive(boolean isActive) {
@@ -153,8 +161,8 @@ public class AmityUserEntity {
 		this.alias = alias;
 	}
 
-	public void setAuthToken(String token) {
-		authToken = token;
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
 	}
 
 	public void setAvatar(String avatar) {
@@ -173,8 +181,12 @@ public class AmityUserEntity {
 		this.firstName = firstName;
 	}
 
-	public void setLastLoginDate(Date lastLoginDate) {
-		this.lastLoginDate = lastLoginDate;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setLastLoginDateTime(DateTime lastLoginDateTime) {
+		this.lastLoginDateTime = lastLoginDateTime;
 	}
 
 	public void setLastName(String lastName) {
@@ -185,8 +197,8 @@ public class AmityUserEntity {
 		this.passwordSand = passwordSand;
 	}
 
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
+	public void setRegisterDateTime(DateTime registerDateTime) {
+		this.registerDateTime = registerDateTime;
 	}
 
 	public void setUserName(String userName) {
@@ -195,5 +207,9 @@ public class AmityUserEntity {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public void setVersionLock(Integer versionLock) {
+		this.versionLock = versionLock;
 	}
 }

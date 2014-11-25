@@ -111,7 +111,7 @@ public class ThriftClientFactory {
 
 		private static final Logger LOGGER = AmityLogger.getLogger();
 
-		private int poolSize = 0;
+		private int freeCount = 0;
 
 		private final Class<U> interfaceClass;
 
@@ -127,17 +127,16 @@ public class ThriftClientFactory {
 				return null;
 			}
 
-			--poolSize;
+			--freeCount;
 			U client = list.remove(0);
-			LOGGER.info("Thrift client of type [{}] acquired from pool. Pool size = [{}]", interfaceClass.getName(),
-					poolSize);
+			LOGGER.info("Thrift client of type [{}] acquired from pool. Free = [{}]", interfaceClass.getName(),
+					freeCount);
 			return interfaceClass.cast(client);
 		}
 
 		public void returnClient(U client) {
-			++poolSize;
-			LOGGER.info("Thrift client of type [{}] returned to pool. Pool size = [{}]", interfaceClass.getName(),
-					poolSize);
+			++freeCount;
+			LOGGER.info("Thrift client of type [{}] returned to pool. Free = [{}]", interfaceClass.getName(), freeCount);
 		}
 	}
 

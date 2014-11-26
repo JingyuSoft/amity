@@ -11,13 +11,13 @@ import com.jingyusoft.amity.thrift.generated.AmityToken;
 @Repository
 public class SessionRepository {
 
-	private final Map<Integer, AmityToken> map = Maps.newConcurrentMap();
+	private final Map<Long, AmityToken> map = Maps.newConcurrentMap();
 
-	public void update(final int amityUserId, AmityToken sessionToken) {
+	public void update(final long amityUserId, AmityToken sessionToken) {
 		map.put(amityUserId, sessionToken);
 	}
 
-	public boolean verify(final int amityUserId, final AmityToken sessionToken) {
+	public boolean verify(final long amityUserId, final AmityToken sessionToken) {
 		AmityToken lookupResult = map.get(amityUserId);
 		if (lookupResult == null) {
 			return false;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.jingyusoft.amity.entities.RegionEntity;
+import com.jingyusoft.amity.data.entities.RegionEntity;
 
 public class Region extends LocationBase {
 

@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.entities;
+package com.jingyusoft.amity.data.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

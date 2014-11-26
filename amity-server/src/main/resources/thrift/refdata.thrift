@@ -31,3 +31,6 @@ struct CountryDto {
 	4: required double latitude,
 	5: required double longitude
 }
+
+service RefDataThriftService {
+}

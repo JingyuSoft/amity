@@ -933,7 +933,7 @@
 
 @end
 
-@implementation ItineraryServiceClient
+@implementation ItineraryThriftServiceClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
   return [self initWithInProtocol: protocol outProtocol: protocol];
@@ -996,9 +996,9 @@
 
 @end
 
-@implementation ItineraryServiceProcessor
+@implementation ItineraryThriftServiceProcessor
 
-- (id) initWithItineraryService: (id <ItineraryService>) service
+- (id) initWithItineraryThriftService: (id <ItineraryThriftService>) service
 {
   self = [super init];
   if (!self) {
@@ -1017,7 +1017,7 @@
   return self;
 }
 
-- (id<ItineraryService>) service
+- (id<ItineraryThriftService>) service
 {
   return [[mService retain_stub] autorelease_stub];
 }

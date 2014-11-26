@@ -1,6 +1,6 @@
 package com.jingyusoft.amity.domain;
 
-import com.jingyusoft.amity.entities.CityEntity;
+import com.jingyusoft.amity.data.entities.CityEntity;
 
 public class City extends LocationBase {
 

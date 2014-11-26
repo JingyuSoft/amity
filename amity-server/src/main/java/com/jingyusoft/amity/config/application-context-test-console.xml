@@ -7,7 +7,7 @@
 	<import resource="application-context-shared.xml" />
 
 	<context:component-scan
-		base-package="com.jingyusoft.amity.thrift.factories" />
+		base-package="com.jingyusoft.amity.thrift.factories,com.jingyusoft.amity.authentication" />
 
 	<bean id="testConsole" class="com.jingyusoft.amity.programs.TestConsole" />
 

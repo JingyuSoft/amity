@@ -1312,3 +1312,86 @@
 }
 @end
 
+@implementation RefDataThriftServiceClient
+- (id) initWithProtocol: (id <TProtocol>) protocol
+{
+  return [self initWithInProtocol: protocol outProtocol: protocol];
+}
+
+- (id) initWithInProtocol: (id <TProtocol>) anInProtocol outProtocol: (id <TProtocol>) anOutProtocol
+{
+  self = [super init];
+  inProtocol = [anInProtocol retain_stub];
+  outProtocol = [anOutProtocol retain_stub];
+  return self;
+}
+
+- (void) dealloc
+{
+  [inProtocol release_stub];
+  [outProtocol release_stub];
+  [super dealloc_stub];
+}
+
+@end
+
+@implementation RefDataThriftServiceProcessor
+
+- (id) initWithRefDataThriftService: (id <RefDataThriftService>) service
+{
+  self = [super init];
+  if (!self) {
+    return nil;
+  }
+  mService = [service retain_stub];
+  mMethodMap = [[NSMutableDictionary dictionary] retain_stub];
+  return self;
+}
+
+- (id<RefDataThriftService>) service
+{
+  return [[mService retain_stub] autorelease_stub];
+}
+
+- (BOOL) processOnInputProtocol: (id <TProtocol>) inProtocol
+                 outputProtocol: (id <TProtocol>) outProtocol
+{
+  NSString * messageName;
+  int messageType;
+  int seqID;
+  [inProtocol readMessageBeginReturningName: &messageName
+                                       type: &messageType
+                                 sequenceID: &seqID];
+  NSInvocation * invocation = [mMethodMap valueForKey: messageName];
+  if (invocation == nil) {
+    [TProtocolUtil skipType: TType_STRUCT onProtocol: inProtocol];
+    [inProtocol readMessageEnd];
+    TApplicationException * x = [TApplicationException exceptionWithType: TApplicationException_UNKNOWN_METHOD reason: [NSString stringWithFormat: @"Invalid method name: '%@'", messageName]];
+    [outProtocol writeMessageBeginWithName: messageName
+                                      type: TMessageType_EXCEPTION
+                                sequenceID: seqID];
+    [x write: outProtocol];
+    [outProtocol writeMessageEnd];
+    [[outProtocol transport] flush];
+    return YES;
+  }
+  // NSInvocation does not conform to NSCopying protocol
+  NSInvocation * i = [NSInvocation invocationWithMethodSignature: [invocation methodSignature]];
+  [i setSelector: [invocation selector]];
+  [i setArgument: &seqID atIndex: 2];
+  [i setArgument: &inProtocol atIndex: 3];
+  [i setArgument: &outProtocol atIndex: 4];
+  [i setTarget: self];
+  [i invoke];
+  return YES;
+}
+
+- (void) dealloc
+{
+  [mService release_stub];
+  [mMethodMap release_stub];
+  [super dealloc_stub];
+}
+
+@end
+

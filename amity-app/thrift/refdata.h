@@ -264,6 +264,25 @@
 
 @end
 
+@protocol RefDataThriftService <NSObject>
+@end
+
+@interface RefDataThriftServiceClient : NSObject <RefDataThriftService> {
+  id <TProtocol> inProtocol;
+  id <TProtocol> outProtocol;
+}
+- (id) initWithProtocol: (id <TProtocol>) protocol;
+- (id) initWithInProtocol: (id <TProtocol>) inProtocol outProtocol: (id <TProtocol>) outProtocol;
+@end
+
+@interface RefDataThriftServiceProcessor : NSObject <TProcessor> {
+  id <RefDataThriftService> mService;
+  NSDictionary * mMethodMap;
+}
+- (id) initWithRefDataThriftService: (id <RefDataThriftService>) service;
+- (id<RefDataThriftService>) service;
+@end
+
 @interface refdataConstants : NSObject {
 }
 @end

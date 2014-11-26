@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.entities;
+package com.jingyusoft.amity.data.entities;
 
 import java.util.Date;
 
@@ -12,13 +12,17 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RevisionEntity;
 import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.common.SecurityUtils;
+import com.jingyusoft.amity.data.auditing.AmityRevisionListener;
 import com.jingyusoft.amity.domain.AmityUserType;
 
 @Entity
 @Table(name = "amity_user")
+@RevisionEntity(AmityRevisionListener.class)
 public class AmityUserEntity {
 
 	public static final String encryptPassword(final String password, final String sand) {
@@ -37,6 +41,7 @@ public class AmityUserEntity {
 	private long id;
 
 	@Column(name = "username", nullable = true, unique = true, length = 64)
+	@Audited(withModifiedFlag = true)
 	private String userName;
 
 	@Column(name = "encrypted_password", nullable = true, length = 128)
@@ -52,15 +57,18 @@ public class AmityUserEntity {
 	private String authToken;
 
 	@Column(name = "first_name", length = 128, nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String firstName;
 
 	@Column(name = "last_name", length = 128, nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String lastName;
 
 	@Column(name = "email_address", nullable = true, unique = true, length = 128)
 	private String emailAddress;
 
 	@Column(name = "alias", unique = true, length = 64, nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String alias;
 
 	@Column(name = "avatar", nullable = true)

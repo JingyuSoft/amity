@@ -17,6 +17,6 @@ struct CreateHelperItineraryResponse {
 	1: i32 itineraryId
 }
 
-service ItineraryService {
+service ItineraryThriftService {
     CreateHelperItineraryResponse createItinerary(1: CreateHelperItineraryRequest request)
 }

@@ -6,7 +6,7 @@ import org.apache.commons.collections4.ListUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.jingyusoft.amity.entities.CountryEntity;
+import com.jingyusoft.amity.data.entities.CountryEntity;
 
 public class Country extends LocationBase {
 

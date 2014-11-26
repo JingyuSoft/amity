@@ -27,6 +27,9 @@
 				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
 				<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
 				<prop key="javax.persistence.validation.mode">none</prop>
+				<prop key="org.hibernate.envers.audit_table_suffix">${hibernate.envers.audit_table_suffix}</prop>
+				<prop key="org.hibernate.envers.global_with_modified_flag">${hibernate.envers.global_with_modified_flag}</prop>
+				<prop key="org.hibernate.envers.modified_flag_suffix">${hibernate.envers.modified_flag_suffix}</prop>
 
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>

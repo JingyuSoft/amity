@@ -139,11 +139,11 @@
 
 @end
 
-@protocol ItineraryService <NSObject>
+@protocol ItineraryThriftService <NSObject>
 - (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request;  // throws TException
 @end
 
-@interface ItineraryServiceClient : NSObject <ItineraryService> {
+@interface ItineraryThriftServiceClient : NSObject <ItineraryThriftService> {
   id <TProtocol> inProtocol;
   id <TProtocol> outProtocol;
 }
@@ -151,12 +151,12 @@
 - (id) initWithInProtocol: (id <TProtocol>) inProtocol outProtocol: (id <TProtocol>) outProtocol;
 @end
 
-@interface ItineraryServiceProcessor : NSObject <TProcessor> {
-  id <ItineraryService> mService;
+@interface ItineraryThriftServiceProcessor : NSObject <TProcessor> {
+  id <ItineraryThriftService> mService;
   NSDictionary * mMethodMap;
 }
-- (id) initWithItineraryService: (id <ItineraryService>) service;
-- (id<ItineraryService>) service;
+- (id) initWithItineraryThriftService: (id <ItineraryThriftService>) service;
+- (id<ItineraryThriftService>) service;
 @end
 
 @interface itineraryConstants : NSObject {

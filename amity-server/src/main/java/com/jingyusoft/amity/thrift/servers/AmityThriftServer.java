@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.thrift.factories.ThriftServerFactory;
-import com.jingyusoft.amity.thrift.generated.AmityService;
-import com.jingyusoft.amity.thrift.generated.ItineraryService;
+import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
+import com.jingyusoft.amity.thrift.generated.ItineraryThriftService;
 
 @Service
 public class AmityThriftServer {
@@ -24,10 +24,10 @@ public class AmityThriftServer {
 	private ThriftServerFactory thriftServerFactory;
 
 	@Resource
-	private AmityService.Iface amityService;
+	private ItineraryThriftService.Iface itineraryThriftService;
 
 	@Resource
-	private ItineraryService.Iface itineraryService;
+	private AuthenticationThriftService.Iface authenticationThriftService;
 
 	@Value("${amity.server.host}")
 	private String host;
@@ -54,8 +54,10 @@ public class AmityThriftServer {
 
 		try {
 			TServer amityServer = thriftServerFactory.create(new TProcessor[] {
-					new AmityService.Processor<AmityService.Iface>(amityService),
-					new ItineraryService.Processor<ItineraryService.Iface>(itineraryService) }, port, handlers);
+					new AuthenticationThriftService.Processor<AuthenticationThriftService.Iface>(
+							authenticationThriftService),
+					new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService) }, port,
+					handlers);
 			LOGGER.info("Amity server started on {}:{}", host, port);
 			amityServer.serve();
 

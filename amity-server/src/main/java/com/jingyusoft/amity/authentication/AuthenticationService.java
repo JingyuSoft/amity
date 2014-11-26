@@ -1,6 +1,8 @@
 package com.jingyusoft.amity.authentication;
 
+import com.jingyusoft.amity.domain.AmityUser;
+
 public interface AuthenticationService {
 
-	boolean authenticateFacebookAccount(final String facebookToken);
+	AmityUser authenticateFacebookAccount(final String facebookToken);
 }

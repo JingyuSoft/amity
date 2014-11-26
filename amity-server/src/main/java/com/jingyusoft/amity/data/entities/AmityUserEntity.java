@@ -18,7 +18,6 @@ import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.common.SecurityUtils;
 import com.jingyusoft.amity.data.auditing.AmityRevisionListener;
-import com.jingyusoft.amity.domain.AmityUserType;
 
 @Entity
 @Table(name = "amity_user")
@@ -64,8 +63,11 @@ public class AmityUserEntity {
 	@Audited(withModifiedFlag = true)
 	private String lastName;
 
-	@Column(name = "email_address", nullable = true, unique = true, length = 128)
+	@Column(name = "email_address", nullable = false, unique = true, length = 128)
 	private String emailAddress;
+
+	@Column(name = "gender", nullable = true, unique = false, length = 1)
+	private String gender;
 
 	@Column(name = "alias", unique = true, length = 64, nullable = true)
 	@Audited(withModifiedFlag = true)
@@ -101,10 +103,6 @@ public class AmityUserEntity {
 		return alias;
 	}
 
-	public final AmityUserType getAmityUserType() {
-		return AmityUserType.from(userType);
-	}
-
 	public String getAuthToken() {
 		return authToken;
 	}
@@ -123,6 +121,10 @@ public class AmityUserEntity {
 
 	public String getFirstName() {
 		return firstName;
+	}
+
+	public String getGender() {
+		return gender;
 	}
 
 	public long getId() {
@@ -187,6 +189,10 @@ public class AmityUserEntity {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public void setId(long id) {

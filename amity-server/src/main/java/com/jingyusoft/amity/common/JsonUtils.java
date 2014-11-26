@@ -24,7 +24,7 @@ public final class JsonUtils {
 
 	private static class JodaDateTimeConverter implements JsonSerializer<DateTime>, JsonDeserializer<DateTime> {
 
-		private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ'");
+		private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ");
 
 		@Override
 		public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

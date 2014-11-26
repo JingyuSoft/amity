@@ -1,4 +1,4 @@
-import sys, re
+import sys, re, os
 
 def generate_java_header(f):
 	header = '''package com.jingyusoft.amity.common;
@@ -9,13 +9,12 @@ public abstract class ErrorCodes {
 	f.write(header)
 
 def generate_java_footer(f):
-	footer = '''
-}
+	footer = '''}
 '''
 	f.write(footer)
 
 def generate_java_line(f, code, name):
-	f.write('\tpublic static final int ' + name + ' = ' + code + ';')
+	f.write('\tpublic static final int ' + name + ' = ' + code + ';' + os.linesep)
 
 
 fin = open(sys.argv[1], 'r')

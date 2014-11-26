@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
-	public boolean authenticateFacebookAccount(int facebookId, String facebookToken) {
+	public boolean authenticateFacebookAccount(String facebookToken) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

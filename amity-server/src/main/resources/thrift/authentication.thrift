@@ -5,15 +5,14 @@ struct AmityToken {
 }
 
 struct LoginFacebookAccountRequest {
-    1: required i64 facebookId,
-    2: required string emailAddress,
-    3: required string facebookToken
+    1: required string facebookToken
 }
 
 struct LoginFacebookAccountResponse {
-    1: required i64 facebookId,
-    2: required AmityToken authToken,
-    3: required AmityToken sessionToken
+	1: required i32 errorCode,
+    2: optional i64 amityUserId,
+    3: optional AmityToken authToken,
+    4: optional AmityToken sessionToken
 }
 
 service AuthenticationThriftService {

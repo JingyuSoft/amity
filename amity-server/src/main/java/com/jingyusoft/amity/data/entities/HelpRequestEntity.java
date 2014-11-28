@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name = "help_request")
+@Audited(withModifiedFlag = true)
 public class HelpRequestEntity {
 
 	@Id

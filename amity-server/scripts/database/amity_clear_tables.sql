@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS `itinerary_audit`;
 DROP TABLE IF EXISTS `facebook_user_audit`;
 DROP TABLE IF EXISTS `amity_user_audit`;
 
+DROP TABLE IF EXISTS `amity_audit_revision`;
+
 DROP TABLE IF EXISTS `agreement`;
 DROP TABLE IF EXISTS `help_request`;
 DROP TABLE IF EXISTS `itinerary`;

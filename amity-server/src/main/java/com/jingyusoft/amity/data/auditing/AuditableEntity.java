@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.data.entities;
+package com.jingyusoft.amity.data.auditing;
 
 import java.util.Date;
 

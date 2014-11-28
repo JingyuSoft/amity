@@ -9,6 +9,6 @@ public class AmityRevisionListener implements RevisionListener {
 
 		AmityRevisionEntity entity = (AmityRevisionEntity) revisionEntity;
 		// TODO: Update entity with current Amity user
-		entity.setAuditor(null);
+		entity.setAmityUser(null);
 	}
 }

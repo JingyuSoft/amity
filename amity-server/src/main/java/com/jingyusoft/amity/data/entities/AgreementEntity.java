@@ -14,10 +14,12 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "agreement")
+@Audited(withModifiedFlag = true)
 public class AgreementEntity {
 
 	@Id

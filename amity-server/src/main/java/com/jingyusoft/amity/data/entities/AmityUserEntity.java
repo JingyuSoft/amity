@@ -16,9 +16,11 @@ import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.common.SecurityUtils;
+import com.jingyusoft.amity.data.auditing.AuditableEntity;
 
 @Entity
 @Table(name = "amity_user")
+@Audited(withModifiedFlag = true)
 public class AmityUserEntity extends AuditableEntity {
 
 	public static final String encryptPassword(final String password, final String sand) {
@@ -37,7 +39,6 @@ public class AmityUserEntity extends AuditableEntity {
 	private long id;
 
 	@Column(name = "username", nullable = true, unique = true, length = 64)
-	@Audited(withModifiedFlag = true)
 	private String userName;
 
 	@Column(name = "encrypted_password", nullable = true, length = 128)
@@ -53,11 +54,9 @@ public class AmityUserEntity extends AuditableEntity {
 	private String authToken;
 
 	@Column(name = "first_name", length = 128, nullable = true)
-	@Audited(withModifiedFlag = true)
 	private String firstName;
 
 	@Column(name = "last_name", length = 128, nullable = true)
-	@Audited(withModifiedFlag = true)
 	private String lastName;
 
 	@Column(name = "email_address", nullable = false, unique = true, length = 128)
@@ -67,7 +66,6 @@ public class AmityUserEntity extends AuditableEntity {
 	private String gender;
 
 	@Column(name = "alias", unique = true, length = 64, nullable = true)
-	@Audited(withModifiedFlag = true)
 	private String alias;
 
 	@Column(name = "avatar", nullable = true)
@@ -76,20 +74,16 @@ public class AmityUserEntity extends AuditableEntity {
 
 	@Column(name = "register_date_time", nullable = false)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	@Audited(withModifiedFlag = true)
 	private DateTime registerDateTime;
 
 	@Column(name = "last_login_date_time", nullable = true)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	@Audited(withModifiedFlag = true)
 	private DateTime lastLoginDateTime;
 
 	@Column(name = "is_active", nullable = true)
-	@Audited(withModifiedFlag = true)
 	private boolean isActive;
 
 	@Column(name = "user_type", nullable = false, length = 1)
-	@Audited(withModifiedFlag = true)
 	private String userType;
 
 	@Version

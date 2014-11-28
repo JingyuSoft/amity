@@ -12,8 +12,11 @@ import javax.persistence.Version;
 
 import org.hibernate.envers.Audited;
 
+import com.jingyusoft.amity.data.auditing.AuditableEntity;
+
 @Entity
 @Table(name = "facebook_user")
+@Audited(withModifiedFlag = true)
 public class FacebookUserEntity extends AuditableEntity {
 
 	/**

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	                    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	                    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	                    http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- Data Source -->
 	<bean id="dataSource"
@@ -27,6 +29,9 @@
 				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
 				<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
 				<prop key="javax.persistence.validation.mode">none</prop>
+				
+				<prop key="org.hibernate.envers.revision_field_name">${org.hibernate.envers.revision_field_name}</prop>
+				<prop key="org.hibernate.envers.revision_type_field_name">${org.hibernate.envers.revision_type_field_name}</prop>
 				<prop key="org.hibernate.envers.audit_table_suffix">${hibernate.envers.audit_table_suffix}</prop>
 				<prop key="org.hibernate.envers.global_with_modified_flag">${hibernate.envers.global_with_modified_flag}</prop>
 				<prop key="org.hibernate.envers.modified_flag_suffix">${hibernate.envers.modified_flag_suffix}</prop>
@@ -43,8 +48,10 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<jpa:repositories base-package="com.jingyusoft.amity.data.repositories" />
 </beans>

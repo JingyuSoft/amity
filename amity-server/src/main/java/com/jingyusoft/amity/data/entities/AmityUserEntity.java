@@ -13,16 +13,13 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.RevisionEntity;
 import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.common.SecurityUtils;
-import com.jingyusoft.amity.data.auditing.AmityRevisionListener;
 
 @Entity
 @Table(name = "amity_user")
-@RevisionEntity(AmityRevisionListener.class)
-public class AmityUserEntity {
+public class AmityUserEntity extends AuditableEntity {
 
 	public static final String encryptPassword(final String password, final String sand) {
 		return SecurityUtils.getBase64SHA256Hash(password + sand);
@@ -79,16 +76,20 @@ public class AmityUserEntity {
 
 	@Column(name = "register_date_time", nullable = false)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Audited(withModifiedFlag = true)
 	private DateTime registerDateTime;
 
 	@Column(name = "last_login_date_time", nullable = true)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Audited(withModifiedFlag = true)
 	private DateTime lastLoginDateTime;
 
 	@Column(name = "is_active", nullable = true)
+	@Audited(withModifiedFlag = true)
 	private boolean isActive;
 
 	@Column(name = "user_type", nullable = false, length = 1)
+	@Audited(withModifiedFlag = true)
 	private String userType;
 
 	@Version

@@ -12,9 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name = "itinerary")
-public class ItineraryEntity {
+public class ItineraryEntity extends AuditableEntity {
 
 	@Id
 	@Column(name = "id")
@@ -23,6 +25,7 @@ public class ItineraryEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_itinerary_user"))
+	@Audited(withModifiedFlag = true)
 	private AmityUserEntity user;
 
 	@Version

@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.authentication.facebook.FacebookAuthenticationService;
 import com.jingyusoft.amity.authentication.facebook.FacebookUserInfo;
-import com.jingyusoft.amity.dao.AmityUserDao;
-import com.jingyusoft.amity.dao.FacebookUserDao;
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
 import com.jingyusoft.amity.data.entities.FacebookUserEntity;
+import com.jingyusoft.amity.data.repositories.AmityUserRepository;
+import com.jingyusoft.amity.data.repositories.FacebookUserRepository;
 import com.jingyusoft.amity.domain.AmityUser;
 
 @Service
@@ -19,10 +19,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	private FacebookAuthenticationService facebookAuthenticationService;
 
 	@Resource
-	private AmityUserDao amityUserDao;
+	private AmityUserRepository amityUserRepository;
 
 	@Resource
-	private FacebookUserDao facebookUserDao;
+	private FacebookUserRepository facebookUserRepository;
 
 	@Override
 	public AmityUser authenticateFacebookAccount(String facebookToken) {
@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			return null;
 		}
 
-		FacebookUserEntity facebookUserEntity = facebookUserDao.get(facebookUserInfo.getId());
+		FacebookUserEntity facebookUserEntity = facebookUserRepository.getOne(facebookUserInfo.getId());
 		if (facebookUserEntity == null) {
 			AmityUserEntity amityUserEntity = new AmityUserEntity();
 			amityUserEntity.setEmailAddress(facebookUserInfo.getEmail());
@@ -42,12 +42,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 			amityUserEntity.setAuthToken(AuthenticationUtils.generateAuthToken(facebookToken));
 
-			amityUserEntity = amityUserDao.merge(amityUserEntity);
+			amityUserEntity = amityUserRepository.saveAndFlush(amityUserEntity);
 
 			facebookUserEntity = new FacebookUserEntity();
 			facebookUserEntity.setFacebookId(facebookUserInfo.getId());
 			facebookUserEntity.setAmityUser(amityUserEntity);
-			facebookUserDao.merge(facebookUserEntity);
+			facebookUserRepository.saveAndFlush(facebookUserEntity);
 
 			return new AmityUser(amityUserEntity);
 		} else {

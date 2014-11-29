@@ -37,7 +37,7 @@ public class AmityUserEntity extends AuditableEntity {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "username", nullable = true, unique = true, length = 64)
 	private String userName;
@@ -123,7 +123,7 @@ public class AmityUserEntity extends AuditableEntity {
 		return gender;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -196,7 +196,7 @@ public class AmityUserEntity extends AuditableEntity {
 		this.gender = gender;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -24,7 +24,7 @@ public class FacebookUserEntity extends AuditableEntity {
 	 */
 	@Id
 	@Column(name = "facebook_id")
-	private long facebookId;
+	private Long facebookId;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "amity_user_id", foreignKey = @ForeignKey(name = "fk_facebook_user_amity_user_id"))
@@ -39,7 +39,7 @@ public class FacebookUserEntity extends AuditableEntity {
 		return amityUser;
 	}
 
-	public long getFacebookId() {
+	public Long getFacebookId() {
 		return facebookId;
 	}
 
@@ -51,7 +51,7 @@ public class FacebookUserEntity extends AuditableEntity {
 		this.amityUser = amityUser;
 	}
 
-	public void setFacebookId(long facebookId) {
+	public void setFacebookId(Long facebookId) {
 		this.facebookId = facebookId;
 	}
 

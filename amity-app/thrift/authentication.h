@@ -42,24 +42,21 @@
 
 @end
 
-@interface LoginFacebookAccountRequest : NSObject <TBase, NSCoding> {
-  int64_t __facebookId;
-  NSString * __emailAddress;
-  NSString * __facebookToken;
+@interface SessionCredentials : NSObject <TBase, NSCoding> {
+  int64_t __amityUserId;
+  AmityToken * __sessionToken;
 
-  BOOL __facebookId_isset;
-  BOOL __emailAddress_isset;
-  BOOL __facebookToken_isset;
+  BOOL __amityUserId_isset;
+  BOOL __sessionToken_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, getter=facebookId, setter=setFacebookId:) int64_t facebookId;
-@property (nonatomic, retain, getter=emailAddress, setter=setEmailAddress:) NSString * emailAddress;
-@property (nonatomic, retain, getter=facebookToken, setter=setFacebookToken:) NSString * facebookToken;
+@property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
+@property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
 #endif
 
 - (id) init;
-- (id) initWithFacebookId: (int64_t) facebookId emailAddress: (NSString *) emailAddress facebookToken: (NSString *) facebookToken;
+- (id) initWithAmityUserId: (int64_t) amityUserId sessionToken: (AmityToken *) sessionToken;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -67,16 +64,36 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (int64_t) facebookId;
-- (void) setFacebookId: (int64_t) facebookId;
+- (int64_t) amityUserId;
+- (void) setAmityUserId: (int64_t) amityUserId;
 #endif
-- (BOOL) facebookIdIsSet;
+- (BOOL) amityUserIdIsSet;
 
 #if !__has_feature(objc_arc)
-- (NSString *) emailAddress;
-- (void) setEmailAddress: (NSString *) emailAddress;
+- (AmityToken *) sessionToken;
+- (void) setSessionToken: (AmityToken *) sessionToken;
 #endif
-- (BOOL) emailAddressIsSet;
+- (BOOL) sessionTokenIsSet;
+
+@end
+
+@interface LoginFacebookAccountRequest : NSObject <TBase, NSCoding> {
+  NSString * __facebookToken;
+
+  BOOL __facebookToken_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=facebookToken, setter=setFacebookToken:) NSString * facebookToken;
+#endif
+
+- (id) init;
+- (id) initWithFacebookToken: (NSString *) facebookToken;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
 
 #if !__has_feature(objc_arc)
 - (NSString *) facebookToken;
@@ -87,23 +104,23 @@
 @end
 
 @interface LoginFacebookAccountResponse : NSObject <TBase, NSCoding> {
-  int64_t __facebookId;
-  AmityToken * __authToken;
-  AmityToken * __sessionToken;
+  int32_t __errorCode;
+  int64_t __amityUserId;
+  AmityToken * __authToke;
 
-  BOOL __facebookId_isset;
-  BOOL __authToken_isset;
-  BOOL __sessionToken_isset;
+  BOOL __errorCode_isset;
+  BOOL __amityUserId_isset;
+  BOOL __authToke_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, getter=facebookId, setter=setFacebookId:) int64_t facebookId;
-@property (nonatomic, retain, getter=authToken, setter=setAuthToken:) AmityToken * authToken;
-@property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
+@property (nonatomic, retain, getter=authToke, setter=setAuthToke:) AmityToken * authToke;
 #endif
 
 - (id) init;
-- (id) initWithFacebookId: (int64_t) facebookId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken;
+- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToke: (AmityToken *) authToke;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -111,22 +128,22 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (int64_t) facebookId;
-- (void) setFacebookId: (int64_t) facebookId;
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
 #endif
-- (BOOL) facebookIdIsSet;
+- (BOOL) errorCodeIsSet;
 
 #if !__has_feature(objc_arc)
-- (AmityToken *) authToken;
-- (void) setAuthToken: (AmityToken *) authToken;
+- (int64_t) amityUserId;
+- (void) setAmityUserId: (int64_t) amityUserId;
 #endif
-- (BOOL) authTokenIsSet;
+- (BOOL) amityUserIdIsSet;
 
 #if !__has_feature(objc_arc)
-- (AmityToken *) sessionToken;
-- (void) setSessionToken: (AmityToken *) sessionToken;
+- (AmityToken *) authToke;
+- (void) setAuthToke: (AmityToken *) authToke;
 #endif
-- (BOOL) sessionTokenIsSet;
+- (BOOL) authTokeIsSet;
 
 @end
 

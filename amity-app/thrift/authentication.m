@@ -145,7 +145,7 @@
 
 @end
 
-@implementation LoginFacebookAccountRequest
+@implementation SessionCredentials
 
 - (id) init
 {
@@ -155,241 +155,11 @@
   return self;
 }
 
-- (id) initWithFacebookId: (int64_t) facebookId emailAddress: (NSString *) emailAddress facebookToken: (NSString *) facebookToken
+- (id) initWithAmityUserId: (int64_t) amityUserId sessionToken: (AmityToken *) sessionToken
 {
   self = [super init];
-  __facebookId = facebookId;
-  __facebookId_isset = YES;
-  __emailAddress = [emailAddress retain_stub];
-  __emailAddress_isset = YES;
-  __facebookToken = [facebookToken retain_stub];
-  __facebookToken_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"facebookId"])
-  {
-    __facebookId = [decoder decodeInt64ForKey: @"facebookId"];
-    __facebookId_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"emailAddress"])
-  {
-    __emailAddress = [[decoder decodeObjectForKey: @"emailAddress"] retain_stub];
-    __emailAddress_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"facebookToken"])
-  {
-    __facebookToken = [[decoder decodeObjectForKey: @"facebookToken"] retain_stub];
-    __facebookToken_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__facebookId_isset)
-  {
-    [encoder encodeInt64: __facebookId forKey: @"facebookId"];
-  }
-  if (__emailAddress_isset)
-  {
-    [encoder encodeObject: __emailAddress forKey: @"emailAddress"];
-  }
-  if (__facebookToken_isset)
-  {
-    [encoder encodeObject: __facebookToken forKey: @"facebookToken"];
-  }
-}
-
-- (void) dealloc
-{
-  [__emailAddress release_stub];
-  [__facebookToken release_stub];
-  [super dealloc_stub];
-}
-
-- (int64_t) facebookId {
-  return __facebookId;
-}
-
-- (void) setFacebookId: (int64_t) facebookId {
-  __facebookId = facebookId;
-  __facebookId_isset = YES;
-}
-
-- (BOOL) facebookIdIsSet {
-  return __facebookId_isset;
-}
-
-- (void) unsetFacebookId {
-  __facebookId_isset = NO;
-}
-
-- (NSString *) emailAddress {
-  return [[__emailAddress retain_stub] autorelease_stub];
-}
-
-- (void) setEmailAddress: (NSString *) emailAddress {
-  [emailAddress retain_stub];
-  [__emailAddress release_stub];
-  __emailAddress = emailAddress;
-  __emailAddress_isset = YES;
-}
-
-- (BOOL) emailAddressIsSet {
-  return __emailAddress_isset;
-}
-
-- (void) unsetEmailAddress {
-  [__emailAddress release_stub];
-  __emailAddress = nil;
-  __emailAddress_isset = NO;
-}
-
-- (NSString *) facebookToken {
-  return [[__facebookToken retain_stub] autorelease_stub];
-}
-
-- (void) setFacebookToken: (NSString *) facebookToken {
-  [facebookToken retain_stub];
-  [__facebookToken release_stub];
-  __facebookToken = facebookToken;
-  __facebookToken_isset = YES;
-}
-
-- (BOOL) facebookTokenIsSet {
-  return __facebookToken_isset;
-}
-
-- (void) unsetFacebookToken {
-  [__facebookToken release_stub];
-  __facebookToken = nil;
-  __facebookToken_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I64) {
-          int64_t fieldValue = [inProtocol readI64];
-          [self setFacebookId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setEmailAddress: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setFacebookToken: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"LoginFacebookAccountRequest"];
-  if (__facebookId_isset) {
-    [outProtocol writeFieldBeginWithName: @"facebookId" type: TType_I64 fieldID: 1];
-    [outProtocol writeI64: __facebookId];
-    [outProtocol writeFieldEnd];
-  }
-  if (__emailAddress_isset) {
-    if (__emailAddress != nil) {
-      [outProtocol writeFieldBeginWithName: @"emailAddress" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __emailAddress];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__facebookToken_isset) {
-    if (__facebookToken != nil) {
-      [outProtocol writeFieldBeginWithName: @"facebookToken" type: TType_STRING fieldID: 3];
-      [outProtocol writeString: __facebookToken];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__facebookId_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'facebookId' is not set."];
-  }
-  if (!__emailAddress_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'emailAddress' is not set."];
-  }
-  if (!__facebookToken_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'facebookToken' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"LoginFacebookAccountRequest("];
-  [ms appendString: @"facebookId:"];
-  [ms appendFormat: @"%qi", __facebookId];
-  [ms appendString: @",emailAddress:"];
-  [ms appendFormat: @"\"%@\"", __emailAddress];
-  [ms appendString: @",facebookToken:"];
-  [ms appendFormat: @"\"%@\"", __facebookToken];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation LoginFacebookAccountResponse
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithFacebookId: (int64_t) facebookId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken
-{
-  self = [super init];
-  __facebookId = facebookId;
-  __facebookId_isset = YES;
-  __authToken = [authToken retain_stub];
-  __authToken_isset = YES;
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
   __sessionToken = [sessionToken retain_stub];
   __sessionToken_isset = YES;
   return self;
@@ -398,15 +168,10 @@
 - (id) initWithCoder: (NSCoder *) decoder
 {
   self = [super init];
-  if ([decoder containsValueForKey: @"facebookId"])
+  if ([decoder containsValueForKey: @"amityUserId"])
   {
-    __facebookId = [decoder decodeInt64ForKey: @"facebookId"];
-    __facebookId_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"authToken"])
-  {
-    __authToken = [[decoder decodeObjectForKey: @"authToken"] retain_stub];
-    __authToken_isset = YES;
+    __amityUserId = [decoder decodeInt64ForKey: @"amityUserId"];
+    __amityUserId_isset = YES;
   }
   if ([decoder containsValueForKey: @"sessionToken"])
   {
@@ -418,13 +183,9 @@
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
-  if (__facebookId_isset)
+  if (__amityUserId_isset)
   {
-    [encoder encodeInt64: __facebookId forKey: @"facebookId"];
-  }
-  if (__authToken_isset)
-  {
-    [encoder encodeObject: __authToken forKey: @"authToken"];
+    [encoder encodeInt64: __amityUserId forKey: @"amityUserId"];
   }
   if (__sessionToken_isset)
   {
@@ -434,47 +195,25 @@
 
 - (void) dealloc
 {
-  [__authToken release_stub];
   [__sessionToken release_stub];
   [super dealloc_stub];
 }
 
-- (int64_t) facebookId {
-  return __facebookId;
+- (int64_t) amityUserId {
+  return __amityUserId;
 }
 
-- (void) setFacebookId: (int64_t) facebookId {
-  __facebookId = facebookId;
-  __facebookId_isset = YES;
+- (void) setAmityUserId: (int64_t) amityUserId {
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
 }
 
-- (BOOL) facebookIdIsSet {
-  return __facebookId_isset;
+- (BOOL) amityUserIdIsSet {
+  return __amityUserId_isset;
 }
 
-- (void) unsetFacebookId {
-  __facebookId_isset = NO;
-}
-
-- (AmityToken *) authToken {
-  return [[__authToken retain_stub] autorelease_stub];
-}
-
-- (void) setAuthToken: (AmityToken *) authToken {
-  [authToken retain_stub];
-  [__authToken release_stub];
-  __authToken = authToken;
-  __authToken_isset = YES;
-}
-
-- (BOOL) authTokenIsSet {
-  return __authToken_isset;
-}
-
-- (void) unsetAuthToken {
-  [__authToken release_stub];
-  __authToken = nil;
-  __authToken_isset = NO;
+- (void) unsetAmityUserId {
+  __amityUserId_isset = NO;
 }
 
 - (AmityToken *) sessionToken {
@@ -516,22 +255,12 @@
       case 1:
         if (fieldType == TType_I64) {
           int64_t fieldValue = [inProtocol readI64];
-          [self setFacebookId: fieldValue];
+          [self setAmityUserId: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
       case 2:
-        if (fieldType == TType_STRUCT) {
-          AmityToken *fieldValue = [[AmityToken alloc] init];
-          [fieldValue read: inProtocol];
-          [self setAuthToken: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
         if (fieldType == TType_STRUCT) {
           AmityToken *fieldValue = [[AmityToken alloc] init];
           [fieldValue read: inProtocol];
@@ -551,22 +280,15 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"LoginFacebookAccountResponse"];
-  if (__facebookId_isset) {
-    [outProtocol writeFieldBeginWithName: @"facebookId" type: TType_I64 fieldID: 1];
-    [outProtocol writeI64: __facebookId];
+  [outProtocol writeStructBeginWithName: @"SessionCredentials"];
+  if (__amityUserId_isset) {
+    [outProtocol writeFieldBeginWithName: @"amityUserId" type: TType_I64 fieldID: 1];
+    [outProtocol writeI64: __amityUserId];
     [outProtocol writeFieldEnd];
-  }
-  if (__authToken_isset) {
-    if (__authToken != nil) {
-      [outProtocol writeFieldBeginWithName: @"authToken" type: TType_STRUCT fieldID: 2];
-      [__authToken write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
   }
   if (__sessionToken_isset) {
     if (__sessionToken != nil) {
-      [outProtocol writeFieldBeginWithName: @"sessionToken" type: TType_STRUCT fieldID: 3];
+      [outProtocol writeFieldBeginWithName: @"sessionToken" type: TType_STRUCT fieldID: 2];
       [__sessionToken write: outProtocol];
       [outProtocol writeFieldEnd];
     }
@@ -577,13 +299,9 @@
 
 - (void) validate {
   // check for required fields
-  if (!__facebookId_isset) {
+  if (!__amityUserId_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'facebookId' is not set."];
-  }
-  if (!__authToken_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'authToken' is not set."];
+                               reason: @"Required field 'amityUserId' is not set."];
   }
   if (!__sessionToken_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
@@ -592,13 +310,353 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"LoginFacebookAccountResponse("];
-  [ms appendString: @"facebookId:"];
-  [ms appendFormat: @"%qi", __facebookId];
-  [ms appendString: @",authToken:"];
-  [ms appendFormat: @"%@", __authToken];
+  NSMutableString * ms = [NSMutableString stringWithString: @"SessionCredentials("];
+  [ms appendString: @"amityUserId:"];
+  [ms appendFormat: @"%qi", __amityUserId];
   [ms appendString: @",sessionToken:"];
   [ms appendFormat: @"%@", __sessionToken];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation LoginFacebookAccountRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithFacebookToken: (NSString *) facebookToken
+{
+  self = [super init];
+  __facebookToken = [facebookToken retain_stub];
+  __facebookToken_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"facebookToken"])
+  {
+    __facebookToken = [[decoder decodeObjectForKey: @"facebookToken"] retain_stub];
+    __facebookToken_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__facebookToken_isset)
+  {
+    [encoder encodeObject: __facebookToken forKey: @"facebookToken"];
+  }
+}
+
+- (void) dealloc
+{
+  [__facebookToken release_stub];
+  [super dealloc_stub];
+}
+
+- (NSString *) facebookToken {
+  return [[__facebookToken retain_stub] autorelease_stub];
+}
+
+- (void) setFacebookToken: (NSString *) facebookToken {
+  [facebookToken retain_stub];
+  [__facebookToken release_stub];
+  __facebookToken = facebookToken;
+  __facebookToken_isset = YES;
+}
+
+- (BOOL) facebookTokenIsSet {
+  return __facebookToken_isset;
+}
+
+- (void) unsetFacebookToken {
+  [__facebookToken release_stub];
+  __facebookToken = nil;
+  __facebookToken_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setFacebookToken: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LoginFacebookAccountRequest"];
+  if (__facebookToken_isset) {
+    if (__facebookToken != nil) {
+      [outProtocol writeFieldBeginWithName: @"facebookToken" type: TType_STRING fieldID: 1];
+      [outProtocol writeString: __facebookToken];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__facebookToken_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'facebookToken' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LoginFacebookAccountRequest("];
+  [ms appendString: @"facebookToken:"];
+  [ms appendFormat: @"\"%@\"", __facebookToken];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation LoginFacebookAccountResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToke: (AmityToken *) authToke
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
+  __authToke = [authToke retain_stub];
+  __authToke_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"amityUserId"])
+  {
+    __amityUserId = [decoder decodeInt64ForKey: @"amityUserId"];
+    __amityUserId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"authToke"])
+  {
+    __authToke = [[decoder decodeObjectForKey: @"authToke"] retain_stub];
+    __authToke_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+  if (__amityUserId_isset)
+  {
+    [encoder encodeInt64: __amityUserId forKey: @"amityUserId"];
+  }
+  if (__authToke_isset)
+  {
+    [encoder encodeObject: __authToke forKey: @"authToke"];
+  }
+}
+
+- (void) dealloc
+{
+  [__authToke release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (int64_t) amityUserId {
+  return __amityUserId;
+}
+
+- (void) setAmityUserId: (int64_t) amityUserId {
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
+}
+
+- (BOOL) amityUserIdIsSet {
+  return __amityUserId_isset;
+}
+
+- (void) unsetAmityUserId {
+  __amityUserId_isset = NO;
+}
+
+- (AmityToken *) authToke {
+  return [[__authToke retain_stub] autorelease_stub];
+}
+
+- (void) setAuthToke: (AmityToken *) authToke {
+  [authToke retain_stub];
+  [__authToke release_stub];
+  __authToke = authToke;
+  __authToke_isset = YES;
+}
+
+- (BOOL) authTokeIsSet {
+  return __authToke_isset;
+}
+
+- (void) unsetAuthToke {
+  [__authToke release_stub];
+  __authToke = nil;
+  __authToke_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_I64) {
+          int64_t fieldValue = [inProtocol readI64];
+          [self setAmityUserId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRUCT) {
+          AmityToken *fieldValue = [[AmityToken alloc] init];
+          [fieldValue read: inProtocol];
+          [self setAuthToke: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LoginFacebookAccountResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (__amityUserId_isset) {
+    [outProtocol writeFieldBeginWithName: @"amityUserId" type: TType_I64 fieldID: 2];
+    [outProtocol writeI64: __amityUserId];
+    [outProtocol writeFieldEnd];
+  }
+  if (__authToke_isset) {
+    if (__authToke != nil) {
+      [outProtocol writeFieldBeginWithName: @"authToke" type: TType_STRUCT fieldID: 3];
+      [__authToke write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LoginFacebookAccountResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",amityUserId:"];
+  [ms appendFormat: @"%qi", __amityUserId];
+  [ms appendString: @",authToke:"];
+  [ms appendFormat: @"%@", __authToke];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

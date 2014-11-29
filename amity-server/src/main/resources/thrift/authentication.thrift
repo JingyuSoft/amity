@@ -16,8 +16,7 @@ struct LoginFacebookAccountRequest {
 struct LoginFacebookAccountResponse {
 	1: required i32 errorCode,
     2: optional i64 amityUserId,
-    3: optional AmityToken authToken,
-    4: optional AmityToken sessionToken
+    3: optional AmityToken authToke
 }
 
 service AuthenticationThriftService {

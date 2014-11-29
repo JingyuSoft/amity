@@ -8,11 +8,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.jingyusoft.amity.config.UnitTestConfigConstants;
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
 import com.jingyusoft.amity.domain.AmityUserType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/com/jingyusoft/amity/config/application-context-unit-test.xml")
+@ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
 public class AmityUserRepositoryTests {
 
 	@Resource

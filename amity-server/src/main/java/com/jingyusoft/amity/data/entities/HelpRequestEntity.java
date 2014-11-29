@@ -18,13 +18,13 @@ public class HelpRequestEntity {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Version
 	@Column(name = "version_lock")
 	private Integer versionLock;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -32,7 +32,7 @@ public class HelpRequestEntity {
 		return versionLock;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

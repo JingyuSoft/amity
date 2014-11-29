@@ -12,11 +12,11 @@ import org.hibernate.envers.RevisionTimestamp;
 public abstract class AuditableEntity {
 
 	@RevisionNumber
-	@Column(name = "revision_number", nullable = false)
+	@Column(name = "revision_number")
 	private int revisionNumber;
 
 	@RevisionTimestamp
-	@Column(name = "revision_timestamp", nullable = false)
+	@Column(name = "revision_timestamp")
 	private Date revisionTimestamp;
 
 	public int getRevisionNumber() {

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -156,6 +157,11 @@ public class AmityUserEntity extends AuditableEntity {
 
 	public boolean isActive() {
 		return isActive;
+	}
+
+	@PrePersist
+	private void prePersist() {
+		registerDateTime = DateTime.now();
 	}
 
 	public void setActive(boolean isActive) {

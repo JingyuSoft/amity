@@ -29,9 +29,10 @@
 				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
 				<prop key="hibernate.cache.region.factory_class">${hibernate.cache.region.factory_class}</prop>
 				<prop key="javax.persistence.validation.mode">none</prop>
-				
+
 				<prop key="org.hibernate.envers.revision_field_name">${org.hibernate.envers.revision_field_name}</prop>
-				<prop key="org.hibernate.envers.revision_type_field_name">${org.hibernate.envers.revision_type_field_name}</prop>
+				<prop key="org.hibernate.envers.revision_type_field_name">${org.hibernate.envers.revision_type_field_name}
+				</prop>
 				<prop key="org.hibernate.envers.audit_table_suffix">${hibernate.envers.audit_table_suffix}</prop>
 				<prop key="org.hibernate.envers.global_with_modified_flag">${hibernate.envers.global_with_modified_flag}</prop>
 				<prop key="org.hibernate.envers.modified_flag_suffix">${hibernate.envers.modified_flag_suffix}</prop>
@@ -43,15 +44,18 @@
 		</property>
 	</bean>
 
+	<!-- JPA Repositories -->
+	<jpa:repositories base-package="com.jingyusoft.amity.data.repositories" />
+
 	<!-- Spring Transaction Manager -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
+	<tx:annotation-driven transaction-manager="transactionManager"
+		mode="proxy" />
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<jpa:repositories base-package="com.jingyusoft.amity.data.repositories" />
 </beans>

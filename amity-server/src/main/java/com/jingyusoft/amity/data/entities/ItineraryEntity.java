@@ -14,12 +14,10 @@ import javax.persistence.Version;
 
 import org.hibernate.envers.Audited;
 
-import com.jingyusoft.amity.data.auditing.AuditableEntity;
-
 @Entity
 @Table(name = "itinerary")
 @Audited(withModifiedFlag = true)
-public class ItineraryEntity extends AuditableEntity {
+public class ItineraryEntity {
 
 	@Id
 	@Column(name = "id")

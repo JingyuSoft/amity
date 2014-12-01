@@ -17,12 +17,11 @@ import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.common.SecurityUtils;
-import com.jingyusoft.amity.data.auditing.AuditableEntity;
 
 @Entity
 @Table(name = "amity_user")
 @Audited(withModifiedFlag = true)
-public class AmityUserEntity extends AuditableEntity {
+public class AmityUserEntity {
 
 	public static final String encryptPassword(final String password, final String sand) {
 		return SecurityUtils.getBase64SHA256Hash(password + sand);

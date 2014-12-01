@@ -1,18 +1,16 @@
 package com.jingyusoft.amity.programs;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.jingyusoft.amity.authentication.facebook.FacebookAuthenticationService;
+import com.jingyusoft.amity.authentication.AuthenticationService;
 import com.jingyusoft.amity.common.HostPort;
 import com.jingyusoft.amity.common.WrappedException;
+import com.jingyusoft.amity.data.auditing.AuditQueryService;
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
-import com.jingyusoft.amity.data.repositories.AmityUserRepository;
 import com.jingyusoft.amity.thrift.factories.ThriftClientFactory;
 import com.jingyusoft.amity.thrift.factories.ThriftClientFactory.ThriftClientHolder;
 import com.jingyusoft.amity.thrift.generated.AmityService;
@@ -30,16 +28,15 @@ public class TestConsole {
 	private ThriftClientFactory thriftClientFactory;
 
 	@Resource
-	private FacebookAuthenticationService facebookAuthenticationService;
+	private AuthenticationService authenticationService;
 
 	@Resource
-	private AmityUserRepository amityUserRepository;
+	private AuditQueryService auditQueryService;
 
 	@PostConstruct
 	public void start() {
 
-		List<AmityUserEntity> list = amityUserRepository.findAll();
-		System.err.println(list.size());
+		auditQueryService.queryAudit(AmityUserEntity.class);
 
 		// thriftDemo();
 	}

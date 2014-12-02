@@ -15,6 +15,7 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
+#import "authentication.h"
 
 @protocol AmityService <NSObject>
 - (NSString *) echo: (NSString *) request;  // throws TException

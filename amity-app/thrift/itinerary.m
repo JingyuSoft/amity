@@ -519,9 +519,11 @@
   return self;
 }
 
-- (id) initWithItineraryId: (int32_t) itineraryId
+- (id) initWithErrorCode: (int32_t) errorCode itineraryId: (int32_t) itineraryId
 {
   self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
   __itineraryId = itineraryId;
   __itineraryId_isset = YES;
   return self;
@@ -530,6 +532,11 @@
 - (id) initWithCoder: (NSCoder *) decoder
 {
   self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
   if ([decoder containsValueForKey: @"itineraryId"])
   {
     __itineraryId = [decoder decodeInt32ForKey: @"itineraryId"];
@@ -540,6 +547,10 @@
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
   if (__itineraryId_isset)
   {
     [encoder encodeInt32: __itineraryId forKey: @"itineraryId"];
@@ -549,6 +560,23 @@
 - (void) dealloc
 {
   [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
 }
 
 - (int32_t) itineraryId {
@@ -586,6 +614,14 @@
       case 1:
         if (fieldType == TType_I32) {
           int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
           [self setItineraryId: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
@@ -602,8 +638,13 @@
 
 - (void) write: (id <TProtocol>) outProtocol {
   [outProtocol writeStructBeginWithName: @"CreateHelperItineraryResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
   if (__itineraryId_isset) {
-    [outProtocol writeFieldBeginWithName: @"itineraryId" type: TType_I32 fieldID: 1];
+    [outProtocol writeFieldBeginWithName: @"itineraryId" type: TType_I32 fieldID: 2];
     [outProtocol writeI32: __itineraryId];
     [outProtocol writeFieldEnd];
   }
@@ -613,11 +654,21 @@
 
 - (void) validate {
   // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+  if (!__itineraryId_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'itineraryId' is not set."];
+  }
 }
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"CreateHelperItineraryResponse("];
-  [ms appendString: @"itineraryId:"];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",itineraryId:"];
   [ms appendFormat: @"%i", __itineraryId];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];

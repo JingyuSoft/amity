@@ -2,14 +2,16 @@ package com.jingyusoft.amity.authentication;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.jingyusoft.amity.common.StringMessage;
-import com.jingyusoft.amity.domain.AmityUser;
+import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 
 @Service
 public class SessionServiceImpl implements SessionService {
+
+	private static final Logger LOGGER = AmityLogger.getLogger();
 
 	@Resource
 	private SessionRepository sessionRepository;
@@ -18,12 +20,7 @@ public class SessionServiceImpl implements SessionService {
 	private AuthenticationService authenticationService;
 
 	@Override
-	public AmityToken createSession(long amityUserId, AmityToken authToken) {
-		AmityUser amityUser = authenticationService.authenticateAmityUser(amityUserId, authToken);
-		if (amityUser == null) {
-			throw new AmityAuthenticationException(StringMessage.with("Invalid auth token for user [{}]", amityUserId));
-		}
-
+	public AmityToken createSession(long amityUserId) {
 		AmityToken sessionToken = new AmityToken(AuthenticationUtils.generateSessionToken());
 		sessionRepository.update(amityUserId, sessionToken);
 		return sessionToken;
@@ -31,6 +28,12 @@ public class SessionServiceImpl implements SessionService {
 
 	@Override
 	public boolean validateSessionToken(long amityUserId, AmityToken sessionToken) {
-		return sessionRepository.verify(amityUserId, sessionToken);
+		boolean result = sessionRepository.verify(amityUserId, sessionToken);
+		if (result) {
+			LOGGER.info("Session token valid. User = [{}], Token = [{}]", amityUserId, sessionToken.getValue());
+		} else {
+			LOGGER.warn("Session token invalid. User = [{}], Token = [{}]", amityUserId, sessionToken.getValue());
+		}
+		return result;
 	}
 }

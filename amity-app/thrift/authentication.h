@@ -106,21 +106,24 @@
 @interface LoginFacebookAccountResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   int64_t __amityUserId;
-  AmityToken * __authToke;
+  AmityToken * __authToken;
+  AmityToken * __sessionToken;
 
   BOOL __errorCode_isset;
   BOOL __amityUserId_isset;
-  BOOL __authToke_isset;
+  BOOL __authToken_isset;
+  BOOL __sessionToken_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
 @property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
-@property (nonatomic, retain, getter=authToke, setter=setAuthToke:) AmityToken * authToke;
+@property (nonatomic, retain, getter=authToken, setter=setAuthToken:) AmityToken * authToken;
+@property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
 #endif
 
 - (id) init;
-- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToke: (AmityToken *) authToke;
+- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -140,15 +143,92 @@
 - (BOOL) amityUserIdIsSet;
 
 #if !__has_feature(objc_arc)
-- (AmityToken *) authToke;
-- (void) setAuthToke: (AmityToken *) authToke;
+- (AmityToken *) authToken;
+- (void) setAuthToken: (AmityToken *) authToken;
 #endif
-- (BOOL) authTokeIsSet;
+- (BOOL) authTokenIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityToken *) sessionToken;
+- (void) setSessionToken: (AmityToken *) sessionToken;
+#endif
+- (BOOL) sessionTokenIsSet;
+
+@end
+
+@interface LoginAmityAccountRequest : NSObject <TBase, NSCoding> {
+  int64_t __amityUserId;
+  AmityToken * __authToken;
+
+  BOOL __amityUserId_isset;
+  BOOL __authToken_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
+@property (nonatomic, retain, getter=authToken, setter=setAuthToken:) AmityToken * authToken;
+#endif
+
+- (id) init;
+- (id) initWithAmityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int64_t) amityUserId;
+- (void) setAmityUserId: (int64_t) amityUserId;
+#endif
+- (BOOL) amityUserIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityToken *) authToken;
+- (void) setAuthToken: (AmityToken *) authToken;
+#endif
+- (BOOL) authTokenIsSet;
+
+@end
+
+@interface LoginAmityAccountResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  AmityToken * __sessionToken;
+
+  BOOL __errorCode_isset;
+  BOOL __sessionToken_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityToken *) sessionToken;
+- (void) setSessionToken: (AmityToken *) sessionToken;
+#endif
+- (BOOL) sessionTokenIsSet;
 
 @end
 
 @protocol AuthenticationThriftService <NSObject>
 - (LoginFacebookAccountResponse *) loginFacebookAccount: (LoginFacebookAccountRequest *) request;  // throws TException
+- (LoginAmityAccountResponse *) loginAmityAccount: (LoginAmityAccountRequest *) request;  // throws TException
 @end
 
 @interface AuthenticationThriftServiceClient : NSObject <AuthenticationThriftService> {

@@ -115,22 +115,31 @@
 @end
 
 @interface CreateHelperItineraryResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
   int32_t __itineraryId;
 
+  BOOL __errorCode_isset;
   BOOL __itineraryId_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
 @property (nonatomic, getter=itineraryId, setter=setItineraryId:) int32_t itineraryId;
 #endif
 
 - (id) init;
-- (id) initWithItineraryId: (int32_t) itineraryId;
+- (id) initWithErrorCode: (int32_t) errorCode itineraryId: (int32_t) itineraryId;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
 
 - (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
 
 #if !__has_feature(objc_arc)
 - (int32_t) itineraryId;

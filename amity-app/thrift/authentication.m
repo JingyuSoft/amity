@@ -458,15 +458,17 @@
   return self;
 }
 
-- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToke: (AmityToken *) authToke
+- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken
 {
   self = [super init];
   __errorCode = errorCode;
   __errorCode_isset = YES;
   __amityUserId = amityUserId;
   __amityUserId_isset = YES;
-  __authToke = [authToke retain_stub];
-  __authToke_isset = YES;
+  __authToken = [authToken retain_stub];
+  __authToken_isset = YES;
+  __sessionToken = [sessionToken retain_stub];
+  __sessionToken_isset = YES;
   return self;
 }
 
@@ -483,10 +485,15 @@
     __amityUserId = [decoder decodeInt64ForKey: @"amityUserId"];
     __amityUserId_isset = YES;
   }
-  if ([decoder containsValueForKey: @"authToke"])
+  if ([decoder containsValueForKey: @"authToken"])
   {
-    __authToke = [[decoder decodeObjectForKey: @"authToke"] retain_stub];
-    __authToke_isset = YES;
+    __authToken = [[decoder decodeObjectForKey: @"authToken"] retain_stub];
+    __authToken_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"sessionToken"])
+  {
+    __sessionToken = [[decoder decodeObjectForKey: @"sessionToken"] retain_stub];
+    __sessionToken_isset = YES;
   }
   return self;
 }
@@ -501,15 +508,20 @@
   {
     [encoder encodeInt64: __amityUserId forKey: @"amityUserId"];
   }
-  if (__authToke_isset)
+  if (__authToken_isset)
   {
-    [encoder encodeObject: __authToke forKey: @"authToke"];
+    [encoder encodeObject: __authToken forKey: @"authToken"];
+  }
+  if (__sessionToken_isset)
+  {
+    [encoder encodeObject: __sessionToken forKey: @"sessionToken"];
   }
 }
 
 - (void) dealloc
 {
-  [__authToke release_stub];
+  [__authToken release_stub];
+  [__sessionToken release_stub];
   [super dealloc_stub];
 }
 
@@ -547,25 +559,46 @@
   __amityUserId_isset = NO;
 }
 
-- (AmityToken *) authToke {
-  return [[__authToke retain_stub] autorelease_stub];
+- (AmityToken *) authToken {
+  return [[__authToken retain_stub] autorelease_stub];
 }
 
-- (void) setAuthToke: (AmityToken *) authToke {
-  [authToke retain_stub];
-  [__authToke release_stub];
-  __authToke = authToke;
-  __authToke_isset = YES;
+- (void) setAuthToken: (AmityToken *) authToken {
+  [authToken retain_stub];
+  [__authToken release_stub];
+  __authToken = authToken;
+  __authToken_isset = YES;
 }
 
-- (BOOL) authTokeIsSet {
-  return __authToke_isset;
+- (BOOL) authTokenIsSet {
+  return __authToken_isset;
 }
 
-- (void) unsetAuthToke {
-  [__authToke release_stub];
-  __authToke = nil;
-  __authToke_isset = NO;
+- (void) unsetAuthToken {
+  [__authToken release_stub];
+  __authToken = nil;
+  __authToken_isset = NO;
+}
+
+- (AmityToken *) sessionToken {
+  return [[__sessionToken retain_stub] autorelease_stub];
+}
+
+- (void) setSessionToken: (AmityToken *) sessionToken {
+  [sessionToken retain_stub];
+  [__sessionToken release_stub];
+  __sessionToken = sessionToken;
+  __sessionToken_isset = YES;
+}
+
+- (BOOL) sessionTokenIsSet {
+  return __sessionToken_isset;
+}
+
+- (void) unsetSessionToken {
+  [__sessionToken release_stub];
+  __sessionToken = nil;
+  __sessionToken_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -603,7 +636,17 @@
         if (fieldType == TType_STRUCT) {
           AmityToken *fieldValue = [[AmityToken alloc] init];
           [fieldValue read: inProtocol];
-          [self setAuthToke: fieldValue];
+          [self setAuthToken: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_STRUCT) {
+          AmityToken *fieldValue = [[AmityToken alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSessionToken: fieldValue];
           [fieldValue release_stub];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
@@ -630,10 +673,17 @@
     [outProtocol writeI64: __amityUserId];
     [outProtocol writeFieldEnd];
   }
-  if (__authToke_isset) {
-    if (__authToke != nil) {
-      [outProtocol writeFieldBeginWithName: @"authToke" type: TType_STRUCT fieldID: 3];
-      [__authToke write: outProtocol];
+  if (__authToken_isset) {
+    if (__authToken != nil) {
+      [outProtocol writeFieldBeginWithName: @"authToken" type: TType_STRUCT fieldID: 3];
+      [__authToken write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__sessionToken_isset) {
+    if (__sessionToken != nil) {
+      [outProtocol writeFieldBeginWithName: @"sessionToken" type: TType_STRUCT fieldID: 4];
+      [__sessionToken write: outProtocol];
       [outProtocol writeFieldEnd];
     }
   }
@@ -655,8 +705,358 @@
   [ms appendFormat: @"%i", __errorCode];
   [ms appendString: @",amityUserId:"];
   [ms appendFormat: @"%qi", __amityUserId];
-  [ms appendString: @",authToke:"];
-  [ms appendFormat: @"%@", __authToke];
+  [ms appendString: @",authToken:"];
+  [ms appendFormat: @"%@", __authToken];
+  [ms appendString: @",sessionToken:"];
+  [ms appendFormat: @"%@", __sessionToken];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation LoginAmityAccountRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithAmityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken
+{
+  self = [super init];
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
+  __authToken = [authToken retain_stub];
+  __authToken_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"amityUserId"])
+  {
+    __amityUserId = [decoder decodeInt64ForKey: @"amityUserId"];
+    __amityUserId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"authToken"])
+  {
+    __authToken = [[decoder decodeObjectForKey: @"authToken"] retain_stub];
+    __authToken_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__amityUserId_isset)
+  {
+    [encoder encodeInt64: __amityUserId forKey: @"amityUserId"];
+  }
+  if (__authToken_isset)
+  {
+    [encoder encodeObject: __authToken forKey: @"authToken"];
+  }
+}
+
+- (void) dealloc
+{
+  [__authToken release_stub];
+  [super dealloc_stub];
+}
+
+- (int64_t) amityUserId {
+  return __amityUserId;
+}
+
+- (void) setAmityUserId: (int64_t) amityUserId {
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
+}
+
+- (BOOL) amityUserIdIsSet {
+  return __amityUserId_isset;
+}
+
+- (void) unsetAmityUserId {
+  __amityUserId_isset = NO;
+}
+
+- (AmityToken *) authToken {
+  return [[__authToken retain_stub] autorelease_stub];
+}
+
+- (void) setAuthToken: (AmityToken *) authToken {
+  [authToken retain_stub];
+  [__authToken release_stub];
+  __authToken = authToken;
+  __authToken_isset = YES;
+}
+
+- (BOOL) authTokenIsSet {
+  return __authToken_isset;
+}
+
+- (void) unsetAuthToken {
+  [__authToken release_stub];
+  __authToken = nil;
+  __authToken_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I64) {
+          int64_t fieldValue = [inProtocol readI64];
+          [self setAmityUserId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          AmityToken *fieldValue = [[AmityToken alloc] init];
+          [fieldValue read: inProtocol];
+          [self setAuthToken: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LoginAmityAccountRequest"];
+  if (__amityUserId_isset) {
+    [outProtocol writeFieldBeginWithName: @"amityUserId" type: TType_I64 fieldID: 1];
+    [outProtocol writeI64: __amityUserId];
+    [outProtocol writeFieldEnd];
+  }
+  if (__authToken_isset) {
+    if (__authToken != nil) {
+      [outProtocol writeFieldBeginWithName: @"authToken" type: TType_STRUCT fieldID: 2];
+      [__authToken write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__amityUserId_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'amityUserId' is not set."];
+  }
+  if (!__authToken_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'authToken' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LoginAmityAccountRequest("];
+  [ms appendString: @"amityUserId:"];
+  [ms appendFormat: @"%qi", __amityUserId];
+  [ms appendString: @",authToken:"];
+  [ms appendFormat: @"%@", __authToken];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation LoginAmityAccountResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  __sessionToken = [sessionToken retain_stub];
+  __sessionToken_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"sessionToken"])
+  {
+    __sessionToken = [[decoder decodeObjectForKey: @"sessionToken"] retain_stub];
+    __sessionToken_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+  if (__sessionToken_isset)
+  {
+    [encoder encodeObject: __sessionToken forKey: @"sessionToken"];
+  }
+}
+
+- (void) dealloc
+{
+  [__sessionToken release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (AmityToken *) sessionToken {
+  return [[__sessionToken retain_stub] autorelease_stub];
+}
+
+- (void) setSessionToken: (AmityToken *) sessionToken {
+  [sessionToken retain_stub];
+  [__sessionToken release_stub];
+  __sessionToken = sessionToken;
+  __sessionToken_isset = YES;
+}
+
+- (BOOL) sessionTokenIsSet {
+  return __sessionToken_isset;
+}
+
+- (void) unsetSessionToken {
+  [__sessionToken release_stub];
+  __sessionToken = nil;
+  __sessionToken_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          AmityToken *fieldValue = [[AmityToken alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSessionToken: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LoginAmityAccountResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (__sessionToken_isset) {
+    if (__sessionToken != nil) {
+      [outProtocol writeFieldBeginWithName: @"sessionToken" type: TType_STRUCT fieldID: 2];
+      [__sessionToken write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LoginAmityAccountResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",sessionToken:"];
+  [ms appendFormat: @"%@", __sessionToken];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -972,6 +1372,309 @@
 
 @end
 
+@interface loginAmityAccount_args : NSObject <TBase, NSCoding> {
+  LoginAmityAccountRequest * __request;
+
+  BOOL __request_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) LoginAmityAccountRequest * request;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (LoginAmityAccountRequest *) request;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (LoginAmityAccountRequest *) request;
+- (void) setRequest: (LoginAmityAccountRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+@end
+
+@implementation loginAmityAccount_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (LoginAmityAccountRequest *) request
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [super dealloc_stub];
+}
+
+- (LoginAmityAccountRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (LoginAmityAccountRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          LoginAmityAccountRequest *fieldValue = [[LoginAmityAccountRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"loginAmityAccount_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"loginAmityAccount_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface LoginAmityAccount_result : NSObject <TBase, NSCoding> {
+  LoginAmityAccountResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) LoginAmityAccountResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (LoginAmityAccountResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (LoginAmityAccountResponse *) success;
+- (void) setSuccess: (LoginAmityAccountResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation LoginAmityAccount_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (LoginAmityAccountResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (LoginAmityAccountResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (LoginAmityAccountResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          LoginAmityAccountResponse *fieldValue = [[LoginAmityAccountResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LoginAmityAccount_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LoginAmityAccount_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation AuthenticationThriftServiceClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -1033,6 +1736,46 @@
   return [self recv_loginFacebookAccount];
 }
 
+- (void) send_loginAmityAccount: (LoginAmityAccountRequest *) request
+{
+  [outProtocol writeMessageBeginWithName: @"loginAmityAccount" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"loginAmityAccount_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (LoginAmityAccountResponse *) recv_loginAmityAccount
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  LoginAmityAccount_result * result = [[[LoginAmityAccount_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"loginAmityAccount failed: unknown result"];
+}
+
+- (LoginAmityAccountResponse *) loginAmityAccount: (LoginAmityAccountRequest *) request
+{
+  [self send_loginAmityAccount : request];
+  return [self recv_loginAmityAccount];
+}
+
 @end
 
 @implementation AuthenticationThriftServiceProcessor
@@ -1052,6 +1795,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"loginFacebookAccount"];
+  }
+  {
+    SEL s = @selector(process_loginAmityAccount_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"loginAmityAccount"];
   }
   return self;
 }
@@ -1102,6 +1853,23 @@
   LoginFacebookAccount_result * result = [[LoginFacebookAccount_result alloc] init];
   [result setSuccess: [mService loginFacebookAccount: [args request]]];
   [outProtocol writeMessageBeginWithName: @"loginFacebookAccount"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_loginAmityAccount_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  loginAmityAccount_args * args = [[loginAmityAccount_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  LoginAmityAccount_result * result = [[LoginAmityAccount_result alloc] init];
+  [result setSuccess: [mService loginAmityAccount: [args request]]];
+  [outProtocol writeMessageBeginWithName: @"loginAmityAccount"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

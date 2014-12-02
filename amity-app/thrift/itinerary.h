@@ -15,6 +15,7 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
+#import "authentication.h"
 
 @interface HelperItineraryDto : NSObject <TBase, NSCoding> {
   int64_t __id;
@@ -140,7 +141,7 @@
 @end
 
 @protocol ItineraryThriftService <NSObject>
-- (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request;  // throws TException
+- (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface ItineraryThriftServiceClient : NSObject <ItineraryThriftService> {

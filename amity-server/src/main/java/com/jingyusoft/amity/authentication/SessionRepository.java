@@ -3,12 +3,15 @@ package com.jingyusoft.amity.authentication;
 import java.util.Map;
 import java.util.Objects;
 
+import net.jcip.annotations.ThreadSafe;
+
 import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Maps;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 
 @Repository
+@ThreadSafe
 public class SessionRepository {
 
 	private final Map<Long, AmityToken> map = Maps.newConcurrentMap();

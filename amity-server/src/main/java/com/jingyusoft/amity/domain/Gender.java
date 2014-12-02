@@ -4,7 +4,7 @@ public enum Gender {
 
 	MALE("M"),
 
-	FEMAIL("F");
+	FEMALE("F");
 
 	private final String code;
 

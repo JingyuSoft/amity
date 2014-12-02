@@ -2,6 +2,7 @@ package com.jingyusoft.amity.authentication;
 
 import javax.annotation.Resource;
 
+import org.h2.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import com.jingyusoft.amity.data.repositories.FacebookUserRepository;
 import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.domain.AmityUserType;
 import com.jingyusoft.amity.domain.Gender;
+import com.jingyusoft.amity.thrift.generated.AmityToken;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -27,6 +29,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Resource
 	private FacebookUserRepository facebookUserRepository;
+
+	@Override
+	public AmityUser authenticateAmityUser(long amityUserId, AmityToken authToken) {
+		AmityUserEntity entity = amityUserRepository.getOne(amityUserId);
+		if (entity != null && StringUtils.equals(authToken.getValue(), entity.getAuthToken())) {
+			return new AmityUser(entity);
+		}
+
+		return null;
+	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)

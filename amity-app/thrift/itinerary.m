@@ -15,6 +15,7 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
+#import "authentication.h"
 
 #import "itinerary.h"
 
@@ -632,16 +633,19 @@
 
 @interface createItinerary_args : NSObject <TBase, NSCoding> {
   CreateHelperItineraryRequest * __request;
+  SessionCredentials * __credentials;
 
   BOOL __request_isset;
+  BOOL __credentials_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, retain, getter=request, setter=setRequest:) CreateHelperItineraryRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
 #endif
 
 - (id) init;
-- (id) initWithRequest: (CreateHelperItineraryRequest *) request;
+- (id) initWithRequest: (CreateHelperItineraryRequest *) request credentials: (SessionCredentials *) credentials;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -653,6 +657,12 @@
 - (void) setRequest: (CreateHelperItineraryRequest *) request;
 #endif
 - (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
 
 @end
 
@@ -666,11 +676,13 @@
   return self;
 }
 
-- (id) initWithRequest: (CreateHelperItineraryRequest *) request
+- (id) initWithRequest: (CreateHelperItineraryRequest *) request credentials: (SessionCredentials *) credentials
 {
   self = [super init];
   __request = [request retain_stub];
   __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
   return self;
 }
 
@@ -682,6 +694,11 @@
     __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
     __request_isset = YES;
   }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
   return self;
 }
 
@@ -691,11 +708,16 @@
   {
     [encoder encodeObject: __request forKey: @"request"];
   }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
 }
 
 - (void) dealloc
 {
   [__request release_stub];
+  [__credentials release_stub];
   [super dealloc_stub];
 }
 
@@ -718,6 +740,27 @@
   [__request release_stub];
   __request = nil;
   __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -745,6 +788,16 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -763,6 +816,13 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -775,6 +835,8 @@
   NSMutableString * ms = [NSMutableString stringWithString: @"createItinerary_args("];
   [ms appendString: @"request:"];
   [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -954,13 +1016,18 @@
   [super dealloc_stub];
 }
 
-- (void) send_createItinerary: (CreateHelperItineraryRequest *) request
+- (void) send_createItinerary: (CreateHelperItineraryRequest *) request credentials: (SessionCredentials *) credentials
 {
   [outProtocol writeMessageBeginWithName: @"createItinerary" type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: @"createItinerary_args"];
   if (request != nil)  {
     [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
     [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
     [outProtocol writeFieldEnd];
   }
   [outProtocol writeFieldStop];
@@ -988,9 +1055,9 @@
                                            reason: @"createItinerary failed: unknown result"];
 }
 
-- (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request
+- (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request credentials: (SessionCredentials *) credentials
 {
-  [self send_createItinerary : request];
+  [self send_createItinerary : request credentials: credentials];
   return [self recv_createItinerary];
 }
 
@@ -1061,7 +1128,7 @@
   [args read: inProtocol];
   [inProtocol readMessageEnd];
   CreateItinerary_result * result = [[CreateItinerary_result alloc] init];
-  [result setSuccess: [mService createItinerary: [args request]]];
+  [result setSuccess: [mService createItinerary: [args request] credentials: [args credentials]]];
   [outProtocol writeMessageBeginWithName: @"createItinerary"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];

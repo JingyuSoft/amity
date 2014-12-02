@@ -1,3 +1,4 @@
+include "authentication.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
 struct HelperItineraryDto {
@@ -14,9 +15,10 @@ struct CreateHelperItineraryRequest {
 }
 
 struct CreateHelperItineraryResponse {
-	1: i32 itineraryId
+	1: required i32 errorCode,
+	2: required i32 itineraryId
 }
 
 service ItineraryThriftService {
-    CreateHelperItineraryResponse createItinerary(1: CreateHelperItineraryRequest request)
+    CreateHelperItineraryResponse createItinerary(1: CreateHelperItineraryRequest request, 2: authentication.SessionCredentials credentials);
 }

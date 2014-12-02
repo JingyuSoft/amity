@@ -26,6 +26,7 @@ for line in fin:
 	m = re.split('\s+', line)
 	code = m[0]
 	name = m[1]
-	generate_java_line(fout, code, name)
+	if code != "" and name != "":
+		generate_java_line(fout, code, name)
 
 generate_java_footer(fout)

@@ -2,7 +2,7 @@ package com.jingyusoft.amity.authentication;
 
 import javax.annotation.Resource;
 
-import org.h2.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

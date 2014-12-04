@@ -160,6 +160,7 @@ public class AmityUserEntity {
 
 	@PrePersist
 	private void prePersist() {
+		isActive = true;
 		registerDateTime = DateTime.now();
 	}
 

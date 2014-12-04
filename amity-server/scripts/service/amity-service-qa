@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# chkconfig: 2345 85 25
+# description: Amity QA server daemon
+
 export AMITY_ENVIRONMENT=qa
 export AMITY_START_SCRIPT=amity-server-$AMITY_ENVIRONMENT
 export JAVA_HOME=/usr/local/java/jdk1.8.0_20

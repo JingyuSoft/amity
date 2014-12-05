@@ -18,7 +18,7 @@
 		</layout>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.%i.log.zip
+			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.%i.log.gz
 			</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>

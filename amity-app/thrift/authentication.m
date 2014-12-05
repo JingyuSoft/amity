@@ -1411,6 +1411,18 @@
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
                                reason: @"Required field 'amityUserId' is not set."];
   }
+  if (!__firstName_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'firstName' is not set."];
+  }
+  if (!__lastName_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'lastName' is not set."];
+  }
+  if (!__userAlias_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'userAlias' is not set."];
+  }
 }
 
 - (NSString *) description {

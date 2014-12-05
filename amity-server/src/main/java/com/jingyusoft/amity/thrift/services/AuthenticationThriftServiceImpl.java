@@ -2,6 +2,7 @@ package com.jingyusoft.amity.thrift.services;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
 
@@ -64,13 +65,17 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 			SessionCredentials credentials) throws TException {
 
 		AmityUser amityUser = userAccountService.getAmityUser(request.getAmityUserId());
-		amityUser.setUserName(request.getUsername());
+		if (StringUtils.isNotBlank(request.getUsername())) {
+			amityUser.setUserName(request.getUsername());
+		}
 		amityUser.setFirstName(request.getFirstName());
 		amityUser.setLastName(request.getLastName());
 		amityUser.setAlias(request.getUserAlias());
 
-		String avatarFileName = userAccountService.uploadAvatar(request.getAmityUserId(), request.getAvatar());
-		amityUser.setAvatar(avatarFileName);
+		if (request.getAvatar() != null && request.getAvatar().length > 0) {
+			String avatarFileName = userAccountService.uploadAvatar(request.getAmityUserId(), request.getAvatar());
+			amityUser.setAvatar(avatarFileName);
+		}
 
 		userAccountService.updateUserProfile(amityUser);
 

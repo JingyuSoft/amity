@@ -53,9 +53,9 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
 
   public long amityUserId; // required
   public String username; // optional
-  public String firstName; // optional
-  public String lastName; // optional
-  public String userAlias; // optional
+  public String firstName; // required
+  public String lastName; // required
+  public String userAlias; // required
   public ByteBuffer avatar; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -134,7 +134,7 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
   // isset id assignments
   private static final int __AMITYUSERID_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.USERNAME,_Fields.FIRST_NAME,_Fields.LAST_NAME,_Fields.USER_ALIAS,_Fields.AVATAR};
+  private static final _Fields optionals[] = {_Fields.USERNAME,_Fields.AVATAR};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -142,11 +142,11 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     tmpMap.put(_Fields.USERNAME, new org.apache.thrift.meta_data.FieldMetaData("username", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.FIRST_NAME, new org.apache.thrift.meta_data.FieldMetaData("firstName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.FIRST_NAME, new org.apache.thrift.meta_data.FieldMetaData("firstName", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.LAST_NAME, new org.apache.thrift.meta_data.FieldMetaData("lastName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.LAST_NAME, new org.apache.thrift.meta_data.FieldMetaData("lastName", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.USER_ALIAS, new org.apache.thrift.meta_data.FieldMetaData("userAlias", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.USER_ALIAS, new org.apache.thrift.meta_data.FieldMetaData("userAlias", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.AVATAR, new org.apache.thrift.meta_data.FieldMetaData("avatar", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
@@ -158,11 +158,17 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
   }
 
   public UpdateAmityAccountRequest(
-    long amityUserId)
+    long amityUserId,
+    String firstName,
+    String lastName,
+    String userAlias)
   {
     this();
     this.amityUserId = amityUserId;
     setAmityUserIdIsSet(true);
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.userAlias = userAlias;
   }
 
   /**
@@ -664,36 +670,30 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
       }
       first = false;
     }
-    if (isSetFirstName()) {
-      if (!first) sb.append(", ");
-      sb.append("firstName:");
-      if (this.firstName == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.firstName);
-      }
-      first = false;
+    if (!first) sb.append(", ");
+    sb.append("firstName:");
+    if (this.firstName == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.firstName);
     }
-    if (isSetLastName()) {
-      if (!first) sb.append(", ");
-      sb.append("lastName:");
-      if (this.lastName == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.lastName);
-      }
-      first = false;
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("lastName:");
+    if (this.lastName == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.lastName);
     }
-    if (isSetUserAlias()) {
-      if (!first) sb.append(", ");
-      sb.append("userAlias:");
-      if (this.userAlias == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.userAlias);
-      }
-      first = false;
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("userAlias:");
+    if (this.userAlias == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.userAlias);
     }
+    first = false;
     if (isSetAvatar()) {
       if (!first) sb.append(", ");
       sb.append("avatar:");
@@ -711,6 +711,15 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // alas, we cannot check 'amityUserId' because it's a primitive and you chose the non-beans generator.
+    if (firstName == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'firstName' was not present! Struct: " + toString());
+    }
+    if (lastName == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'lastName' was not present! Struct: " + toString());
+    }
+    if (userAlias == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'userAlias' was not present! Struct: " + toString());
+    }
     // check for sub-struct validity
   }
 
@@ -827,25 +836,19 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
         }
       }
       if (struct.firstName != null) {
-        if (struct.isSetFirstName()) {
-          oprot.writeFieldBegin(FIRST_NAME_FIELD_DESC);
-          oprot.writeString(struct.firstName);
-          oprot.writeFieldEnd();
-        }
+        oprot.writeFieldBegin(FIRST_NAME_FIELD_DESC);
+        oprot.writeString(struct.firstName);
+        oprot.writeFieldEnd();
       }
       if (struct.lastName != null) {
-        if (struct.isSetLastName()) {
-          oprot.writeFieldBegin(LAST_NAME_FIELD_DESC);
-          oprot.writeString(struct.lastName);
-          oprot.writeFieldEnd();
-        }
+        oprot.writeFieldBegin(LAST_NAME_FIELD_DESC);
+        oprot.writeString(struct.lastName);
+        oprot.writeFieldEnd();
       }
       if (struct.userAlias != null) {
-        if (struct.isSetUserAlias()) {
-          oprot.writeFieldBegin(USER_ALIAS_FIELD_DESC);
-          oprot.writeString(struct.userAlias);
-          oprot.writeFieldEnd();
-        }
+        oprot.writeFieldBegin(USER_ALIAS_FIELD_DESC);
+        oprot.writeString(struct.userAlias);
+        oprot.writeFieldEnd();
       }
       if (struct.avatar != null) {
         if (struct.isSetAvatar()) {
@@ -872,34 +875,19 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
     public void write(org.apache.thrift.protocol.TProtocol prot, UpdateAmityAccountRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.amityUserId);
+      oprot.writeString(struct.firstName);
+      oprot.writeString(struct.lastName);
+      oprot.writeString(struct.userAlias);
       BitSet optionals = new BitSet();
       if (struct.isSetUsername()) {
         optionals.set(0);
       }
-      if (struct.isSetFirstName()) {
+      if (struct.isSetAvatar()) {
         optionals.set(1);
       }
-      if (struct.isSetLastName()) {
-        optionals.set(2);
-      }
-      if (struct.isSetUserAlias()) {
-        optionals.set(3);
-      }
-      if (struct.isSetAvatar()) {
-        optionals.set(4);
-      }
-      oprot.writeBitSet(optionals, 5);
+      oprot.writeBitSet(optionals, 2);
       if (struct.isSetUsername()) {
         oprot.writeString(struct.username);
-      }
-      if (struct.isSetFirstName()) {
-        oprot.writeString(struct.firstName);
-      }
-      if (struct.isSetLastName()) {
-        oprot.writeString(struct.lastName);
-      }
-      if (struct.isSetUserAlias()) {
-        oprot.writeString(struct.userAlias);
       }
       if (struct.isSetAvatar()) {
         oprot.writeBinary(struct.avatar);
@@ -911,24 +899,18 @@ public class UpdateAmityAccountRequest implements org.apache.thrift.TBase<Update
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.amityUserId = iprot.readI64();
       struct.setAmityUserIdIsSet(true);
-      BitSet incoming = iprot.readBitSet(5);
+      struct.firstName = iprot.readString();
+      struct.setFirstNameIsSet(true);
+      struct.lastName = iprot.readString();
+      struct.setLastNameIsSet(true);
+      struct.userAlias = iprot.readString();
+      struct.setUserAliasIsSet(true);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         struct.username = iprot.readString();
         struct.setUsernameIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.firstName = iprot.readString();
-        struct.setFirstNameIsSet(true);
-      }
-      if (incoming.get(2)) {
-        struct.lastName = iprot.readString();
-        struct.setLastNameIsSet(true);
-      }
-      if (incoming.get(3)) {
-        struct.userAlias = iprot.readString();
-        struct.setUserAliasIsSet(true);
-      }
-      if (incoming.get(4)) {
         struct.avatar = iprot.readBinary();
         struct.setAvatarIsSet(true);
       }

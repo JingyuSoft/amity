@@ -9,10 +9,10 @@ cd `dirname $0`
 
 SERVICE_NAME=$AMITY_START_SCRIPT
 START_SCRIPT=./$AMITY_START_SCRIPT
-TEMP_DIR=/var/tmp/jingyusoft
+TEMP_DIR=/jingyusoft/amity/$AMITY_ENVIRONMENT
 PID_PATH_NAME=$TEMP_DIR/${SERVICE_NAME}-pid
-STDOUT_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/stdout.log
-STDERR_FILE_NAME=$TEMP_DIR/$SERVICE_NAME/stderr.log
+STDOUT_FILE_NAME=$TEMP_DIR/logs/${SERVICE_NAME}-stdout.log
+STDERR_FILE_NAME=$TEMP_DIR/logs/${SERVICE_NAME}-stderr.log
 
 echo "-------------------------------------"
 echo "---   AMITY SERVICE INFORMATION   ---"

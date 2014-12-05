@@ -10,6 +10,7 @@
 	<context:component-scan
 		base-package="com.jingyusoft.amity.data,
 					  com.jingyusoft.amity.authentication,
+					  com.jingyusoft.amity.users,
 		              com.jingyusoft.amity.repository,
 		              com.jingyusoft.amity.thrift.services,
 		              com.jingyusoft.amity.thrift.factories,

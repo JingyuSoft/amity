@@ -52,9 +52,13 @@ public class SpringMain {
 			System.err.println("Failed to load Amity database password");
 		}
 
-		applicationContext = new ClassPathXmlApplicationContext(applicationContextFile);
-		LOGGER.info("Spring main started successfullly. " + applicationContext.getBeanDefinitionCount()
-				+ " beans created.");
+		try {
+			applicationContext = new ClassPathXmlApplicationContext(applicationContextFile);
+			LOGGER.info("Spring main started successfullly. " + applicationContext.getBeanDefinitionCount()
+					+ " beans created.");
+		} catch (Exception e) {
+			LOGGER.error("Failed to load Spring application context", e);
+		}
 	}
 
 	static {

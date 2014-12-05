@@ -35,7 +35,8 @@ struct UpdateAmityAccountRequest {
     2: optional string username,
     3: optional string firstName,
     4: optional string lastName,
-    5: optional string alias
+    5: optional string userAlias,
+    6: optional binary avatar
 }
 
 struct UpdateAmityAccountResponse {
@@ -45,4 +46,5 @@ struct UpdateAmityAccountResponse {
 service AuthenticationThriftService {
     LoginFacebookAccountResponse loginFacebookAccount(1: LoginFacebookAccountRequest request)
     LoginAmityAccountResponse loginAmityAccount(1: LoginAmityAccountRequest request)
+    UpdateAmityAccountResponse updateAmityAccount(1: UpdateAmityAccountRequest request, 2: SessionCredentials credentials)
 }

@@ -226,9 +226,107 @@
 
 @end
 
+@interface UpdateAmityAccountRequest : NSObject <TBase, NSCoding> {
+  int64_t __amityUserId;
+  NSString * __username;
+  NSString * __firstName;
+  NSString * __lastName;
+  NSString * __userAlias;
+  NSData * __avatar;
+
+  BOOL __amityUserId_isset;
+  BOOL __username_isset;
+  BOOL __firstName_isset;
+  BOOL __lastName_isset;
+  BOOL __userAlias_isset;
+  BOOL __avatar_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
+@property (nonatomic, retain, getter=username, setter=setUsername:) NSString * username;
+@property (nonatomic, retain, getter=firstName, setter=setFirstName:) NSString * firstName;
+@property (nonatomic, retain, getter=lastName, setter=setLastName:) NSString * lastName;
+@property (nonatomic, retain, getter=userAlias, setter=setUserAlias:) NSString * userAlias;
+@property (nonatomic, retain, getter=avatar, setter=setAvatar:) NSData * avatar;
+#endif
+
+- (id) init;
+- (id) initWithAmityUserId: (int64_t) amityUserId username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName userAlias: (NSString *) userAlias avatar: (NSData *) avatar;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int64_t) amityUserId;
+- (void) setAmityUserId: (int64_t) amityUserId;
+#endif
+- (BOOL) amityUserIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) username;
+- (void) setUsername: (NSString *) username;
+#endif
+- (BOOL) usernameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) firstName;
+- (void) setFirstName: (NSString *) firstName;
+#endif
+- (BOOL) firstNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) lastName;
+- (void) setLastName: (NSString *) lastName;
+#endif
+- (BOOL) lastNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) userAlias;
+- (void) setUserAlias: (NSString *) userAlias;
+#endif
+- (BOOL) userAliasIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSData *) avatar;
+- (void) setAvatar: (NSData *) avatar;
+#endif
+- (BOOL) avatarIsSet;
+
+@end
+
+@interface UpdateAmityAccountResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+
+  BOOL __errorCode_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+@end
+
 @protocol AuthenticationThriftService <NSObject>
 - (LoginFacebookAccountResponse *) loginFacebookAccount: (LoginFacebookAccountRequest *) request;  // throws TException
 - (LoginAmityAccountResponse *) loginAmityAccount: (LoginAmityAccountRequest *) request;  // throws TException
+- (UpdateAmityAccountResponse *) updateAmityAccount: (UpdateAmityAccountRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface AuthenticationThriftServiceClient : NSObject <AuthenticationThriftService> {

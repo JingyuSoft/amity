@@ -11,6 +11,7 @@
 		base-package="com.jingyusoft.amity.dao,
 					  com.jingyusoft.amity.authentication,
 		              com.jingyusoft.amity.repository,
+		              com.jingyusoft.amity.users,
 		              com.jingyusoft.amity.thrift.services,
 		              com.jingyusoft.amity.thrift.factories,
 		              com.jingyusoft.amity.thrift.servers" />

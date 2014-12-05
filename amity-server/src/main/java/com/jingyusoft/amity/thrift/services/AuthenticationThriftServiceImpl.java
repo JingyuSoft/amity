@@ -15,6 +15,10 @@ import com.jingyusoft.amity.thrift.generated.LoginAmityAccountRequest;
 import com.jingyusoft.amity.thrift.generated.LoginAmityAccountResponse;
 import com.jingyusoft.amity.thrift.generated.LoginFacebookAccountRequest;
 import com.jingyusoft.amity.thrift.generated.LoginFacebookAccountResponse;
+import com.jingyusoft.amity.thrift.generated.SessionCredentials;
+import com.jingyusoft.amity.thrift.generated.UpdateAmityAccountRequest;
+import com.jingyusoft.amity.thrift.generated.UpdateAmityAccountResponse;
+import com.jingyusoft.amity.users.UserAccountService;
 
 @Service
 public class AuthenticationThriftServiceImpl implements AuthenticationThriftService.Iface {
@@ -24,6 +28,9 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 
 	@Resource
 	private SessionService sessionService;
+
+	@Resource
+	private UserAccountService userAccountService;
 
 	@Override
 	public LoginAmityAccountResponse loginAmityAccount(LoginAmityAccountRequest request) throws TException {
@@ -50,5 +57,23 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 		response.setSessionToken(sessionService.createSession(amityUser.getId()));
 
 		return response;
+	}
+
+	@Override
+	public UpdateAmityAccountResponse updateAmityAccount(UpdateAmityAccountRequest request,
+			SessionCredentials credentials) throws TException {
+
+		AmityUser amityUser = userAccountService.getAmityUser(request.getAmityUserId());
+		amityUser.setUserName(request.getUsername());
+		amityUser.setFirstName(request.getFirstName());
+		amityUser.setLastName(request.getLastName());
+		amityUser.setAlias(request.getUserAlias());
+
+		String avatarFileName = userAccountService.uploadAvatar(request.getAmityUserId(), request.getAvatar());
+		amityUser.setAvatar(avatarFileName);
+
+		userAccountService.updateUserProfile(amityUser);
+
+		return new UpdateAmityAccountResponse();
 	}
 }

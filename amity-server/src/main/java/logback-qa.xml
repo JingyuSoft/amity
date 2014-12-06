@@ -40,7 +40,7 @@
 		</layout>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.%i.log.zip
+			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.%i.log.gz
 			</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
@@ -62,7 +62,7 @@
 		</layout>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.schema.%i.log.zip
+			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.schema.%i.log.gz
 			</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
@@ -84,7 +84,7 @@
 		</layout>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.sql.%i.log.zip
+			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.sql.%i.log.gz
 			</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
@@ -106,7 +106,7 @@
 		</layout>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.spring.%i.log.zip
+			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.spring.%i.log.gz
 			</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>

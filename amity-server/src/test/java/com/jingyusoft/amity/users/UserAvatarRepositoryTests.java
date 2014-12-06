@@ -29,7 +29,7 @@ public class UserAvatarRepositoryTests {
 
 		try {
 			byte[] avatar = IOUtils.toByteArray(UserAvatarRepositoryTests.class.getResourceAsStream("Avatar.png"));
-			userAvatarRepository.saveAvatar(amityUserId, avatar);
+			userAvatarRepository.updateAvatar(amityUserId, avatar);
 
 			Assert.assertTrue(userAvatarRepository.avatarFileExists(amityUserId));
 			byte[] refetched = userAvatarRepository.getAvatar(amityUserId);

@@ -22,12 +22,17 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
+	public void removeAvatar(long amityUserId) {
+		userAvatarRepository.removeAvatar(amityUserId);
+	}
+
+	@Override
 	public void updateUserProfile(AmityUser amityUser) {
 		amityUserRepository.saveAndFlush(amityUser.toEntity());
 	}
 
 	@Override
 	public String uploadAvatar(long amityUserId, byte[] avatar) {
-		return userAvatarRepository.saveAvatar(amityUserId, avatar);
+		return userAvatarRepository.updateAvatar(amityUserId, avatar);
 	}
 }

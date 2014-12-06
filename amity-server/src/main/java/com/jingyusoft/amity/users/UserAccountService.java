@@ -6,6 +6,8 @@ public interface UserAccountService {
 
 	AmityUser getAmityUser(long amityUserId);
 
+	void removeAvatar(long amityUserId);
+
 	void updateUserProfile(AmityUser amityUser);
 
 	String uploadAvatar(long amityUserId, byte[] avatar);

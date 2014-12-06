@@ -11,6 +11,7 @@ import com.jingyusoft.amity.authentication.SessionService;
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
+import com.jingyusoft.amity.thrift.generated.AmityUserDto;
 import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
 import com.jingyusoft.amity.thrift.generated.LoginAmityAccountRequest;
 import com.jingyusoft.amity.thrift.generated.LoginAmityAccountResponse;
@@ -37,8 +38,14 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 	public LoginAmityAccountResponse loginAmityAccount(LoginAmityAccountRequest request) throws TException {
 		AmityUser amityUser = authenticationService.authenticateAmityUser(request.getAmityUserId(),
 				request.getAuthToken());
+
 		if (amityUser != null) {
-			return new LoginAmityAccountResponse().setSessionToken(sessionService.createSession(amityUser.getId()));
+			LoginAmityAccountResponse response = new LoginAmityAccountResponse().setSessionToken(sessionService
+					.createSession(amityUser.getId()));
+			AmityUserDto amityUserDto = amityUser.toDto();
+			amityUserDto.setAvatar(userAccountService.getAvatar(amityUser.getId()));
+			response.setAmityUser(amityUserDto);
+			return response;
 		} else {
 			return new LoginAmityAccountResponse(ErrorCodes.UNAUTHORIZED);
 		}
@@ -56,6 +63,9 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 		response.setAmityUserId(amityUser.getId());
 		response.setAuthToken(new AmityToken(amityUser.getAuthToken()));
 		response.setSessionToken(sessionService.createSession(amityUser.getId()));
+		AmityUserDto amityUserDto = amityUser.toDto();
+		amityUserDto.setAvatar(userAccountService.getAvatar(amityUser.getId()));
+		response.setAmityUser(amityUserDto);
 
 		return response;
 	}
@@ -73,7 +83,7 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 		amityUser.setAlias(request.getUserAlias());
 
 		if (request.getAvatar() != null && request.getAvatar().length > 0) {
-			String avatarFileName = userAccountService.uploadAvatar(request.getAmityUserId(), request.getAvatar());
+			String avatarFileName = userAccountService.updateAvatar(request.getAmityUserId(), request.getAvatar());
 			amityUser.setAvatar(avatarFileName);
 		}
 

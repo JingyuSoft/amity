@@ -103,16 +103,116 @@
 
 @end
 
+@interface AmityUserDto : NSObject <TBase, NSCoding> {
+  int64_t __amityUserId;
+  NSString * __userType;
+  NSString * __username;
+  NSString * __firstName;
+  NSString * __lastName;
+  NSString * __emailAddress;
+  NSString * __gender;
+  NSString * __userAlias;
+  NSData * __avatar;
+
+  BOOL __amityUserId_isset;
+  BOOL __userType_isset;
+  BOOL __username_isset;
+  BOOL __firstName_isset;
+  BOOL __lastName_isset;
+  BOOL __emailAddress_isset;
+  BOOL __gender_isset;
+  BOOL __userAlias_isset;
+  BOOL __avatar_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
+@property (nonatomic, retain, getter=userType, setter=setUserType:) NSString * userType;
+@property (nonatomic, retain, getter=username, setter=setUsername:) NSString * username;
+@property (nonatomic, retain, getter=firstName, setter=setFirstName:) NSString * firstName;
+@property (nonatomic, retain, getter=lastName, setter=setLastName:) NSString * lastName;
+@property (nonatomic, retain, getter=emailAddress, setter=setEmailAddress:) NSString * emailAddress;
+@property (nonatomic, retain, getter=gender, setter=setGender:) NSString * gender;
+@property (nonatomic, retain, getter=userAlias, setter=setUserAlias:) NSString * userAlias;
+@property (nonatomic, retain, getter=avatar, setter=setAvatar:) NSData * avatar;
+#endif
+
+- (id) init;
+- (id) initWithAmityUserId: (int64_t) amityUserId userType: (NSString *) userType username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName emailAddress: (NSString *) emailAddress gender: (NSString *) gender userAlias: (NSString *) userAlias avatar: (NSData *) avatar;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int64_t) amityUserId;
+- (void) setAmityUserId: (int64_t) amityUserId;
+#endif
+- (BOOL) amityUserIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) userType;
+- (void) setUserType: (NSString *) userType;
+#endif
+- (BOOL) userTypeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) username;
+- (void) setUsername: (NSString *) username;
+#endif
+- (BOOL) usernameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) firstName;
+- (void) setFirstName: (NSString *) firstName;
+#endif
+- (BOOL) firstNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) lastName;
+- (void) setLastName: (NSString *) lastName;
+#endif
+- (BOOL) lastNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) emailAddress;
+- (void) setEmailAddress: (NSString *) emailAddress;
+#endif
+- (BOOL) emailAddressIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) gender;
+- (void) setGender: (NSString *) gender;
+#endif
+- (BOOL) genderIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) userAlias;
+- (void) setUserAlias: (NSString *) userAlias;
+#endif
+- (BOOL) userAliasIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSData *) avatar;
+- (void) setAvatar: (NSData *) avatar;
+#endif
+- (BOOL) avatarIsSet;
+
+@end
+
 @interface LoginFacebookAccountResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   int64_t __amityUserId;
   AmityToken * __authToken;
   AmityToken * __sessionToken;
+  AmityUserDto * __amityUser;
 
   BOOL __errorCode_isset;
   BOOL __amityUserId_isset;
   BOOL __authToken_isset;
   BOOL __sessionToken_isset;
+  BOOL __amityUser_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -120,10 +220,11 @@
 @property (nonatomic, getter=amityUserId, setter=setAmityUserId:) int64_t amityUserId;
 @property (nonatomic, retain, getter=authToken, setter=setAuthToken:) AmityToken * authToken;
 @property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
+@property (nonatomic, retain, getter=amityUser, setter=setAmityUser:) AmityUserDto * amityUser;
 #endif
 
 - (id) init;
-- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken;
+- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken amityUser: (AmityUserDto *) amityUser;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -153,6 +254,12 @@
 - (void) setSessionToken: (AmityToken *) sessionToken;
 #endif
 - (BOOL) sessionTokenIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityUserDto *) amityUser;
+- (void) setAmityUser: (AmityUserDto *) amityUser;
+#endif
+- (BOOL) amityUserIsSet;
 
 @end
 
@@ -194,18 +301,21 @@
 @interface LoginAmityAccountResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   AmityToken * __sessionToken;
+  AmityUserDto * __amityUser;
 
   BOOL __errorCode_isset;
   BOOL __sessionToken_isset;
+  BOOL __amityUser_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
 @property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
+@property (nonatomic, retain, getter=amityUser, setter=setAmityUser:) AmityUserDto * amityUser;
 #endif
 
 - (id) init;
-- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken;
+- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken amityUser: (AmityUserDto *) amityUser;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -223,6 +333,12 @@
 - (void) setSessionToken: (AmityToken *) sessionToken;
 #endif
 - (BOOL) sessionTokenIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityUserDto *) amityUser;
+- (void) setAmityUser: (AmityUserDto *) amityUser;
+#endif
+- (BOOL) amityUserIsSet;
 
 @end
 

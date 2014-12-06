@@ -13,11 +13,24 @@ struct LoginFacebookAccountRequest {
     1: required string facebookToken
 }
 
+struct AmityUserDto {
+	1: required i64 amityUserId,
+	2: required string userType,
+	3: optional string username,
+	4: optional string firstName,
+	5: optional string lastName,
+	6: required string emailAddress,
+	7: optional string gender,
+	8: optional string userAlias,
+	9: optional binary avatar
+}
+
 struct LoginFacebookAccountResponse {
 	1: required i32 errorCode,
     2: optional i64 amityUserId,
     3: optional AmityToken authToken,
-    4: optional AmityToken sessionToken
+    4: optional AmityToken sessionToken,
+    5: optional AmityUserDto amityUser
 }
 
 struct LoginAmityAccountRequest {
@@ -27,7 +40,8 @@ struct LoginAmityAccountRequest {
 
 struct LoginAmityAccountResponse {
 	1: required i32 errorCode,
-    2: optional AmityToken sessionToken
+    2: optional AmityToken sessionToken,
+    3: optional AmityUserDto amityUser
 }
 
 struct UpdateAmityAccountRequest {

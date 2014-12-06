@@ -25,7 +25,7 @@ public class UserAvatarRepositoryTests {
 	@Test
 	public void testLoadAndSaveFile() {
 
-		long amityUserId = new Random().nextLong();
+		long amityUserId = Math.abs(new Random().nextLong());
 
 		try {
 			byte[] avatar = IOUtils.toByteArray(UserAvatarRepositoryTests.class.getResourceAsStream("Avatar.png"));

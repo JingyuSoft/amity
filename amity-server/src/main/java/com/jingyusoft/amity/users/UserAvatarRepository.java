@@ -37,6 +37,11 @@ public class UserAvatarRepository {
 
 	public byte[] getAvatar(long amityUserId) {
 		File file = new File(getAvatarFileName(amityUserId));
+
+		if (!file.exists()) {
+			return null;
+		}
+
 		try {
 			return FileUtils.readFileToByteArray(file);
 		} catch (IOException e) {

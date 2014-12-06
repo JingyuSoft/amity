@@ -3,6 +3,7 @@ package com.jingyusoft.amity.domain;
 import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
+import com.jingyusoft.amity.thrift.generated.AmityUserDto;
 
 public class AmityUser {
 
@@ -126,6 +127,19 @@ public class AmityUser {
 
 	public void setUserType(String userType) {
 		entity.setUserType(userType);
+	}
+
+	public AmityUserDto toDto() {
+		AmityUserDto amityUserDto = new AmityUserDto();
+		amityUserDto.setAmityUserId(getId());
+		amityUserDto.setUserType(getUserType());
+		amityUserDto.setUsername(getUserName());
+		amityUserDto.setFirstName(getFirstName());
+		amityUserDto.setLastName(getLastName());
+		amityUserDto.setEmailAddress(getEmailAddress());
+		amityUserDto.setGender(getGender());
+		amityUserDto.setUserAlias(getAlias());
+		return amityUserDto;
 	}
 
 	public AmityUserEntity toEntity() {

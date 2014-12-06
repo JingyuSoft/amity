@@ -448,6 +448,534 @@
 
 @end
 
+@implementation AmityUserDto
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithAmityUserId: (int64_t) amityUserId userType: (NSString *) userType username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName emailAddress: (NSString *) emailAddress gender: (NSString *) gender userAlias: (NSString *) userAlias avatar: (NSData *) avatar
+{
+  self = [super init];
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
+  __userType = [userType retain_stub];
+  __userType_isset = YES;
+  __username = [username retain_stub];
+  __username_isset = YES;
+  __firstName = [firstName retain_stub];
+  __firstName_isset = YES;
+  __lastName = [lastName retain_stub];
+  __lastName_isset = YES;
+  __emailAddress = [emailAddress retain_stub];
+  __emailAddress_isset = YES;
+  __gender = [gender retain_stub];
+  __gender_isset = YES;
+  __userAlias = [userAlias retain_stub];
+  __userAlias_isset = YES;
+  __avatar = [avatar retain_stub];
+  __avatar_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"amityUserId"])
+  {
+    __amityUserId = [decoder decodeInt64ForKey: @"amityUserId"];
+    __amityUserId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"userType"])
+  {
+    __userType = [[decoder decodeObjectForKey: @"userType"] retain_stub];
+    __userType_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"username"])
+  {
+    __username = [[decoder decodeObjectForKey: @"username"] retain_stub];
+    __username_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"firstName"])
+  {
+    __firstName = [[decoder decodeObjectForKey: @"firstName"] retain_stub];
+    __firstName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"lastName"])
+  {
+    __lastName = [[decoder decodeObjectForKey: @"lastName"] retain_stub];
+    __lastName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"emailAddress"])
+  {
+    __emailAddress = [[decoder decodeObjectForKey: @"emailAddress"] retain_stub];
+    __emailAddress_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"gender"])
+  {
+    __gender = [[decoder decodeObjectForKey: @"gender"] retain_stub];
+    __gender_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"userAlias"])
+  {
+    __userAlias = [[decoder decodeObjectForKey: @"userAlias"] retain_stub];
+    __userAlias_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"avatar"])
+  {
+    __avatar = [[decoder decodeObjectForKey: @"avatar"] retain_stub];
+    __avatar_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__amityUserId_isset)
+  {
+    [encoder encodeInt64: __amityUserId forKey: @"amityUserId"];
+  }
+  if (__userType_isset)
+  {
+    [encoder encodeObject: __userType forKey: @"userType"];
+  }
+  if (__username_isset)
+  {
+    [encoder encodeObject: __username forKey: @"username"];
+  }
+  if (__firstName_isset)
+  {
+    [encoder encodeObject: __firstName forKey: @"firstName"];
+  }
+  if (__lastName_isset)
+  {
+    [encoder encodeObject: __lastName forKey: @"lastName"];
+  }
+  if (__emailAddress_isset)
+  {
+    [encoder encodeObject: __emailAddress forKey: @"emailAddress"];
+  }
+  if (__gender_isset)
+  {
+    [encoder encodeObject: __gender forKey: @"gender"];
+  }
+  if (__userAlias_isset)
+  {
+    [encoder encodeObject: __userAlias forKey: @"userAlias"];
+  }
+  if (__avatar_isset)
+  {
+    [encoder encodeObject: __avatar forKey: @"avatar"];
+  }
+}
+
+- (void) dealloc
+{
+  [__userType release_stub];
+  [__username release_stub];
+  [__firstName release_stub];
+  [__lastName release_stub];
+  [__emailAddress release_stub];
+  [__gender release_stub];
+  [__userAlias release_stub];
+  [__avatar release_stub];
+  [super dealloc_stub];
+}
+
+- (int64_t) amityUserId {
+  return __amityUserId;
+}
+
+- (void) setAmityUserId: (int64_t) amityUserId {
+  __amityUserId = amityUserId;
+  __amityUserId_isset = YES;
+}
+
+- (BOOL) amityUserIdIsSet {
+  return __amityUserId_isset;
+}
+
+- (void) unsetAmityUserId {
+  __amityUserId_isset = NO;
+}
+
+- (NSString *) userType {
+  return [[__userType retain_stub] autorelease_stub];
+}
+
+- (void) setUserType: (NSString *) userType {
+  [userType retain_stub];
+  [__userType release_stub];
+  __userType = userType;
+  __userType_isset = YES;
+}
+
+- (BOOL) userTypeIsSet {
+  return __userType_isset;
+}
+
+- (void) unsetUserType {
+  [__userType release_stub];
+  __userType = nil;
+  __userType_isset = NO;
+}
+
+- (NSString *) username {
+  return [[__username retain_stub] autorelease_stub];
+}
+
+- (void) setUsername: (NSString *) username {
+  [username retain_stub];
+  [__username release_stub];
+  __username = username;
+  __username_isset = YES;
+}
+
+- (BOOL) usernameIsSet {
+  return __username_isset;
+}
+
+- (void) unsetUsername {
+  [__username release_stub];
+  __username = nil;
+  __username_isset = NO;
+}
+
+- (NSString *) firstName {
+  return [[__firstName retain_stub] autorelease_stub];
+}
+
+- (void) setFirstName: (NSString *) firstName {
+  [firstName retain_stub];
+  [__firstName release_stub];
+  __firstName = firstName;
+  __firstName_isset = YES;
+}
+
+- (BOOL) firstNameIsSet {
+  return __firstName_isset;
+}
+
+- (void) unsetFirstName {
+  [__firstName release_stub];
+  __firstName = nil;
+  __firstName_isset = NO;
+}
+
+- (NSString *) lastName {
+  return [[__lastName retain_stub] autorelease_stub];
+}
+
+- (void) setLastName: (NSString *) lastName {
+  [lastName retain_stub];
+  [__lastName release_stub];
+  __lastName = lastName;
+  __lastName_isset = YES;
+}
+
+- (BOOL) lastNameIsSet {
+  return __lastName_isset;
+}
+
+- (void) unsetLastName {
+  [__lastName release_stub];
+  __lastName = nil;
+  __lastName_isset = NO;
+}
+
+- (NSString *) emailAddress {
+  return [[__emailAddress retain_stub] autorelease_stub];
+}
+
+- (void) setEmailAddress: (NSString *) emailAddress {
+  [emailAddress retain_stub];
+  [__emailAddress release_stub];
+  __emailAddress = emailAddress;
+  __emailAddress_isset = YES;
+}
+
+- (BOOL) emailAddressIsSet {
+  return __emailAddress_isset;
+}
+
+- (void) unsetEmailAddress {
+  [__emailAddress release_stub];
+  __emailAddress = nil;
+  __emailAddress_isset = NO;
+}
+
+- (NSString *) gender {
+  return [[__gender retain_stub] autorelease_stub];
+}
+
+- (void) setGender: (NSString *) gender {
+  [gender retain_stub];
+  [__gender release_stub];
+  __gender = gender;
+  __gender_isset = YES;
+}
+
+- (BOOL) genderIsSet {
+  return __gender_isset;
+}
+
+- (void) unsetGender {
+  [__gender release_stub];
+  __gender = nil;
+  __gender_isset = NO;
+}
+
+- (NSString *) userAlias {
+  return [[__userAlias retain_stub] autorelease_stub];
+}
+
+- (void) setUserAlias: (NSString *) userAlias {
+  [userAlias retain_stub];
+  [__userAlias release_stub];
+  __userAlias = userAlias;
+  __userAlias_isset = YES;
+}
+
+- (BOOL) userAliasIsSet {
+  return __userAlias_isset;
+}
+
+- (void) unsetUserAlias {
+  [__userAlias release_stub];
+  __userAlias = nil;
+  __userAlias_isset = NO;
+}
+
+- (NSData *) avatar {
+  return [[__avatar retain_stub] autorelease_stub];
+}
+
+- (void) setAvatar: (NSData *) avatar {
+  [avatar retain_stub];
+  [__avatar release_stub];
+  __avatar = avatar;
+  __avatar_isset = YES;
+}
+
+- (BOOL) avatarIsSet {
+  return __avatar_isset;
+}
+
+- (void) unsetAvatar {
+  [__avatar release_stub];
+  __avatar = nil;
+  __avatar_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I64) {
+          int64_t fieldValue = [inProtocol readI64];
+          [self setAmityUserId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setUserType: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setUsername: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setFirstName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setLastName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setEmailAddress: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setGender: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 8:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setUserAlias: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 9:
+        if (fieldType == TType_STRING) {
+          NSData * fieldValue = [inProtocol readBinary];
+          [self setAvatar: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"AmityUserDto"];
+  if (__amityUserId_isset) {
+    [outProtocol writeFieldBeginWithName: @"amityUserId" type: TType_I64 fieldID: 1];
+    [outProtocol writeI64: __amityUserId];
+    [outProtocol writeFieldEnd];
+  }
+  if (__userType_isset) {
+    if (__userType != nil) {
+      [outProtocol writeFieldBeginWithName: @"userType" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __userType];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__username_isset) {
+    if (__username != nil) {
+      [outProtocol writeFieldBeginWithName: @"username" type: TType_STRING fieldID: 3];
+      [outProtocol writeString: __username];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__firstName_isset) {
+    if (__firstName != nil) {
+      [outProtocol writeFieldBeginWithName: @"firstName" type: TType_STRING fieldID: 4];
+      [outProtocol writeString: __firstName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__lastName_isset) {
+    if (__lastName != nil) {
+      [outProtocol writeFieldBeginWithName: @"lastName" type: TType_STRING fieldID: 5];
+      [outProtocol writeString: __lastName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__emailAddress_isset) {
+    if (__emailAddress != nil) {
+      [outProtocol writeFieldBeginWithName: @"emailAddress" type: TType_STRING fieldID: 6];
+      [outProtocol writeString: __emailAddress];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__gender_isset) {
+    if (__gender != nil) {
+      [outProtocol writeFieldBeginWithName: @"gender" type: TType_STRING fieldID: 7];
+      [outProtocol writeString: __gender];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__userAlias_isset) {
+    if (__userAlias != nil) {
+      [outProtocol writeFieldBeginWithName: @"userAlias" type: TType_STRING fieldID: 8];
+      [outProtocol writeString: __userAlias];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__avatar_isset) {
+    if (__avatar != nil) {
+      [outProtocol writeFieldBeginWithName: @"avatar" type: TType_STRING fieldID: 9];
+      [outProtocol writeBinary: __avatar];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__amityUserId_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'amityUserId' is not set."];
+  }
+  if (!__userType_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'userType' is not set."];
+  }
+  if (!__emailAddress_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'emailAddress' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"AmityUserDto("];
+  [ms appendString: @"amityUserId:"];
+  [ms appendFormat: @"%qi", __amityUserId];
+  [ms appendString: @",userType:"];
+  [ms appendFormat: @"\"%@\"", __userType];
+  [ms appendString: @",username:"];
+  [ms appendFormat: @"\"%@\"", __username];
+  [ms appendString: @",firstName:"];
+  [ms appendFormat: @"\"%@\"", __firstName];
+  [ms appendString: @",lastName:"];
+  [ms appendFormat: @"\"%@\"", __lastName];
+  [ms appendString: @",emailAddress:"];
+  [ms appendFormat: @"\"%@\"", __emailAddress];
+  [ms appendString: @",gender:"];
+  [ms appendFormat: @"\"%@\"", __gender];
+  [ms appendString: @",userAlias:"];
+  [ms appendFormat: @"\"%@\"", __userAlias];
+  [ms appendString: @",avatar:"];
+  [ms appendFormat: @"\"%@\"", __avatar];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation LoginFacebookAccountResponse
 
 - (id) init
@@ -458,7 +986,7 @@
   return self;
 }
 
-- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken
+- (id) initWithErrorCode: (int32_t) errorCode amityUserId: (int64_t) amityUserId authToken: (AmityToken *) authToken sessionToken: (AmityToken *) sessionToken amityUser: (AmityUserDto *) amityUser
 {
   self = [super init];
   __errorCode = errorCode;
@@ -469,6 +997,8 @@
   __authToken_isset = YES;
   __sessionToken = [sessionToken retain_stub];
   __sessionToken_isset = YES;
+  __amityUser = [amityUser retain_stub];
+  __amityUser_isset = YES;
   return self;
 }
 
@@ -495,6 +1025,11 @@
     __sessionToken = [[decoder decodeObjectForKey: @"sessionToken"] retain_stub];
     __sessionToken_isset = YES;
   }
+  if ([decoder containsValueForKey: @"amityUser"])
+  {
+    __amityUser = [[decoder decodeObjectForKey: @"amityUser"] retain_stub];
+    __amityUser_isset = YES;
+  }
   return self;
 }
 
@@ -516,12 +1051,17 @@
   {
     [encoder encodeObject: __sessionToken forKey: @"sessionToken"];
   }
+  if (__amityUser_isset)
+  {
+    [encoder encodeObject: __amityUser forKey: @"amityUser"];
+  }
 }
 
 - (void) dealloc
 {
   [__authToken release_stub];
   [__sessionToken release_stub];
+  [__amityUser release_stub];
   [super dealloc_stub];
 }
 
@@ -601,6 +1141,27 @@
   __sessionToken_isset = NO;
 }
 
+- (AmityUserDto *) amityUser {
+  return [[__amityUser retain_stub] autorelease_stub];
+}
+
+- (void) setAmityUser: (AmityUserDto *) amityUser {
+  [amityUser retain_stub];
+  [__amityUser release_stub];
+  __amityUser = amityUser;
+  __amityUser_isset = YES;
+}
+
+- (BOOL) amityUserIsSet {
+  return __amityUser_isset;
+}
+
+- (void) unsetAmityUser {
+  [__amityUser release_stub];
+  __amityUser = nil;
+  __amityUser_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -652,6 +1213,16 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 5:
+        if (fieldType == TType_STRUCT) {
+          AmityUserDto *fieldValue = [[AmityUserDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setAmityUser: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -687,6 +1258,13 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__amityUser_isset) {
+    if (__amityUser != nil) {
+      [outProtocol writeFieldBeginWithName: @"amityUser" type: TType_STRUCT fieldID: 5];
+      [__amityUser write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -709,6 +1287,8 @@
   [ms appendFormat: @"%@", __authToken];
   [ms appendString: @",sessionToken:"];
   [ms appendFormat: @"%@", __sessionToken];
+  [ms appendString: @",amityUser:"];
+  [ms appendFormat: @"%@", __amityUser];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -901,13 +1481,15 @@
   return self;
 }
 
-- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken
+- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken amityUser: (AmityUserDto *) amityUser
 {
   self = [super init];
   __errorCode = errorCode;
   __errorCode_isset = YES;
   __sessionToken = [sessionToken retain_stub];
   __sessionToken_isset = YES;
+  __amityUser = [amityUser retain_stub];
+  __amityUser_isset = YES;
   return self;
 }
 
@@ -924,6 +1506,11 @@
     __sessionToken = [[decoder decodeObjectForKey: @"sessionToken"] retain_stub];
     __sessionToken_isset = YES;
   }
+  if ([decoder containsValueForKey: @"amityUser"])
+  {
+    __amityUser = [[decoder decodeObjectForKey: @"amityUser"] retain_stub];
+    __amityUser_isset = YES;
+  }
   return self;
 }
 
@@ -937,11 +1524,16 @@
   {
     [encoder encodeObject: __sessionToken forKey: @"sessionToken"];
   }
+  if (__amityUser_isset)
+  {
+    [encoder encodeObject: __amityUser forKey: @"amityUser"];
+  }
 }
 
 - (void) dealloc
 {
   [__sessionToken release_stub];
+  [__amityUser release_stub];
   [super dealloc_stub];
 }
 
@@ -983,6 +1575,27 @@
   __sessionToken_isset = NO;
 }
 
+- (AmityUserDto *) amityUser {
+  return [[__amityUser retain_stub] autorelease_stub];
+}
+
+- (void) setAmityUser: (AmityUserDto *) amityUser {
+  [amityUser retain_stub];
+  [__amityUser release_stub];
+  __amityUser = amityUser;
+  __amityUser_isset = YES;
+}
+
+- (BOOL) amityUserIsSet {
+  return __amityUser_isset;
+}
+
+- (void) unsetAmityUser {
+  [__amityUser release_stub];
+  __amityUser = nil;
+  __amityUser_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -1016,6 +1629,16 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 3:
+        if (fieldType == TType_STRUCT) {
+          AmityUserDto *fieldValue = [[AmityUserDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setAmityUser: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -1039,6 +1662,13 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__amityUser_isset) {
+    if (__amityUser != nil) {
+      [outProtocol writeFieldBeginWithName: @"amityUser" type: TType_STRUCT fieldID: 3];
+      [__amityUser write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -1057,6 +1687,8 @@
   [ms appendFormat: @"%i", __errorCode];
   [ms appendString: @",sessionToken:"];
   [ms appendFormat: @"%@", __sessionToken];
+  [ms appendString: @",amityUser:"];
+  [ms appendFormat: @"%@", __amityUser];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

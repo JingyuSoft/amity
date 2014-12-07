@@ -27,8 +27,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
-	public void removeAvatar(long amityUserId) {
-		userAvatarRepository.removeAvatar(amityUserId);
+	public boolean removeAvatar(long amityUserId) {
+		return userAvatarRepository.removeAvatar(amityUserId);
 	}
 
 	@Override

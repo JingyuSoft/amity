@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.domain;
+package com.jingyusoft.amity.domain.geographics;
 
 import java.util.List;
 

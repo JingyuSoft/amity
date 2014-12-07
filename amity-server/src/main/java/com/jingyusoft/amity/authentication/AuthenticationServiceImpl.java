@@ -3,6 +3,7 @@ package com.jingyusoft.amity.authentication;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +32,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	private FacebookUserRepository facebookUserRepository;
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public AmityUser authenticateAmityUser(long amityUserId, AmityToken authToken) {
 		AmityUserEntity entity = amityUserRepository.getOne(amityUserId);
 		if (entity != null && StringUtils.equals(authToken.getValue(), entity.getAuthToken())) {
+			entity.setLastLoginDateTime(DateTime.now());
+			amityUserRepository.saveAndFlush(entity);
 			return new AmityUser(entity);
 		}
 
@@ -68,7 +72,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 			return new AmityUser(amityUserEntity);
 		} else {
-			return new AmityUser(facebookUserRepository.getOne(facebookUserInfo.getId()).getAmityUser());
+			AmityUserEntity amityUserEntity = facebookUserRepository.getOne(facebookUserInfo.getId()).getAmityUser();
+			amityUserRepository.saveAndFlush(amityUserEntity);
+			return new AmityUser(amityUserEntity);
 		}
 	}
 }

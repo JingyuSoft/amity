@@ -1,4 +1,4 @@
-package com.jingyusoft.amity.domain;
+package com.jingyusoft.amity.domain.geographics;
 
 import com.jingyusoft.amity.data.entities.CityEntity;
 

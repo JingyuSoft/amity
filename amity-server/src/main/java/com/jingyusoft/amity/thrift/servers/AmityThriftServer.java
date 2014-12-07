@@ -39,8 +39,15 @@ public class AmityThriftServer {
 	@Value("${amity.server.port}")
 	private int port;
 
+	@Value("${amity.server.port.ssl}")
+	private int sslPort;
+
 	@Value("${amity.server.handlers}")
 	private int handlers;
+
+	private int getPort(boolean ssl) {
+		return ssl ? sslPort : port;
+	}
 
 	@PostConstruct
 	public void start() {
@@ -49,21 +56,29 @@ public class AmityThriftServer {
 
 			@Override
 			public void run() {
-				startDataServer();
+				startDataServer(false);
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				startDataServer(true);
 			}
 		}).start();
 	}
 
-	private void startDataServer() {
+	private void startDataServer(boolean ssl) {
 
 		try {
 			TServer amityServer = thriftServerFactory.create(new TProcessor[] {
 					new AmityService.Processor<AmityService.Iface>(amityService),
 					new AuthenticationThriftService.Processor<AuthenticationThriftService.Iface>(
 							authenticationThriftService),
-							new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService) }, port,
+							new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService) }, ssl,
 							handlers);
-			LOGGER.info("Amity server started on {}:{}", host, port);
+			LOGGER.info("Amity server started on {}:{}", host, getPort(ssl));
 			amityServer.serve();
 
 		} catch (Exception e) {

@@ -23,6 +23,12 @@ public class ThriftServerFactory {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
+	@Value("${amity.server.port}")
+	private int port;
+
+	@Value("${amity.server.port.ssl}")
+	private int sslPort;
+
 	@Value("${thrift.server.min.threads}")
 	private int minWorkerThreads;
 
@@ -38,22 +44,27 @@ public class ThriftServerFactory {
 	@Value("${thrift.keystore.password.file}")
 	private String keyPassFile;
 
-	public TServer create(TProcessor processor, int port, int workerThreads) {
+	public TServer create(TProcessor processor, boolean ssl, int workerThreads) {
 
-		return create(new TProcessor[] { processor }, port, workerThreads);
+		return create(new TProcessor[] { processor }, ssl, workerThreads);
 	}
 
-	public TServer create(TProcessor[] processors, int port, int workerThreads) {
+	public TServer create(TProcessor[] processors, boolean ssl, int workerThreads) {
 
 		if (processors == null || processors.length == 0) {
 			throw new AmityException("Thrift processor not specified");
 		}
 
 		try {
-			TSSLTransportFactory.TSSLTransportParameters params = new TSSLTransportFactory.TSSLTransportParameters();
-			final String keyStorePassword = SecurityUtils.getPasswordFromFile(keyPassFile);
-			params.setKeyStore(keyStore, keyStorePassword);
-			TServerSocket transport = TSSLTransportFactory.getServerSocket(port, clientTimeout, null, params);
+			TServerSocket transport = null;
+			if (ssl) {
+				TSSLTransportFactory.TSSLTransportParameters params = new TSSLTransportFactory.TSSLTransportParameters();
+				final String keyStorePassword = SecurityUtils.getPasswordFromFile(keyPassFile);
+				params.setKeyStore(keyStore, keyStorePassword);
+				transport = TSSLTransportFactory.getServerSocket(sslPort, clientTimeout, null, params);
+			} else {
+				transport = new TServerSocket(port);
+			}
 
 			TThreadPoolServer.Args args = new TThreadPoolServer.Args(transport);
 			args.minWorkerThreads(minWorkerThreads);

@@ -28,8 +28,8 @@ public class TestConsole {
 	@Value("${amity.server.host}")
 	private String host;
 
-	@Value("${amity.server.port}")
-	private int port;
+	@Value("${amity.server.port.ssl}")
+	private int sslPort;
 
 	@Resource
 	private ThriftClientFactory thriftClientFactory;
@@ -96,7 +96,7 @@ public class TestConsole {
 
 	private void thriftDemo() {
 
-		HostPort hostPort = HostPort.from(host, port);
+		HostPort hostPort = HostPort.from(host, sslPort);
 		try (ThriftClientHolder<AmityService.Iface> holder = thriftClientFactory.getClient(hostPort,
 				AmityService.Iface.class)) {
 			System.out.println(holder.getClient().echo("Hello"));

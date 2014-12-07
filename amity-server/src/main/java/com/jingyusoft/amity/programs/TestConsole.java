@@ -87,11 +87,11 @@ public class TestConsole {
 	@PostConstruct
 	public void start() {
 
-		sendMailDemo();
+		// sendMailDemo();
 
 		// auditQueryService.queryAudit(AmityUserEntity.class);
 
-		// thriftDemo();
+		thriftDemo();
 	}
 
 	private void thriftDemo() {

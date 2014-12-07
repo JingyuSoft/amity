@@ -4,10 +4,10 @@ import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TThreadedSelectorServer;
+import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TFramedTransport;
-import org.apache.thrift.transport.TNonblockingServerSocket;
-import org.apache.thrift.transport.TNonblockingServerTransport;
+import org.apache.thrift.transport.TSSLTransportFactory;
+import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.AmityLogger;
+import com.jingyusoft.amity.common.SecurityUtils;
 import com.jingyusoft.amity.common.WrappedException;
 
 @Repository
@@ -22,8 +23,20 @@ public class ThriftServerFactory {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
-	@Value("${thrift.server.selector.threads}")
-	private int selectorThreads;
+	@Value("${thrift.server.min.threads}")
+	private int minWorkerThreads;
+
+	@Value("${thrift.server.max.threads}")
+	private int maxWorkerThreads;
+
+	@Value("${thrift.client.timeout}")
+	private int clientTimeout;
+
+	@Value("${thrift.keystore.file}")
+	private String keyStore;
+
+	@Value("${thrift.keystore.password.file}")
+	private String keyPassFile;
 
 	public TServer create(TProcessor processor, int port, int workerThreads) {
 
@@ -37,8 +50,14 @@ public class ThriftServerFactory {
 		}
 
 		try {
-			TNonblockingServerTransport transport = new TNonblockingServerSocket(port);
-			TThreadedSelectorServer.Args args = new TThreadedSelectorServer.Args(transport);
+			TSSLTransportFactory.TSSLTransportParameters params = new TSSLTransportFactory.TSSLTransportParameters();
+			final String keyStorePassword = SecurityUtils.getPasswordFromFile(keyPassFile);
+			params.setKeyStore(keyStore, keyStorePassword);
+			TServerSocket transport = TSSLTransportFactory.getServerSocket(port, clientTimeout, null, params);
+
+			TThreadPoolServer.Args args = new TThreadPoolServer.Args(transport);
+			args.minWorkerThreads(minWorkerThreads);
+			args.maxWorkerThreads(maxWorkerThreads);
 			args.transportFactory(new TFramedTransport.Factory());
 			args.protocolFactory(new TBinaryProtocol.Factory());
 			if (processors.length == 1) {
@@ -55,9 +74,7 @@ public class ThriftServerFactory {
 				}
 				args.processor(multiplexedProcessor);
 			}
-			args.selectorThreads(selectorThreads);
-			args.workerThreads(workerThreads);
-			return new TThreadedSelectorServer(args);
+			return new TThreadPoolServer(args);
 		} catch (TTransportException e) {
 			throw WrappedException.insteadOf(e);
 		}

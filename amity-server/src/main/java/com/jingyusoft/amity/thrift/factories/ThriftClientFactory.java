@@ -12,10 +12,11 @@ import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TMultiplexedProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
-import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.transport.TSSLTransportFactory;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Lists;
@@ -23,6 +24,7 @@ import com.google.common.collect.Maps;
 import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.HostPort;
+import com.jingyusoft.amity.common.SecurityUtils;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 
@@ -43,14 +45,16 @@ public class ThriftClientFactory {
 		}
 
 		private T createClient() {
-			TTransport transport = new TSocket(hostPort.getHost(), hostPort.getPort());
-			transport = new TFramedTransport(transport);
+			TSSLTransportFactory.TSSLTransportParameters params = new TSSLTransportFactory.TSSLTransportParameters();
+			final String trustStorePassword = SecurityUtils.getPasswordFromFile(trustPassFile);
+			params.setTrustStore(trustStore, trustStorePassword);
+
+			TTransport transport = null;
 			try {
-				transport.open();
+				transport = TSSLTransportFactory.getClientSocket(hostPort.getHost(), hostPort.getPort(), clientTimeout,
+						params);
+				transport = new TFramedTransport(transport);
 			} catch (TTransportException e) {
-				if (transport != null) {
-					transport.close();
-				}
 				throw new AmityException(StringMessage.with("Failed to connect to worker server {}", hostPort), e);
 			}
 
@@ -143,6 +147,15 @@ public class ThriftClientFactory {
 	private static final String getClientPoolKey(final HostPort hostPort, Class<?> interfaceClass) {
 		return hostPort + "_" + interfaceClass.getName();
 	}
+
+	@Value("${thrift.truststore.file}")
+	private String trustStore;
+
+	@Value("${thrift.truststore.password.file}")
+	private String trustPassFile;
+
+	@Value("${thrift.client.timeout}")
+	private int clientTimeout;
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 

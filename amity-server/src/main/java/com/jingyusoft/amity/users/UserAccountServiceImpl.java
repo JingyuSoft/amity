@@ -27,6 +27,12 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
+	public AmityUser registerAmityUser(String emailAddress, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public boolean removeAvatar(long amityUserId) {
 		return userAvatarRepository.removeAvatar(amityUserId);
 	}

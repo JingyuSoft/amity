@@ -28,6 +28,19 @@ public interface UserAccountService {
 
 	/**
 	 *
+	 * Register a new Amity user
+	 *
+	 * @param emailAddress
+	 *            Email address
+	 * @param password
+	 *            Plain text password
+	 *
+	 * @return The registered Amity user
+	 */
+	AmityUser registerAmityUser(String emailAddress, String password);
+
+	/**
+	 *
 	 * Remove user avatar
 	 *
 	 * @param amityUserId

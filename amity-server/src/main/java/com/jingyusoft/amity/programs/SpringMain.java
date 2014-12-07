@@ -1,10 +1,5 @@
 package com.jingyusoft.amity.programs;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -13,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.AmityPropertiesRepository;
-import com.jingyusoft.amity.common.WrappedException;
+import com.jingyusoft.amity.common.SecurityUtils;
 
 public class SpringMain {
 
@@ -38,13 +33,7 @@ public class SpringMain {
 				final String passwordFileName = System.getProperty("jdbc.password.file");
 				LOGGER.info("Loading JDBC password from file [{}]", passwordFileName);
 				// Load JDBC password from external file
-				try {
-					@SuppressWarnings("unchecked")
-					List<String> lines = IOUtils.readLines(new FileInputStream(passwordFileName));
-					System.setProperty("jdbc.password", lines.stream().findFirst().orElse(null));
-				} catch (IOException e) {
-					throw WrappedException.insteadOf(e);
-				}
+				System.setProperty("jdbc.password", SecurityUtils.getPasswordFromFile(passwordFileName));
 			}
 		}
 

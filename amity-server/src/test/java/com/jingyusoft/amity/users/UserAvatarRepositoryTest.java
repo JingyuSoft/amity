@@ -17,7 +17,7 @@ import com.jingyusoft.amity.config.UnitTestConfigConstants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
-public class UserAvatarRepositoryTests {
+public class UserAvatarRepositoryTest {
 
 	@Resource
 	private UserAvatarRepository userAvatarRepository;
@@ -28,7 +28,7 @@ public class UserAvatarRepositoryTests {
 		long amityUserId = Math.abs(new Random().nextLong());
 
 		try {
-			byte[] avatar = IOUtils.toByteArray(UserAvatarRepositoryTests.class.getResourceAsStream("Avatar.png"));
+			byte[] avatar = IOUtils.toByteArray(UserAvatarRepositoryTest.class.getResourceAsStream("Avatar.png"));
 			userAvatarRepository.updateAvatar(amityUserId, avatar);
 
 			Assert.assertTrue(userAvatarRepository.avatarFileExists(amityUserId));

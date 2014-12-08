@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
 @RunWith(BlockJUnit4ClassRunner.class)
-public class GeoUtilsTests {
+public class GeoUtilsTest {
 
 	private static final double DELTA = 1e-15;
 

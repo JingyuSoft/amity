@@ -20,7 +20,7 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import com.jingyusoft.amity.common.WrappedException;
 
 @RunWith(BlockJUnit4ClassRunner.class)
-public class AmityCipherTests {
+public class AmityCipherTest {
 
 	@Resource
 	private AmityCipher amityCipher;

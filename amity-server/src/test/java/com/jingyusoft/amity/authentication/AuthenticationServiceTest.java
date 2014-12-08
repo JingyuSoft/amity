@@ -14,7 +14,7 @@ import com.jingyusoft.amity.domain.AmityUser;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
-public class AuthenticationServiceTests {
+public class AuthenticationServiceTest {
 
 	@Resource
 	private AuthenticationService authenticationService;

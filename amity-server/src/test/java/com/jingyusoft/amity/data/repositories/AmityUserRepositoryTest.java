@@ -14,7 +14,7 @@ import com.jingyusoft.amity.domain.AmityUserType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
-public class AmityUserRepositoryTests {
+public class AmityUserRepositoryTest {
 
 	@Resource
 	private AmityUserRepository amityUserRepository;

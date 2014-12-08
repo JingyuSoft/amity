@@ -8,10 +8,12 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.jingyusoft.amity.TestGroups;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
 
@@ -23,6 +25,7 @@ public class UserAvatarRepositoryTest {
 	private UserAvatarRepository userAvatarRepository;
 
 	@Test
+	@Category(TestGroups.FileSystemRequired.class)
 	public void testLoadAndSaveFile() {
 
 		long amityUserId = Math.abs(new Random().nextLong());

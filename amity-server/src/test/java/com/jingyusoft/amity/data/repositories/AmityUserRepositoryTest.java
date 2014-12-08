@@ -4,10 +4,12 @@ import javax.annotation.Resource;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.jingyusoft.amity.TestGroups;
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
 import com.jingyusoft.amity.domain.AmityUserType;
@@ -20,6 +22,7 @@ public class AmityUserRepositoryTest {
 	private AmityUserRepository amityUserRepository;
 
 	@Test
+	@Category(TestGroups.DatabaseRequired.class)
 	public void testCreateAmityUser() {
 		AmityUserEntity amityUserEntity = new AmityUserEntity();
 		amityUserEntity.setFirstName("Univer");

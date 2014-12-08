@@ -20,5 +20,5 @@ struct CreateHelperItineraryResponse {
 }
 
 service ItineraryThriftService {
-    CreateHelperItineraryResponse createItinerary(1: CreateHelperItineraryRequest request, 2: authentication.SessionCredentials credentials);
+    CreateHelperItineraryResponse createItinerary(1: CreateHelperItineraryRequest request, 2: authentication.SessionCredentials credentials)
 }

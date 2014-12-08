@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.jingyusoft.amity.data.entities.RegionEntity;
+import com.jingyusoft.amity.thrift.generated.RegionDto;
 
 public class Region extends LocationBase {
 
@@ -31,5 +32,15 @@ public class Region extends LocationBase {
 
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+
+	public RegionDto toDto() {
+		RegionDto regionDto = new RegionDto();
+		regionDto.setId(getId());
+		regionDto.setCode(getCode());
+		regionDto.setName(getName());
+		regionDto.setLatitude(getLocation().getLatitude());
+		regionDto.setLongitude(getLocation().getLongitude());
+		return regionDto;
 	}
 }

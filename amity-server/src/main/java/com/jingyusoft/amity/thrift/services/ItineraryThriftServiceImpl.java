@@ -9,7 +9,7 @@ import com.jingyusoft.amity.thrift.generated.ItineraryThriftService;
 import com.jingyusoft.amity.thrift.generated.SessionCredentials;
 
 @Service
-public class ItineraryServiceImpl implements ItineraryThriftService.Iface {
+public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface {
 
 	@Override
 	public CreateHelperItineraryResponse createItinerary(CreateHelperItineraryRequest request,

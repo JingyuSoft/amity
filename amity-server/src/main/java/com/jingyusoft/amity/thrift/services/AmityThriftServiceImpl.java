@@ -8,7 +8,7 @@ import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.thrift.generated.AmityService;
 
 @Service
-public class AmityServiceImpl implements AmityService.Iface {
+public class AmityThriftServiceImpl implements AmityService.Iface {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 

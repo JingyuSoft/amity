@@ -15,6 +15,7 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
+#import "authentication.h"
 
 @interface LocationDto : NSObject <TBase, NSCoding> {
   int32_t __id;
@@ -264,7 +265,248 @@
 
 @end
 
+@interface GetCountriesResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  NSMutableArray * __countries;
+
+  BOOL __errorCode_isset;
+  BOOL __countries_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=countries, setter=setCountries:) NSMutableArray * countries;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode countries: (NSMutableArray *) countries;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) countries;
+- (void) setCountries: (NSMutableArray *) countries;
+#endif
+- (BOOL) countriesIsSet;
+
+@end
+
+@interface GetRegionsResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  NSMutableArray * __regions;
+
+  BOOL __errorCode_isset;
+  BOOL __regions_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=regions, setter=setRegions:) NSMutableArray * regions;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode regions: (NSMutableArray *) regions;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) regions;
+- (void) setRegions: (NSMutableArray *) regions;
+#endif
+- (BOOL) regionsIsSet;
+
+@end
+
+@interface GetCitiesResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  NSMutableArray * __cities;
+
+  BOOL __errorCode_isset;
+  BOOL __cities_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=cities, setter=setCities:) NSMutableArray * cities;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode cities: (NSMutableArray *) cities;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) cities;
+- (void) setCities: (NSMutableArray *) cities;
+#endif
+- (BOOL) citiesIsSet;
+
+@end
+
+@interface GetRegionsAndCitiesByCountryRequest : NSObject <TBase, NSCoding> {
+  int32_t __countryId;
+
+  BOOL __countryId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=countryId, setter=setCountryId:) int32_t countryId;
+#endif
+
+- (id) init;
+- (id) initWithCountryId: (int32_t) countryId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) countryId;
+- (void) setCountryId: (int32_t) countryId;
+#endif
+- (BOOL) countryIdIsSet;
+
+@end
+
+@interface GetRegionsAndCitiesByCountryResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  NSMutableArray * __regions;
+  NSMutableArray * __cities;
+
+  BOOL __errorCode_isset;
+  BOOL __regions_isset;
+  BOOL __cities_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=regions, setter=setRegions:) NSMutableArray * regions;
+@property (nonatomic, retain, getter=cities, setter=setCities:) NSMutableArray * cities;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode regions: (NSMutableArray *) regions cities: (NSMutableArray *) cities;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) regions;
+- (void) setRegions: (NSMutableArray *) regions;
+#endif
+- (BOOL) regionsIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) cities;
+- (void) setCities: (NSMutableArray *) cities;
+#endif
+- (BOOL) citiesIsSet;
+
+@end
+
+@interface GetCitiesByRegionRequest : NSObject <TBase, NSCoding> {
+  int32_t __regionId;
+
+  BOOL __regionId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=regionId, setter=setRegionId:) int32_t regionId;
+#endif
+
+- (id) init;
+- (id) initWithRegionId: (int32_t) regionId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) regionId;
+- (void) setRegionId: (int32_t) regionId;
+#endif
+- (BOOL) regionIdIsSet;
+
+@end
+
+@interface GetCitiesByRegionResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  NSMutableArray * __cities;
+
+  BOOL __errorCode_isset;
+  BOOL __cities_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=cities, setter=setCities:) NSMutableArray * cities;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode cities: (NSMutableArray *) cities;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) cities;
+- (void) setCities: (NSMutableArray *) cities;
+#endif
+- (BOOL) citiesIsSet;
+
+@end
+
 @protocol RefDataThriftService <NSObject>
+- (GetCountriesResponse *) getCountries: (SessionCredentials *) credentials;  // throws TException
+- (GetRegionsResponse *) getRegions: (SessionCredentials *) credentials;  // throws TException
+- (GetCitiesResponse *) getCities: (SessionCredentials *) credentials;  // throws TException
+- (GetRegionsAndCitiesByCountryResponse *) getRegionsAndCitiesByCountry: (GetRegionsAndCitiesByCountryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (GetCitiesByRegionResponse *) getCitiesByRegion: (GetCitiesByRegionRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface RefDataThriftServiceClient : NSObject <RefDataThriftService> {

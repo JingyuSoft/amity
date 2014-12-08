@@ -1,6 +1,8 @@
 package com.jingyusoft.amity.authentication;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -65,6 +67,13 @@ public class AmityCipherTest {
 			throw WrappedException.insteadOf(e);
 		} catch (IOException e) {
 			throw WrappedException.insteadOf(e);
+		} finally {
+			try {
+				Files.deleteIfExists(Paths.get(AmityCipher.PUBLIC_KEY_FILE));
+				Files.deleteIfExists(Paths.get(AmityCipher.PRIVATE_KEY_FILE));
+			} catch (IOException e) {
+				throw WrappedException.insteadOf(e);
+			}
 		}
 	}
 }

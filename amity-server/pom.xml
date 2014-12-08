@@ -89,7 +89,7 @@
 				<version>2.17</version>
 				<configuration>
 					<argLine>-Dconfig.mode=test</argLine>
-					<excludedGroups>com.jingyusoft.amity.TestGroups.DatabaseRequired,com.jingyusoft.amity.TestGroups.FileSystemRequired</excludedGroups>
+					<excludedGroups>com.jingyusoft.amity.testgroups.DatabaseRequired,com.jingyusoft.amity.testgroups.FileSystemRequired</excludedGroups>
 				</configuration>
 				<dependencies>
 					<dependency>

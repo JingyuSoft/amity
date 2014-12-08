@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.jingyusoft.amity.TestGroups;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
+import com.jingyusoft.amity.testgroups.FileSystemRequired;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
@@ -25,7 +25,7 @@ public class UserAvatarRepositoryTest {
 	private UserAvatarRepository userAvatarRepository;
 
 	@Test
-	@Category(TestGroups.FileSystemRequired.class)
+	@Category(FileSystemRequired.class)
 	public void testLoadAndSaveFile() {
 
 		long amityUserId = Math.abs(new Random().nextLong());

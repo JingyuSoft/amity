@@ -2,6 +2,8 @@ package com.jingyusoft.amity.authentication;
 
 import java.lang.reflect.Field;
 
+import javax.annotation.Resource;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,13 +32,16 @@ public class AuthenticationAspect {
 		}
 	}
 
+	@Resource
+	private SessionService sessionService;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationAspect.class);
 
-	@Around("execution(* *(.., com.jingyusoft.amity.thrift.generated.SessionCredentials))")
+	@Around("execution(public * com.jingyusoft.amity.thrift.services..*.*(.., com.jingyusoft.amity.thrift.generated.SessionCredentials))")
 	public Object authenticate(ProceedingJoinPoint joinPoint) {
 
-		if (joinPoint.getArgs().length != 2 || joinPoint.getArgs()[1] != null
-				&& !(joinPoint.getArgs()[1] instanceof SessionCredentials)) {
+		Object lastArg = joinPoint.getArgs()[joinPoint.getArgs().length - 1];
+		if (lastArg == null || !(lastArg instanceof SessionCredentials)) {
 			try {
 				return joinPoint.proceed();
 			} catch (Throwable e) {
@@ -50,10 +55,11 @@ public class AuthenticationAspect {
 			return createErrorResponse(returnType, "Credentials does not exist");
 		}
 
-		boolean authenticated = true;
+		boolean authenticated = sessionService.validateSessionToken(credentials.getAmityUserId(),
+				credentials.getSessionToken());
 
 		if (!authenticated) {
-			LOGGER.warn("Invalid credentials [{}]", credentials.toString());
+			LOGGER.warn("Invalid credentials [{}]", credentials);
 			return createErrorResponse(returnType, "Credentials invalid");
 		}
 

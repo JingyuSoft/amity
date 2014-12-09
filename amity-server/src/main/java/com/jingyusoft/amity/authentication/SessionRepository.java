@@ -1,37 +1,50 @@
 package com.jingyusoft.amity.authentication;
 
-import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import com.google.common.collect.Maps;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 
 @Repository
-@ThreadSafe
 public class SessionRepository {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
-	private final Map<Long, AmityToken> map = Maps.newConcurrentMap();
+	@Value("${amity.authentication.session.expiry}")
+	private int sessionExpiryInMinutes;
+
+	private Cache<Long, AmityToken> tokens;
+
+	@PostConstruct
+	private void initialize() {
+		tokens = CacheBuilder.newBuilder().expireAfterWrite(sessionExpiryInMinutes, TimeUnit.MINUTES)
+				.removalListener(new RemovalListener<Long, AmityToken>() {
+
+					@Override
+					public void onRemoval(RemovalNotification<Long, AmityToken> notification) {
+						LOGGER.info("Session token expired for user [{}]", notification.getKey());
+					}
+				}).build();
+	}
 
 	public void update(final long amityUserId, AmityToken sessionToken) {
-		AmityToken previousToken = map.put(amityUserId, sessionToken);
-		if (previousToken != null) {
-			LOGGER.info("Session token replaced for user [{}]. Old = [{}], New = [{}]", amityUserId,
-					previousToken.getValue(), sessionToken.getValue());
-		} else {
-			LOGGER.info("Session token created for user [{}]. Token = [{}]", amityUserId, sessionToken.getValue());
-		}
+		tokens.put(amityUserId, sessionToken);
+		LOGGER.info("Session token [{}] assigned to user [{}]", sessionToken.getValue(), amityUserId);
 	}
 
 	public boolean verify(final long amityUserId, final AmityToken sessionToken) {
-		AmityToken lookupResult = map.get(amityUserId);
+		AmityToken lookupResult = tokens.getIfPresent(amityUserId);
 		if (lookupResult == null) {
 			return false;
 		}

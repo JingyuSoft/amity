@@ -12,7 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
+import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "help_request")
@@ -49,12 +51,24 @@ public class HelpRequestEntity {
 	@Audited(withModifiedFlag = true)
 	private Double toLongitude;
 
+	@Column(name = "from_date", columnDefinition = "DATE")
+	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	private DateTime fromDate;
+
+	@Column(name = "to_date", columnDefinition = "DATE")
+	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	private DateTime toDate;
+
 	@Version
 	@Column(name = "version_lock")
 	private Integer versionLock;
 
 	public CityEntity getFromCity() {
 		return fromCity;
+	}
+
+	public DateTime getFromDate() {
+		return fromDate;
 	}
 
 	public Double getFromLatitude() {
@@ -73,6 +87,10 @@ public class HelpRequestEntity {
 		return toCity;
 	}
 
+	public DateTime getToDate() {
+		return toDate;
+	}
+
 	public Double getToLatitude() {
 		return toLatitude;
 	}
@@ -89,6 +107,10 @@ public class HelpRequestEntity {
 		this.fromCity = fromCity;
 	}
 
+	public void setFromDate(DateTime fromDate) {
+		this.fromDate = fromDate;
+	}
+
 	public void setFromLatitude(Double fromLatitude) {
 		this.fromLatitude = fromLatitude;
 	}
@@ -103,6 +125,10 @@ public class HelpRequestEntity {
 
 	public void setToCity(CityEntity toCity) {
 		this.toCity = toCity;
+	}
+
+	public void setToDate(DateTime toDate) {
+		this.toDate = toDate;
 	}
 
 	public void setToLatitude(Double toLatitude) {

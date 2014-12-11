@@ -9,11 +9,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 @Entity
 @Table(name = "city", indexes = { @Index(name = "idx_city_by_region_id", columnList = "region_id"),
 		@Index(name = "idx_city_by_code", columnList = "code", unique = true) })
-@Audited(withModifiedFlag = true)
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class CityEntity extends LocationEntityBase {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = CountryEntity.class)

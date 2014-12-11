@@ -1,5 +1,6 @@
 use `amity_dev_univer`;
 
+DROP TABLE IF EXISTS `text_message`;
 DROP TABLE IF EXISTS `agreement_audit`;
 DROP TABLE IF EXISTS `help_request_audit`;
 DROP TABLE IF EXISTS `itinerary_audit`;

@@ -8,8 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name = "region", indexes = { @Index(name = "idx_region_by_code", columnList = "code", unique = true) })
+@Audited(withModifiedFlag = true)
 public class RegionEntity extends LocationEntityBase {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = CountryEntity.class)

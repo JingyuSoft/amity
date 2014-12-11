@@ -26,7 +26,6 @@ public class ItineraryEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_itinerary_user"))
-	@Audited(withModifiedFlag = true)
 	private AmityUserEntity user;
 
 	@Version

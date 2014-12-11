@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -20,7 +19,6 @@ import com.jingyusoft.amity.common.SecurityUtils;
 
 @Entity
 @Table(name = "amity_user")
-@Audited(withModifiedFlag = true)
 public class AmityUserEntity {
 
 	public static final String encryptPassword(final String password, final String sand) {
@@ -39,37 +37,46 @@ public class AmityUserEntity {
 	private Long id;
 
 	@Column(name = "username", nullable = true, unique = true, length = 64)
+	@Audited(withModifiedFlag = true)
 	private String userName;
 
 	@Column(name = "encrypted_password", nullable = true, length = 128)
+	@Audited(withModifiedFlag = true)
 	private String encryptedPassword;
 
 	@Column(name = "password_sand", nullable = true, length = 64)
+	@Audited(withModifiedFlag = true)
 	private String passwordSand;
 
 	/**
 	 * Univer 2014-10-09 - The token is regenerated each time user login
 	 */
 	@Column(name = "auth_token", nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String authToken;
 
 	@Column(name = "first_name", length = 128, nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String firstName;
 
 	@Column(name = "last_name", length = 128, nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String lastName;
 
 	@Column(name = "email_address", nullable = false, unique = true, length = 128)
+	@Audited(withModifiedFlag = true)
 	private String emailAddress;
 
 	@Column(name = "gender", nullable = true, unique = false, length = 1)
+	@Audited(withModifiedFlag = true)
 	private String gender;
 
 	@Column(name = "alias", unique = true, length = 64, nullable = true)
+	@Audited(withModifiedFlag = true)
 	private String alias;
 
-	@Column(name = "avatar", nullable = true)
-	@Lob
+	@Column(name = "avatar", nullable = true, length = 128)
+	@Audited(withModifiedFlag = true)
 	private String avatar;
 
 	@Column(name = "register_date_time", nullable = false)
@@ -78,9 +85,11 @@ public class AmityUserEntity {
 
 	@Column(name = "last_login_date_time", nullable = true)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Audited(withModifiedFlag = true)
 	private DateTime lastLoginDateTime;
 
 	@Column(name = "is_active", nullable = true)
+	@Audited(withModifiedFlag = true)
 	private boolean isActive;
 
 	@Column(name = "user_type", nullable = false, length = 1)

@@ -9,13 +9,17 @@ public enum Gender {
 	FEMALE("F");
 
 	public static Gender parse(final String code) {
+		if (StringUtils.isEmpty(code)) {
+			return null;
+		}
+
 		for (Gender gender : Gender.values()) {
 			if (StringUtils.equals(gender.code, code)) {
 				return gender;
 			}
 		}
 
-		return null;
+		throw new IllegalArgumentException("Invalid gender code [" + code + "]");
 	}
 
 	private final String code;

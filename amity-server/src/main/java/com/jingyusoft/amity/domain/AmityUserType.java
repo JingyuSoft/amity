@@ -11,13 +11,17 @@ public enum AmityUserType {
 	GOOGLE("G");
 
 	public static final AmityUserType from(final String code) {
+		if (StringUtils.isEmpty(code)) {
+			return null;
+		}
+
 		for (final AmityUserType type : AmityUserType.values()) {
 			if (StringUtils.equals(type.code, code)) {
 				return type;
 			}
 		}
 
-		return null;
+		throw new IllegalArgumentException("Invalid Amity user type code [" + code + "]");
 	}
 
 	final String code;

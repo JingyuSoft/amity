@@ -347,6 +347,7 @@
   NSString * __username;
   NSString * __firstName;
   NSString * __lastName;
+  NSString * __gender;
   NSString * __userAlias;
   NSData * __avatar;
 
@@ -354,6 +355,7 @@
   BOOL __username_isset;
   BOOL __firstName_isset;
   BOOL __lastName_isset;
+  BOOL __gender_isset;
   BOOL __userAlias_isset;
   BOOL __avatar_isset;
 }
@@ -363,12 +365,13 @@
 @property (nonatomic, retain, getter=username, setter=setUsername:) NSString * username;
 @property (nonatomic, retain, getter=firstName, setter=setFirstName:) NSString * firstName;
 @property (nonatomic, retain, getter=lastName, setter=setLastName:) NSString * lastName;
+@property (nonatomic, retain, getter=gender, setter=setGender:) NSString * gender;
 @property (nonatomic, retain, getter=userAlias, setter=setUserAlias:) NSString * userAlias;
 @property (nonatomic, retain, getter=avatar, setter=setAvatar:) NSData * avatar;
 #endif
 
 - (id) init;
-- (id) initWithAmityUserId: (int64_t) amityUserId username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName userAlias: (NSString *) userAlias avatar: (NSData *) avatar;
+- (id) initWithAmityUserId: (int64_t) amityUserId username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName gender: (NSString *) gender userAlias: (NSString *) userAlias avatar: (NSData *) avatar;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -398,6 +401,12 @@
 - (void) setLastName: (NSString *) lastName;
 #endif
 - (BOOL) lastNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) gender;
+- (void) setGender: (NSString *) gender;
+#endif
+- (BOOL) genderIsSet;
 
 #if !__has_feature(objc_arc)
 - (NSString *) userAlias;

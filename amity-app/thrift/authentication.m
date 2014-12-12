@@ -1705,7 +1705,7 @@
   return self;
 }
 
-- (id) initWithAmityUserId: (int64_t) amityUserId username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName userAlias: (NSString *) userAlias avatar: (NSData *) avatar
+- (id) initWithAmityUserId: (int64_t) amityUserId username: (NSString *) username firstName: (NSString *) firstName lastName: (NSString *) lastName gender: (NSString *) gender userAlias: (NSString *) userAlias avatar: (NSData *) avatar
 {
   self = [super init];
   __amityUserId = amityUserId;
@@ -1716,6 +1716,8 @@
   __firstName_isset = YES;
   __lastName = [lastName retain_stub];
   __lastName_isset = YES;
+  __gender = [gender retain_stub];
+  __gender_isset = YES;
   __userAlias = [userAlias retain_stub];
   __userAlias_isset = YES;
   __avatar = [avatar retain_stub];
@@ -1745,6 +1747,11 @@
   {
     __lastName = [[decoder decodeObjectForKey: @"lastName"] retain_stub];
     __lastName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"gender"])
+  {
+    __gender = [[decoder decodeObjectForKey: @"gender"] retain_stub];
+    __gender_isset = YES;
   }
   if ([decoder containsValueForKey: @"userAlias"])
   {
@@ -1777,6 +1784,10 @@
   {
     [encoder encodeObject: __lastName forKey: @"lastName"];
   }
+  if (__gender_isset)
+  {
+    [encoder encodeObject: __gender forKey: @"gender"];
+  }
   if (__userAlias_isset)
   {
     [encoder encodeObject: __userAlias forKey: @"userAlias"];
@@ -1792,6 +1803,7 @@
   [__username release_stub];
   [__firstName release_stub];
   [__lastName release_stub];
+  [__gender release_stub];
   [__userAlias release_stub];
   [__avatar release_stub];
   [super dealloc_stub];
@@ -1875,6 +1887,27 @@
   [__lastName release_stub];
   __lastName = nil;
   __lastName_isset = NO;
+}
+
+- (NSString *) gender {
+  return [[__gender retain_stub] autorelease_stub];
+}
+
+- (void) setGender: (NSString *) gender {
+  [gender retain_stub];
+  [__gender release_stub];
+  __gender = gender;
+  __gender_isset = YES;
+}
+
+- (BOOL) genderIsSet {
+  return __gender_isset;
+}
+
+- (void) unsetGender {
+  [__gender release_stub];
+  __gender = nil;
+  __gender_isset = NO;
 }
 
 - (NSString *) userAlias {
@@ -1969,12 +2002,20 @@
       case 5:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setUserAlias: fieldValue];
+          [self setGender: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
       case 6:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setUserAlias: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
         if (fieldType == TType_STRING) {
           NSData * fieldValue = [inProtocol readBinary];
           [self setAvatar: fieldValue];
@@ -2019,16 +2060,23 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__gender_isset) {
+    if (__gender != nil) {
+      [outProtocol writeFieldBeginWithName: @"gender" type: TType_STRING fieldID: 5];
+      [outProtocol writeString: __gender];
+      [outProtocol writeFieldEnd];
+    }
+  }
   if (__userAlias_isset) {
     if (__userAlias != nil) {
-      [outProtocol writeFieldBeginWithName: @"userAlias" type: TType_STRING fieldID: 5];
+      [outProtocol writeFieldBeginWithName: @"userAlias" type: TType_STRING fieldID: 6];
       [outProtocol writeString: __userAlias];
       [outProtocol writeFieldEnd];
     }
   }
   if (__avatar_isset) {
     if (__avatar != nil) {
-      [outProtocol writeFieldBeginWithName: @"avatar" type: TType_STRING fieldID: 6];
+      [outProtocol writeFieldBeginWithName: @"avatar" type: TType_STRING fieldID: 7];
       [outProtocol writeBinary: __avatar];
       [outProtocol writeFieldEnd];
     }
@@ -2067,6 +2115,8 @@
   [ms appendFormat: @"\"%@\"", __firstName];
   [ms appendString: @",lastName:"];
   [ms appendFormat: @"\"%@\"", __lastName];
+  [ms appendString: @",gender:"];
+  [ms appendFormat: @"\"%@\"", __gender];
   [ms appendString: @",userAlias:"];
   [ms appendFormat: @"\"%@\"", __userAlias];
   [ms appendString: @",avatar:"];

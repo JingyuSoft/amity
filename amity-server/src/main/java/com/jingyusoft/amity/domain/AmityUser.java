@@ -41,8 +41,8 @@ public class AmityUser {
 		return entity.getFirstName();
 	}
 
-	public String getGender() {
-		return entity.getGender();
+	public Gender getGender() {
+		return Gender.parse(entity.getGender());
 	}
 
 	public long getId() {
@@ -101,8 +101,8 @@ public class AmityUser {
 		entity.setFirstName(firstName);
 	}
 
-	public void setGender(String gender) {
-		entity.setGender(gender);
+	public void setGender(Gender gender) {
+		entity.setGender(gender.getCode());
 	}
 
 	public void setLastLoginDateTime(DateTime lastLoginDateTime) {
@@ -137,7 +137,7 @@ public class AmityUser {
 		amityUserDto.setFirstName(getFirstName());
 		amityUserDto.setLastName(getLastName());
 		amityUserDto.setEmailAddress(getEmailAddress());
-		amityUserDto.setGender(getGender());
+		amityUserDto.setGender(getGender().getCode());
 		amityUserDto.setUserAlias(getAlias());
 		return amityUserDto;
 	}

@@ -49,8 +49,9 @@ struct UpdateAmityAccountRequest {
     2: optional string username,
     3: required string firstName,
     4: required string lastName,
-    5: required string userAlias,
-    6: optional binary avatar
+    5: optional string gender,
+    6: required string userAlias,
+    7: optional binary avatar
 }
 
 struct UpdateAmityAccountResponse {

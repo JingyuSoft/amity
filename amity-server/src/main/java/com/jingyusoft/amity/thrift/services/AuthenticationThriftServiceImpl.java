@@ -10,6 +10,7 @@ import com.jingyusoft.amity.authentication.AuthenticationService;
 import com.jingyusoft.amity.authentication.SessionService;
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.AmityUser;
+import com.jingyusoft.amity.domain.Gender;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 import com.jingyusoft.amity.thrift.generated.AmityUserDto;
 import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
@@ -80,6 +81,7 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 		}
 		amityUser.setFirstName(request.getFirstName());
 		amityUser.setLastName(request.getLastName());
+		amityUser.setGender(Gender.parse(request.getGender()));
 		amityUser.setAlias(request.getUserAlias());
 
 		if (request.getAvatar() != null && request.getAvatar().length > 0) {

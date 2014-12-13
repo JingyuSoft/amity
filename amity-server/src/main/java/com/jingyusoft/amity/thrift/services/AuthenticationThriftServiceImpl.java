@@ -5,8 +5,6 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.jingyusoft.amity.authentication.AuthenticationService;
 import com.jingyusoft.amity.authentication.SessionService;
@@ -74,7 +72,6 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public UpdateAmityAccountResponse updateAmityAccount(UpdateAmityAccountRequest request,
 			SessionCredentials credentials) throws TException {
 

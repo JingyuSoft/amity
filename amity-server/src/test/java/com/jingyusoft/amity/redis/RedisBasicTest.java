@@ -1,7 +1,6 @@
 package com.jingyusoft.amity.redis;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -15,7 +14,6 @@ import com.jingyusoft.amity.common.SecurityUtils;
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
 import com.jingyusoft.amity.testgroups.DatabaseRequired;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
 public class RedisBasicTest {

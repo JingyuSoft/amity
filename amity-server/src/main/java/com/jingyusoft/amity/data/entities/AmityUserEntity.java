@@ -1,7 +1,5 @@
 package com.jingyusoft.amity.data.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,19 +13,9 @@ import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
-import com.jingyusoft.amity.common.SecurityUtils;
-
 @Entity
 @Table(name = "amity_user")
 public class AmityUserEntity {
-
-	public static final String encryptPassword(final String password, final String sand) {
-		return SecurityUtils.getBase64SHA256Hash(password + sand);
-	}
-
-	public static final String generateAuthToken(final String encryptedPassword) {
-		return SecurityUtils.getBase64SHA256Hash(encryptedPassword + new Date().getTime());
-	}
 
 	public static final String DEFAULT_PASSWORD_SAND = "Amity";
 

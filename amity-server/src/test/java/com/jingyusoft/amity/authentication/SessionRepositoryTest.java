@@ -5,17 +5,17 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
+import com.jingyusoft.amity.testgroups.WindowsOnly;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
 public class SessionRepositoryTest {
@@ -24,6 +24,7 @@ public class SessionRepositoryTest {
 	private SessionRepository sessionRepository;
 
 	@Test
+	@Category(WindowsOnly.class)
 	public void testExpiry() {
 		AmityToken sessionToken = new AmityToken(UUID.randomUUID().toString());
 		sessionRepository.update(1, sessionToken);

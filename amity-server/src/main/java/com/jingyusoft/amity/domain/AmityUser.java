@@ -7,142 +7,180 @@ import com.jingyusoft.amity.thrift.generated.AmityUserDto;
 
 public class AmityUser {
 
-	private final AmityUserEntity entity;
+	private final Long id;
+	private String userName;
+	private String encryptedPassword;
+	private String passwordSand;
+	private String authToken;
+	private String firstName;
+	private String lastName;
+	private String emailAddress;
+	private Gender gender;
+	private String alias;
+	private String avatar;
+	private final DateTime registerDateTime;
+	private final DateTime lastLoginDateTime;
+	private boolean isActive;
+	private AmityUserType userType;
 
 	public AmityUser(AmityUserEntity entity) {
-		this.entity = entity;
+		id = entity.getId();
+		userName = entity.getUserName();
+		encryptedPassword = entity.getEncryptedPassword();
+		passwordSand = entity.getPasswordSand();
+		authToken = entity.getAuthToken();
+		firstName = entity.getFirstName();
+		lastName = entity.getLastName();
+		emailAddress = entity.getEmailAddress();
+		gender = Gender.parse(entity.getGender());
+		alias = entity.getAlias();
+		avatar = entity.getAvatar();
+		registerDateTime = entity.getRegisterDateTime();
+		lastLoginDateTime = entity.getLastLoginDateTime();
+		isActive = entity.isActive();
+		userType = AmityUserType.from(entity.getUserType());
 	}
 
 	public String getAlias() {
-		return entity.getAlias();
-	}
-
-	public final AmityUserType getAmityUserType() {
-		return AmityUserType.from(entity.getUserType());
+		return alias;
 	}
 
 	public String getAuthToken() {
-		return entity.getAuthToken();
+		return authToken;
 	}
 
 	public String getAvatar() {
-		return entity.getAvatar();
+		return avatar;
 	}
 
 	public String getEmailAddress() {
-		return entity.getEmailAddress();
+		return emailAddress;
 	}
 
 	public String getEncryptedPassword() {
-		return entity.getEncryptedPassword();
+		return encryptedPassword;
 	}
 
 	public String getFirstName() {
-		return entity.getFirstName();
+		return firstName;
 	}
 
 	public Gender getGender() {
-		return Gender.parse(entity.getGender());
+		return gender;
 	}
 
-	public long getId() {
-		return entity.getId();
+	public Long getId() {
+		return id;
 	}
 
 	public DateTime getLastLoginDateTime() {
-		return entity.getLastLoginDateTime();
+		return lastLoginDateTime;
 	}
 
 	public String getLastName() {
-		return entity.getLastName();
+		return lastName;
 	}
 
 	public String getPasswordSand() {
-		return entity.getPasswordSand();
+		return passwordSand;
 	}
 
 	public DateTime getRegisterDateTime() {
-		return entity.getRegisterDateTime();
+		return registerDateTime;
 	}
 
 	public String getUserName() {
-		return entity.getUserName();
+		return userName;
 	}
 
-	public String getUserType() {
-		return entity.getUserType();
+	public AmityUserType getUserType() {
+		return userType;
 	}
 
 	public boolean isActive() {
-		return entity.isActive();
+		return isActive;
 	}
 
 	public void setActive(boolean isActive) {
-		entity.setActive(isActive);
+		this.isActive = isActive;
 	}
 
 	public void setAlias(String alias) {
-		entity.setAlias(alias);
+		this.alias = alias;
 	}
 
 	public void setAuthToken(String authToken) {
-		entity.setAuthToken(authToken);
+		this.authToken = authToken;
 	}
 
 	public void setAvatar(String avatar) {
-		entity.setAvatar(avatar);
+		this.avatar = avatar;
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		entity.setEmailAddress(emailAddress);
+		this.emailAddress = emailAddress;
+	}
+
+	public void setEncryptedPassword(String encryptedPassword) {
+		this.encryptedPassword = encryptedPassword;
 	}
 
 	public void setFirstName(String firstName) {
-		entity.setFirstName(firstName);
+		this.firstName = firstName;
 	}
 
 	public void setGender(Gender gender) {
-		entity.setGender(gender.getCode());
-	}
-
-	public void setLastLoginDateTime(DateTime lastLoginDateTime) {
-		entity.setLastLoginDateTime(lastLoginDateTime);
+		this.gender = gender;
 	}
 
 	public void setLastName(String lastName) {
-		entity.setLastName(lastName);
+		this.lastName = lastName;
 	}
 
 	public void setPasswordSand(String passwordSand) {
-		entity.setPasswordSand(passwordSand);
-	}
-
-	public void setRegisterDateTime(DateTime registerDateTime) {
-		entity.setRegisterDateTime(registerDateTime);
+		this.passwordSand = passwordSand;
 	}
 
 	public void setUserName(String userName) {
-		entity.setUserName(userName);
+		this.userName = userName;
 	}
 
-	public void setUserType(String userType) {
-		entity.setUserType(userType);
+	public void setUserType(AmityUserType userType) {
+		this.userType = userType;
 	}
 
 	public AmityUserDto toDto() {
 		AmityUserDto amityUserDto = new AmityUserDto();
-		amityUserDto.setAmityUserId(getId());
-		amityUserDto.setUserType(getUserType());
-		amityUserDto.setUsername(getUserName());
-		amityUserDto.setFirstName(getFirstName());
-		amityUserDto.setLastName(getLastName());
-		amityUserDto.setEmailAddress(getEmailAddress());
-		amityUserDto.setGender(getGender().getCode());
-		amityUserDto.setUserAlias(getAlias());
+		amityUserDto.setAmityUserId(id);
+		amityUserDto.setUserType(userType.getCode());
+		amityUserDto.setUsername(userName);
+		amityUserDto.setFirstName(firstName);
+		amityUserDto.setLastName(lastName);
+		amityUserDto.setEmailAddress(emailAddress);
+		amityUserDto.setGender(gender.getCode());
+		amityUserDto.setUserAlias(alias);
 		return amityUserDto;
 	}
 
 	public AmityUserEntity toEntity() {
+		AmityUserEntity entity = new AmityUserEntity();
+
+		entity.setId(id);
+		entity.setUserName(userName);
+		entity.setEncryptedPassword(encryptedPassword);
+		entity.setPasswordSand(passwordSand);
+		entity.setAuthToken(authToken);
+		entity.setFirstName(firstName);
+		entity.setLastName(lastName);
+		entity.setEmailAddress(emailAddress);
+		entity.setGender(gender.getCode());
+		entity.setAlias(alias);
+		entity.setAvatar(avatar);
+		entity.setRegisterDateTime(registerDateTime);
+		entity.setLastLoginDateTime(lastLoginDateTime);
+		entity.setActive(isActive);
+		entity.setUserType(userType.getCode());
+
 		return entity;
 	}
 }

@@ -38,17 +38,22 @@ public class SessionRepository {
 				}).build();
 	}
 
+	public void remove(final long amityUserId) {
+		tokens.invalidate(amityUserId);
+	}
+
 	public void update(final long amityUserId, AmityToken sessionToken) {
 		tokens.put(amityUserId, sessionToken);
 		LOGGER.info("Session token [{}] assigned to user [{}]", sessionToken.getValue(), amityUserId);
 	}
 
-	public boolean verify(final long amityUserId, final AmityToken sessionToken) {
+	public SessionVerificationResult verify(final long amityUserId, final AmityToken sessionToken) {
 		AmityToken lookupResult = tokens.getIfPresent(amityUserId);
 		if (lookupResult == null) {
-			return false;
+			return SessionVerificationResult.NOT_EXIST;
 		}
 
-		return Objects.equals(sessionToken, lookupResult);
+		return Objects.equals(sessionToken, lookupResult) ? SessionVerificationResult.SUCCESS
+				: SessionVerificationResult.NOT_MATCH;
 	}
 }

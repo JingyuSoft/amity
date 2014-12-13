@@ -27,13 +27,24 @@ public class SessionServiceImpl implements SessionService {
 	}
 
 	@Override
+	public void expireSession(final long amityUserId) {
+		sessionRepository.remove(amityUserId);
+	}
+
+	@Override
 	public boolean validateSessionToken(long amityUserId, AmityToken sessionToken) {
-		boolean result = sessionRepository.verify(amityUserId, sessionToken);
-		if (result) {
+		SessionVerificationResult result = sessionRepository.verify(amityUserId, sessionToken);
+		switch (result) {
+		case SUCCESS:
 			LOGGER.info("Session token valid. User = [{}], Token = [{}]", amityUserId, sessionToken.getValue());
-		} else {
-			LOGGER.warn("Session token invalid. User = [{}], Token = [{}]", amityUserId, sessionToken.getValue());
+			break;
+		case NOT_EXIST:
+			LOGGER.warn("Session token does not exist. User = [{}], Token = [{}]", amityUserId, sessionToken.getValue());
+			break;
+		case NOT_MATCH:
+			LOGGER.warn("Session token does not match. User = [{}], Token = [{}]", amityUserId, sessionToken.getValue());
+			break;
 		}
-		return result;
+		return result.isSuccess();
 	}
 }

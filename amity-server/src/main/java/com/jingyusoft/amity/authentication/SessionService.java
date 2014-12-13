@@ -6,5 +6,7 @@ public interface SessionService {
 
 	AmityToken createSession(final long amityUserId);
 
+	void expireSession(final long amityUserId);
+
 	boolean validateSessionToken(final long amityUserId, AmityToken sessionToken);
 }

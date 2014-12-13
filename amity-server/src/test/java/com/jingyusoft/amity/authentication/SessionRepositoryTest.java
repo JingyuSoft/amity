@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +15,7 @@ import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(UnitTestConfigConstants.APPLICATION_CONTEXT_PATH)
 public class SessionRepositoryTest {

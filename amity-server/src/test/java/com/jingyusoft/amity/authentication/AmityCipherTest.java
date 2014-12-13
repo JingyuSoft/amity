@@ -15,12 +15,14 @@ import java.security.spec.RSAPublicKeySpec;
 
 import javax.annotation.Resource;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
 import com.jingyusoft.amity.common.WrappedException;
 
+@Ignore
 @RunWith(BlockJUnit4ClassRunner.class)
 public class AmityCipherTest {
 

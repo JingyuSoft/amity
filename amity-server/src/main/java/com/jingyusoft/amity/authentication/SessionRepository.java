@@ -28,7 +28,7 @@ public class SessionRepository {
 
 	@PostConstruct
 	private void initialize() {
-		tokens = CacheBuilder.newBuilder().expireAfterWrite(sessionExpiryInMinutes, TimeUnit.MINUTES)
+		tokens = CacheBuilder.newBuilder().expireAfterWrite(sessionExpiryInMinutes, TimeUnit.SECONDS)
 				.removalListener(new RemovalListener<Long, AmityToken>() {
 
 					@Override

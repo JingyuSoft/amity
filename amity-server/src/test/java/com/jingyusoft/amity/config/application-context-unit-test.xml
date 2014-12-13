@@ -4,7 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<import resource="application-context-shared.xml" />
+	<context:property-placeholder
+		location="classpath:config-default.properties,
+                  classpath:config-test.properties,
+                  classpath:config-${config.mode:test}.properties" />
+
 	<import resource="application-context-data-source.xml" />
 
 	<context:component-scan

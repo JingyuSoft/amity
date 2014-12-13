@@ -22,6 +22,7 @@ public class AmityUser {
 	private final DateTime lastLoginDateTime;
 	private boolean isActive;
 	private AmityUserType userType;
+	private final long versionLock;
 
 	public AmityUser(AmityUserEntity entity) {
 		id = entity.getId();
@@ -39,6 +40,7 @@ public class AmityUser {
 		lastLoginDateTime = entity.getLastLoginDateTime();
 		isActive = entity.isActive();
 		userType = AmityUserType.from(entity.getUserType());
+		versionLock = entity.getVersionLock();
 	}
 
 	public String getAlias() {
@@ -180,6 +182,7 @@ public class AmityUser {
 		entity.setLastLoginDateTime(lastLoginDateTime);
 		entity.setActive(isActive);
 		entity.setUserType(userType.getCode());
+		entity.setVersionLock(versionLock);
 
 		return entity;
 	}

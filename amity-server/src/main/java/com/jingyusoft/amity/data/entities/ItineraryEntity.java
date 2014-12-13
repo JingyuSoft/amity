@@ -66,7 +66,7 @@ public class ItineraryEntity {
 
 	@Version
 	@Column(name = "version_lock")
-	private Integer versionLock;
+	private long versionLock;
 
 	public CityEntity getFromCity() {
 		return fromCity;
@@ -108,7 +108,7 @@ public class ItineraryEntity {
 		return user;
 	}
 
-	public Integer getVersionLock() {
+	public long getVersionLock() {
 		return versionLock;
 	}
 
@@ -152,7 +152,7 @@ public class ItineraryEntity {
 		this.user = user;
 	}
 
-	public void setVersionLock(Integer versionLock) {
+	public void setVersionLock(long versionLock) {
 		this.versionLock = versionLock;
 	}
 }

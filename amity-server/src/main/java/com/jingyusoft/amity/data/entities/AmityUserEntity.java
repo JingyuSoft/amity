@@ -85,7 +85,7 @@ public class AmityUserEntity {
 
 	@Version
 	@Column(name = "version_lock")
-	private Integer versionLock;
+	private long versionLock;
 
 	public AmityUserEntity() {
 		setPasswordSand(DEFAULT_PASSWORD_SAND);
@@ -147,7 +147,7 @@ public class AmityUserEntity {
 		return userType;
 	}
 
-	public Integer getVersionLock() {
+	public long getVersionLock() {
 		return versionLock;
 	}
 
@@ -221,7 +221,7 @@ public class AmityUserEntity {
 		this.userType = userType;
 	}
 
-	public void setVersionLock(Integer versionLock) {
+	public void setVersionLock(long versionLock) {
 		this.versionLock = versionLock;
 	}
 }

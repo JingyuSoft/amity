@@ -41,7 +41,7 @@ public class AgreementEntity {
 
 	@Version
 	@Column(name = "version_lock")
-	private Integer versionLock;
+	private long versionLock;
 
 	public DateTime getCreateDateTime() {
 		return createDateTime;
@@ -59,7 +59,7 @@ public class AgreementEntity {
 		return id;
 	}
 
-	public Integer getVersionLock() {
+	public long getVersionLock() {
 		return versionLock;
 	}
 
@@ -84,7 +84,7 @@ public class AgreementEntity {
 		this.id = id;
 	}
 
-	public void setVersionLock(Integer versionLock) {
+	public void setVersionLock(long versionLock) {
 		this.versionLock = versionLock;
 	}
 }

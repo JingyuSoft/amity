@@ -31,7 +31,7 @@ public class FacebookUserEntity {
 
 	@Version
 	@Column(name = "version_lock")
-	private Integer versionLock;
+	private long versionLock;
 
 	public AmityUserEntity getAmityUser() {
 		return amityUser;
@@ -41,7 +41,7 @@ public class FacebookUserEntity {
 		return facebookId;
 	}
 
-	public Integer getVersionLock() {
+	public long getVersionLock() {
 		return versionLock;
 	}
 
@@ -53,7 +53,7 @@ public class FacebookUserEntity {
 		this.facebookId = facebookId;
 	}
 
-	public void setVersionLock(Integer versionLock) {
+	public void setVersionLock(long versionLock) {
 		this.versionLock = versionLock;
 	}
 }

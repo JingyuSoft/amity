@@ -18,9 +18,16 @@ import com.jingyusoft.amity.authentication.AuthenticationService;
 import com.jingyusoft.amity.common.HostPort;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.auditing.AuditQueryService;
+import com.jingyusoft.amity.domain.Gender;
 import com.jingyusoft.amity.thrift.factories.ThriftClientFactory;
 import com.jingyusoft.amity.thrift.factories.ThriftClientFactory.ThriftClientHolder;
-import com.jingyusoft.amity.thrift.generated.AmityService;
+import com.jingyusoft.amity.thrift.generated.AmityToken;
+import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
+import com.jingyusoft.amity.thrift.generated.LoginAmityAccountRequest;
+import com.jingyusoft.amity.thrift.generated.LoginAmityAccountResponse;
+import com.jingyusoft.amity.thrift.generated.SessionCredentials;
+import com.jingyusoft.amity.thrift.generated.UpdateAmityAccountRequest;
+import com.jingyusoft.amity.thrift.generated.UpdateAmityAccountResponse;
 
 @Service
 public class TestConsole {
@@ -97,9 +104,20 @@ public class TestConsole {
 	private void thriftDemo() {
 
 		HostPort hostPort = HostPort.from(host, sslPort);
-		try (ThriftClientHolder<AmityService.Iface> holder = thriftClientFactory.getClient(hostPort,
-				AmityService.Iface.class)) {
-			System.out.println(holder.getClient().echo("Hello"));
+		try (ThriftClientHolder<AuthenticationThriftService.Iface> holder = thriftClientFactory.getClient(hostPort,
+				AuthenticationThriftService.Iface.class)) {
+
+			LoginAmityAccountResponse loginResponse = holder.getClient().loginAmityAccount(
+					new LoginAmityAccountRequest().setAmityUserId(1).setAuthToken(
+							new AmityToken("kfWYuHC3ELUE1Gdw1NDktTSZlxyjzLFBC+JIBmDb398=")));
+
+			UpdateAmityAccountResponse updateResponse = holder.getClient().updateAmityAccount(
+					new UpdateAmityAccountRequest().setAmityUserId(1).setFirstName("Univer").setLastName("Shi")
+					.setUserAlias("Univer").setGender(Gender.MALE.getCode()),
+					new SessionCredentials(1, loginResponse.getSessionToken()));
+
+			System.out.println(updateResponse.getErrorCode());
+
 		} catch (Exception e) {
 			throw WrappedException.insteadOf(e);
 		}

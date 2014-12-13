@@ -61,7 +61,7 @@ public class HelpRequestEntity {
 
 	@Version
 	@Column(name = "version_lock")
-	private Integer versionLock;
+	private long versionLock;
 
 	public CityEntity getFromCity() {
 		return fromCity;
@@ -99,7 +99,7 @@ public class HelpRequestEntity {
 		return toLongitude;
 	}
 
-	public Integer getVersionLock() {
+	public long getVersionLock() {
 		return versionLock;
 	}
 
@@ -139,7 +139,7 @@ public class HelpRequestEntity {
 		this.toLongitude = toLongitude;
 	}
 
-	public void setVersionLock(Integer versionLock) {
+	public void setVersionLock(long versionLock) {
 		this.versionLock = versionLock;
 	}
 }

@@ -19,328 +19,6 @@
 
 #import "refdata.h"
 
-@implementation LocationDto
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude
-{
-  self = [super init];
-  __id = id;
-  __id_isset = YES;
-  __code = [code retain_stub];
-  __code_isset = YES;
-  __name = [name retain_stub];
-  __name_isset = YES;
-  __latitude = latitude;
-  __latitude_isset = YES;
-  __longitude = longitude;
-  __longitude_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"id"])
-  {
-    __id = [decoder decodeInt32ForKey: @"id"];
-    __id_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"code"])
-  {
-    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
-    __code_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"name"])
-  {
-    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
-    __name_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"latitude"])
-  {
-    __latitude = [decoder decodeDoubleForKey: @"latitude"];
-    __latitude_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"longitude"])
-  {
-    __longitude = [decoder decodeDoubleForKey: @"longitude"];
-    __longitude_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__id_isset)
-  {
-    [encoder encodeInt32: __id forKey: @"id"];
-  }
-  if (__code_isset)
-  {
-    [encoder encodeObject: __code forKey: @"code"];
-  }
-  if (__name_isset)
-  {
-    [encoder encodeObject: __name forKey: @"name"];
-  }
-  if (__latitude_isset)
-  {
-    [encoder encodeDouble: __latitude forKey: @"latitude"];
-  }
-  if (__longitude_isset)
-  {
-    [encoder encodeDouble: __longitude forKey: @"longitude"];
-  }
-}
-
-- (void) dealloc
-{
-  [__code release_stub];
-  [__name release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) id {
-  return __id;
-}
-
-- (void) setId: (int32_t) id {
-  __id = id;
-  __id_isset = YES;
-}
-
-- (BOOL) idIsSet {
-  return __id_isset;
-}
-
-- (void) unsetId {
-  __id_isset = NO;
-}
-
-- (NSString *) code {
-  return [[__code retain_stub] autorelease_stub];
-}
-
-- (void) setCode: (NSString *) code {
-  [code retain_stub];
-  [__code release_stub];
-  __code = code;
-  __code_isset = YES;
-}
-
-- (BOOL) codeIsSet {
-  return __code_isset;
-}
-
-- (void) unsetCode {
-  [__code release_stub];
-  __code = nil;
-  __code_isset = NO;
-}
-
-- (NSString *) name {
-  return [[__name retain_stub] autorelease_stub];
-}
-
-- (void) setName: (NSString *) name {
-  [name retain_stub];
-  [__name release_stub];
-  __name = name;
-  __name_isset = YES;
-}
-
-- (BOOL) nameIsSet {
-  return __name_isset;
-}
-
-- (void) unsetName {
-  [__name release_stub];
-  __name = nil;
-  __name_isset = NO;
-}
-
-- (double) latitude {
-  return __latitude;
-}
-
-- (void) setLatitude: (double) latitude {
-  __latitude = latitude;
-  __latitude_isset = YES;
-}
-
-- (BOOL) latitudeIsSet {
-  return __latitude_isset;
-}
-
-- (void) unsetLatitude {
-  __latitude_isset = NO;
-}
-
-- (double) longitude {
-  return __longitude;
-}
-
-- (void) setLongitude: (double) longitude {
-  __longitude = longitude;
-  __longitude_isset = YES;
-}
-
-- (BOOL) longitudeIsSet {
-  return __longitude_isset;
-}
-
-- (void) unsetLongitude {
-  __longitude_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 4:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLatitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 5:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLongitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"LocationDto"];
-  if (__id_isset) {
-    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __id];
-    [outProtocol writeFieldEnd];
-  }
-  if (__code_isset) {
-    if (__code != nil) {
-      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __code];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__name_isset) {
-    if (__name != nil) {
-      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
-      [outProtocol writeString: __name];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__latitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 4];
-    [outProtocol writeDouble: __latitude];
-    [outProtocol writeFieldEnd];
-  }
-  if (__longitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 5];
-    [outProtocol writeDouble: __longitude];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__id_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'id' is not set."];
-  }
-  if (!__code_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'code' is not set."];
-  }
-  if (!__name_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'name' is not set."];
-  }
-  if (!__latitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'latitude' is not set."];
-  }
-  if (!__longitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'longitude' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"LocationDto("];
-  [ms appendString: @"id:"];
-  [ms appendFormat: @"%i", __id];
-  [ms appendString: @",code:"];
-  [ms appendFormat: @"\"%@\"", __code];
-  [ms appendString: @",name:"];
-  [ms appendFormat: @"\"%@\"", __name];
-  [ms appendString: @",latitude:"];
-  [ms appendFormat: @"%f", __latitude];
-  [ms appendString: @",longitude:"];
-  [ms appendFormat: @"%f", __longitude];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
 @implementation CityDto
 
 - (id) init
@@ -351,7 +29,7 @@
   return self;
 }
 
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude
+- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName
 {
   self = [super init];
   __id = id;
@@ -364,6 +42,10 @@
   __latitude_isset = YES;
   __longitude = longitude;
   __longitude_isset = YES;
+  __regionName = [regionName retain_stub];
+  __regionName_isset = YES;
+  __countryName = [countryName retain_stub];
+  __countryName_isset = YES;
   return self;
 }
 
@@ -395,6 +77,16 @@
     __longitude = [decoder decodeDoubleForKey: @"longitude"];
     __longitude_isset = YES;
   }
+  if ([decoder containsValueForKey: @"regionName"])
+  {
+    __regionName = [[decoder decodeObjectForKey: @"regionName"] retain_stub];
+    __regionName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"countryName"])
+  {
+    __countryName = [[decoder decodeObjectForKey: @"countryName"] retain_stub];
+    __countryName_isset = YES;
+  }
   return self;
 }
 
@@ -420,12 +112,22 @@
   {
     [encoder encodeDouble: __longitude forKey: @"longitude"];
   }
+  if (__regionName_isset)
+  {
+    [encoder encodeObject: __regionName forKey: @"regionName"];
+  }
+  if (__countryName_isset)
+  {
+    [encoder encodeObject: __countryName forKey: @"countryName"];
+  }
 }
 
 - (void) dealloc
 {
   [__code release_stub];
   [__name release_stub];
+  [__regionName release_stub];
+  [__countryName release_stub];
   [super dealloc_stub];
 }
 
@@ -522,6 +224,48 @@
   __longitude_isset = NO;
 }
 
+- (NSString *) regionName {
+  return [[__regionName retain_stub] autorelease_stub];
+}
+
+- (void) setRegionName: (NSString *) regionName {
+  [regionName retain_stub];
+  [__regionName release_stub];
+  __regionName = regionName;
+  __regionName_isset = YES;
+}
+
+- (BOOL) regionNameIsSet {
+  return __regionName_isset;
+}
+
+- (void) unsetRegionName {
+  [__regionName release_stub];
+  __regionName = nil;
+  __regionName_isset = NO;
+}
+
+- (NSString *) countryName {
+  return [[__countryName retain_stub] autorelease_stub];
+}
+
+- (void) setCountryName: (NSString *) countryName {
+  [countryName retain_stub];
+  [__countryName release_stub];
+  __countryName = countryName;
+  __countryName_isset = YES;
+}
+
+- (BOOL) countryNameIsSet {
+  return __countryName_isset;
+}
+
+- (void) unsetCountryName {
+  [__countryName release_stub];
+  __countryName = nil;
+  __countryName_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -573,6 +317,22 @@
         if (fieldType == TType_DOUBLE) {
           double fieldValue = [inProtocol readDouble];
           [self setLongitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setRegionName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setCountryName: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -617,6 +377,20 @@
     [outProtocol writeDouble: __longitude];
     [outProtocol writeFieldEnd];
   }
+  if (__regionName_isset) {
+    if (__regionName != nil) {
+      [outProtocol writeFieldBeginWithName: @"regionName" type: TType_STRING fieldID: 6];
+      [outProtocol writeString: __regionName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__countryName_isset) {
+    if (__countryName != nil) {
+      [outProtocol writeFieldBeginWithName: @"countryName" type: TType_STRING fieldID: 7];
+      [outProtocol writeString: __countryName];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -642,6 +416,10 @@
   if (!__longitude_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
                                reason: @"Required field 'longitude' is not set."];
+  }
+  if (!__countryName_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'countryName' is not set."];
   }
 }
 
@@ -657,13 +435,17 @@
   [ms appendFormat: @"%f", __latitude];
   [ms appendString: @",longitude:"];
   [ms appendFormat: @"%f", __longitude];
+  [ms appendString: @",regionName:"];
+  [ms appendFormat: @"\"%@\"", __regionName];
+  [ms appendString: @",countryName:"];
+  [ms appendFormat: @"\"%@\"", __countryName];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
 
 @end
 
-@implementation RegionDto
+@implementation SearchCitiesRequest
 
 - (id) init
 {
@@ -673,175 +455,58 @@
   return self;
 }
 
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude
+- (id) initWithSearchText: (NSString *) searchText
 {
   self = [super init];
-  __id = id;
-  __id_isset = YES;
-  __code = [code retain_stub];
-  __code_isset = YES;
-  __name = [name retain_stub];
-  __name_isset = YES;
-  __latitude = latitude;
-  __latitude_isset = YES;
-  __longitude = longitude;
-  __longitude_isset = YES;
+  __searchText = [searchText retain_stub];
+  __searchText_isset = YES;
   return self;
 }
 
 - (id) initWithCoder: (NSCoder *) decoder
 {
   self = [super init];
-  if ([decoder containsValueForKey: @"id"])
+  if ([decoder containsValueForKey: @"searchText"])
   {
-    __id = [decoder decodeInt32ForKey: @"id"];
-    __id_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"code"])
-  {
-    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
-    __code_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"name"])
-  {
-    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
-    __name_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"latitude"])
-  {
-    __latitude = [decoder decodeDoubleForKey: @"latitude"];
-    __latitude_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"longitude"])
-  {
-    __longitude = [decoder decodeDoubleForKey: @"longitude"];
-    __longitude_isset = YES;
+    __searchText = [[decoder decodeObjectForKey: @"searchText"] retain_stub];
+    __searchText_isset = YES;
   }
   return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
-  if (__id_isset)
+  if (__searchText_isset)
   {
-    [encoder encodeInt32: __id forKey: @"id"];
-  }
-  if (__code_isset)
-  {
-    [encoder encodeObject: __code forKey: @"code"];
-  }
-  if (__name_isset)
-  {
-    [encoder encodeObject: __name forKey: @"name"];
-  }
-  if (__latitude_isset)
-  {
-    [encoder encodeDouble: __latitude forKey: @"latitude"];
-  }
-  if (__longitude_isset)
-  {
-    [encoder encodeDouble: __longitude forKey: @"longitude"];
+    [encoder encodeObject: __searchText forKey: @"searchText"];
   }
 }
 
 - (void) dealloc
 {
-  [__code release_stub];
-  [__name release_stub];
+  [__searchText release_stub];
   [super dealloc_stub];
 }
 
-- (int32_t) id {
-  return __id;
+- (NSString *) searchText {
+  return [[__searchText retain_stub] autorelease_stub];
 }
 
-- (void) setId: (int32_t) id {
-  __id = id;
-  __id_isset = YES;
+- (void) setSearchText: (NSString *) searchText {
+  [searchText retain_stub];
+  [__searchText release_stub];
+  __searchText = searchText;
+  __searchText_isset = YES;
 }
 
-- (BOOL) idIsSet {
-  return __id_isset;
+- (BOOL) searchTextIsSet {
+  return __searchText_isset;
 }
 
-- (void) unsetId {
-  __id_isset = NO;
-}
-
-- (NSString *) code {
-  return [[__code retain_stub] autorelease_stub];
-}
-
-- (void) setCode: (NSString *) code {
-  [code retain_stub];
-  [__code release_stub];
-  __code = code;
-  __code_isset = YES;
-}
-
-- (BOOL) codeIsSet {
-  return __code_isset;
-}
-
-- (void) unsetCode {
-  [__code release_stub];
-  __code = nil;
-  __code_isset = NO;
-}
-
-- (NSString *) name {
-  return [[__name retain_stub] autorelease_stub];
-}
-
-- (void) setName: (NSString *) name {
-  [name retain_stub];
-  [__name release_stub];
-  __name = name;
-  __name_isset = YES;
-}
-
-- (BOOL) nameIsSet {
-  return __name_isset;
-}
-
-- (void) unsetName {
-  [__name release_stub];
-  __name = nil;
-  __name_isset = NO;
-}
-
-- (double) latitude {
-  return __latitude;
-}
-
-- (void) setLatitude: (double) latitude {
-  __latitude = latitude;
-  __latitude_isset = YES;
-}
-
-- (BOOL) latitudeIsSet {
-  return __latitude_isset;
-}
-
-- (void) unsetLatitude {
-  __latitude_isset = NO;
-}
-
-- (double) longitude {
-  return __longitude;
-}
-
-- (void) setLongitude: (double) longitude {
-  __longitude = longitude;
-  __longitude_isset = YES;
-}
-
-- (BOOL) longitudeIsSet {
-  return __longitude_isset;
-}
-
-- (void) unsetLongitude {
-  __longitude_isset = NO;
+- (void) unsetSearchText {
+  [__searchText release_stub];
+  __searchText = nil;
+  __searchText_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -860,41 +525,9 @@
     switch (fieldID)
     {
       case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 4:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLatitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 5:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLongitude: fieldValue];
+          [self setSearchText: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -909,35 +542,13 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"RegionDto"];
-  if (__id_isset) {
-    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __id];
-    [outProtocol writeFieldEnd];
-  }
-  if (__code_isset) {
-    if (__code != nil) {
-      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __code];
+  [outProtocol writeStructBeginWithName: @"SearchCitiesRequest"];
+  if (__searchText_isset) {
+    if (__searchText != nil) {
+      [outProtocol writeFieldBeginWithName: @"searchText" type: TType_STRING fieldID: 1];
+      [outProtocol writeString: __searchText];
       [outProtocol writeFieldEnd];
     }
-  }
-  if (__name_isset) {
-    if (__name != nil) {
-      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
-      [outProtocol writeString: __name];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__latitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 4];
-    [outProtocol writeDouble: __latitude];
-    [outProtocol writeFieldEnd];
-  }
-  if (__longitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 5];
-    [outProtocol writeDouble: __longitude];
-    [outProtocol writeFieldEnd];
   }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
@@ -945,47 +556,23 @@
 
 - (void) validate {
   // check for required fields
-  if (!__id_isset) {
+  if (!__searchText_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'id' is not set."];
-  }
-  if (!__code_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'code' is not set."];
-  }
-  if (!__name_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'name' is not set."];
-  }
-  if (!__latitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'latitude' is not set."];
-  }
-  if (!__longitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'longitude' is not set."];
+                               reason: @"Required field 'searchText' is not set."];
   }
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"RegionDto("];
-  [ms appendString: @"id:"];
-  [ms appendFormat: @"%i", __id];
-  [ms appendString: @",code:"];
-  [ms appendFormat: @"\"%@\"", __code];
-  [ms appendString: @",name:"];
-  [ms appendFormat: @"\"%@\"", __name];
-  [ms appendString: @",latitude:"];
-  [ms appendFormat: @"%f", __latitude];
-  [ms appendString: @",longitude:"];
-  [ms appendFormat: @"%f", __longitude];
+  NSMutableString * ms = [NSMutableString stringWithString: @"SearchCitiesRequest("];
+  [ms appendString: @"searchText:"];
+  [ms appendFormat: @"\"%@\"", __searchText];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
 
 @end
 
-@implementation CountryDto
+@implementation SearchCitiesResponse
 
 - (id) init
 {
@@ -995,335 +582,13 @@
   return self;
 }
 
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude
-{
-  self = [super init];
-  __id = id;
-  __id_isset = YES;
-  __code = [code retain_stub];
-  __code_isset = YES;
-  __name = [name retain_stub];
-  __name_isset = YES;
-  __latitude = latitude;
-  __latitude_isset = YES;
-  __longitude = longitude;
-  __longitude_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"id"])
-  {
-    __id = [decoder decodeInt32ForKey: @"id"];
-    __id_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"code"])
-  {
-    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
-    __code_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"name"])
-  {
-    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
-    __name_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"latitude"])
-  {
-    __latitude = [decoder decodeDoubleForKey: @"latitude"];
-    __latitude_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"longitude"])
-  {
-    __longitude = [decoder decodeDoubleForKey: @"longitude"];
-    __longitude_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__id_isset)
-  {
-    [encoder encodeInt32: __id forKey: @"id"];
-  }
-  if (__code_isset)
-  {
-    [encoder encodeObject: __code forKey: @"code"];
-  }
-  if (__name_isset)
-  {
-    [encoder encodeObject: __name forKey: @"name"];
-  }
-  if (__latitude_isset)
-  {
-    [encoder encodeDouble: __latitude forKey: @"latitude"];
-  }
-  if (__longitude_isset)
-  {
-    [encoder encodeDouble: __longitude forKey: @"longitude"];
-  }
-}
-
-- (void) dealloc
-{
-  [__code release_stub];
-  [__name release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) id {
-  return __id;
-}
-
-- (void) setId: (int32_t) id {
-  __id = id;
-  __id_isset = YES;
-}
-
-- (BOOL) idIsSet {
-  return __id_isset;
-}
-
-- (void) unsetId {
-  __id_isset = NO;
-}
-
-- (NSString *) code {
-  return [[__code retain_stub] autorelease_stub];
-}
-
-- (void) setCode: (NSString *) code {
-  [code retain_stub];
-  [__code release_stub];
-  __code = code;
-  __code_isset = YES;
-}
-
-- (BOOL) codeIsSet {
-  return __code_isset;
-}
-
-- (void) unsetCode {
-  [__code release_stub];
-  __code = nil;
-  __code_isset = NO;
-}
-
-- (NSString *) name {
-  return [[__name retain_stub] autorelease_stub];
-}
-
-- (void) setName: (NSString *) name {
-  [name retain_stub];
-  [__name release_stub];
-  __name = name;
-  __name_isset = YES;
-}
-
-- (BOOL) nameIsSet {
-  return __name_isset;
-}
-
-- (void) unsetName {
-  [__name release_stub];
-  __name = nil;
-  __name_isset = NO;
-}
-
-- (double) latitude {
-  return __latitude;
-}
-
-- (void) setLatitude: (double) latitude {
-  __latitude = latitude;
-  __latitude_isset = YES;
-}
-
-- (BOOL) latitudeIsSet {
-  return __latitude_isset;
-}
-
-- (void) unsetLatitude {
-  __latitude_isset = NO;
-}
-
-- (double) longitude {
-  return __longitude;
-}
-
-- (void) setLongitude: (double) longitude {
-  __longitude = longitude;
-  __longitude_isset = YES;
-}
-
-- (BOOL) longitudeIsSet {
-  return __longitude_isset;
-}
-
-- (void) unsetLongitude {
-  __longitude_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 4:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLatitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 5:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLongitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"CountryDto"];
-  if (__id_isset) {
-    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __id];
-    [outProtocol writeFieldEnd];
-  }
-  if (__code_isset) {
-    if (__code != nil) {
-      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __code];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__name_isset) {
-    if (__name != nil) {
-      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
-      [outProtocol writeString: __name];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__latitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 4];
-    [outProtocol writeDouble: __latitude];
-    [outProtocol writeFieldEnd];
-  }
-  if (__longitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 5];
-    [outProtocol writeDouble: __longitude];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__id_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'id' is not set."];
-  }
-  if (!__code_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'code' is not set."];
-  }
-  if (!__name_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'name' is not set."];
-  }
-  if (!__latitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'latitude' is not set."];
-  }
-  if (!__longitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'longitude' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"CountryDto("];
-  [ms appendString: @"id:"];
-  [ms appendFormat: @"%i", __id];
-  [ms appendString: @",code:"];
-  [ms appendFormat: @"\"%@\"", __code];
-  [ms appendString: @",name:"];
-  [ms appendFormat: @"\"%@\"", __name];
-  [ms appendString: @",latitude:"];
-  [ms appendFormat: @"%f", __latitude];
-  [ms appendString: @",longitude:"];
-  [ms appendFormat: @"%f", __longitude];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetCountriesResponse
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithErrorCode: (int32_t) errorCode countries: (NSMutableArray *) countries
+- (id) initWithErrorCode: (int32_t) errorCode cities: (NSMutableArray *) cities
 {
   self = [super init];
   __errorCode = errorCode;
   __errorCode_isset = YES;
-  __countries = [countries retain_stub];
-  __countries_isset = YES;
+  __cities = [cities retain_stub];
+  __cities_isset = YES;
   return self;
 }
 
@@ -1335,10 +600,10 @@
     __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
     __errorCode_isset = YES;
   }
-  if ([decoder containsValueForKey: @"countries"])
+  if ([decoder containsValueForKey: @"cities"])
   {
-    __countries = [[decoder decodeObjectForKey: @"countries"] retain_stub];
-    __countries_isset = YES;
+    __cities = [[decoder decodeObjectForKey: @"cities"] retain_stub];
+    __cities_isset = YES;
   }
   return self;
 }
@@ -1349,15 +614,15 @@
   {
     [encoder encodeInt32: __errorCode forKey: @"errorCode"];
   }
-  if (__countries_isset)
+  if (__cities_isset)
   {
-    [encoder encodeObject: __countries forKey: @"countries"];
+    [encoder encodeObject: __cities forKey: @"cities"];
   }
 }
 
 - (void) dealloc
 {
-  [__countries release_stub];
+  [__cities release_stub];
   [super dealloc_stub];
 }
 
@@ -1378,25 +643,25 @@
   __errorCode_isset = NO;
 }
 
-- (NSMutableArray *) countries {
-  return [[__countries retain_stub] autorelease_stub];
+- (NSMutableArray *) cities {
+  return [[__cities retain_stub] autorelease_stub];
 }
 
-- (void) setCountries: (NSMutableArray *) countries {
-  [countries retain_stub];
-  [__countries release_stub];
-  __countries = countries;
-  __countries_isset = YES;
+- (void) setCities: (NSMutableArray *) cities {
+  [cities retain_stub];
+  [__cities release_stub];
+  __cities = cities;
+  __cities_isset = YES;
 }
 
-- (BOOL) countriesIsSet {
-  return __countries_isset;
+- (BOOL) citiesIsSet {
+  return __cities_isset;
 }
 
-- (void) unsetCountries {
-  [__countries release_stub];
-  __countries = nil;
-  __countries_isset = NO;
+- (void) unsetCities {
+  [__cities release_stub];
+  __cities = nil;
+  __cities_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -1430,13 +695,13 @@
           int _i1;
           for (_i1 = 0; _i1 < _size0; ++_i1)
           {
-            CountryDto *_elem2 = [[CountryDto alloc] init];
+            CityDto *_elem2 = [[CityDto alloc] init];
             [_elem2 read: inProtocol];
             [fieldValue addObject: _elem2];
             [_elem2 release_stub];
           }
           [inProtocol readListEnd];
-          [self setCountries: fieldValue];
+          [self setCities: fieldValue];
           [fieldValue release_stub];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
@@ -1452,21 +717,21 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCountriesResponse"];
+  [outProtocol writeStructBeginWithName: @"SearchCitiesResponse"];
   if (__errorCode_isset) {
     [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
     [outProtocol writeI32: __errorCode];
     [outProtocol writeFieldEnd];
   }
-  if (__countries_isset) {
-    if (__countries != nil) {
-      [outProtocol writeFieldBeginWithName: @"countries" type: TType_LIST fieldID: 2];
+  if (__cities_isset) {
+    if (__cities != nil) {
+      [outProtocol writeFieldBeginWithName: @"cities" type: TType_LIST fieldID: 2];
       {
-        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__countries count]];
+        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__cities count]];
         int idx4;
-        for (idx4 = 0; idx4 < [__countries count]; idx4++)
+        for (idx4 = 0; idx4 < [__cities count]; idx4++)
         {
-          [[__countries objectAtIndex: idx4] write: outProtocol];
+          [[__cities objectAtIndex: idx4] write: outProtocol];
         }
         [outProtocol writeListEnd];
       }
@@ -1486,1077 +751,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCountriesResponse("];
-  [ms appendString: @"errorCode:"];
-  [ms appendFormat: @"%i", __errorCode];
-  [ms appendString: @",countries:"];
-  [ms appendFormat: @"%@", __countries];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetRegionsResponse
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithErrorCode: (int32_t) errorCode regions: (NSMutableArray *) regions
-{
-  self = [super init];
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-  __regions = [regions retain_stub];
-  __regions_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"errorCode"])
-  {
-    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
-    __errorCode_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"regions"])
-  {
-    __regions = [[decoder decodeObjectForKey: @"regions"] retain_stub];
-    __regions_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__errorCode_isset)
-  {
-    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
-  }
-  if (__regions_isset)
-  {
-    [encoder encodeObject: __regions forKey: @"regions"];
-  }
-}
-
-- (void) dealloc
-{
-  [__regions release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) errorCode {
-  return __errorCode;
-}
-
-- (void) setErrorCode: (int32_t) errorCode {
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-}
-
-- (BOOL) errorCodeIsSet {
-  return __errorCode_isset;
-}
-
-- (void) unsetErrorCode {
-  __errorCode_isset = NO;
-}
-
-- (NSMutableArray *) regions {
-  return [[__regions retain_stub] autorelease_stub];
-}
-
-- (void) setRegions: (NSMutableArray *) regions {
-  [regions retain_stub];
-  [__regions release_stub];
-  __regions = regions;
-  __regions_isset = YES;
-}
-
-- (BOOL) regionsIsSet {
-  return __regions_isset;
-}
-
-- (void) unsetRegions {
-  [__regions release_stub];
-  __regions = nil;
-  __regions_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setErrorCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_LIST) {
-          int _size5;
-          [inProtocol readListBeginReturningElementType: NULL size: &_size5];
-          NSMutableArray * fieldValue = [[NSMutableArray alloc] initWithCapacity: _size5];
-          int _i6;
-          for (_i6 = 0; _i6 < _size5; ++_i6)
-          {
-            RegionDto *_elem7 = [[RegionDto alloc] init];
-            [_elem7 read: inProtocol];
-            [fieldValue addObject: _elem7];
-            [_elem7 release_stub];
-          }
-          [inProtocol readListEnd];
-          [self setRegions: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetRegionsResponse"];
-  if (__errorCode_isset) {
-    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __errorCode];
-    [outProtocol writeFieldEnd];
-  }
-  if (__regions_isset) {
-    if (__regions != nil) {
-      [outProtocol writeFieldBeginWithName: @"regions" type: TType_LIST fieldID: 2];
-      {
-        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__regions count]];
-        int idx9;
-        for (idx9 = 0; idx9 < [__regions count]; idx9++)
-        {
-          [[__regions objectAtIndex: idx9] write: outProtocol];
-        }
-        [outProtocol writeListEnd];
-      }
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__errorCode_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'errorCode' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetRegionsResponse("];
-  [ms appendString: @"errorCode:"];
-  [ms appendFormat: @"%i", __errorCode];
-  [ms appendString: @",regions:"];
-  [ms appendFormat: @"%@", __regions];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetCitiesResponse
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithErrorCode: (int32_t) errorCode cities: (NSMutableArray *) cities
-{
-  self = [super init];
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-  __cities = [cities retain_stub];
-  __cities_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"errorCode"])
-  {
-    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
-    __errorCode_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"cities"])
-  {
-    __cities = [[decoder decodeObjectForKey: @"cities"] retain_stub];
-    __cities_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__errorCode_isset)
-  {
-    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
-  }
-  if (__cities_isset)
-  {
-    [encoder encodeObject: __cities forKey: @"cities"];
-  }
-}
-
-- (void) dealloc
-{
-  [__cities release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) errorCode {
-  return __errorCode;
-}
-
-- (void) setErrorCode: (int32_t) errorCode {
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-}
-
-- (BOOL) errorCodeIsSet {
-  return __errorCode_isset;
-}
-
-- (void) unsetErrorCode {
-  __errorCode_isset = NO;
-}
-
-- (NSMutableArray *) cities {
-  return [[__cities retain_stub] autorelease_stub];
-}
-
-- (void) setCities: (NSMutableArray *) cities {
-  [cities retain_stub];
-  [__cities release_stub];
-  __cities = cities;
-  __cities_isset = YES;
-}
-
-- (BOOL) citiesIsSet {
-  return __cities_isset;
-}
-
-- (void) unsetCities {
-  [__cities release_stub];
-  __cities = nil;
-  __cities_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setErrorCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_LIST) {
-          int _size10;
-          [inProtocol readListBeginReturningElementType: NULL size: &_size10];
-          NSMutableArray * fieldValue = [[NSMutableArray alloc] initWithCapacity: _size10];
-          int _i11;
-          for (_i11 = 0; _i11 < _size10; ++_i11)
-          {
-            CityDto *_elem12 = [[CityDto alloc] init];
-            [_elem12 read: inProtocol];
-            [fieldValue addObject: _elem12];
-            [_elem12 release_stub];
-          }
-          [inProtocol readListEnd];
-          [self setCities: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCitiesResponse"];
-  if (__errorCode_isset) {
-    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __errorCode];
-    [outProtocol writeFieldEnd];
-  }
-  if (__cities_isset) {
-    if (__cities != nil) {
-      [outProtocol writeFieldBeginWithName: @"cities" type: TType_LIST fieldID: 2];
-      {
-        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__cities count]];
-        int idx14;
-        for (idx14 = 0; idx14 < [__cities count]; idx14++)
-        {
-          [[__cities objectAtIndex: idx14] write: outProtocol];
-        }
-        [outProtocol writeListEnd];
-      }
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__errorCode_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'errorCode' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCitiesResponse("];
-  [ms appendString: @"errorCode:"];
-  [ms appendFormat: @"%i", __errorCode];
-  [ms appendString: @",cities:"];
-  [ms appendFormat: @"%@", __cities];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetRegionsAndCitiesByCountryRequest
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithCountryId: (int32_t) countryId
-{
-  self = [super init];
-  __countryId = countryId;
-  __countryId_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"countryId"])
-  {
-    __countryId = [decoder decodeInt32ForKey: @"countryId"];
-    __countryId_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__countryId_isset)
-  {
-    [encoder encodeInt32: __countryId forKey: @"countryId"];
-  }
-}
-
-- (void) dealloc
-{
-  [super dealloc_stub];
-}
-
-- (int32_t) countryId {
-  return __countryId;
-}
-
-- (void) setCountryId: (int32_t) countryId {
-  __countryId = countryId;
-  __countryId_isset = YES;
-}
-
-- (BOOL) countryIdIsSet {
-  return __countryId_isset;
-}
-
-- (void) unsetCountryId {
-  __countryId_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setCountryId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetRegionsAndCitiesByCountryRequest"];
-  if (__countryId_isset) {
-    [outProtocol writeFieldBeginWithName: @"countryId" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __countryId];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__countryId_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'countryId' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetRegionsAndCitiesByCountryRequest("];
-  [ms appendString: @"countryId:"];
-  [ms appendFormat: @"%i", __countryId];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetRegionsAndCitiesByCountryResponse
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithErrorCode: (int32_t) errorCode regions: (NSMutableArray *) regions cities: (NSMutableArray *) cities
-{
-  self = [super init];
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-  __regions = [regions retain_stub];
-  __regions_isset = YES;
-  __cities = [cities retain_stub];
-  __cities_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"errorCode"])
-  {
-    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
-    __errorCode_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"regions"])
-  {
-    __regions = [[decoder decodeObjectForKey: @"regions"] retain_stub];
-    __regions_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"cities"])
-  {
-    __cities = [[decoder decodeObjectForKey: @"cities"] retain_stub];
-    __cities_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__errorCode_isset)
-  {
-    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
-  }
-  if (__regions_isset)
-  {
-    [encoder encodeObject: __regions forKey: @"regions"];
-  }
-  if (__cities_isset)
-  {
-    [encoder encodeObject: __cities forKey: @"cities"];
-  }
-}
-
-- (void) dealloc
-{
-  [__regions release_stub];
-  [__cities release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) errorCode {
-  return __errorCode;
-}
-
-- (void) setErrorCode: (int32_t) errorCode {
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-}
-
-- (BOOL) errorCodeIsSet {
-  return __errorCode_isset;
-}
-
-- (void) unsetErrorCode {
-  __errorCode_isset = NO;
-}
-
-- (NSMutableArray *) regions {
-  return [[__regions retain_stub] autorelease_stub];
-}
-
-- (void) setRegions: (NSMutableArray *) regions {
-  [regions retain_stub];
-  [__regions release_stub];
-  __regions = regions;
-  __regions_isset = YES;
-}
-
-- (BOOL) regionsIsSet {
-  return __regions_isset;
-}
-
-- (void) unsetRegions {
-  [__regions release_stub];
-  __regions = nil;
-  __regions_isset = NO;
-}
-
-- (NSMutableArray *) cities {
-  return [[__cities retain_stub] autorelease_stub];
-}
-
-- (void) setCities: (NSMutableArray *) cities {
-  [cities retain_stub];
-  [__cities release_stub];
-  __cities = cities;
-  __cities_isset = YES;
-}
-
-- (BOOL) citiesIsSet {
-  return __cities_isset;
-}
-
-- (void) unsetCities {
-  [__cities release_stub];
-  __cities = nil;
-  __cities_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setErrorCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_LIST) {
-          int _size15;
-          [inProtocol readListBeginReturningElementType: NULL size: &_size15];
-          NSMutableArray * fieldValue = [[NSMutableArray alloc] initWithCapacity: _size15];
-          int _i16;
-          for (_i16 = 0; _i16 < _size15; ++_i16)
-          {
-            RegionDto *_elem17 = [[RegionDto alloc] init];
-            [_elem17 read: inProtocol];
-            [fieldValue addObject: _elem17];
-            [_elem17 release_stub];
-          }
-          [inProtocol readListEnd];
-          [self setRegions: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_LIST) {
-          int _size18;
-          [inProtocol readListBeginReturningElementType: NULL size: &_size18];
-          NSMutableArray * fieldValue = [[NSMutableArray alloc] initWithCapacity: _size18];
-          int _i19;
-          for (_i19 = 0; _i19 < _size18; ++_i19)
-          {
-            CityDto *_elem20 = [[CityDto alloc] init];
-            [_elem20 read: inProtocol];
-            [fieldValue addObject: _elem20];
-            [_elem20 release_stub];
-          }
-          [inProtocol readListEnd];
-          [self setCities: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetRegionsAndCitiesByCountryResponse"];
-  if (__errorCode_isset) {
-    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __errorCode];
-    [outProtocol writeFieldEnd];
-  }
-  if (__regions_isset) {
-    if (__regions != nil) {
-      [outProtocol writeFieldBeginWithName: @"regions" type: TType_LIST fieldID: 2];
-      {
-        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__regions count]];
-        int idx22;
-        for (idx22 = 0; idx22 < [__regions count]; idx22++)
-        {
-          [[__regions objectAtIndex: idx22] write: outProtocol];
-        }
-        [outProtocol writeListEnd];
-      }
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__cities_isset) {
-    if (__cities != nil) {
-      [outProtocol writeFieldBeginWithName: @"cities" type: TType_LIST fieldID: 3];
-      {
-        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__cities count]];
-        int idx24;
-        for (idx24 = 0; idx24 < [__cities count]; idx24++)
-        {
-          [[__cities objectAtIndex: idx24] write: outProtocol];
-        }
-        [outProtocol writeListEnd];
-      }
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__errorCode_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'errorCode' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetRegionsAndCitiesByCountryResponse("];
-  [ms appendString: @"errorCode:"];
-  [ms appendFormat: @"%i", __errorCode];
-  [ms appendString: @",regions:"];
-  [ms appendFormat: @"%@", __regions];
-  [ms appendString: @",cities:"];
-  [ms appendFormat: @"%@", __cities];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetCitiesByRegionRequest
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithRegionId: (int32_t) regionId
-{
-  self = [super init];
-  __regionId = regionId;
-  __regionId_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"regionId"])
-  {
-    __regionId = [decoder decodeInt32ForKey: @"regionId"];
-    __regionId_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__regionId_isset)
-  {
-    [encoder encodeInt32: __regionId forKey: @"regionId"];
-  }
-}
-
-- (void) dealloc
-{
-  [super dealloc_stub];
-}
-
-- (int32_t) regionId {
-  return __regionId;
-}
-
-- (void) setRegionId: (int32_t) regionId {
-  __regionId = regionId;
-  __regionId_isset = YES;
-}
-
-- (BOOL) regionIdIsSet {
-  return __regionId_isset;
-}
-
-- (void) unsetRegionId {
-  __regionId_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setRegionId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCitiesByRegionRequest"];
-  if (__regionId_isset) {
-    [outProtocol writeFieldBeginWithName: @"regionId" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __regionId];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__regionId_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'regionId' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCitiesByRegionRequest("];
-  [ms appendString: @"regionId:"];
-  [ms appendFormat: @"%i", __regionId];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation GetCitiesByRegionResponse
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithErrorCode: (int32_t) errorCode cities: (NSMutableArray *) cities
-{
-  self = [super init];
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-  __cities = [cities retain_stub];
-  __cities_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"errorCode"])
-  {
-    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
-    __errorCode_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"cities"])
-  {
-    __cities = [[decoder decodeObjectForKey: @"cities"] retain_stub];
-    __cities_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__errorCode_isset)
-  {
-    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
-  }
-  if (__cities_isset)
-  {
-    [encoder encodeObject: __cities forKey: @"cities"];
-  }
-}
-
-- (void) dealloc
-{
-  [__cities release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) errorCode {
-  return __errorCode;
-}
-
-- (void) setErrorCode: (int32_t) errorCode {
-  __errorCode = errorCode;
-  __errorCode_isset = YES;
-}
-
-- (BOOL) errorCodeIsSet {
-  return __errorCode_isset;
-}
-
-- (void) unsetErrorCode {
-  __errorCode_isset = NO;
-}
-
-- (NSMutableArray *) cities {
-  return [[__cities retain_stub] autorelease_stub];
-}
-
-- (void) setCities: (NSMutableArray *) cities {
-  [cities retain_stub];
-  [__cities release_stub];
-  __cities = cities;
-  __cities_isset = YES;
-}
-
-- (BOOL) citiesIsSet {
-  return __cities_isset;
-}
-
-- (void) unsetCities {
-  [__cities release_stub];
-  __cities = nil;
-  __cities_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setErrorCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_LIST) {
-          int _size25;
-          [inProtocol readListBeginReturningElementType: NULL size: &_size25];
-          NSMutableArray * fieldValue = [[NSMutableArray alloc] initWithCapacity: _size25];
-          int _i26;
-          for (_i26 = 0; _i26 < _size25; ++_i26)
-          {
-            CityDto *_elem27 = [[CityDto alloc] init];
-            [_elem27 read: inProtocol];
-            [fieldValue addObject: _elem27];
-            [_elem27 release_stub];
-          }
-          [inProtocol readListEnd];
-          [self setCities: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCitiesByRegionResponse"];
-  if (__errorCode_isset) {
-    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __errorCode];
-    [outProtocol writeFieldEnd];
-  }
-  if (__cities_isset) {
-    if (__cities != nil) {
-      [outProtocol writeFieldBeginWithName: @"cities" type: TType_LIST fieldID: 2];
-      {
-        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__cities count]];
-        int idx29;
-        for (idx29 = 0; idx29 < [__cities count]; idx29++)
-        {
-          [[__cities objectAtIndex: idx29] write: outProtocol];
-        }
-        [outProtocol writeListEnd];
-      }
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__errorCode_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'errorCode' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCitiesByRegionResponse("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"SearchCitiesResponse("];
   [ms appendString: @"errorCode:"];
   [ms appendFormat: @"%i", __errorCode];
   [ms appendString: @",cities:"];
@@ -2573,917 +768,8 @@
 }
 @end
 
-@interface getCountries_args : NSObject <TBase, NSCoding> {
-  SessionCredentials * __credentials;
-
-  BOOL __credentials_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
-#endif
-
-- (id) init;
-- (id) initWithCredentials: (SessionCredentials *) credentials;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (SessionCredentials *) credentials;
-- (void) setCredentials: (SessionCredentials *) credentials;
-#endif
-- (BOOL) credentialsIsSet;
-
-@end
-
-@implementation getCountries_args
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithCredentials: (SessionCredentials *) credentials
-{
-  self = [super init];
-  __credentials = [credentials retain_stub];
-  __credentials_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"credentials"])
-  {
-    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
-    __credentials_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__credentials_isset)
-  {
-    [encoder encodeObject: __credentials forKey: @"credentials"];
-  }
-}
-
-- (void) dealloc
-{
-  [__credentials release_stub];
-  [super dealloc_stub];
-}
-
-- (SessionCredentials *) credentials {
-  return [[__credentials retain_stub] autorelease_stub];
-}
-
-- (void) setCredentials: (SessionCredentials *) credentials {
-  [credentials retain_stub];
-  [__credentials release_stub];
-  __credentials = credentials;
-  __credentials_isset = YES;
-}
-
-- (BOOL) credentialsIsSet {
-  return __credentials_isset;
-}
-
-- (void) unsetCredentials {
-  [__credentials release_stub];
-  __credentials = nil;
-  __credentials_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_STRUCT) {
-          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
-          [fieldValue read: inProtocol];
-          [self setCredentials: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"getCountries_args"];
-  if (__credentials_isset) {
-    if (__credentials != nil) {
-      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 1];
-      [__credentials write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"getCountries_args("];
-  [ms appendString: @"credentials:"];
-  [ms appendFormat: @"%@", __credentials];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface GetCountries_result : NSObject <TBase, NSCoding> {
-  GetCountriesResponse * __success;
-
-  BOOL __success_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) GetCountriesResponse * success;
-#endif
-
-- (id) init;
-- (id) initWithSuccess: (GetCountriesResponse *) success;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (GetCountriesResponse *) success;
-- (void) setSuccess: (GetCountriesResponse *) success;
-#endif
-- (BOOL) successIsSet;
-
-@end
-
-@implementation GetCountries_result
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithSuccess: (GetCountriesResponse *) success
-{
-  self = [super init];
-  __success = [success retain_stub];
-  __success_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"success"])
-  {
-    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
-    __success_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__success_isset)
-  {
-    [encoder encodeObject: __success forKey: @"success"];
-  }
-}
-
-- (void) dealloc
-{
-  [__success release_stub];
-  [super dealloc_stub];
-}
-
-- (GetCountriesResponse *) success {
-  return [[__success retain_stub] autorelease_stub];
-}
-
-- (void) setSuccess: (GetCountriesResponse *) success {
-  [success retain_stub];
-  [__success release_stub];
-  __success = success;
-  __success_isset = YES;
-}
-
-- (BOOL) successIsSet {
-  return __success_isset;
-}
-
-- (void) unsetSuccess {
-  [__success release_stub];
-  __success = nil;
-  __success_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 0:
-        if (fieldType == TType_STRUCT) {
-          GetCountriesResponse *fieldValue = [[GetCountriesResponse alloc] init];
-          [fieldValue read: inProtocol];
-          [self setSuccess: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCountries_result"];
-
-  if (__success_isset) {
-    if (__success != nil) {
-      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
-      [__success write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCountries_result("];
-  [ms appendString: @"success:"];
-  [ms appendFormat: @"%@", __success];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface getRegions_args : NSObject <TBase, NSCoding> {
-  SessionCredentials * __credentials;
-
-  BOOL __credentials_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
-#endif
-
-- (id) init;
-- (id) initWithCredentials: (SessionCredentials *) credentials;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (SessionCredentials *) credentials;
-- (void) setCredentials: (SessionCredentials *) credentials;
-#endif
-- (BOOL) credentialsIsSet;
-
-@end
-
-@implementation getRegions_args
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithCredentials: (SessionCredentials *) credentials
-{
-  self = [super init];
-  __credentials = [credentials retain_stub];
-  __credentials_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"credentials"])
-  {
-    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
-    __credentials_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__credentials_isset)
-  {
-    [encoder encodeObject: __credentials forKey: @"credentials"];
-  }
-}
-
-- (void) dealloc
-{
-  [__credentials release_stub];
-  [super dealloc_stub];
-}
-
-- (SessionCredentials *) credentials {
-  return [[__credentials retain_stub] autorelease_stub];
-}
-
-- (void) setCredentials: (SessionCredentials *) credentials {
-  [credentials retain_stub];
-  [__credentials release_stub];
-  __credentials = credentials;
-  __credentials_isset = YES;
-}
-
-- (BOOL) credentialsIsSet {
-  return __credentials_isset;
-}
-
-- (void) unsetCredentials {
-  [__credentials release_stub];
-  __credentials = nil;
-  __credentials_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_STRUCT) {
-          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
-          [fieldValue read: inProtocol];
-          [self setCredentials: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"getRegions_args"];
-  if (__credentials_isset) {
-    if (__credentials != nil) {
-      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 1];
-      [__credentials write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"getRegions_args("];
-  [ms appendString: @"credentials:"];
-  [ms appendFormat: @"%@", __credentials];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface GetRegions_result : NSObject <TBase, NSCoding> {
-  GetRegionsResponse * __success;
-
-  BOOL __success_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) GetRegionsResponse * success;
-#endif
-
-- (id) init;
-- (id) initWithSuccess: (GetRegionsResponse *) success;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (GetRegionsResponse *) success;
-- (void) setSuccess: (GetRegionsResponse *) success;
-#endif
-- (BOOL) successIsSet;
-
-@end
-
-@implementation GetRegions_result
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithSuccess: (GetRegionsResponse *) success
-{
-  self = [super init];
-  __success = [success retain_stub];
-  __success_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"success"])
-  {
-    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
-    __success_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__success_isset)
-  {
-    [encoder encodeObject: __success forKey: @"success"];
-  }
-}
-
-- (void) dealloc
-{
-  [__success release_stub];
-  [super dealloc_stub];
-}
-
-- (GetRegionsResponse *) success {
-  return [[__success retain_stub] autorelease_stub];
-}
-
-- (void) setSuccess: (GetRegionsResponse *) success {
-  [success retain_stub];
-  [__success release_stub];
-  __success = success;
-  __success_isset = YES;
-}
-
-- (BOOL) successIsSet {
-  return __success_isset;
-}
-
-- (void) unsetSuccess {
-  [__success release_stub];
-  __success = nil;
-  __success_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 0:
-        if (fieldType == TType_STRUCT) {
-          GetRegionsResponse *fieldValue = [[GetRegionsResponse alloc] init];
-          [fieldValue read: inProtocol];
-          [self setSuccess: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetRegions_result"];
-
-  if (__success_isset) {
-    if (__success != nil) {
-      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
-      [__success write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetRegions_result("];
-  [ms appendString: @"success:"];
-  [ms appendFormat: @"%@", __success];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface getCities_args : NSObject <TBase, NSCoding> {
-  SessionCredentials * __credentials;
-
-  BOOL __credentials_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
-#endif
-
-- (id) init;
-- (id) initWithCredentials: (SessionCredentials *) credentials;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (SessionCredentials *) credentials;
-- (void) setCredentials: (SessionCredentials *) credentials;
-#endif
-- (BOOL) credentialsIsSet;
-
-@end
-
-@implementation getCities_args
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithCredentials: (SessionCredentials *) credentials
-{
-  self = [super init];
-  __credentials = [credentials retain_stub];
-  __credentials_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"credentials"])
-  {
-    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
-    __credentials_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__credentials_isset)
-  {
-    [encoder encodeObject: __credentials forKey: @"credentials"];
-  }
-}
-
-- (void) dealloc
-{
-  [__credentials release_stub];
-  [super dealloc_stub];
-}
-
-- (SessionCredentials *) credentials {
-  return [[__credentials retain_stub] autorelease_stub];
-}
-
-- (void) setCredentials: (SessionCredentials *) credentials {
-  [credentials retain_stub];
-  [__credentials release_stub];
-  __credentials = credentials;
-  __credentials_isset = YES;
-}
-
-- (BOOL) credentialsIsSet {
-  return __credentials_isset;
-}
-
-- (void) unsetCredentials {
-  [__credentials release_stub];
-  __credentials = nil;
-  __credentials_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_STRUCT) {
-          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
-          [fieldValue read: inProtocol];
-          [self setCredentials: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"getCities_args"];
-  if (__credentials_isset) {
-    if (__credentials != nil) {
-      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 1];
-      [__credentials write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"getCities_args("];
-  [ms appendString: @"credentials:"];
-  [ms appendFormat: @"%@", __credentials];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface GetCities_result : NSObject <TBase, NSCoding> {
-  GetCitiesResponse * __success;
-
-  BOOL __success_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) GetCitiesResponse * success;
-#endif
-
-- (id) init;
-- (id) initWithSuccess: (GetCitiesResponse *) success;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (GetCitiesResponse *) success;
-- (void) setSuccess: (GetCitiesResponse *) success;
-#endif
-- (BOOL) successIsSet;
-
-@end
-
-@implementation GetCities_result
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithSuccess: (GetCitiesResponse *) success
-{
-  self = [super init];
-  __success = [success retain_stub];
-  __success_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"success"])
-  {
-    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
-    __success_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__success_isset)
-  {
-    [encoder encodeObject: __success forKey: @"success"];
-  }
-}
-
-- (void) dealloc
-{
-  [__success release_stub];
-  [super dealloc_stub];
-}
-
-- (GetCitiesResponse *) success {
-  return [[__success retain_stub] autorelease_stub];
-}
-
-- (void) setSuccess: (GetCitiesResponse *) success {
-  [success retain_stub];
-  [__success release_stub];
-  __success = success;
-  __success_isset = YES;
-}
-
-- (BOOL) successIsSet {
-  return __success_isset;
-}
-
-- (void) unsetSuccess {
-  [__success release_stub];
-  __success = nil;
-  __success_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 0:
-        if (fieldType == TType_STRUCT) {
-          GetCitiesResponse *fieldValue = [[GetCitiesResponse alloc] init];
-          [fieldValue read: inProtocol];
-          [self setSuccess: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCities_result"];
-
-  if (__success_isset) {
-    if (__success != nil) {
-      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
-      [__success write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCities_result("];
-  [ms appendString: @"success:"];
-  [ms appendFormat: @"%@", __success];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface getRegionsAndCitiesByCountry_args : NSObject <TBase, NSCoding> {
-  GetRegionsAndCitiesByCountryRequest * __request;
+@interface searchCities_args : NSObject <TBase, NSCoding> {
+  SearchCitiesRequest * __request;
   SessionCredentials * __credentials;
 
   BOOL __request_isset;
@@ -3491,12 +777,12 @@
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=request, setter=setRequest:) GetRegionsAndCitiesByCountryRequest * request;
+@property (nonatomic, retain, getter=request, setter=setRequest:) SearchCitiesRequest * request;
 @property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
 #endif
 
 - (id) init;
-- (id) initWithRequest: (GetRegionsAndCitiesByCountryRequest *) request credentials: (SessionCredentials *) credentials;
+- (id) initWithRequest: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -3504,8 +790,8 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (GetRegionsAndCitiesByCountryRequest *) request;
-- (void) setRequest: (GetRegionsAndCitiesByCountryRequest *) request;
+- (SearchCitiesRequest *) request;
+- (void) setRequest: (SearchCitiesRequest *) request;
 #endif
 - (BOOL) requestIsSet;
 
@@ -3517,7 +803,7 @@
 
 @end
 
-@implementation getRegionsAndCitiesByCountry_args
+@implementation searchCities_args
 
 - (id) init
 {
@@ -3527,7 +813,7 @@
   return self;
 }
 
-- (id) initWithRequest: (GetRegionsAndCitiesByCountryRequest *) request credentials: (SessionCredentials *) credentials
+- (id) initWithRequest: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials
 {
   self = [super init];
   __request = [request retain_stub];
@@ -3572,11 +858,11 @@
   [super dealloc_stub];
 }
 
-- (GetRegionsAndCitiesByCountryRequest *) request {
+- (SearchCitiesRequest *) request {
   return [[__request retain_stub] autorelease_stub];
 }
 
-- (void) setRequest: (GetRegionsAndCitiesByCountryRequest *) request {
+- (void) setRequest: (SearchCitiesRequest *) request {
   [request retain_stub];
   [__request release_stub];
   __request = request;
@@ -3631,7 +917,7 @@
     {
       case 1:
         if (fieldType == TType_STRUCT) {
-          GetRegionsAndCitiesByCountryRequest *fieldValue = [[GetRegionsAndCitiesByCountryRequest alloc] init];
+          SearchCitiesRequest *fieldValue = [[SearchCitiesRequest alloc] init];
           [fieldValue read: inProtocol];
           [self setRequest: fieldValue];
           [fieldValue release_stub];
@@ -3659,7 +945,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"getRegionsAndCitiesByCountry_args"];
+  [outProtocol writeStructBeginWithName: @"searchCities_args"];
   if (__request_isset) {
     if (__request != nil) {
       [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
@@ -3683,7 +969,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"getRegionsAndCitiesByCountry_args("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"searchCities_args("];
   [ms appendString: @"request:"];
   [ms appendFormat: @"%@", __request];
   [ms appendString: @",credentials:"];
@@ -3694,18 +980,18 @@
 
 @end
 
-@interface GetRegionsAndCitiesByCountry_result : NSObject <TBase, NSCoding> {
-  GetRegionsAndCitiesByCountryResponse * __success;
+@interface SearchCities_result : NSObject <TBase, NSCoding> {
+  SearchCitiesResponse * __success;
 
   BOOL __success_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) GetRegionsAndCitiesByCountryResponse * success;
+@property (nonatomic, retain, getter=success, setter=setSuccess:) SearchCitiesResponse * success;
 #endif
 
 - (id) init;
-- (id) initWithSuccess: (GetRegionsAndCitiesByCountryResponse *) success;
+- (id) initWithSuccess: (SearchCitiesResponse *) success;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -3713,14 +999,14 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (GetRegionsAndCitiesByCountryResponse *) success;
-- (void) setSuccess: (GetRegionsAndCitiesByCountryResponse *) success;
+- (SearchCitiesResponse *) success;
+- (void) setSuccess: (SearchCitiesResponse *) success;
 #endif
 - (BOOL) successIsSet;
 
 @end
 
-@implementation GetRegionsAndCitiesByCountry_result
+@implementation SearchCities_result
 
 - (id) init
 {
@@ -3730,7 +1016,7 @@
   return self;
 }
 
-- (id) initWithSuccess: (GetRegionsAndCitiesByCountryResponse *) success
+- (id) initWithSuccess: (SearchCitiesResponse *) success
 {
   self = [super init];
   __success = [success retain_stub];
@@ -3763,11 +1049,11 @@
   [super dealloc_stub];
 }
 
-- (GetRegionsAndCitiesByCountryResponse *) success {
+- (SearchCitiesResponse *) success {
   return [[__success retain_stub] autorelease_stub];
 }
 
-- (void) setSuccess: (GetRegionsAndCitiesByCountryResponse *) success {
+- (void) setSuccess: (SearchCitiesResponse *) success {
   [success retain_stub];
   [__success release_stub];
   __success = success;
@@ -3801,7 +1087,7 @@
     {
       case 0:
         if (fieldType == TType_STRUCT) {
-          GetRegionsAndCitiesByCountryResponse *fieldValue = [[GetRegionsAndCitiesByCountryResponse alloc] init];
+          SearchCitiesResponse *fieldValue = [[SearchCitiesResponse alloc] init];
           [fieldValue read: inProtocol];
           [self setSuccess: fieldValue];
           [fieldValue release_stub];
@@ -3819,7 +1105,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetRegionsAndCitiesByCountry_result"];
+  [outProtocol writeStructBeginWithName: @"SearchCities_result"];
 
   if (__success_isset) {
     if (__success != nil) {
@@ -3837,371 +1123,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetRegionsAndCitiesByCountry_result("];
-  [ms appendString: @"success:"];
-  [ms appendFormat: @"%@", __success];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface getCitiesByRegion_args : NSObject <TBase, NSCoding> {
-  GetCitiesByRegionRequest * __request;
-  SessionCredentials * __credentials;
-
-  BOOL __request_isset;
-  BOOL __credentials_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=request, setter=setRequest:) GetCitiesByRegionRequest * request;
-@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
-#endif
-
-- (id) init;
-- (id) initWithRequest: (GetCitiesByRegionRequest *) request credentials: (SessionCredentials *) credentials;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (GetCitiesByRegionRequest *) request;
-- (void) setRequest: (GetCitiesByRegionRequest *) request;
-#endif
-- (BOOL) requestIsSet;
-
-#if !__has_feature(objc_arc)
-- (SessionCredentials *) credentials;
-- (void) setCredentials: (SessionCredentials *) credentials;
-#endif
-- (BOOL) credentialsIsSet;
-
-@end
-
-@implementation getCitiesByRegion_args
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithRequest: (GetCitiesByRegionRequest *) request credentials: (SessionCredentials *) credentials
-{
-  self = [super init];
-  __request = [request retain_stub];
-  __request_isset = YES;
-  __credentials = [credentials retain_stub];
-  __credentials_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"request"])
-  {
-    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
-    __request_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"credentials"])
-  {
-    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
-    __credentials_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__request_isset)
-  {
-    [encoder encodeObject: __request forKey: @"request"];
-  }
-  if (__credentials_isset)
-  {
-    [encoder encodeObject: __credentials forKey: @"credentials"];
-  }
-}
-
-- (void) dealloc
-{
-  [__request release_stub];
-  [__credentials release_stub];
-  [super dealloc_stub];
-}
-
-- (GetCitiesByRegionRequest *) request {
-  return [[__request retain_stub] autorelease_stub];
-}
-
-- (void) setRequest: (GetCitiesByRegionRequest *) request {
-  [request retain_stub];
-  [__request release_stub];
-  __request = request;
-  __request_isset = YES;
-}
-
-- (BOOL) requestIsSet {
-  return __request_isset;
-}
-
-- (void) unsetRequest {
-  [__request release_stub];
-  __request = nil;
-  __request_isset = NO;
-}
-
-- (SessionCredentials *) credentials {
-  return [[__credentials retain_stub] autorelease_stub];
-}
-
-- (void) setCredentials: (SessionCredentials *) credentials {
-  [credentials retain_stub];
-  [__credentials release_stub];
-  __credentials = credentials;
-  __credentials_isset = YES;
-}
-
-- (BOOL) credentialsIsSet {
-  return __credentials_isset;
-}
-
-- (void) unsetCredentials {
-  [__credentials release_stub];
-  __credentials = nil;
-  __credentials_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_STRUCT) {
-          GetCitiesByRegionRequest *fieldValue = [[GetCitiesByRegionRequest alloc] init];
-          [fieldValue read: inProtocol];
-          [self setRequest: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_STRUCT) {
-          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
-          [fieldValue read: inProtocol];
-          [self setCredentials: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"getCitiesByRegion_args"];
-  if (__request_isset) {
-    if (__request != nil) {
-      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
-      [__request write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__credentials_isset) {
-    if (__credentials != nil) {
-      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
-      [__credentials write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"getCitiesByRegion_args("];
-  [ms appendString: @"request:"];
-  [ms appendFormat: @"%@", __request];
-  [ms appendString: @",credentials:"];
-  [ms appendFormat: @"%@", __credentials];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface GetCitiesByRegion_result : NSObject <TBase, NSCoding> {
-  GetCitiesByRegionResponse * __success;
-
-  BOOL __success_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) GetCitiesByRegionResponse * success;
-#endif
-
-- (id) init;
-- (id) initWithSuccess: (GetCitiesByRegionResponse *) success;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (void) validate;
-
-#if !__has_feature(objc_arc)
-- (GetCitiesByRegionResponse *) success;
-- (void) setSuccess: (GetCitiesByRegionResponse *) success;
-#endif
-- (BOOL) successIsSet;
-
-@end
-
-@implementation GetCitiesByRegion_result
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithSuccess: (GetCitiesByRegionResponse *) success
-{
-  self = [super init];
-  __success = [success retain_stub];
-  __success_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"success"])
-  {
-    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
-    __success_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__success_isset)
-  {
-    [encoder encodeObject: __success forKey: @"success"];
-  }
-}
-
-- (void) dealloc
-{
-  [__success release_stub];
-  [super dealloc_stub];
-}
-
-- (GetCitiesByRegionResponse *) success {
-  return [[__success retain_stub] autorelease_stub];
-}
-
-- (void) setSuccess: (GetCitiesByRegionResponse *) success {
-  [success retain_stub];
-  [__success release_stub];
-  __success = success;
-  __success_isset = YES;
-}
-
-- (BOOL) successIsSet {
-  return __success_isset;
-}
-
-- (void) unsetSuccess {
-  [__success release_stub];
-  __success = nil;
-  __success_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 0:
-        if (fieldType == TType_STRUCT) {
-          GetCitiesByRegionResponse *fieldValue = [[GetCitiesByRegionResponse alloc] init];
-          [fieldValue read: inProtocol];
-          [self setSuccess: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetCitiesByRegion_result"];
-
-  if (__success_isset) {
-    if (__success != nil) {
-      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
-      [__success write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetCitiesByRegion_result("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"SearchCities_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%@", __success];
   [ms appendString: @")"];
@@ -4231,130 +1153,10 @@
   [super dealloc_stub];
 }
 
-- (void) send_getCountries: (SessionCredentials *) credentials
+- (void) send_searchCities: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials
 {
-  [outProtocol writeMessageBeginWithName: @"getCountries" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"getCountries_args"];
-  if (credentials != nil)  {
-    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 1];
-    [credentials write: outProtocol];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-}
-
-- (GetCountriesResponse *) recv_getCountries
-{
-  int msgType = 0;
-  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
-  if (msgType == TMessageType_EXCEPTION) {
-    TApplicationException * x = [TApplicationException read: inProtocol];
-    [inProtocol readMessageEnd];
-    @throw x;
-  }
-  GetCountries_result * result = [[[GetCountries_result alloc] init] autorelease_stub];
-  [result read: inProtocol];
-  [inProtocol readMessageEnd];
-  if ([result successIsSet]) {
-    return [result success];
-  }
-  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"getCountries failed: unknown result"];
-}
-
-- (GetCountriesResponse *) getCountries: (SessionCredentials *) credentials
-{
-  [self send_getCountries : credentials];
-  return [self recv_getCountries];
-}
-
-- (void) send_getRegions: (SessionCredentials *) credentials
-{
-  [outProtocol writeMessageBeginWithName: @"getRegions" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"getRegions_args"];
-  if (credentials != nil)  {
-    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 1];
-    [credentials write: outProtocol];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-}
-
-- (GetRegionsResponse *) recv_getRegions
-{
-  int msgType = 0;
-  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
-  if (msgType == TMessageType_EXCEPTION) {
-    TApplicationException * x = [TApplicationException read: inProtocol];
-    [inProtocol readMessageEnd];
-    @throw x;
-  }
-  GetRegions_result * result = [[[GetRegions_result alloc] init] autorelease_stub];
-  [result read: inProtocol];
-  [inProtocol readMessageEnd];
-  if ([result successIsSet]) {
-    return [result success];
-  }
-  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"getRegions failed: unknown result"];
-}
-
-- (GetRegionsResponse *) getRegions: (SessionCredentials *) credentials
-{
-  [self send_getRegions : credentials];
-  return [self recv_getRegions];
-}
-
-- (void) send_getCities: (SessionCredentials *) credentials
-{
-  [outProtocol writeMessageBeginWithName: @"getCities" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"getCities_args"];
-  if (credentials != nil)  {
-    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 1];
-    [credentials write: outProtocol];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-}
-
-- (GetCitiesResponse *) recv_getCities
-{
-  int msgType = 0;
-  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
-  if (msgType == TMessageType_EXCEPTION) {
-    TApplicationException * x = [TApplicationException read: inProtocol];
-    [inProtocol readMessageEnd];
-    @throw x;
-  }
-  GetCities_result * result = [[[GetCities_result alloc] init] autorelease_stub];
-  [result read: inProtocol];
-  [inProtocol readMessageEnd];
-  if ([result successIsSet]) {
-    return [result success];
-  }
-  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"getCities failed: unknown result"];
-}
-
-- (GetCitiesResponse *) getCities: (SessionCredentials *) credentials
-{
-  [self send_getCities : credentials];
-  return [self recv_getCities];
-}
-
-- (void) send_getRegionsAndCitiesByCountry: (GetRegionsAndCitiesByCountryRequest *) request credentials: (SessionCredentials *) credentials
-{
-  [outProtocol writeMessageBeginWithName: @"getRegionsAndCitiesByCountry" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"getRegionsAndCitiesByCountry_args"];
+  [outProtocol writeMessageBeginWithName: @"searchCities" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"searchCities_args"];
   if (request != nil)  {
     [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
     [request write: outProtocol];
@@ -4371,7 +1173,7 @@
   [[outProtocol transport] flush];
 }
 
-- (GetRegionsAndCitiesByCountryResponse *) recv_getRegionsAndCitiesByCountry
+- (SearchCitiesResponse *) recv_searchCities
 {
   int msgType = 0;
   [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
@@ -4380,65 +1182,20 @@
     [inProtocol readMessageEnd];
     @throw x;
   }
-  GetRegionsAndCitiesByCountry_result * result = [[[GetRegionsAndCitiesByCountry_result alloc] init] autorelease_stub];
+  SearchCities_result * result = [[[SearchCities_result alloc] init] autorelease_stub];
   [result read: inProtocol];
   [inProtocol readMessageEnd];
   if ([result successIsSet]) {
     return [result success];
   }
   @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"getRegionsAndCitiesByCountry failed: unknown result"];
+                                           reason: @"searchCities failed: unknown result"];
 }
 
-- (GetRegionsAndCitiesByCountryResponse *) getRegionsAndCitiesByCountry: (GetRegionsAndCitiesByCountryRequest *) request credentials: (SessionCredentials *) credentials
+- (SearchCitiesResponse *) searchCities: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials
 {
-  [self send_getRegionsAndCitiesByCountry : request credentials: credentials];
-  return [self recv_getRegionsAndCitiesByCountry];
-}
-
-- (void) send_getCitiesByRegion: (GetCitiesByRegionRequest *) request credentials: (SessionCredentials *) credentials
-{
-  [outProtocol writeMessageBeginWithName: @"getCitiesByRegion" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"getCitiesByRegion_args"];
-  if (request != nil)  {
-    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
-    [request write: outProtocol];
-    [outProtocol writeFieldEnd];
-  }
-  if (credentials != nil)  {
-    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
-    [credentials write: outProtocol];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-}
-
-- (GetCitiesByRegionResponse *) recv_getCitiesByRegion
-{
-  int msgType = 0;
-  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
-  if (msgType == TMessageType_EXCEPTION) {
-    TApplicationException * x = [TApplicationException read: inProtocol];
-    [inProtocol readMessageEnd];
-    @throw x;
-  }
-  GetCitiesByRegion_result * result = [[[GetCitiesByRegion_result alloc] init] autorelease_stub];
-  [result read: inProtocol];
-  [inProtocol readMessageEnd];
-  if ([result successIsSet]) {
-    return [result success];
-  }
-  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"getCitiesByRegion failed: unknown result"];
-}
-
-- (GetCitiesByRegionResponse *) getCitiesByRegion: (GetCitiesByRegionRequest *) request credentials: (SessionCredentials *) credentials
-{
-  [self send_getCitiesByRegion : request credentials: credentials];
-  return [self recv_getCitiesByRegion];
+  [self send_searchCities : request credentials: credentials];
+  return [self recv_searchCities];
 }
 
 @end
@@ -4454,44 +1211,12 @@
   mService = [service retain_stub];
   mMethodMap = [[NSMutableDictionary dictionary] retain_stub];
   {
-    SEL s = @selector(process_getCountries_withSequenceID:inProtocol:outProtocol:);
+    SEL s = @selector(process_searchCities_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
     [invocation setSelector: s];
     [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"getCountries"];
-  }
-  {
-    SEL s = @selector(process_getRegions_withSequenceID:inProtocol:outProtocol:);
-    NSMethodSignature * sig = [self methodSignatureForSelector: s];
-    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
-    [invocation setSelector: s];
-    [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"getRegions"];
-  }
-  {
-    SEL s = @selector(process_getCities_withSequenceID:inProtocol:outProtocol:);
-    NSMethodSignature * sig = [self methodSignatureForSelector: s];
-    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
-    [invocation setSelector: s];
-    [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"getCities"];
-  }
-  {
-    SEL s = @selector(process_getRegionsAndCitiesByCountry_withSequenceID:inProtocol:outProtocol:);
-    NSMethodSignature * sig = [self methodSignatureForSelector: s];
-    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
-    [invocation setSelector: s];
-    [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"getRegionsAndCitiesByCountry"];
-  }
-  {
-    SEL s = @selector(process_getCitiesByRegion_withSequenceID:inProtocol:outProtocol:);
-    NSMethodSignature * sig = [self methodSignatureForSelector: s];
-    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
-    [invocation setSelector: s];
-    [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"getCitiesByRegion"];
+    [mMethodMap setValue: invocation forKey: @"searchCities"];
   }
   return self;
 }
@@ -4534,82 +1259,14 @@
   return YES;
 }
 
-- (void) process_getCountries_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+- (void) process_searchCities_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
 {
-  getCountries_args * args = [[getCountries_args alloc] init];
+  searchCities_args * args = [[searchCities_args alloc] init];
   [args read: inProtocol];
   [inProtocol readMessageEnd];
-  GetCountries_result * result = [[GetCountries_result alloc] init];
-  [result setSuccess: [mService getCountries: [args credentials]]];
-  [outProtocol writeMessageBeginWithName: @"getCountries"
-                                    type: TMessageType_REPLY
-                              sequenceID: seqID];
-  [result write: outProtocol];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-  [result release_stub];
-  [args release_stub];
-}
-
-- (void) process_getRegions_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
-{
-  getRegions_args * args = [[getRegions_args alloc] init];
-  [args read: inProtocol];
-  [inProtocol readMessageEnd];
-  GetRegions_result * result = [[GetRegions_result alloc] init];
-  [result setSuccess: [mService getRegions: [args credentials]]];
-  [outProtocol writeMessageBeginWithName: @"getRegions"
-                                    type: TMessageType_REPLY
-                              sequenceID: seqID];
-  [result write: outProtocol];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-  [result release_stub];
-  [args release_stub];
-}
-
-- (void) process_getCities_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
-{
-  getCities_args * args = [[getCities_args alloc] init];
-  [args read: inProtocol];
-  [inProtocol readMessageEnd];
-  GetCities_result * result = [[GetCities_result alloc] init];
-  [result setSuccess: [mService getCities: [args credentials]]];
-  [outProtocol writeMessageBeginWithName: @"getCities"
-                                    type: TMessageType_REPLY
-                              sequenceID: seqID];
-  [result write: outProtocol];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-  [result release_stub];
-  [args release_stub];
-}
-
-- (void) process_getRegionsAndCitiesByCountry_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
-{
-  getRegionsAndCitiesByCountry_args * args = [[getRegionsAndCitiesByCountry_args alloc] init];
-  [args read: inProtocol];
-  [inProtocol readMessageEnd];
-  GetRegionsAndCitiesByCountry_result * result = [[GetRegionsAndCitiesByCountry_result alloc] init];
-  [result setSuccess: [mService getRegionsAndCitiesByCountry: [args request] credentials: [args credentials]]];
-  [outProtocol writeMessageBeginWithName: @"getRegionsAndCitiesByCountry"
-                                    type: TMessageType_REPLY
-                              sequenceID: seqID];
-  [result write: outProtocol];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-  [result release_stub];
-  [args release_stub];
-}
-
-- (void) process_getCitiesByRegion_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
-{
-  getCitiesByRegion_args * args = [[getCitiesByRegion_args alloc] init];
-  [args read: inProtocol];
-  [inProtocol readMessageEnd];
-  GetCitiesByRegion_result * result = [[GetCitiesByRegion_result alloc] init];
-  [result setSuccess: [mService getCitiesByRegion: [args request] credentials: [args credentials]]];
-  [outProtocol writeMessageBeginWithName: @"getCitiesByRegion"
+  SearchCities_result * result = [[SearchCities_result alloc] init];
+  [result setSuccess: [mService searchCities: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"searchCities"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

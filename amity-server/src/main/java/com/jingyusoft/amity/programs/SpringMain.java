@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jingyusoft.amity.common.AmityExceptionHandler;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.AmityPropertiesRepository;
+import com.jingyusoft.amity.common.Mail;
 import com.jingyusoft.amity.common.SecurityUtils;
 
 public class SpringMain {
@@ -20,15 +22,22 @@ public class SpringMain {
 			return;
 		}
 
+		AmityPropertiesRepository amityProperties = new AmityPropertiesRepository();
+		amityProperties.initialize();
+
+		// Initialize mail sender
+		Mail.initializeWith(amityProperties);
+
+		// Initialize exception handler
+		AmityExceptionHandler.initializeWith(amityProperties);
+
 		if (StringUtils.isEmpty(System.getProperty("jdbc.password"))) {
 			LOGGER.info("Loading JDBC password from VM arguments [{}]", "jdbc.password");
 
 			if (StringUtils.isEmpty(System.getProperty("jdbc.password.file"))) {
 				LOGGER.info("Loading JDBC password from properties file");
-				AmityPropertiesRepository propertiesRepository = new AmityPropertiesRepository();
-				propertiesRepository.initialize();
 
-				System.setProperty("jdbc.password", propertiesRepository.getProperty("jdbc.password"));
+				System.setProperty("jdbc.password", amityProperties.getProperty("jdbc.password"));
 			} else {
 				final String passwordFileName = System.getProperty("jdbc.password.file");
 				LOGGER.info("Loading JDBC password from file [{}]", passwordFileName);
@@ -47,6 +56,7 @@ public class SpringMain {
 					+ " beans created.");
 		} catch (Exception e) {
 			LOGGER.error("Failed to load Spring application context", e);
+			AmityExceptionHandler.handle("Failed to initialize application context", e);
 		}
 	}
 

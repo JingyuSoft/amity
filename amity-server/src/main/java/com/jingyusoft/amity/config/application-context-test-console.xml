@@ -5,12 +5,14 @@
 	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<import resource="application-context-shared.xml" />
-	<import resource="application-context-data-source.xml"/>
+	<import resource="application-context-data-source.xml" />
 
 	<context:component-scan
 		base-package="com.jingyusoft.amity.thrift.factories,
 		              com.jingyusoft.amity.authentication,
 		              com.jingyusoft.amity.data" />
+
+	<bean class="com.jingyusoft.amity.common.Mail.MailProperties" />
 
 	<bean id="testConsole" class="com.jingyusoft.amity.programs.TestConsole" />
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.authentication.AuthenticationService;
 import com.jingyusoft.amity.common.HostPort;
+import com.jingyusoft.amity.common.Mail;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.auditing.AuditQueryService;
 import com.jingyusoft.amity.domain.Gender;
@@ -45,6 +46,8 @@ public class TestConsole {
 		// auditQueryService.queryAudit(AmityUserEntity.class);
 
 		// thriftDemo();
+
+		Mail.send("univer.shi@gmail.com", "Test sending mail from Amity", "Hello!");
 	}
 
 	private void thriftDemo() {

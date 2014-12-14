@@ -2,7 +2,6 @@ package com.jingyusoft.amity.common;
 
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,53 +13,34 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 
 public abstract class Mail {
 
-	public static class MailProperties {
+	public static void initializeWith(AmityPropertiesRepository amityProperties) {
+		Mail.PROPERTIES.setProperty("mail.transport.protocol",
+				amityProperties.getProperty("amity.mail.transport.protocol"));
+		Mail.PROPERTIES.setProperty("mail.smtp.host", amityProperties.getProperty("amity.mail.smtp.host"));
+		Mail.PROPERTIES.setProperty("mail.smtp.port", amityProperties.getProperty("amity.mail.smtp.port"));
+		Mail.PROPERTIES.setProperty("mail.smtp.auth", amityProperties.getProperty("amity.mail.smtp.auth"));
+		Mail.PROPERTIES.setProperty("mail.smtp.starttls.enable",
+				amityProperties.getProperty("amity.mail.smtp.starttls.enable"));
 
-		@Value("${amity.mail.transport.protocol}")
-		private String mailTransport;
+		Mail.fromAddress = amityProperties.getProperty("amity.mail.smtp.username");
 
-		@Value("${amity.mail.smtp.host}")
-		private String smtpHost;
+		Mail.authenticator = new Authenticator() {
 
-		@Value("${amity.mail.smtp.port}")
-		private String smtpPort;
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(amityProperties.getProperty("amity.mail.smtp.username"),
+						SecurityUtils.getPasswordFromFile(amityProperties.getProperty("amity.mail.smtp.password.file")));
+			}
+		};
 
-		@Value("${amity.mail.smtp.auth}")
-		private String smtpAuth;
+		LOGGER.info("Amity mail sender initialized");
+	}
 
-		@Value("${amity.mail.smtp.starttls.enable}")
-		private String startTls;
-
-		@Value("${amity.mail.smtp.username}")
-		private String username;
-
-		@Value("${amity.mail.smtp.password.file}")
-		private String passwordFile;
-
-		@PostConstruct
-		private void initialize() {
-			Mail.PROPERTIES.setProperty("mail.transport.protocol", mailTransport);
-			Mail.PROPERTIES.setProperty("mail.smtp.host", smtpHost);
-			Mail.PROPERTIES.setProperty("mail.smtp.auth", smtpAuth);
-			Mail.PROPERTIES.setProperty("mail.smtp.port", smtpPort);
-			Mail.PROPERTIES.setProperty("mail.smtp.starttls.enable", startTls);
-
-			Mail.fromAddress = username;
-
-			Mail.authenticator = new Authenticator() {
-
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(username, SecurityUtils.getPasswordFromFile(passwordFile));
-				}
-			};
-
-			LOGGER.info("Amity mail sender initialized");
-		}
+	public static void send(final String recipient, final String subject, final String body) {
+		send(new String[] { recipient }, subject, body);
 	}
 
 	public static void send(final String[] recipients, final String subject, final String body) {

@@ -17,6 +17,9 @@
 		              com.jingyusoft.amity.thrift.servers" />
 
 	<!-- Aspect -->
-	<bean id="authenticationAspect" class="com.jingyusoft.amity.authentication.AuthenticationAspect" />
+	<bean id="authenticationAspect"
+		class="com.jingyusoft.amity.authentication.AuthenticationAspect" />
+
+	<bean class="com.jingyusoft.amity.common.Mail.MailProperties" />
 
 </beans>

@@ -15,11 +15,9 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 public abstract class Mail {
 
-	@Component
 	public static class MailProperties {
 
 		@Value("${amity.mail.transport.protocol}")
@@ -40,7 +38,7 @@ public abstract class Mail {
 		@Value("${amity.mail.smtp.username}")
 		private String username;
 
-		@Value("${amity.mail.smtp.passowrd.file}")
+		@Value("${amity.mail.smtp.password.file}")
 		private String passwordFile;
 
 		@PostConstruct
@@ -60,6 +58,8 @@ public abstract class Mail {
 					return new PasswordAuthentication(username, SecurityUtils.getPasswordFromFile(passwordFile));
 				}
 			};
+
+			LOGGER.info("Amity mail sender initialized");
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.jingyusoft.amity.common;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
 
 import com.jingyusoft.amity.AmityException;
 
@@ -31,10 +32,13 @@ public class AmityEnvironment {
 		return workingEnvironment;
 	}
 
+	private static final Logger LOGGER = AmityLogger.getLogger();
+
 	private static WorkingEnvironment workingEnvironment;
 
 	static {
 		final String configMode = System.getProperty("config.mode");
+
 		if (StringUtils.isBlank(configMode)) {
 			throw new AmityException("Failed to detect working environment. [config.mode] property not set.");
 		}
@@ -48,5 +52,7 @@ public class AmityEnvironment {
 		if (workingEnvironment == null) {
 			throw new AmityException("Failed to detect working environment. ");
 		}
+
+		LOGGER.info("Working environment set to [{}]", workingEnvironment);
 	}
 }

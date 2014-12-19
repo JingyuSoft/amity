@@ -74,7 +74,6 @@
 								<extraArguments>
 									<extraArgument>-Dapplication.context=/com/jingyusoft/amity/config/application-context-server.xml</extraArgument>
 									<extraArgument>-Dconfig.mode=qa</extraArgument>
-									<extraArgument>-Djdbc.password=${AMITY_DATABASE_PASSWORD}</extraArgument>
 									<extraArgument>-Djdbc.password.file=/srv/amity-server/amity-database-password-qa</extraArgument>
 									<extraArgument>-Dlogback.configurationFile=logback-qa.xml</extraArgument>
 								</extraArguments>

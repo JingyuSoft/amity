@@ -40,7 +40,7 @@ public abstract class Mail {
 	}
 
 	public static void send(final String recipient, final String subject, final String body) {
-		send(new String[] { recipient }, subject, body);
+		send(StringUtils.split(recipient, ",; "), subject, body);
 	}
 
 	public static void send(final String[] recipients, final String subject, final String body) {

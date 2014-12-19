@@ -1,6 +1,7 @@
 package com.jingyusoft.amity.programs;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +13,7 @@ import com.jingyusoft.amity.common.AmityMailAlert;
 import com.jingyusoft.amity.common.AmityPropertiesRepository;
 import com.jingyusoft.amity.common.Mail;
 import com.jingyusoft.amity.common.SecurityUtils;
+import com.jingyusoft.amity.common.StringMessage;
 
 public class SpringMain {
 
@@ -65,7 +67,9 @@ public class SpringMain {
 			AmityExceptionHandler.handle("Failed to initialize application context", e);
 		}
 
-		AmityMailAlert.send("Amity server started successfully");
+		final String message = StringMessage.with("Amity server started successfully at {}",
+				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		AmityMailAlert.send(message, message);
 	}
 
 	static {

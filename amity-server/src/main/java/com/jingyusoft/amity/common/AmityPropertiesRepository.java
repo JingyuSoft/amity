@@ -35,7 +35,7 @@ public class AmityPropertiesRepository {
 			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
 			LOGGER.info("Properties loaded from [{}]", resource.getFilename());
 
-			final String configMode = AmityEnvironment.getWorkingEnvironment().getConfigMode();
+			final String configMode = System.getProperty("config.mode");
 			if (!StringUtils.isBlank(configMode)) {
 				ClassPathResource configModeResource = new ClassPathResource("config-" + configMode + ".properties");
 				Properties configModeProperties = PropertiesLoaderUtils.loadProperties(configModeResource);

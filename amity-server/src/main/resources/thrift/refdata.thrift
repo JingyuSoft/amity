@@ -3,12 +3,11 @@ namespace java com.jingyusoft.amity.thrift.generated
 
 struct CityDto {
 	1: required i32 id,
-	2: required string code,
-	3: required string name,
-	4: required double latitude,
-	5: required double longitude
-	6: optional string regionName,
-	7: required string countryName
+	2: required string name,
+	3: required double latitude,
+	4: required double longitude
+	5: optional string regionName,
+	6: required string countryName
 }
 
 struct SearchCitiesRequest {

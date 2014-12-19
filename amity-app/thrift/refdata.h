@@ -19,7 +19,6 @@
 
 @interface CityDto : NSObject <TBase, NSCoding> {
   int32_t __id;
-  NSString * __code;
   NSString * __name;
   double __latitude;
   double __longitude;
@@ -27,7 +26,6 @@
   NSString * __countryName;
 
   BOOL __id_isset;
-  BOOL __code_isset;
   BOOL __name_isset;
   BOOL __latitude_isset;
   BOOL __longitude_isset;
@@ -37,7 +35,6 @@
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, getter=id, setter=setId:) int32_t id;
-@property (nonatomic, retain, getter=code, setter=setCode:) NSString * code;
 @property (nonatomic, retain, getter=name, setter=setName:) NSString * name;
 @property (nonatomic, getter=latitude, setter=setLatitude:) double latitude;
 @property (nonatomic, getter=longitude, setter=setLongitude:) double longitude;
@@ -46,7 +43,7 @@
 #endif
 
 - (id) init;
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName;
+- (id) initWithId: (int32_t) id name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -58,12 +55,6 @@
 - (void) setId: (int32_t) id;
 #endif
 - (BOOL) idIsSet;
-
-#if !__has_feature(objc_arc)
-- (NSString *) code;
-- (void) setCode: (NSString *) code;
-#endif
-- (BOOL) codeIsSet;
 
 #if !__has_feature(objc_arc)
 - (NSString *) name;

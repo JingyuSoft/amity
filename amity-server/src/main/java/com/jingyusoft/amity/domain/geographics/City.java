@@ -36,6 +36,10 @@ public class City extends LocationBase {
 		return countryId;
 	}
 
+	public GeoLocation getGeoLocation() {
+		return geoLocation;
+	}
+
 	public Region getRegion() {
 		return region;
 	}
@@ -55,10 +59,15 @@ public class City extends LocationBase {
 	public CityDto toDto() {
 		CityDto cityDto = new CityDto();
 		cityDto.setId(getId());
-		cityDto.setCode(getCode());
 		cityDto.setName(getName());
 		cityDto.setLatitude(geoLocation.getLatitude());
 		cityDto.setLongitude(geoLocation.getLongitude());
+		if (getRegion() != null) {
+			cityDto.setRegionName(getRegion().getName());
+		}
+		if (getCountry() != null) {
+			cityDto.setCountryName(getCountry().getName());
+		}
 		return cityDto;
 	}
 }

@@ -19,6 +19,16 @@ public class AmityLogger implements Logger {
 		return new AmityLogger(LoggerFactory.getLogger(callingClass));
 	}
 
+	public static final Logger getLogger(final Class<?> clazz) {
+
+		return new AmityLogger(LoggerFactory.getLogger(clazz));
+	}
+
+	public static final Logger getLogger(final String name) {
+
+		return new AmityLogger(LoggerFactory.getLogger(name));
+	}
+
 	private final Logger logger;
 
 	public AmityLogger(Logger logger) {

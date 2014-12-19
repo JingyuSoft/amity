@@ -29,13 +29,11 @@
   return self;
 }
 
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName
+- (id) initWithId: (int32_t) id name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName
 {
   self = [super init];
   __id = id;
   __id_isset = YES;
-  __code = [code retain_stub];
-  __code_isset = YES;
   __name = [name retain_stub];
   __name_isset = YES;
   __latitude = latitude;
@@ -56,11 +54,6 @@
   {
     __id = [decoder decodeInt32ForKey: @"id"];
     __id_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"code"])
-  {
-    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
-    __code_isset = YES;
   }
   if ([decoder containsValueForKey: @"name"])
   {
@@ -96,10 +89,6 @@
   {
     [encoder encodeInt32: __id forKey: @"id"];
   }
-  if (__code_isset)
-  {
-    [encoder encodeObject: __code forKey: @"code"];
-  }
   if (__name_isset)
   {
     [encoder encodeObject: __name forKey: @"name"];
@@ -124,7 +113,6 @@
 
 - (void) dealloc
 {
-  [__code release_stub];
   [__name release_stub];
   [__regionName release_stub];
   [__countryName release_stub];
@@ -146,27 +134,6 @@
 
 - (void) unsetId {
   __id_isset = NO;
-}
-
-- (NSString *) code {
-  return [[__code retain_stub] autorelease_stub];
-}
-
-- (void) setCode: (NSString *) code {
-  [code retain_stub];
-  [__code release_stub];
-  __code = code;
-  __code_isset = YES;
-}
-
-- (BOOL) codeIsSet {
-  return __code_isset;
-}
-
-- (void) unsetCode {
-  [__code release_stub];
-  __code = nil;
-  __code_isset = NO;
 }
 
 - (NSString *) name {
@@ -292,20 +259,12 @@
       case 2:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
           [self setName: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
-      case 4:
+      case 3:
         if (fieldType == TType_DOUBLE) {
           double fieldValue = [inProtocol readDouble];
           [self setLatitude: fieldValue];
@@ -313,7 +272,7 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
-      case 5:
+      case 4:
         if (fieldType == TType_DOUBLE) {
           double fieldValue = [inProtocol readDouble];
           [self setLongitude: fieldValue];
@@ -321,7 +280,7 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
-      case 6:
+      case 5:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
           [self setRegionName: fieldValue];
@@ -329,7 +288,7 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
-      case 7:
+      case 6:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
           [self setCountryName: fieldValue];
@@ -353,40 +312,33 @@
     [outProtocol writeI32: __id];
     [outProtocol writeFieldEnd];
   }
-  if (__code_isset) {
-    if (__code != nil) {
-      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __code];
-      [outProtocol writeFieldEnd];
-    }
-  }
   if (__name_isset) {
     if (__name != nil) {
-      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
+      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 2];
       [outProtocol writeString: __name];
       [outProtocol writeFieldEnd];
     }
   }
   if (__latitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 4];
+    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 3];
     [outProtocol writeDouble: __latitude];
     [outProtocol writeFieldEnd];
   }
   if (__longitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 5];
+    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 4];
     [outProtocol writeDouble: __longitude];
     [outProtocol writeFieldEnd];
   }
   if (__regionName_isset) {
     if (__regionName != nil) {
-      [outProtocol writeFieldBeginWithName: @"regionName" type: TType_STRING fieldID: 6];
+      [outProtocol writeFieldBeginWithName: @"regionName" type: TType_STRING fieldID: 5];
       [outProtocol writeString: __regionName];
       [outProtocol writeFieldEnd];
     }
   }
   if (__countryName_isset) {
     if (__countryName != nil) {
-      [outProtocol writeFieldBeginWithName: @"countryName" type: TType_STRING fieldID: 7];
+      [outProtocol writeFieldBeginWithName: @"countryName" type: TType_STRING fieldID: 6];
       [outProtocol writeString: __countryName];
       [outProtocol writeFieldEnd];
     }
@@ -400,10 +352,6 @@
   if (!__id_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
                                reason: @"Required field 'id' is not set."];
-  }
-  if (!__code_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'code' is not set."];
   }
   if (!__name_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
@@ -427,8 +375,6 @@
   NSMutableString * ms = [NSMutableString stringWithString: @"CityDto("];
   [ms appendString: @"id:"];
   [ms appendFormat: @"%i", __id];
-  [ms appendString: @",code:"];
-  [ms appendFormat: @"\"%@\"", __code];
   [ms appendString: @",name:"];
   [ms appendFormat: @"\"%@\"", __name];
   [ms appendString: @",latitude:"];

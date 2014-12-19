@@ -127,11 +127,11 @@
 	</logger>
 
 	<logger name="org.hibernate.tool.hbm2ddl" level="DEBUG"
-		additivity="true">
+		additivity="false">
 		<appender-ref ref="HIBERNATE-SCHEMA" />
 	</logger>
 
-	<logger name="org.hibernate" level="DEBUG" additivity="true">
+	<logger name="org.hibernate" level="DEBUG" additivity="false">
 		<appender-ref ref="HIBERNATE" />
 	</logger>
 

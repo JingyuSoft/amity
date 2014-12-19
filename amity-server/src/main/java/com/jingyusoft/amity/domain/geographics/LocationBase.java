@@ -4,24 +4,22 @@ import com.jingyusoft.amity.common.Ensure;
 
 public abstract class LocationBase {
 
+	private final LocationType locationType;
+
 	private final int id;
 
 	private final String code;
 
 	private final String name;
 
-	private final GeoLocation location;
-
-	protected LocationBase(int id, String code, String name, Double latitude, Double longitude) {
+	protected LocationBase(LocationType locationType, int id, String code, String name) {
 		Ensure.notNull("code", code);
 		Ensure.notNull("name", name);
-		Ensure.notNull("latitude", latitude);
-		Ensure.notNull("longitude", longitude);
 
+		this.locationType = locationType;
 		this.id = id;
 		this.code = code;
 		this.name = name;
-		location = GeoLocation.from(latitude, longitude);
 	}
 
 	public String getCode() {
@@ -32,8 +30,8 @@ public abstract class LocationBase {
 		return id;
 	}
 
-	public GeoLocation getLocation() {
-		return location;
+	public LocationType getLocationType() {
+		return locationType;
 	}
 
 	public String getName() {

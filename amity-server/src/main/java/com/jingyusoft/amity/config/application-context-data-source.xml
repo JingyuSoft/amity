@@ -45,7 +45,7 @@
 	</bean>
 
 	<!-- JPA Repositories -->
-	<jpa:repositories base-package="com.jingyusoft.amity.data.repositories" />
+	<jpa:repositories base-package="com.jingyusoft.amity.data.repositories" repository-impl-postfix="Impl" />
 
 	<!-- Spring Transaction Manager -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

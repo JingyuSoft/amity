@@ -5,16 +5,18 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.jingyusoft.amity.data.entities.RegionEntity;
-import com.jingyusoft.amity.thrift.generated.RegionDto;
 
 public class Region extends LocationBase {
+
+	private final Integer countryId;
 
 	private Country country;
 
 	private final List<City> cities = Lists.newArrayList();
 
 	public Region(RegionEntity entity) {
-		super(entity.getId(), entity.getCode(), entity.getName(), entity.getLatitude(), entity.getLongitude());
+		super(LocationType.REGION, entity.getId(), entity.getCode(), entity.getName());
+		countryId = entity.getCountry().getId();
 	}
 
 	public Region addCity(City city) {
@@ -30,17 +32,11 @@ public class Region extends LocationBase {
 		return country;
 	}
 
-	public void setCountry(Country country) {
-		this.country = country;
+	public Integer getCountryId() {
+		return countryId;
 	}
 
-	public RegionDto toDto() {
-		RegionDto regionDto = new RegionDto();
-		regionDto.setId(getId());
-		regionDto.setCode(getCode());
-		regionDto.setName(getName());
-		regionDto.setLatitude(getLocation().getLatitude());
-		regionDto.setLongitude(getLocation().getLongitude());
-		return regionDto;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 }

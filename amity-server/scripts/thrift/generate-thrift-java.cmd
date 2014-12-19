@@ -9,7 +9,7 @@ set SRC_DIR=..\..\src\main\resources\thrift
 set JAVA_DST_DIR=..\..\src\main\java
 set IOS_DST_DIR=..\..\..\amity-app\thrift
 
-del /Sy %JAVA_DST_DIR%\com\jingyusoft\amity\thrift\generated
+del /S /y %JAVA_DST_DIR%\com\jingyusoft\amity\thrift\generated
 
 for /R %SRC_DIR% %%G in (*.thrift) do (
 	%THRIFT% --gen java -out %JAVA_DST_DIR% %%G

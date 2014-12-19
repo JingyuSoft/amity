@@ -1,5 +1,7 @@
 package com.jingyusoft.amity.thrift.servers;
 
+import java.lang.Thread.UncaughtExceptionHandler;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.jingyusoft.amity.common.AmityExceptionHandler;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.thrift.factories.ThriftServerFactory;
@@ -56,6 +59,14 @@ public class AmityThriftServer {
 
 			@Override
 			public void run() {
+				Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+
+					@Override
+					public void uncaughtException(Thread t, Throwable e) {
+						AmityExceptionHandler.handle(e);
+					}
+				});
+
 				startDataServer(false);
 			}
 		}).start();
@@ -64,6 +75,14 @@ public class AmityThriftServer {
 
 			@Override
 			public void run() {
+				Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+
+					@Override
+					public void uncaughtException(Thread t, Throwable e) {
+						AmityExceptionHandler.handle(e);
+					}
+				});
+
 				startDataServer(true);
 			}
 		}).start();
@@ -76,8 +95,8 @@ public class AmityThriftServer {
 					new AmityService.Processor<AmityService.Iface>(amityService),
 					new AuthenticationThriftService.Processor<AuthenticationThriftService.Iface>(
 							authenticationThriftService),
-							new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService) }, ssl,
-							handlers);
+					new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService) }, ssl,
+					handlers);
 			LOGGER.info("Amity server started on {}:{}", host, getPort(ssl));
 			amityServer.serve();
 

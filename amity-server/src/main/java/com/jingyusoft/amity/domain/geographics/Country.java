@@ -7,7 +7,6 @@ import org.apache.commons.collections4.ListUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.jingyusoft.amity.data.entities.CountryEntity;
-import com.jingyusoft.amity.thrift.generated.CountryDto;
 
 public class Country extends LocationBase {
 
@@ -16,7 +15,7 @@ public class Country extends LocationBase {
 	private final List<Region> regions = Lists.newArrayList();
 
 	public Country(CountryEntity entity) {
-		super(entity.getId(), entity.getCode(), entity.getName(), entity.getLatitude(), entity.getLongitude());
+		super(LocationType.COUNTRY, entity.getId(), entity.getCode(), entity.getName());
 	}
 
 	public Country addCity(final City city) {
@@ -39,15 +38,5 @@ public class Country extends LocationBase {
 
 	public List<Region> getRegions() {
 		return ImmutableList.copyOf(regions);
-	}
-
-	public CountryDto toDto() {
-		CountryDto countryDto = new CountryDto();
-		countryDto.setId(getId());
-		countryDto.setCode(getCode());
-		countryDto.setName(getName());
-		countryDto.setLatitude(getLocation().getLatitude());
-		countryDto.setLongitude(getLocation().getLongitude());
-		return countryDto;
 	}
 }

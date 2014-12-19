@@ -5,20 +5,43 @@ import com.jingyusoft.amity.thrift.generated.CityDto;
 
 public class City extends LocationBase {
 
+	private Integer regionId;
+
+	private Integer countryId;
+
 	private Region region;
 
 	private Country country;
 
+	private final GeoLocation geoLocation;
+
 	public City(CityEntity entity) {
-		super(entity.getId(), entity.getCode(), entity.getName(), entity.getLatitude(), entity.getLongitude());
+		super(LocationType.CITY, entity.getId(), entity.getCode(), entity.getName());
+
+		geoLocation = GeoLocation.from(entity.getLatitude(), entity.getLongitude());
+
+		if (entity.getRegion() != null) {
+			regionId = entity.getRegion().getId();
+		}
+		if (entity.getCountry() != null) {
+			countryId = entity.getCountry().getId();
+		}
 	}
 
 	public Country getCountry() {
 		return country != null ? country : region.getCountry();
 	}
 
+	public Integer getCountryId() {
+		return countryId;
+	}
+
 	public Region getRegion() {
 		return region;
+	}
+
+	public Integer getRegionId() {
+		return regionId;
 	}
 
 	public void setCountry(Country country) {
@@ -34,8 +57,8 @@ public class City extends LocationBase {
 		cityDto.setId(getId());
 		cityDto.setCode(getCode());
 		cityDto.setName(getName());
-		cityDto.setLatitude(getLocation().getLatitude());
-		cityDto.setLongitude(getLocation().getLongitude());
+		cityDto.setLatitude(geoLocation.getLatitude());
+		cityDto.setLongitude(geoLocation.getLongitude());
 		return cityDto;
 	}
 }

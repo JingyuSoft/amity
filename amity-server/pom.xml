@@ -11,6 +11,7 @@
 				<directory>src/main/java</directory>
 				<includes>
 					<include>**/*.xml</include>
+					<include>**/*.sql</include>
 				</includes>
 			</resource>
 			<resource>
@@ -23,6 +24,7 @@
 				<directory>src/test/java</directory>
 				<includes>
 					<include>**/*.xml</include>
+					<include>**/*.sql</include>
 				</includes>
 			</resource>
 			<resource>

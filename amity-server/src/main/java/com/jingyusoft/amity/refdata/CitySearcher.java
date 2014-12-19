@@ -93,6 +93,8 @@ public class CitySearcher {
 			LOGGER.error("Failed to build city index", e);
 			throw WrappedException.insteadOf(e);
 		}
+
+		LOGGER.info("Index on {} cities built into directory [{}]", searchableCities.size(), indexDirName);
 	}
 
 	private void initializeIndex() {
@@ -127,10 +129,12 @@ public class CitySearcher {
 				} catch (IOException e) {
 					throw WrappedException.insteadOf(e);
 				}
+			}
 
+			if (FileUtils.listFiles(indexDir, null, false).size() == 0) {
 				initializeFromDatabase();
 			} else {
-				LOGGER.info("Index loaded from directory [{}]", indexDirName);
+				LOGGER.info("Existing index loaded from directory [{}]", indexDirName);
 			}
 		}
 	}

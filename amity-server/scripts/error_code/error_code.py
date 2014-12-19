@@ -14,7 +14,8 @@ def generate_java_footer(f):
 	f.write(footer)
 
 def generate_java_line(f, code, name):
-	f.write('\tpublic static final int ' + name + ' = ' + code + ';' + os.linesep)
+	f.write('\tpublic static final int ' + name + ' = ' + code + ''';
+''')
 
 
 fin = open(sys.argv[1], 'r')

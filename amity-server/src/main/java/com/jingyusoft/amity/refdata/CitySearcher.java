@@ -82,7 +82,6 @@ public class CitySearcher {
 			for (SearchableCity searchableCity : searchableCities) {
 				Document document = new Document();
 				document.add(new TextField("city", searchableCity.getCityName(), Field.Store.YES));
-				document.add(new TextField("region", searchableCity.getRegionName(), Field.Store.YES));
 				document.add(new TextField("country", searchableCity.getCountryName(), Field.Store.YES));
 				document.add(new IntField("id", searchableCity.getId(), Field.Store.YES));
 				try {
@@ -157,25 +156,25 @@ public class CitySearcher {
 			List<SearchableCity> searchResult = Lists.newArrayList();
 
 			final StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < topDocs.scoreDocs.length; i++) {
-				ScoreDoc scoreDoc = topDocs.scoreDocs[i];
-				sb.append(StringUtils.leftPad(i + 1 + ". ", String.valueOf(topDocs.scoreDocs.length).length() + 2));
-				sb.append(StringUtils.rightPad(
-						StringMessage.with("Doc = [{}], Score = [{}]  ", scoreDoc.doc, String.valueOf(scoreDoc.score)),
-						20));
-				sb.append(searcher.doc(scoreDoc.doc).get("name") + SystemUtils.LINE_SEPARATOR);
-			}
 
-			LOGGER.debug("Found {} cities with pattern [{}]" + SystemUtils.LINE_SEPARATOR + sb.toString(),
-					topDocs.scoreDocs.length, criteria);
-
+			int i = 0;
 			for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
 				int docId = scoreDoc.doc;
 				Document doc = searcher.doc(docId);
 
-				searchResult.add(new SearchableCity(Integer.parseInt(doc.get("id")), doc.get("city"), doc.get("region"), doc
-						.get("country")));
+				SearchableCity searchableCity = new SearchableCity(Integer.parseInt(doc.get("id")), doc.get("city"),
+						doc.get("country"));
+				searchResult.add(searchableCity);
+
+				sb.append(StringUtils.leftPad(++i + ". ", String.valueOf(topDocs.scoreDocs.length).length() + 2));
+				sb.append(StringUtils.rightPad(
+						StringMessage.with("Doc = [{}], Score = [{}]  ", scoreDoc.doc, String.valueOf(scoreDoc.score)),
+						20));
+				sb.append(searchableCity + SystemUtils.LINE_SEPARATOR);
 			}
+
+			LOGGER.debug("Found {} cities with pattern [{}]" + SystemUtils.LINE_SEPARATOR + sb.toString(),
+					topDocs.scoreDocs.length, criteria);
 
 			return ImmutableList.copyOf(searchResult);
 		} catch (NumberFormatException e) {

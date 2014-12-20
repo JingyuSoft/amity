@@ -4,8 +4,6 @@ public enum LocationType {
 
 	COUNTRY("CO"),
 
-	REGION("RE"),
-
 	CITY("CI");
 
 	private String code;

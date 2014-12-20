@@ -8,22 +8,18 @@ public abstract class LocationBase {
 
 	private final int id;
 
-	private final String code;
-
 	private final String name;
 
-	protected LocationBase(LocationType locationType, int id, String code, String name) {
-		Ensure.notNull("code", code);
+	protected LocationBase(LocationType locationType, int id, String name) {
 		Ensure.notNull("name", name);
 
 		this.locationType = locationType;
 		this.id = id;
-		this.code = code;
 		this.name = name;
 	}
 
-	public String getCode() {
-		return code;
+	public String getDisplayName() {
+		return name;
 	}
 
 	public int getId() {

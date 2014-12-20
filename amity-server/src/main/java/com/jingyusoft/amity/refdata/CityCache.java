@@ -21,7 +21,6 @@ import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.repositories.CityRepository;
 import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.domain.geographics.Country;
-import com.jingyusoft.amity.domain.geographics.Region;
 
 @Component
 public class CityCache {
@@ -33,21 +32,12 @@ public class CityCache {
 		private CityRepository cityRepository;
 
 		@Resource
-		private RegionCache regionCache;
-
-		@Resource
 		private CountryCache countryCache;
 
 		@Override
 		@Transactional(propagation = Propagation.REQUIRED)
 		public City load(Integer key) throws Exception {
 			City city = new City(cityRepository.getOne(key));
-
-			if (city.getRegionId() != null) {
-				Region region = regionCache.get(city.getRegionId());
-				city.setRegion(region);
-				region.addCity(city);
-			}
 
 			if (city.getCountryId() != null) {
 				Country country = countryCache.get(city.getCountryId());

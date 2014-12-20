@@ -26,9 +26,8 @@ public class CityDaoImpl implements CityDao {
 		@SuppressWarnings("unchecked")
 		List<Object[]> list = query.getResultList();
 
-		List<SearchableCity> result = list
-				.stream()
-				.map(item -> new SearchableCity((Integer) item[0], (String) item[1], (String) item[2], (String) item[3]))
+		List<SearchableCity> result = list.stream()
+				.map(item -> new SearchableCity((Integer) item[0], (String) item[1], (String) item[2]))
 				.collect(Collectors.toList());
 
 		return result;

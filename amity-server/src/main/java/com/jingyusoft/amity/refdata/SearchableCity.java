@@ -6,14 +6,11 @@ public class SearchableCity {
 
 	private final String cityName;
 
-	private final String regionName;
-
 	private final String countryName;
 
-	public SearchableCity(Integer id, String cityName, String regionName, String countryName) {
+	public SearchableCity(Integer id, String cityName, String countryName) {
 		this.id = id;
 		this.cityName = cityName;
-		this.regionName = regionName;
 		this.countryName = countryName;
 	}
 
@@ -29,7 +26,8 @@ public class SearchableCity {
 		return id;
 	}
 
-	public String getRegionName() {
-		return regionName;
+	@Override
+	public String toString() {
+		return "SearchableCity [id=" + id + ", cityName=" + cityName + ", countryName=" + countryName + "]";
 	}
 }

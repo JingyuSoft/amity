@@ -6,8 +6,7 @@ struct CityDto {
 	2: required string name,
 	3: required double latitude,
 	4: required double longitude
-	5: optional string regionName,
-	6: required string countryName
+	5: required string countryName
 }
 
 struct SearchCitiesRequest {

@@ -38,8 +38,7 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 			return new SearchCitiesResponse().setCities(searchResult
 					.stream()
 					.map(item -> new CityDto().setId(item.getId()).setName(item.getCityName())
-							.setRegionName(item.getRegionName()).setCountryName(item.getCountryName()))
-					.collect(Collectors.toList()));
+							.setCountryName(item.getCountryName())).collect(Collectors.toList()));
 		} catch (ParseException e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SearchCitiesResponse(ErrorCodes.UNKNOWN);

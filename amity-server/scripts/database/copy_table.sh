@@ -1,0 +1,1 @@
+mysqldump --user=univer --password=<password> amity_dev_univer geolite2_city_locations_en | mysql --user=univer --password=<password> amity_qa

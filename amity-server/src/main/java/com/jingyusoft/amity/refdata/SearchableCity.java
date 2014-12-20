@@ -6,15 +6,14 @@ public class SearchableCity {
 
 	private final String cityName;
 
-	private final String regionname;
+	private final String regionName;
 
 	private final String countryName;
 
-	public SearchableCity(Integer id, String cityName, String regionname, String countryName) {
-		super();
+	public SearchableCity(Integer id, String cityName, String regionName, String countryName) {
 		this.id = id;
 		this.cityName = cityName;
-		this.regionname = regionname;
+		this.regionName = regionName;
 		this.countryName = countryName;
 	}
 
@@ -30,7 +29,7 @@ public class SearchableCity {
 		return id;
 	}
 
-	public String getRegionname() {
-		return regionname;
+	public String getRegionName() {
+		return regionName;
 	}
 }

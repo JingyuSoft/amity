@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
@@ -39,9 +40,9 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
-import com.jingyusoft.amity.domain.geographics.City;
 
 @Component
 public class CitySearcher {
@@ -81,7 +82,7 @@ public class CitySearcher {
 			for (SearchableCity searchableCity : searchableCities) {
 				Document document = new Document();
 				document.add(new TextField("city", searchableCity.getCityName(), Field.Store.YES));
-				document.add(new TextField("region", searchableCity.getRegionname(), Field.Store.YES));
+				document.add(new TextField("region", searchableCity.getRegionName(), Field.Store.YES));
 				document.add(new TextField("country", searchableCity.getCountryName(), Field.Store.YES));
 				document.add(new IntField("id", searchableCity.getId(), Field.Store.YES));
 				try {
@@ -140,7 +141,7 @@ public class CitySearcher {
 		}
 	}
 
-	public List<City> searchCities(final String criteria, final int maxCount) throws ParseException {
+	public List<SearchableCity> searchCities(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria;
 		QueryParser parser = new QueryParser("city", analyzer);
 		Query query = parser.parse("(city:" + pattern + ")^2 (country:" + pattern + ")");
@@ -153,16 +154,27 @@ public class CitySearcher {
 
 			TopDocs topDocs = collector.topDocs();
 
-			List<City> searchResult = Lists.newArrayList();
+			List<SearchableCity> searchResult = Lists.newArrayList();
 
-			LOGGER.debug("Found {} cities with pattern [{}]", topDocs.scoreDocs.length, criteria);
+			final StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < topDocs.scoreDocs.length; i++) {
+				ScoreDoc scoreDoc = topDocs.scoreDocs[i];
+				sb.append(StringUtils.leftPad(i + 1 + ". ", String.valueOf(topDocs.scoreDocs.length).length() + 2));
+				sb.append(StringUtils.rightPad(
+						StringMessage.with("Doc = [{}], Score = [{}]  ", scoreDoc.doc, String.valueOf(scoreDoc.score)),
+						20));
+				sb.append(searcher.doc(scoreDoc.doc).get("name") + SystemUtils.LINE_SEPARATOR);
+			}
+
+			LOGGER.debug("Found {} cities with pattern [{}]" + SystemUtils.LINE_SEPARATOR + sb.toString(),
+					topDocs.scoreDocs.length, criteria);
 
 			for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
 				int docId = scoreDoc.doc;
-				Document d = searcher.doc(docId);
+				Document doc = searcher.doc(docId);
 
-				City city = cityCache.getCityFromCache(Integer.parseInt(d.get("id")));
-				searchResult.add(city);
+				searchResult.add(new SearchableCity(Integer.parseInt(doc.get("id")), doc.get("city"), doc.get("region"), doc
+						.get("country")));
 			}
 
 			return ImmutableList.copyOf(searchResult);

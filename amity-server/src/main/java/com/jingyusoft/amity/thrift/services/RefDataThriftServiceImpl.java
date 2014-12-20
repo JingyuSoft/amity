@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.ErrorCodes;
-import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.refdata.CitySearcher;
+import com.jingyusoft.amity.refdata.SearchableCity;
+import com.jingyusoft.amity.thrift.generated.CityDto;
 import com.jingyusoft.amity.thrift.generated.RefDataThriftService;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesRequest;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesResponse;
@@ -33,8 +34,11 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 
 		final String query = request.getSearchText() + "*";
 		try {
-			Collection<City> searchResult = citySearcher.searchCities(query, 10);
-			return new SearchCitiesResponse().setCities(searchResult.stream().map(item -> item.toDto())
+			Collection<SearchableCity> searchResult = citySearcher.searchCities(query, 10);
+			return new SearchCitiesResponse().setCities(searchResult
+					.stream()
+					.map(item -> new CityDto().setId(item.getId()).setName(item.getCityName())
+							.setRegionName(item.getRegionName()).setCountryName(item.getCountryName()))
 					.collect(Collectors.toList()));
 		} catch (ParseException e) {
 			LOGGER.error(e.getMessage(), e);

@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jingyusoft.amity.common.AmityEnvironment;
+import com.jingyusoft.amity.common.AmityEnvironment.WorkingEnvironment;
 import com.jingyusoft.amity.common.AmityExceptionHandler;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.AmityMailAlert;
@@ -69,7 +71,10 @@ public class SpringMain {
 
 		final String message = StringMessage.with("Amity server started successfully at {}",
 				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-		AmityMailAlert.send(message, message);
+
+		if (AmityEnvironment.getWorkingEnvironment() != WorkingEnvironment.DEV) {
+			AmityMailAlert.send(message, message);
+		}
 	}
 
 	static {

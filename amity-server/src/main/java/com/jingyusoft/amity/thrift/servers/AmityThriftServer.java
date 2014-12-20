@@ -18,6 +18,7 @@ import com.jingyusoft.amity.thrift.factories.ThriftServerFactory;
 import com.jingyusoft.amity.thrift.generated.AmityService;
 import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
 import com.jingyusoft.amity.thrift.generated.ItineraryThriftService;
+import com.jingyusoft.amity.thrift.generated.RefDataThriftService;
 
 @Service
 public class AmityThriftServer {
@@ -35,6 +36,9 @@ public class AmityThriftServer {
 
 	@Resource
 	private AuthenticationThriftService.Iface authenticationThriftService;
+
+	@Resource
+	private RefDataThriftService.Iface refDataThriftService;
 
 	@Value("${amity.server.host}")
 	private String host;
@@ -95,8 +99,8 @@ public class AmityThriftServer {
 					new AmityService.Processor<AmityService.Iface>(amityService),
 					new AuthenticationThriftService.Processor<AuthenticationThriftService.Iface>(
 							authenticationThriftService),
-					new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService) }, ssl,
-					handlers);
+							new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService),
+							new RefDataThriftService.Processor<>(refDataThriftService) }, ssl, handlers);
 			LOGGER.info("Amity server started on {}:{}", host, getPort(ssl));
 			amityServer.serve();
 

@@ -2,7 +2,6 @@ package com.jingyusoft.amity.refdata;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.util.CharArraySet;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntField;
@@ -38,6 +38,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
 import com.jingyusoft.amity.domain.geographics.City;
@@ -50,14 +51,14 @@ public class CitySearcher {
 	@Value("${amity.refdata.city.index.dir}")
 	private String indexDirName;
 
-	private final Analyzer analyzer = new EnglishAnalyzer();
+	private final Analyzer analyzer = new EnglishAnalyzer(CharArraySet.copy(Sets.newHashSet()));
 
 	private Directory index;
 
 	private final IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LATEST, analyzer);
 
 	@Resource
-	private LocationCache locationCache;
+	private CityCache cityCache;
 
 	@Resource
 	private CityDao cityDao;
@@ -139,7 +140,7 @@ public class CitySearcher {
 		}
 	}
 
-	public Collection<City> searchCities(final String criteria, final int maxCount) throws ParseException {
+	public List<City> searchCities(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria;
 		QueryParser parser = new QueryParser("city", analyzer);
 		Query query = parser.parse("(city:" + pattern + ")^2 (country:" + pattern + ")");
@@ -160,7 +161,7 @@ public class CitySearcher {
 				int docId = scoreDoc.doc;
 				Document d = searcher.doc(docId);
 
-				City city = locationCache.getCityFromCache(Integer.parseInt(d.get("id")));
+				City city = cityCache.getCityFromCache(Integer.parseInt(d.get("id")));
 				searchResult.add(city);
 			}
 

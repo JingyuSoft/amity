@@ -7,11 +7,13 @@ import javax.annotation.Resource;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jingyusoft.amity.common.WrappedException;
+import com.jingyusoft.amity.testgroups.DatabaseRequired;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/com/jingyusoft/amity/refdata/application-context-unit-test-refdata.xml")
@@ -21,6 +23,7 @@ public class CitySearchTest {
 	private CitySearcher citySearcher;
 
 	@Test
+	@Category(DatabaseRequired.class)
 	public void test() {
 		Assert.assertNotNull(citySearcher);
 

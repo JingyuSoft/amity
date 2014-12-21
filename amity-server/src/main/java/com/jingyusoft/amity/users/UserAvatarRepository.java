@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -51,6 +53,12 @@ public class UserAvatarRepository {
 
 	private String getAvatarFileName(long amityUserId) {
 		return avatarFolder + IOUtils.DIR_SEPARATOR + fileNamePrefix + amityUserId + fileNamePostfix;
+	}
+
+	@PostConstruct
+	private void initialize() {
+
+		new File(avatarFolder).mkdirs();
 	}
 
 	public boolean removeAvatar(long amityUserId) {

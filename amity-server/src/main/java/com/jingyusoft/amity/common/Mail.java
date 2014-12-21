@@ -39,6 +39,10 @@ public abstract class Mail {
 		LOGGER.info("Amity mail sender initialized");
 	}
 
+	public static boolean isInitialized() {
+		return StringUtils.isNotBlank(Mail.fromAddress) && authenticator != null;
+	}
+
 	public static void send(final String recipient, final String subject, final String body) {
 		send(StringUtils.split(recipient, ",; "), subject, body);
 	}

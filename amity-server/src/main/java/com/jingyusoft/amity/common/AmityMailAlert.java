@@ -10,12 +10,17 @@ public abstract class AmityMailAlert {
 				.toUpperCase());
 	}
 
-	public static void send(final String subject) {
-		send(subject, StringUtils.EMPTY);
+	public static boolean send(final String subject) {
+		return send(subject, StringUtils.EMPTY);
 	}
 
-	public static void send(final String subject, final String body) {
+	public static boolean send(final String subject, final String body) {
+		if (!Mail.isInitialized()) {
+			return false;
+		}
+
 		Mail.send(alertEmailAddress, subjectPrefix + subject, body);
+		return true;
 	}
 
 	private static String subjectPrefix;

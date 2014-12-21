@@ -16,9 +16,6 @@
 					  com.jingyusoft.amity.data,
 		              com.jingyusoft.amity.repository,
 		              com.jingyusoft.amity.refdata,
-		              com.jingyusoft.amity.users,
-		              com.jingyusoft.amity.thrift.services,
-		              com.jingyusoft.amity.thrift.factories,
-		              com.jingyusoft.amity.thrift.servers" />
+		              com.jingyusoft.amity.users" />
 
 </beans>

@@ -20,13 +20,16 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
+import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.TopFieldDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.NIOFSDirectory;
 import org.apache.lucene.store.RAMDirectory;
@@ -154,16 +157,20 @@ public class CitySearcher {
 	public List<CitySearchResult> searchCities(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria.toLowerCase();
 
-		QueryParser parser = new QueryParser("amity", analyzer);
-		Query query = parser.parse("city:" + pattern + " country:" + pattern);
+		BooleanQuery query = new BooleanQuery();
 
-		TopScoreDocCollector collector = TopScoreDocCollector.create(maxCount, true);
+		PrefixQuery cityQuery = new PrefixQuery(new Term("city", pattern));
+		cityQuery.setBoost(1.5f);
+		query.add(cityQuery, BooleanClause.Occur.SHOULD);
+
+		PrefixQuery countryTermQuery = new PrefixQuery(new Term("country", pattern));
+		query.add(countryTermQuery, BooleanClause.Occur.SHOULD);
 
 		try (IndexReader reader = DirectoryReader.open(index)) {
 			IndexSearcher searcher = new IndexSearcher(reader);
 
-			searcher.search(query, collector);
-			TopDocs topDocs = collector.topDocs();
+			TopFieldDocs topDocs = searcher.search(query, maxCount, new Sort(new SortField("city",
+					SortField.Type.STRING)));
 
 			List<CitySearchResult> citySearchResults = Lists.newArrayList();
 

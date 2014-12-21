@@ -96,7 +96,7 @@ public class CitySearcher {
 				document.add(new IntField("id", searchableCity.getId(), Field.Store.YES));
 				document.add(new TextField("city", searchableCity.getCityName().toLowerCase(), Field.Store.YES));
 				document.add(new TextField("country", searchableCity.getCountryName().toLowerCase(), Field.Store.YES));
-				document.add(new TextField("displayName", searchableCity.getDisplayName() + ","
+				document.add(new TextField("displayName", searchableCity.getDisplayName() + ", "
 						+ searchableCity.getCountryName(), Field.Store.YES));
 				try {
 					indexWriter.addDocument(document);

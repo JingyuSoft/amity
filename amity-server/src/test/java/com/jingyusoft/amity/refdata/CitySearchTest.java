@@ -24,7 +24,7 @@ public class CitySearchTest {
 
 	@Test
 	@Category(DatabaseRequired.class)
-	public void test() {
+	public void testSearchCity() {
 		Assert.assertNotNull(citySearcher);
 
 		try {

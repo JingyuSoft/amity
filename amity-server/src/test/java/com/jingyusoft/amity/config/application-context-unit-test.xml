@@ -10,6 +10,9 @@
                   classpath:config-${config.mode:test}.properties" />
 
 	<import resource="application-context-data-source.xml" />
+	
+	<bean id="testDataPreparer" class="com.jingyusoft.amity.testdata.TestDataPreparer" />
+	<bean id="testDataDao" class="com.jingyusoft.amity.testdata.TestDataDaoImpl" />
 
 	<context:component-scan
 		base-package="com.jingyusoft.amity.authentication,

@@ -13,6 +13,7 @@
 					  com.jingyusoft.amity.users,
 		              com.jingyusoft.amity.repository,
 		              com.jingyusoft.amity.dao,
+		              com.jingyusoft.amity.services,
 		              com.jingyusoft.amity.refdata,
 		              com.jingyusoft.amity.thrift.services,
 		              com.jingyusoft.amity.thrift.factories,

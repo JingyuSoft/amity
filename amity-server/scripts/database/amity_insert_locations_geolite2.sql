@@ -24,6 +24,7 @@ update geolite2_city_coordinates
 set latitude = (min_latitude + max_latitude) / 2,
 	longitude = (min_longitude + max_longitude) / 2;
 
+
 insert into city(id, country_id, city_name, latitude, longitude, subdivision_1_code, subdivision_1_name, subdivision_2_code, subdivision_2_name, metro_code, time_zone)
 select distinct a.geoname_id, b.id, a.city_name, c.latitude, c.longitude, a.subdivision_1_iso_code, subdivision_1_name, subdivision_2_iso_code, subdivision_2_name, metro_code, time_zone
 from geolite2_city_locations_en a, country b, geolite2_city_coordinates c

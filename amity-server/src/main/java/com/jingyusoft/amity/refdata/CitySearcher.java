@@ -11,8 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.en.EnglishAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntField;
@@ -39,7 +38,6 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
@@ -52,7 +50,7 @@ public class CitySearcher {
 	@Value("${amity.refdata.city.index.dir}")
 	private String indexDirName;
 
-	private final Analyzer analyzer = new EnglishAnalyzer(CharArraySet.copy(Sets.newHashSet()));
+	private final Analyzer analyzer = new StandardAnalyzer();
 
 	private Directory index;
 
@@ -63,6 +61,17 @@ public class CitySearcher {
 
 	@Resource
 	private CityDao cityDao;
+
+	public void deleteIndex() {
+		File dir = new File(indexDirName);
+		if (dir.exists()) {
+			try {
+				FileUtils.deleteDirectory(dir);
+			} catch (IOException e) {
+				throw WrappedException.insteadOf(e);
+			}
+		}
+	}
 
 	@PostConstruct
 	private void initialize() {
@@ -142,15 +151,17 @@ public class CitySearcher {
 
 	public List<SearchableCity> searchCities(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria;
-		QueryParser parser = new QueryParser("city", analyzer);
-		Query query = parser.parse("(city:" + pattern + ")^2 (country:" + pattern + ")");
+
+		QueryParser parser = new QueryParser("amity", analyzer);
+		Query query = parser.parse("city:" + pattern + " country:" + pattern);
+		// Query query = new PrefixQuery(new Term("city", pattern));
 
 		TopScoreDocCollector collector = TopScoreDocCollector.create(maxCount, true);
 
 		try (IndexReader reader = DirectoryReader.open(index)) {
 			IndexSearcher searcher = new IndexSearcher(reader);
-			searcher.search(query, collector);
 
+			searcher.search(query, collector);
 			TopDocs topDocs = collector.topDocs();
 
 			List<SearchableCity> searchResult = Lists.newArrayList();

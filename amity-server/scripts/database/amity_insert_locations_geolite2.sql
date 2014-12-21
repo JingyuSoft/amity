@@ -31,3 +31,20 @@ where a.country_iso_code = b.country_code
   and a.geoname_id = c.geoname_id
   and a.city_name is not null
   and length(a.city_name) > 0;
+
+
+-- Update city display name for cities in the same country that have the same name but belong to different subdivision
+drop table if exists city_ids;
+  
+create temporary table city_ids as 
+select a.id
+from city a, city b
+where a.city_name = b.city_name
+  and a.country_id = b.country_id
+  and a.id <> b.id
+  and a.subdivision_1_name <> b.subdivision_1_name;
+
+update city set display_name = concat(city_name, ", ", subdivision_1_name)
+where id in ( select id from city_ids );
+
+drop table city_ids;

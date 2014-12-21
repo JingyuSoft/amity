@@ -19,6 +19,10 @@ import com.jingyusoft.amity.common.StringMessage;
 
 public class SpringMain {
 
+	public static ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
 	private static void loadJdbcPassword(AmityPropertiesRepository amityProperties) {
 
 		final String vmArgumentPassword = System.getProperty("jdbc.password");
@@ -69,10 +73,9 @@ public class SpringMain {
 			AmityExceptionHandler.handle("Failed to initialize application context", e);
 		}
 
-		final String message = StringMessage.with("Amity server started successfully at {}",
-				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-
 		if (AmityEnvironment.getWorkingEnvironment() != WorkingEnvironment.DEV) {
+			final String message = StringMessage.with("Amity server started successfully at {}", DateTime.now()
+					.toString("yyyy-MM-dd HH:mm:ss"));
 			AmityMailAlert.send(message, message);
 		}
 	}

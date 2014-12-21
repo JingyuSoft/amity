@@ -8,12 +8,18 @@
 	<import resource="application-context-data-source.xml" />
 
 	<context:component-scan
-		base-package="com.jingyusoft.amity.thrift.factories,
-		              com.jingyusoft.amity.authentication,
-		              com.jingyusoft.amity.data" />
-
-	<bean class="com.jingyusoft.amity.common.Mail.MailProperties" />
+		base-package="com.jingyusoft.amity.data,
+					  com.jingyusoft.amity.authentication,
+					  com.jingyusoft.amity.users,
+		              com.jingyusoft.amity.repository,
+		              com.jingyusoft.amity.dao,
+		              com.jingyusoft.amity.refdata,
+		              com.jingyusoft.amity.thrift.services,
+		              com.jingyusoft.amity.thrift.factories,
+		              com.jingyusoft.amity.thrift.servers" />
 
 	<bean id="testConsole" class="com.jingyusoft.amity.programs.TestConsole" />
+
+	<bean id="citySearchConsole" class="com.jingyusoft.amity.programs.CitySearchConsole" />
 
 </beans>

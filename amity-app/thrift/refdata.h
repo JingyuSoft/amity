@@ -17,33 +17,21 @@
 
 #import "authentication.h"
 
-@interface CityDto : NSObject <TBase, NSCoding> {
+@interface CitySearchResultDto : NSObject <TBase, NSCoding> {
   int32_t __id;
-  NSString * __name;
-  double __latitude;
-  double __longitude;
-  NSString * __regionName;
-  NSString * __countryName;
+  NSString * __displayName;
 
   BOOL __id_isset;
-  BOOL __name_isset;
-  BOOL __latitude_isset;
-  BOOL __longitude_isset;
-  BOOL __regionName_isset;
-  BOOL __countryName_isset;
+  BOOL __displayName_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, getter=id, setter=setId:) int32_t id;
-@property (nonatomic, retain, getter=name, setter=setName:) NSString * name;
-@property (nonatomic, getter=latitude, setter=setLatitude:) double latitude;
-@property (nonatomic, getter=longitude, setter=setLongitude:) double longitude;
-@property (nonatomic, retain, getter=regionName, setter=setRegionName:) NSString * regionName;
-@property (nonatomic, retain, getter=countryName, setter=setCountryName:) NSString * countryName;
+@property (nonatomic, retain, getter=displayName, setter=setDisplayName:) NSString * displayName;
 #endif
 
 - (id) init;
-- (id) initWithId: (int32_t) id name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName;
+- (id) initWithId: (int32_t) id displayName: (NSString *) displayName;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -57,34 +45,10 @@
 - (BOOL) idIsSet;
 
 #if !__has_feature(objc_arc)
-- (NSString *) name;
-- (void) setName: (NSString *) name;
+- (NSString *) displayName;
+- (void) setDisplayName: (NSString *) displayName;
 #endif
-- (BOOL) nameIsSet;
-
-#if !__has_feature(objc_arc)
-- (double) latitude;
-- (void) setLatitude: (double) latitude;
-#endif
-- (BOOL) latitudeIsSet;
-
-#if !__has_feature(objc_arc)
-- (double) longitude;
-- (void) setLongitude: (double) longitude;
-#endif
-- (BOOL) longitudeIsSet;
-
-#if !__has_feature(objc_arc)
-- (NSString *) regionName;
-- (void) setRegionName: (NSString *) regionName;
-#endif
-- (BOOL) regionNameIsSet;
-
-#if !__has_feature(objc_arc)
-- (NSString *) countryName;
-- (void) setCountryName: (NSString *) countryName;
-#endif
-- (BOOL) countryNameIsSet;
+- (BOOL) displayNameIsSet;
 
 @end
 

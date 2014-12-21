@@ -8,9 +8,12 @@ public class SearchableCity {
 
 	private final String countryName;
 
-	public SearchableCity(Integer id, String cityName, String countryName) {
+	private final String cityDisplayName;
+
+	public SearchableCity(Integer id, String cityName, final String cityDisplayName, String countryName) {
 		this.id = id;
 		this.cityName = cityName;
+		this.cityDisplayName = cityDisplayName;
 		this.countryName = countryName;
 	}
 
@@ -22,12 +25,17 @@ public class SearchableCity {
 		return countryName;
 	}
 
+	public String getDisplayName() {
+		return cityDisplayName;
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
 	@Override
 	public String toString() {
-		return "SearchableCity [id=" + id + ", cityName=" + cityName + ", countryName=" + countryName + "]";
+		return "SearchableCity [id=" + id + ", cityName=" + cityName + ", countryName=" + countryName
+				+ ", cityDisplayName=" + cityDisplayName + "]";
 	}
 }

@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntField;
@@ -50,7 +50,7 @@ public class CitySearcher {
 	@Value("${amity.refdata.city.index.dir}")
 	private String indexDirName;
 
-	private final Analyzer analyzer = new StandardAnalyzer();
+	private final Analyzer analyzer = new KeywordAnalyzer();
 
 	private Directory index;
 
@@ -90,9 +90,11 @@ public class CitySearcher {
 		try (IndexWriter indexWriter = new IndexWriter(index, indexWriterConfig)) {
 			for (SearchableCity searchableCity : searchableCities) {
 				Document document = new Document();
-				document.add(new TextField("city", searchableCity.getCityName(), Field.Store.YES));
-				document.add(new TextField("country", searchableCity.getCountryName(), Field.Store.YES));
 				document.add(new IntField("id", searchableCity.getId(), Field.Store.YES));
+				document.add(new TextField("city", searchableCity.getCityName().toLowerCase(), Field.Store.YES));
+				document.add(new TextField("country", searchableCity.getCountryName().toLowerCase(), Field.Store.YES));
+				document.add(new TextField("displayName", searchableCity.getDisplayName() + ","
+						+ searchableCity.getCountryName(), Field.Store.YES));
 				try {
 					indexWriter.addDocument(document);
 				} catch (IOException e) {
@@ -149,12 +151,11 @@ public class CitySearcher {
 		}
 	}
 
-	public List<SearchableCity> searchCities(final String criteria, final int maxCount) throws ParseException {
-		final String pattern = criteria;
+	public List<CitySearchResult> searchCities(final String criteria, final int maxCount) throws ParseException {
+		final String pattern = criteria.toLowerCase();
 
 		QueryParser parser = new QueryParser("amity", analyzer);
 		Query query = parser.parse("city:" + pattern + " country:" + pattern);
-		// Query query = new PrefixQuery(new Term("city", pattern));
 
 		TopScoreDocCollector collector = TopScoreDocCollector.create(maxCount, true);
 
@@ -164,7 +165,7 @@ public class CitySearcher {
 			searcher.search(query, collector);
 			TopDocs topDocs = collector.topDocs();
 
-			List<SearchableCity> searchResult = Lists.newArrayList();
+			List<CitySearchResult> citySearchResults = Lists.newArrayList();
 
 			final StringBuilder sb = new StringBuilder();
 
@@ -173,21 +174,21 @@ public class CitySearcher {
 				int docId = scoreDoc.doc;
 				Document doc = searcher.doc(docId);
 
-				SearchableCity searchableCity = new SearchableCity(Integer.parseInt(doc.get("id")), doc.get("city"),
-						doc.get("country"));
-				searchResult.add(searchableCity);
+				CitySearchResult citySearchResult = new CitySearchResult(Integer.parseInt(doc.get("id")),
+						doc.get("displayName"));
+				citySearchResults.add(citySearchResult);
 
 				sb.append(StringUtils.leftPad(++i + ". ", String.valueOf(topDocs.scoreDocs.length).length() + 2));
 				sb.append(StringUtils.rightPad(
 						StringMessage.with("Doc = [{}], Score = [{}]  ", scoreDoc.doc, String.valueOf(scoreDoc.score)),
 						20));
-				sb.append(searchableCity + SystemUtils.LINE_SEPARATOR);
+				sb.append(citySearchResult + SystemUtils.LINE_SEPARATOR);
 			}
 
 			LOGGER.debug("Found {} cities with pattern [{}]" + SystemUtils.LINE_SEPARATOR + sb.toString(),
 					topDocs.scoreDocs.length, criteria);
 
-			return ImmutableList.copyOf(searchResult);
+			return ImmutableList.copyOf(citySearchResults);
 		} catch (NumberFormatException e) {
 			LOGGER.error(e.getMessage(), e);
 			throw WrappedException.insteadOf(e);

@@ -37,7 +37,7 @@ where a.country_iso_code = b.country_code
 drop table if exists city_ids;
   
 create temporary table city_ids as 
-select a.id
+select distinct a.id
 from city a, city b
 where a.city_name = b.city_name
   and a.country_id = b.country_id

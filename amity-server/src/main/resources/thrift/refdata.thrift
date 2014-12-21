@@ -1,12 +1,9 @@
 include "authentication.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
-struct CityDto {
+struct CitySearchResultDto {
 	1: required i32 id,
-	2: required string name,
-	3: required double latitude,
-	4: required double longitude
-	5: required string countryName
+	2: required string displayName
 }
 
 struct SearchCitiesRequest {
@@ -15,7 +12,7 @@ struct SearchCitiesRequest {
 
 struct SearchCitiesResponse {
 	1: required i32 errorCode,
-	2: optional list<CityDto> cities
+	2: optional list<CitySearchResultDto> cities
 }
 
 service RefDataThriftService {

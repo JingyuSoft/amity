@@ -25,7 +25,7 @@ public class CitySearchTest {
 		Assert.assertNotNull(citySearcher);
 
 		try {
-			List<SearchableCity> result = citySearcher.searchCities("beiji*", 10);
+			List<CitySearchResult> result = citySearcher.searchCities("beiji*", 10);
 			Assert.assertTrue(result.size() > 0);
 			System.out.println(result.size());
 		} catch (ParseException e) {

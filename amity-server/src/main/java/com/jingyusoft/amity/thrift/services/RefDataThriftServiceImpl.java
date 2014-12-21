@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.ErrorCodes;
+import com.jingyusoft.amity.refdata.CitySearchResult;
 import com.jingyusoft.amity.refdata.CitySearcher;
-import com.jingyusoft.amity.refdata.SearchableCity;
-import com.jingyusoft.amity.thrift.generated.CityDto;
+import com.jingyusoft.amity.thrift.generated.CitySearchResultDto;
 import com.jingyusoft.amity.thrift.generated.RefDataThriftService;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesRequest;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesResponse;
@@ -34,11 +34,11 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 
 		final String query = request.getSearchText() + "*";
 		try {
-			Collection<SearchableCity> searchResult = citySearcher.searchCities(query, 10);
+			Collection<CitySearchResult> searchResult = citySearcher.searchCities(query, 10);
 			return new SearchCitiesResponse().setCities(searchResult
 					.stream()
-					.map(item -> new CityDto().setId(item.getId()).setName(item.getCityName())
-							.setCountryName(item.getCountryName())).collect(Collectors.toList()));
+					.map(item -> new CitySearchResultDto().setId(item.getId())
+							.setDisplayName(item.getFullDisplayName())).collect(Collectors.toList()));
 		} catch (ParseException e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SearchCitiesResponse(ErrorCodes.UNKNOWN);

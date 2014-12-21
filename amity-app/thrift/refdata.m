@@ -19,7 +19,7 @@
 
 #import "refdata.h"
 
-@implementation CityDto
+@implementation CitySearchResultDto
 
 - (id) init
 {
@@ -29,21 +29,13 @@
   return self;
 }
 
-- (id) initWithId: (int32_t) id name: (NSString *) name latitude: (double) latitude longitude: (double) longitude regionName: (NSString *) regionName countryName: (NSString *) countryName
+- (id) initWithId: (int32_t) id displayName: (NSString *) displayName
 {
   self = [super init];
   __id = id;
   __id_isset = YES;
-  __name = [name retain_stub];
-  __name_isset = YES;
-  __latitude = latitude;
-  __latitude_isset = YES;
-  __longitude = longitude;
-  __longitude_isset = YES;
-  __regionName = [regionName retain_stub];
-  __regionName_isset = YES;
-  __countryName = [countryName retain_stub];
-  __countryName_isset = YES;
+  __displayName = [displayName retain_stub];
+  __displayName_isset = YES;
   return self;
 }
 
@@ -55,30 +47,10 @@
     __id = [decoder decodeInt32ForKey: @"id"];
     __id_isset = YES;
   }
-  if ([decoder containsValueForKey: @"name"])
+  if ([decoder containsValueForKey: @"displayName"])
   {
-    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
-    __name_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"latitude"])
-  {
-    __latitude = [decoder decodeDoubleForKey: @"latitude"];
-    __latitude_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"longitude"])
-  {
-    __longitude = [decoder decodeDoubleForKey: @"longitude"];
-    __longitude_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"regionName"])
-  {
-    __regionName = [[decoder decodeObjectForKey: @"regionName"] retain_stub];
-    __regionName_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"countryName"])
-  {
-    __countryName = [[decoder decodeObjectForKey: @"countryName"] retain_stub];
-    __countryName_isset = YES;
+    __displayName = [[decoder decodeObjectForKey: @"displayName"] retain_stub];
+    __displayName_isset = YES;
   }
   return self;
 }
@@ -89,33 +61,15 @@
   {
     [encoder encodeInt32: __id forKey: @"id"];
   }
-  if (__name_isset)
+  if (__displayName_isset)
   {
-    [encoder encodeObject: __name forKey: @"name"];
-  }
-  if (__latitude_isset)
-  {
-    [encoder encodeDouble: __latitude forKey: @"latitude"];
-  }
-  if (__longitude_isset)
-  {
-    [encoder encodeDouble: __longitude forKey: @"longitude"];
-  }
-  if (__regionName_isset)
-  {
-    [encoder encodeObject: __regionName forKey: @"regionName"];
-  }
-  if (__countryName_isset)
-  {
-    [encoder encodeObject: __countryName forKey: @"countryName"];
+    [encoder encodeObject: __displayName forKey: @"displayName"];
   }
 }
 
 - (void) dealloc
 {
-  [__name release_stub];
-  [__regionName release_stub];
-  [__countryName release_stub];
+  [__displayName release_stub];
   [super dealloc_stub];
 }
 
@@ -136,101 +90,25 @@
   __id_isset = NO;
 }
 
-- (NSString *) name {
-  return [[__name retain_stub] autorelease_stub];
+- (NSString *) displayName {
+  return [[__displayName retain_stub] autorelease_stub];
 }
 
-- (void) setName: (NSString *) name {
-  [name retain_stub];
-  [__name release_stub];
-  __name = name;
-  __name_isset = YES;
+- (void) setDisplayName: (NSString *) displayName {
+  [displayName retain_stub];
+  [__displayName release_stub];
+  __displayName = displayName;
+  __displayName_isset = YES;
 }
 
-- (BOOL) nameIsSet {
-  return __name_isset;
+- (BOOL) displayNameIsSet {
+  return __displayName_isset;
 }
 
-- (void) unsetName {
-  [__name release_stub];
-  __name = nil;
-  __name_isset = NO;
-}
-
-- (double) latitude {
-  return __latitude;
-}
-
-- (void) setLatitude: (double) latitude {
-  __latitude = latitude;
-  __latitude_isset = YES;
-}
-
-- (BOOL) latitudeIsSet {
-  return __latitude_isset;
-}
-
-- (void) unsetLatitude {
-  __latitude_isset = NO;
-}
-
-- (double) longitude {
-  return __longitude;
-}
-
-- (void) setLongitude: (double) longitude {
-  __longitude = longitude;
-  __longitude_isset = YES;
-}
-
-- (BOOL) longitudeIsSet {
-  return __longitude_isset;
-}
-
-- (void) unsetLongitude {
-  __longitude_isset = NO;
-}
-
-- (NSString *) regionName {
-  return [[__regionName retain_stub] autorelease_stub];
-}
-
-- (void) setRegionName: (NSString *) regionName {
-  [regionName retain_stub];
-  [__regionName release_stub];
-  __regionName = regionName;
-  __regionName_isset = YES;
-}
-
-- (BOOL) regionNameIsSet {
-  return __regionName_isset;
-}
-
-- (void) unsetRegionName {
-  [__regionName release_stub];
-  __regionName = nil;
-  __regionName_isset = NO;
-}
-
-- (NSString *) countryName {
-  return [[__countryName retain_stub] autorelease_stub];
-}
-
-- (void) setCountryName: (NSString *) countryName {
-  [countryName retain_stub];
-  [__countryName release_stub];
-  __countryName = countryName;
-  __countryName_isset = YES;
-}
-
-- (BOOL) countryNameIsSet {
-  return __countryName_isset;
-}
-
-- (void) unsetCountryName {
-  [__countryName release_stub];
-  __countryName = nil;
-  __countryName_isset = NO;
+- (void) unsetDisplayName {
+  [__displayName release_stub];
+  __displayName = nil;
+  __displayName_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -259,39 +137,7 @@
       case 2:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLatitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 4:
-        if (fieldType == TType_DOUBLE) {
-          double fieldValue = [inProtocol readDouble];
-          [self setLongitude: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 5:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setRegionName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 6:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setCountryName: fieldValue];
+          [self setDisplayName: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -306,40 +152,16 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"CityDto"];
+  [outProtocol writeStructBeginWithName: @"CitySearchResultDto"];
   if (__id_isset) {
     [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
     [outProtocol writeI32: __id];
     [outProtocol writeFieldEnd];
   }
-  if (__name_isset) {
-    if (__name != nil) {
-      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __name];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__latitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 3];
-    [outProtocol writeDouble: __latitude];
-    [outProtocol writeFieldEnd];
-  }
-  if (__longitude_isset) {
-    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 4];
-    [outProtocol writeDouble: __longitude];
-    [outProtocol writeFieldEnd];
-  }
-  if (__regionName_isset) {
-    if (__regionName != nil) {
-      [outProtocol writeFieldBeginWithName: @"regionName" type: TType_STRING fieldID: 5];
-      [outProtocol writeString: __regionName];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__countryName_isset) {
-    if (__countryName != nil) {
-      [outProtocol writeFieldBeginWithName: @"countryName" type: TType_STRING fieldID: 6];
-      [outProtocol writeString: __countryName];
+  if (__displayName_isset) {
+    if (__displayName != nil) {
+      [outProtocol writeFieldBeginWithName: @"displayName" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __displayName];
       [outProtocol writeFieldEnd];
     }
   }
@@ -353,38 +175,18 @@
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
                                reason: @"Required field 'id' is not set."];
   }
-  if (!__name_isset) {
+  if (!__displayName_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'name' is not set."];
-  }
-  if (!__latitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'latitude' is not set."];
-  }
-  if (!__longitude_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'longitude' is not set."];
-  }
-  if (!__countryName_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'countryName' is not set."];
+                               reason: @"Required field 'displayName' is not set."];
   }
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"CityDto("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"CitySearchResultDto("];
   [ms appendString: @"id:"];
   [ms appendFormat: @"%i", __id];
-  [ms appendString: @",name:"];
-  [ms appendFormat: @"\"%@\"", __name];
-  [ms appendString: @",latitude:"];
-  [ms appendFormat: @"%f", __latitude];
-  [ms appendString: @",longitude:"];
-  [ms appendFormat: @"%f", __longitude];
-  [ms appendString: @",regionName:"];
-  [ms appendFormat: @"\"%@\"", __regionName];
-  [ms appendString: @",countryName:"];
-  [ms appendFormat: @"\"%@\"", __countryName];
+  [ms appendString: @",displayName:"];
+  [ms appendFormat: @"\"%@\"", __displayName];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -641,7 +443,7 @@
           int _i1;
           for (_i1 = 0; _i1 < _size0; ++_i1)
           {
-            CityDto *_elem2 = [[CityDto alloc] init];
+            CitySearchResultDto *_elem2 = [[CitySearchResultDto alloc] init];
             [_elem2 read: inProtocol];
             [fieldValue addObject: _elem2];
             [_elem2 release_stub];

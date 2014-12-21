@@ -203,11 +203,13 @@
   return self;
 }
 
-- (id) initWithSearchText: (NSString *) searchText
+- (id) initWithSearchText: (NSString *) searchText maxCount: (int32_t) maxCount
 {
   self = [super init];
   __searchText = [searchText retain_stub];
   __searchText_isset = YES;
+  __maxCount = maxCount;
+  __maxCount_isset = YES;
   return self;
 }
 
@@ -219,6 +221,11 @@
     __searchText = [[decoder decodeObjectForKey: @"searchText"] retain_stub];
     __searchText_isset = YES;
   }
+  if ([decoder containsValueForKey: @"maxCount"])
+  {
+    __maxCount = [decoder decodeInt32ForKey: @"maxCount"];
+    __maxCount_isset = YES;
+  }
   return self;
 }
 
@@ -227,6 +234,10 @@
   if (__searchText_isset)
   {
     [encoder encodeObject: __searchText forKey: @"searchText"];
+  }
+  if (__maxCount_isset)
+  {
+    [encoder encodeInt32: __maxCount forKey: @"maxCount"];
   }
 }
 
@@ -257,6 +268,23 @@
   __searchText_isset = NO;
 }
 
+- (int32_t) maxCount {
+  return __maxCount;
+}
+
+- (void) setMaxCount: (int32_t) maxCount {
+  __maxCount = maxCount;
+  __maxCount_isset = YES;
+}
+
+- (BOOL) maxCountIsSet {
+  return __maxCount_isset;
+}
+
+- (void) unsetMaxCount {
+  __maxCount_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -280,6 +308,14 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 2:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setMaxCount: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -298,6 +334,11 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__maxCount_isset) {
+    [outProtocol writeFieldBeginWithName: @"maxCount" type: TType_I32 fieldID: 2];
+    [outProtocol writeI32: __maxCount];
+    [outProtocol writeFieldEnd];
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -314,6 +355,8 @@
   NSMutableString * ms = [NSMutableString stringWithString: @"SearchCitiesRequest("];
   [ms appendString: @"searchText:"];
   [ms appendFormat: @"\"%@\"", __searchText];
+  [ms appendString: @",maxCount:"];
+  [ms appendFormat: @"%i", __maxCount];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

@@ -54,16 +54,19 @@
 
 @interface SearchCitiesRequest : NSObject <TBase, NSCoding> {
   NSString * __searchText;
+  int32_t __maxCount;
 
   BOOL __searchText_isset;
+  BOOL __maxCount_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, retain, getter=searchText, setter=setSearchText:) NSString * searchText;
+@property (nonatomic, getter=maxCount, setter=setMaxCount:) int32_t maxCount;
 #endif
 
 - (id) init;
-- (id) initWithSearchText: (NSString *) searchText;
+- (id) initWithSearchText: (NSString *) searchText maxCount: (int32_t) maxCount;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -75,6 +78,12 @@
 - (void) setSearchText: (NSString *) searchText;
 #endif
 - (BOOL) searchTextIsSet;
+
+#if !__has_feature(objc_arc)
+- (int32_t) maxCount;
+- (void) setMaxCount: (int32_t) maxCount;
+#endif
+- (BOOL) maxCountIsSet;
 
 @end
 

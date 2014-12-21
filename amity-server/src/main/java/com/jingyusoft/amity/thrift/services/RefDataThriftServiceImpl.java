@@ -25,6 +25,8 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
+	private static final int DEFAULT_SEARCH_RESULT_MAX_COUNT = 10;
+
 	@Resource
 	private CitySearcher citySearcher;
 
@@ -32,9 +34,13 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 	public SearchCitiesResponse searchCities(SearchCitiesRequest request, SessionCredentials credentials)
 			throws TException {
 
-		final String query = request.getSearchText() + "*";
+		final String query = request.getSearchText();
+		Integer maxCount = request.getMaxCount();
+		if (maxCount == null) {
+			maxCount = DEFAULT_SEARCH_RESULT_MAX_COUNT;
+		}
 		try {
-			Collection<CitySearchResult> searchResult = citySearcher.searchCities(query, 10);
+			Collection<CitySearchResult> searchResult = citySearcher.searchCities(query, maxCount);
 			return new SearchCitiesResponse().setCities(searchResult
 					.stream()
 					.map(item -> new CitySearchResultDto().setId(item.getId())

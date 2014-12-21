@@ -7,7 +7,8 @@ struct CitySearchResultDto {
 }
 
 struct SearchCitiesRequest {
-	1: required string searchText
+	1: required string searchText,
+	2: optional i32 maxCount
 }
 
 struct SearchCitiesResponse {

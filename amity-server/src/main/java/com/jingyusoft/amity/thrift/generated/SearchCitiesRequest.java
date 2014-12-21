@@ -39,6 +39,7 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("SearchCitiesRequest");
 
   private static final org.apache.thrift.protocol.TField SEARCH_TEXT_FIELD_DESC = new org.apache.thrift.protocol.TField("searchText", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField MAX_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("maxCount", org.apache.thrift.protocol.TType.I32, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -47,10 +48,12 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
   }
 
   public String searchText; // required
+  public int maxCount; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    SEARCH_TEXT((short)1, "searchText");
+    SEARCH_TEXT((short)1, "searchText"),
+    MAX_COUNT((short)2, "maxCount");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -67,6 +70,8 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
       switch(fieldId) {
         case 1: // SEARCH_TEXT
           return SEARCH_TEXT;
+        case 2: // MAX_COUNT
+          return MAX_COUNT;
         default:
           return null;
       }
@@ -107,11 +112,16 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
   }
 
   // isset id assignments
+  private static final int __MAXCOUNT_ISSET_ID = 0;
+  private byte __isset_bitfield = 0;
+  private static final _Fields optionals[] = {_Fields.MAX_COUNT};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.SEARCH_TEXT, new org.apache.thrift.meta_data.FieldMetaData("searchText", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.MAX_COUNT, new org.apache.thrift.meta_data.FieldMetaData("maxCount", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SearchCitiesRequest.class, metaDataMap);
   }
@@ -130,9 +140,11 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
    * Performs a deep copy on <i>other</i>.
    */
   public SearchCitiesRequest(SearchCitiesRequest other) {
+    __isset_bitfield = other.__isset_bitfield;
     if (other.isSetSearchText()) {
       this.searchText = other.searchText;
     }
+    this.maxCount = other.maxCount;
   }
 
   public SearchCitiesRequest deepCopy() {
@@ -142,6 +154,8 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
   @Override
   public void clear() {
     this.searchText = null;
+    setMaxCountIsSet(false);
+    this.maxCount = 0;
   }
 
   public String getSearchText() {
@@ -168,6 +182,29 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
     }
   }
 
+  public int getMaxCount() {
+    return this.maxCount;
+  }
+
+  public SearchCitiesRequest setMaxCount(int maxCount) {
+    this.maxCount = maxCount;
+    setMaxCountIsSet(true);
+    return this;
+  }
+
+  public void unsetMaxCount() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __MAXCOUNT_ISSET_ID);
+  }
+
+  /** Returns true if field maxCount is set (has been assigned a value) and false otherwise */
+  public boolean isSetMaxCount() {
+    return EncodingUtils.testBit(__isset_bitfield, __MAXCOUNT_ISSET_ID);
+  }
+
+  public void setMaxCountIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __MAXCOUNT_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case SEARCH_TEXT:
@@ -178,6 +215,14 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
       }
       break;
 
+    case MAX_COUNT:
+      if (value == null) {
+        unsetMaxCount();
+      } else {
+        setMaxCount((Integer)value);
+      }
+      break;
+
     }
   }
 
@@ -185,6 +230,9 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
     switch (field) {
     case SEARCH_TEXT:
       return getSearchText();
+
+    case MAX_COUNT:
+      return Integer.valueOf(getMaxCount());
 
     }
     throw new IllegalStateException();
@@ -199,6 +247,8 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
     switch (field) {
     case SEARCH_TEXT:
       return isSetSearchText();
+    case MAX_COUNT:
+      return isSetMaxCount();
     }
     throw new IllegalStateException();
   }
@@ -225,6 +275,15 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
         return false;
     }
 
+    boolean this_present_maxCount = true && this.isSetMaxCount();
+    boolean that_present_maxCount = true && that.isSetMaxCount();
+    if (this_present_maxCount || that_present_maxCount) {
+      if (!(this_present_maxCount && that_present_maxCount))
+        return false;
+      if (this.maxCount != that.maxCount)
+        return false;
+    }
+
     return true;
   }
 
@@ -236,6 +295,11 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
     list.add(present_searchText);
     if (present_searchText)
       list.add(searchText);
+
+    boolean present_maxCount = true && (isSetMaxCount());
+    list.add(present_maxCount);
+    if (present_maxCount)
+      list.add(maxCount);
 
     return list.hashCode();
   }
@@ -254,6 +318,16 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
     }
     if (isSetSearchText()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.searchText, other.searchText);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetMaxCount()).compareTo(other.isSetMaxCount());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetMaxCount()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.maxCount, other.maxCount);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -285,6 +359,12 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
       sb.append(this.searchText);
     }
     first = false;
+    if (isSetMaxCount()) {
+      if (!first) sb.append(", ");
+      sb.append("maxCount:");
+      sb.append(this.maxCount);
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -307,6 +387,8 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
+      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
@@ -339,6 +421,14 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 2: // MAX_COUNT
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.maxCount = iprot.readI32();
+              struct.setMaxCountIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -359,6 +449,11 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
         oprot.writeString(struct.searchText);
         oprot.writeFieldEnd();
       }
+      if (struct.isSetMaxCount()) {
+        oprot.writeFieldBegin(MAX_COUNT_FIELD_DESC);
+        oprot.writeI32(struct.maxCount);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -377,6 +472,14 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
     public void write(org.apache.thrift.protocol.TProtocol prot, SearchCitiesRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.searchText);
+      BitSet optionals = new BitSet();
+      if (struct.isSetMaxCount()) {
+        optionals.set(0);
+      }
+      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetMaxCount()) {
+        oprot.writeI32(struct.maxCount);
+      }
     }
 
     @Override
@@ -384,6 +487,11 @@ public class SearchCitiesRequest implements org.apache.thrift.TBase<SearchCities
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.searchText = iprot.readString();
       struct.setSearchTextIsSet(true);
+      BitSet incoming = iprot.readBitSet(1);
+      if (incoming.get(0)) {
+        struct.maxCount = iprot.readI32();
+        struct.setMaxCountIsSet(true);
+      }
     }
   }
 

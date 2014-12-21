@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +19,7 @@ import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableMap;
 import com.jingyusoft.amity.common.WrappedException;
+import com.jingyusoft.amity.data.entities.CityEntity;
 import com.jingyusoft.amity.data.repositories.CityRepository;
 import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.domain.geographics.Country;
@@ -37,7 +39,12 @@ public class CityCache {
 		@Override
 		@Transactional(propagation = Propagation.REQUIRED)
 		public City load(Integer key) throws Exception {
-			City city = new City(cityRepository.getOne(key));
+			CityEntity cityEntity = cityRepository.getOne(key);
+			if (cityEntity == null) {
+				return null;
+			}
+
+			City city = new City(cityEntity);
 
 			if (city.getCountryId() != null) {
 				Country country = countryCache.get(city.getCountryId());
@@ -73,16 +80,28 @@ public class CityCache {
 		return innerCache.equals(object);
 	}
 
-	public City get(Integer key) throws ExecutionException {
-		return innerCache.get(key);
+	public City get(Integer key) {
+		try {
+			return innerCache.get(key);
+		} catch (ExecutionException e) {
+			throw new ReferenceDataLoadException(City.class, key, e);
+		}
 	}
 
-	public City get(Integer key, Callable<? extends City> valueLoader) throws ExecutionException {
-		return innerCache.get(key, valueLoader);
+	public City get(Integer key, Callable<? extends City> valueLoader) {
+		try {
+			return innerCache.get(key, valueLoader);
+		} catch (ExecutionException e) {
+			throw new ReferenceDataLoadException(City.class, key, e);
+		}
 	}
 
-	public ImmutableMap<Integer, City> getAll(Iterable<? extends Integer> keys) throws ExecutionException {
-		return innerCache.getAll(keys);
+	public ImmutableMap<Integer, City> getAll(Iterable<? extends Integer> keys) {
+		try {
+			return innerCache.getAll(keys);
+		} catch (ExecutionException e) {
+			throw new ReferenceDataLoadException(City.class, StringUtils.join(keys, ","), e);
+		}
 	}
 
 	public ImmutableMap<Integer, City> getAllPresent(Iterable<?> keys) {

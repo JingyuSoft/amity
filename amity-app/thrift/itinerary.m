@@ -29,21 +29,21 @@
   return self;
 }
 
-- (id) initWithId: (int64_t) id userId: (int64_t) userId fromLocationid: (int32_t) fromLocationid latestPickupDate: (NSString *) latestPickupDate toLocationId: (int32_t) toLocationId latestDeliveryDate: (NSString *) latestDeliveryDate
+- (id) initWithId: (int64_t) id userId: (int64_t) userId departureCityId: (int32_t) departureCityId departureDate: (NSString *) departureDate arrivalCityId: (int32_t) arrivalCityId arrivalDate: (NSString *) arrivalDate
 {
   self = [super init];
   __id = id;
   __id_isset = YES;
   __userId = userId;
   __userId_isset = YES;
-  __fromLocationid = fromLocationid;
-  __fromLocationid_isset = YES;
-  __latestPickupDate = [latestPickupDate retain_stub];
-  __latestPickupDate_isset = YES;
-  __toLocationId = toLocationId;
-  __toLocationId_isset = YES;
-  __latestDeliveryDate = [latestDeliveryDate retain_stub];
-  __latestDeliveryDate_isset = YES;
+  __departureCityId = departureCityId;
+  __departureCityId_isset = YES;
+  __departureDate = [departureDate retain_stub];
+  __departureDate_isset = YES;
+  __arrivalCityId = arrivalCityId;
+  __arrivalCityId_isset = YES;
+  __arrivalDate = [arrivalDate retain_stub];
+  __arrivalDate_isset = YES;
   return self;
 }
 
@@ -60,25 +60,25 @@
     __userId = [decoder decodeInt64ForKey: @"userId"];
     __userId_isset = YES;
   }
-  if ([decoder containsValueForKey: @"fromLocationid"])
+  if ([decoder containsValueForKey: @"departureCityId"])
   {
-    __fromLocationid = [decoder decodeInt32ForKey: @"fromLocationid"];
-    __fromLocationid_isset = YES;
+    __departureCityId = [decoder decodeInt32ForKey: @"departureCityId"];
+    __departureCityId_isset = YES;
   }
-  if ([decoder containsValueForKey: @"latestPickupDate"])
+  if ([decoder containsValueForKey: @"departureDate"])
   {
-    __latestPickupDate = [[decoder decodeObjectForKey: @"latestPickupDate"] retain_stub];
-    __latestPickupDate_isset = YES;
+    __departureDate = [[decoder decodeObjectForKey: @"departureDate"] retain_stub];
+    __departureDate_isset = YES;
   }
-  if ([decoder containsValueForKey: @"toLocationId"])
+  if ([decoder containsValueForKey: @"arrivalCityId"])
   {
-    __toLocationId = [decoder decodeInt32ForKey: @"toLocationId"];
-    __toLocationId_isset = YES;
+    __arrivalCityId = [decoder decodeInt32ForKey: @"arrivalCityId"];
+    __arrivalCityId_isset = YES;
   }
-  if ([decoder containsValueForKey: @"latestDeliveryDate"])
+  if ([decoder containsValueForKey: @"arrivalDate"])
   {
-    __latestDeliveryDate = [[decoder decodeObjectForKey: @"latestDeliveryDate"] retain_stub];
-    __latestDeliveryDate_isset = YES;
+    __arrivalDate = [[decoder decodeObjectForKey: @"arrivalDate"] retain_stub];
+    __arrivalDate_isset = YES;
   }
   return self;
 }
@@ -93,28 +93,28 @@
   {
     [encoder encodeInt64: __userId forKey: @"userId"];
   }
-  if (__fromLocationid_isset)
+  if (__departureCityId_isset)
   {
-    [encoder encodeInt32: __fromLocationid forKey: @"fromLocationid"];
+    [encoder encodeInt32: __departureCityId forKey: @"departureCityId"];
   }
-  if (__latestPickupDate_isset)
+  if (__departureDate_isset)
   {
-    [encoder encodeObject: __latestPickupDate forKey: @"latestPickupDate"];
+    [encoder encodeObject: __departureDate forKey: @"departureDate"];
   }
-  if (__toLocationId_isset)
+  if (__arrivalCityId_isset)
   {
-    [encoder encodeInt32: __toLocationId forKey: @"toLocationId"];
+    [encoder encodeInt32: __arrivalCityId forKey: @"arrivalCityId"];
   }
-  if (__latestDeliveryDate_isset)
+  if (__arrivalDate_isset)
   {
-    [encoder encodeObject: __latestDeliveryDate forKey: @"latestDeliveryDate"];
+    [encoder encodeObject: __arrivalDate forKey: @"arrivalDate"];
   }
 }
 
 - (void) dealloc
 {
-  [__latestPickupDate release_stub];
-  [__latestDeliveryDate release_stub];
+  [__departureDate release_stub];
+  [__arrivalDate release_stub];
   [super dealloc_stub];
 }
 
@@ -152,80 +152,80 @@
   __userId_isset = NO;
 }
 
-- (int32_t) fromLocationid {
-  return __fromLocationid;
+- (int32_t) departureCityId {
+  return __departureCityId;
 }
 
-- (void) setFromLocationid: (int32_t) fromLocationid {
-  __fromLocationid = fromLocationid;
-  __fromLocationid_isset = YES;
+- (void) setDepartureCityId: (int32_t) departureCityId {
+  __departureCityId = departureCityId;
+  __departureCityId_isset = YES;
 }
 
-- (BOOL) fromLocationidIsSet {
-  return __fromLocationid_isset;
+- (BOOL) departureCityIdIsSet {
+  return __departureCityId_isset;
 }
 
-- (void) unsetFromLocationid {
-  __fromLocationid_isset = NO;
+- (void) unsetDepartureCityId {
+  __departureCityId_isset = NO;
 }
 
-- (NSString *) latestPickupDate {
-  return [[__latestPickupDate retain_stub] autorelease_stub];
+- (NSString *) departureDate {
+  return [[__departureDate retain_stub] autorelease_stub];
 }
 
-- (void) setLatestPickupDate: (NSString *) latestPickupDate {
-  [latestPickupDate retain_stub];
-  [__latestPickupDate release_stub];
-  __latestPickupDate = latestPickupDate;
-  __latestPickupDate_isset = YES;
+- (void) setDepartureDate: (NSString *) departureDate {
+  [departureDate retain_stub];
+  [__departureDate release_stub];
+  __departureDate = departureDate;
+  __departureDate_isset = YES;
 }
 
-- (BOOL) latestPickupDateIsSet {
-  return __latestPickupDate_isset;
+- (BOOL) departureDateIsSet {
+  return __departureDate_isset;
 }
 
-- (void) unsetLatestPickupDate {
-  [__latestPickupDate release_stub];
-  __latestPickupDate = nil;
-  __latestPickupDate_isset = NO;
+- (void) unsetDepartureDate {
+  [__departureDate release_stub];
+  __departureDate = nil;
+  __departureDate_isset = NO;
 }
 
-- (int32_t) toLocationId {
-  return __toLocationId;
+- (int32_t) arrivalCityId {
+  return __arrivalCityId;
 }
 
-- (void) setToLocationId: (int32_t) toLocationId {
-  __toLocationId = toLocationId;
-  __toLocationId_isset = YES;
+- (void) setArrivalCityId: (int32_t) arrivalCityId {
+  __arrivalCityId = arrivalCityId;
+  __arrivalCityId_isset = YES;
 }
 
-- (BOOL) toLocationIdIsSet {
-  return __toLocationId_isset;
+- (BOOL) arrivalCityIdIsSet {
+  return __arrivalCityId_isset;
 }
 
-- (void) unsetToLocationId {
-  __toLocationId_isset = NO;
+- (void) unsetArrivalCityId {
+  __arrivalCityId_isset = NO;
 }
 
-- (NSString *) latestDeliveryDate {
-  return [[__latestDeliveryDate retain_stub] autorelease_stub];
+- (NSString *) arrivalDate {
+  return [[__arrivalDate retain_stub] autorelease_stub];
 }
 
-- (void) setLatestDeliveryDate: (NSString *) latestDeliveryDate {
-  [latestDeliveryDate retain_stub];
-  [__latestDeliveryDate release_stub];
-  __latestDeliveryDate = latestDeliveryDate;
-  __latestDeliveryDate_isset = YES;
+- (void) setArrivalDate: (NSString *) arrivalDate {
+  [arrivalDate retain_stub];
+  [__arrivalDate release_stub];
+  __arrivalDate = arrivalDate;
+  __arrivalDate_isset = YES;
 }
 
-- (BOOL) latestDeliveryDateIsSet {
-  return __latestDeliveryDate_isset;
+- (BOOL) arrivalDateIsSet {
+  return __arrivalDate_isset;
 }
 
-- (void) unsetLatestDeliveryDate {
-  [__latestDeliveryDate release_stub];
-  __latestDeliveryDate = nil;
-  __latestDeliveryDate_isset = NO;
+- (void) unsetArrivalDate {
+  [__arrivalDate release_stub];
+  __arrivalDate = nil;
+  __arrivalDate_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -262,7 +262,7 @@
       case 3:
         if (fieldType == TType_I32) {
           int32_t fieldValue = [inProtocol readI32];
-          [self setFromLocationid: fieldValue];
+          [self setDepartureCityId: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -270,7 +270,7 @@
       case 4:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setLatestPickupDate: fieldValue];
+          [self setDepartureDate: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -278,7 +278,7 @@
       case 5:
         if (fieldType == TType_I32) {
           int32_t fieldValue = [inProtocol readI32];
-          [self setToLocationId: fieldValue];
+          [self setArrivalCityId: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -286,7 +286,7 @@
       case 6:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setLatestDeliveryDate: fieldValue];
+          [self setArrivalDate: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -312,27 +312,27 @@
     [outProtocol writeI64: __userId];
     [outProtocol writeFieldEnd];
   }
-  if (__fromLocationid_isset) {
-    [outProtocol writeFieldBeginWithName: @"fromLocationid" type: TType_I32 fieldID: 3];
-    [outProtocol writeI32: __fromLocationid];
+  if (__departureCityId_isset) {
+    [outProtocol writeFieldBeginWithName: @"departureCityId" type: TType_I32 fieldID: 3];
+    [outProtocol writeI32: __departureCityId];
     [outProtocol writeFieldEnd];
   }
-  if (__latestPickupDate_isset) {
-    if (__latestPickupDate != nil) {
-      [outProtocol writeFieldBeginWithName: @"latestPickupDate" type: TType_STRING fieldID: 4];
-      [outProtocol writeString: __latestPickupDate];
+  if (__departureDate_isset) {
+    if (__departureDate != nil) {
+      [outProtocol writeFieldBeginWithName: @"departureDate" type: TType_STRING fieldID: 4];
+      [outProtocol writeString: __departureDate];
       [outProtocol writeFieldEnd];
     }
   }
-  if (__toLocationId_isset) {
-    [outProtocol writeFieldBeginWithName: @"toLocationId" type: TType_I32 fieldID: 5];
-    [outProtocol writeI32: __toLocationId];
+  if (__arrivalCityId_isset) {
+    [outProtocol writeFieldBeginWithName: @"arrivalCityId" type: TType_I32 fieldID: 5];
+    [outProtocol writeI32: __arrivalCityId];
     [outProtocol writeFieldEnd];
   }
-  if (__latestDeliveryDate_isset) {
-    if (__latestDeliveryDate != nil) {
-      [outProtocol writeFieldBeginWithName: @"latestDeliveryDate" type: TType_STRING fieldID: 6];
-      [outProtocol writeString: __latestDeliveryDate];
+  if (__arrivalDate_isset) {
+    if (__arrivalDate != nil) {
+      [outProtocol writeFieldBeginWithName: @"arrivalDate" type: TType_STRING fieldID: 6];
+      [outProtocol writeString: __arrivalDate];
       [outProtocol writeFieldEnd];
     }
   }
@@ -346,21 +346,21 @@
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
                                reason: @"Required field 'userId' is not set."];
   }
-  if (!__fromLocationid_isset) {
+  if (!__departureCityId_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'fromLocationid' is not set."];
+                               reason: @"Required field 'departureCityId' is not set."];
   }
-  if (!__latestPickupDate_isset) {
+  if (!__departureDate_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'latestPickupDate' is not set."];
+                               reason: @"Required field 'departureDate' is not set."];
   }
-  if (!__toLocationId_isset) {
+  if (!__arrivalCityId_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'toLocationId' is not set."];
+                               reason: @"Required field 'arrivalCityId' is not set."];
   }
-  if (!__latestDeliveryDate_isset) {
+  if (!__arrivalDate_isset) {
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'latestDeliveryDate' is not set."];
+                               reason: @"Required field 'arrivalDate' is not set."];
   }
 }
 
@@ -370,14 +370,14 @@
   [ms appendFormat: @"%qi", __id];
   [ms appendString: @",userId:"];
   [ms appendFormat: @"%qi", __userId];
-  [ms appendString: @",fromLocationid:"];
-  [ms appendFormat: @"%i", __fromLocationid];
-  [ms appendString: @",latestPickupDate:"];
-  [ms appendFormat: @"\"%@\"", __latestPickupDate];
-  [ms appendString: @",toLocationId:"];
-  [ms appendFormat: @"%i", __toLocationId];
-  [ms appendString: @",latestDeliveryDate:"];
-  [ms appendFormat: @"\"%@\"", __latestDeliveryDate];
+  [ms appendString: @",departureCityId:"];
+  [ms appendFormat: @"%i", __departureCityId];
+  [ms appendString: @",departureDate:"];
+  [ms appendFormat: @"\"%@\"", __departureDate];
+  [ms appendString: @",arrivalCityId:"];
+  [ms appendFormat: @"%i", __arrivalCityId];
+  [ms appendString: @",arrivalDate:"];
+  [ms appendFormat: @"\"%@\"", __arrivalDate];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -519,7 +519,7 @@
   return self;
 }
 
-- (id) initWithErrorCode: (int32_t) errorCode itineraryId: (int32_t) itineraryId
+- (id) initWithErrorCode: (int32_t) errorCode itineraryId: (int64_t) itineraryId
 {
   self = [super init];
   __errorCode = errorCode;
@@ -539,7 +539,7 @@
   }
   if ([decoder containsValueForKey: @"itineraryId"])
   {
-    __itineraryId = [decoder decodeInt32ForKey: @"itineraryId"];
+    __itineraryId = [decoder decodeInt64ForKey: @"itineraryId"];
     __itineraryId_isset = YES;
   }
   return self;
@@ -553,7 +553,7 @@
   }
   if (__itineraryId_isset)
   {
-    [encoder encodeInt32: __itineraryId forKey: @"itineraryId"];
+    [encoder encodeInt64: __itineraryId forKey: @"itineraryId"];
   }
 }
 
@@ -579,11 +579,11 @@
   __errorCode_isset = NO;
 }
 
-- (int32_t) itineraryId {
+- (int64_t) itineraryId {
   return __itineraryId;
 }
 
-- (void) setItineraryId: (int32_t) itineraryId {
+- (void) setItineraryId: (int64_t) itineraryId {
   __itineraryId = itineraryId;
   __itineraryId_isset = YES;
 }
@@ -620,8 +620,8 @@
         }
         break;
       case 2:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
+        if (fieldType == TType_I64) {
+          int64_t fieldValue = [inProtocol readI64];
           [self setItineraryId: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
@@ -644,8 +644,8 @@
     [outProtocol writeFieldEnd];
   }
   if (__itineraryId_isset) {
-    [outProtocol writeFieldBeginWithName: @"itineraryId" type: TType_I32 fieldID: 2];
-    [outProtocol writeI32: __itineraryId];
+    [outProtocol writeFieldBeginWithName: @"itineraryId" type: TType_I64 fieldID: 2];
+    [outProtocol writeI64: __itineraryId];
     [outProtocol writeFieldEnd];
   }
   [outProtocol writeFieldStop];
@@ -669,7 +669,7 @@
   [ms appendString: @"errorCode:"];
   [ms appendFormat: @"%i", __errorCode];
   [ms appendString: @",itineraryId:"];
-  [ms appendFormat: @"%i", __itineraryId];
+  [ms appendFormat: @"%qi", __itineraryId];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

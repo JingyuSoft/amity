@@ -40,10 +40,10 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
 
   private static final org.apache.thrift.protocol.TField ID_FIELD_DESC = new org.apache.thrift.protocol.TField("id", org.apache.thrift.protocol.TType.I64, (short)1);
   private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userId", org.apache.thrift.protocol.TType.I64, (short)2);
-  private static final org.apache.thrift.protocol.TField FROM_LOCATIONID_FIELD_DESC = new org.apache.thrift.protocol.TField("fromLocationid", org.apache.thrift.protocol.TType.I32, (short)3);
-  private static final org.apache.thrift.protocol.TField LATEST_PICKUP_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("latestPickupDate", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField TO_LOCATION_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("toLocationId", org.apache.thrift.protocol.TType.I32, (short)5);
-  private static final org.apache.thrift.protocol.TField LATEST_DELIVERY_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("latestDeliveryDate", org.apache.thrift.protocol.TType.STRING, (short)6);
+  private static final org.apache.thrift.protocol.TField DEPARTURE_CITY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("departureCityId", org.apache.thrift.protocol.TType.I32, (short)3);
+  private static final org.apache.thrift.protocol.TField DEPARTURE_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("departureDate", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField ARRIVAL_CITY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("arrivalCityId", org.apache.thrift.protocol.TType.I32, (short)5);
+  private static final org.apache.thrift.protocol.TField ARRIVAL_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("arrivalDate", org.apache.thrift.protocol.TType.STRING, (short)6);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -53,19 +53,19 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
 
   public long id; // optional
   public long userId; // required
-  public int fromLocationid; // required
-  public String latestPickupDate; // required
-  public int toLocationId; // required
-  public String latestDeliveryDate; // required
+  public int departureCityId; // required
+  public String departureDate; // required
+  public int arrivalCityId; // required
+  public String arrivalDate; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     ID((short)1, "id"),
     USER_ID((short)2, "userId"),
-    FROM_LOCATIONID((short)3, "fromLocationid"),
-    LATEST_PICKUP_DATE((short)4, "latestPickupDate"),
-    TO_LOCATION_ID((short)5, "toLocationId"),
-    LATEST_DELIVERY_DATE((short)6, "latestDeliveryDate");
+    DEPARTURE_CITY_ID((short)3, "departureCityId"),
+    DEPARTURE_DATE((short)4, "departureDate"),
+    ARRIVAL_CITY_ID((short)5, "arrivalCityId"),
+    ARRIVAL_DATE((short)6, "arrivalDate");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -84,14 +84,14 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
           return ID;
         case 2: // USER_ID
           return USER_ID;
-        case 3: // FROM_LOCATIONID
-          return FROM_LOCATIONID;
-        case 4: // LATEST_PICKUP_DATE
-          return LATEST_PICKUP_DATE;
-        case 5: // TO_LOCATION_ID
-          return TO_LOCATION_ID;
-        case 6: // LATEST_DELIVERY_DATE
-          return LATEST_DELIVERY_DATE;
+        case 3: // DEPARTURE_CITY_ID
+          return DEPARTURE_CITY_ID;
+        case 4: // DEPARTURE_DATE
+          return DEPARTURE_DATE;
+        case 5: // ARRIVAL_CITY_ID
+          return ARRIVAL_CITY_ID;
+        case 6: // ARRIVAL_DATE
+          return ARRIVAL_DATE;
         default:
           return null;
       }
@@ -134,8 +134,8 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
   // isset id assignments
   private static final int __ID_ISSET_ID = 0;
   private static final int __USERID_ISSET_ID = 1;
-  private static final int __FROMLOCATIONID_ISSET_ID = 2;
-  private static final int __TOLOCATIONID_ISSET_ID = 3;
+  private static final int __DEPARTURECITYID_ISSET_ID = 2;
+  private static final int __ARRIVALCITYID_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
   private static final _Fields optionals[] = {_Fields.ID};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
@@ -145,13 +145,13 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     tmpMap.put(_Fields.USER_ID, new org.apache.thrift.meta_data.FieldMetaData("userId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
-    tmpMap.put(_Fields.FROM_LOCATIONID, new org.apache.thrift.meta_data.FieldMetaData("fromLocationid", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.DEPARTURE_CITY_ID, new org.apache.thrift.meta_data.FieldMetaData("departureCityId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
-    tmpMap.put(_Fields.LATEST_PICKUP_DATE, new org.apache.thrift.meta_data.FieldMetaData("latestPickupDate", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.DEPARTURE_DATE, new org.apache.thrift.meta_data.FieldMetaData("departureDate", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.TO_LOCATION_ID, new org.apache.thrift.meta_data.FieldMetaData("toLocationId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.ARRIVAL_CITY_ID, new org.apache.thrift.meta_data.FieldMetaData("arrivalCityId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
-    tmpMap.put(_Fields.LATEST_DELIVERY_DATE, new org.apache.thrift.meta_data.FieldMetaData("latestDeliveryDate", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.ARRIVAL_DATE, new org.apache.thrift.meta_data.FieldMetaData("arrivalDate", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(HelperItineraryDto.class, metaDataMap);
@@ -162,20 +162,20 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
 
   public HelperItineraryDto(
     long userId,
-    int fromLocationid,
-    String latestPickupDate,
-    int toLocationId,
-    String latestDeliveryDate)
+    int departureCityId,
+    String departureDate,
+    int arrivalCityId,
+    String arrivalDate)
   {
     this();
     this.userId = userId;
     setUserIdIsSet(true);
-    this.fromLocationid = fromLocationid;
-    setFromLocationidIsSet(true);
-    this.latestPickupDate = latestPickupDate;
-    this.toLocationId = toLocationId;
-    setToLocationIdIsSet(true);
-    this.latestDeliveryDate = latestDeliveryDate;
+    this.departureCityId = departureCityId;
+    setDepartureCityIdIsSet(true);
+    this.departureDate = departureDate;
+    this.arrivalCityId = arrivalCityId;
+    setArrivalCityIdIsSet(true);
+    this.arrivalDate = arrivalDate;
   }
 
   /**
@@ -185,13 +185,13 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     __isset_bitfield = other.__isset_bitfield;
     this.id = other.id;
     this.userId = other.userId;
-    this.fromLocationid = other.fromLocationid;
-    if (other.isSetLatestPickupDate()) {
-      this.latestPickupDate = other.latestPickupDate;
+    this.departureCityId = other.departureCityId;
+    if (other.isSetDepartureDate()) {
+      this.departureDate = other.departureDate;
     }
-    this.toLocationId = other.toLocationId;
-    if (other.isSetLatestDeliveryDate()) {
-      this.latestDeliveryDate = other.latestDeliveryDate;
+    this.arrivalCityId = other.arrivalCityId;
+    if (other.isSetArrivalDate()) {
+      this.arrivalDate = other.arrivalDate;
     }
   }
 
@@ -205,12 +205,12 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     this.id = 0;
     setUserIdIsSet(false);
     this.userId = 0;
-    setFromLocationidIsSet(false);
-    this.fromLocationid = 0;
-    this.latestPickupDate = null;
-    setToLocationIdIsSet(false);
-    this.toLocationId = 0;
-    this.latestDeliveryDate = null;
+    setDepartureCityIdIsSet(false);
+    this.departureCityId = 0;
+    this.departureDate = null;
+    setArrivalCityIdIsSet(false);
+    this.arrivalCityId = 0;
+    this.arrivalDate = null;
   }
 
   public long getId() {
@@ -259,97 +259,97 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __USERID_ISSET_ID, value);
   }
 
-  public int getFromLocationid() {
-    return this.fromLocationid;
+  public int getDepartureCityId() {
+    return this.departureCityId;
   }
 
-  public HelperItineraryDto setFromLocationid(int fromLocationid) {
-    this.fromLocationid = fromLocationid;
-    setFromLocationidIsSet(true);
+  public HelperItineraryDto setDepartureCityId(int departureCityId) {
+    this.departureCityId = departureCityId;
+    setDepartureCityIdIsSet(true);
     return this;
   }
 
-  public void unsetFromLocationid() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __FROMLOCATIONID_ISSET_ID);
+  public void unsetDepartureCityId() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __DEPARTURECITYID_ISSET_ID);
   }
 
-  /** Returns true if field fromLocationid is set (has been assigned a value) and false otherwise */
-  public boolean isSetFromLocationid() {
-    return EncodingUtils.testBit(__isset_bitfield, __FROMLOCATIONID_ISSET_ID);
+  /** Returns true if field departureCityId is set (has been assigned a value) and false otherwise */
+  public boolean isSetDepartureCityId() {
+    return EncodingUtils.testBit(__isset_bitfield, __DEPARTURECITYID_ISSET_ID);
   }
 
-  public void setFromLocationidIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __FROMLOCATIONID_ISSET_ID, value);
+  public void setDepartureCityIdIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __DEPARTURECITYID_ISSET_ID, value);
   }
 
-  public String getLatestPickupDate() {
-    return this.latestPickupDate;
+  public String getDepartureDate() {
+    return this.departureDate;
   }
 
-  public HelperItineraryDto setLatestPickupDate(String latestPickupDate) {
-    this.latestPickupDate = latestPickupDate;
+  public HelperItineraryDto setDepartureDate(String departureDate) {
+    this.departureDate = departureDate;
     return this;
   }
 
-  public void unsetLatestPickupDate() {
-    this.latestPickupDate = null;
+  public void unsetDepartureDate() {
+    this.departureDate = null;
   }
 
-  /** Returns true if field latestPickupDate is set (has been assigned a value) and false otherwise */
-  public boolean isSetLatestPickupDate() {
-    return this.latestPickupDate != null;
+  /** Returns true if field departureDate is set (has been assigned a value) and false otherwise */
+  public boolean isSetDepartureDate() {
+    return this.departureDate != null;
   }
 
-  public void setLatestPickupDateIsSet(boolean value) {
+  public void setDepartureDateIsSet(boolean value) {
     if (!value) {
-      this.latestPickupDate = null;
+      this.departureDate = null;
     }
   }
 
-  public int getToLocationId() {
-    return this.toLocationId;
+  public int getArrivalCityId() {
+    return this.arrivalCityId;
   }
 
-  public HelperItineraryDto setToLocationId(int toLocationId) {
-    this.toLocationId = toLocationId;
-    setToLocationIdIsSet(true);
+  public HelperItineraryDto setArrivalCityId(int arrivalCityId) {
+    this.arrivalCityId = arrivalCityId;
+    setArrivalCityIdIsSet(true);
     return this;
   }
 
-  public void unsetToLocationId() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __TOLOCATIONID_ISSET_ID);
+  public void unsetArrivalCityId() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ARRIVALCITYID_ISSET_ID);
   }
 
-  /** Returns true if field toLocationId is set (has been assigned a value) and false otherwise */
-  public boolean isSetToLocationId() {
-    return EncodingUtils.testBit(__isset_bitfield, __TOLOCATIONID_ISSET_ID);
+  /** Returns true if field arrivalCityId is set (has been assigned a value) and false otherwise */
+  public boolean isSetArrivalCityId() {
+    return EncodingUtils.testBit(__isset_bitfield, __ARRIVALCITYID_ISSET_ID);
   }
 
-  public void setToLocationIdIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TOLOCATIONID_ISSET_ID, value);
+  public void setArrivalCityIdIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ARRIVALCITYID_ISSET_ID, value);
   }
 
-  public String getLatestDeliveryDate() {
-    return this.latestDeliveryDate;
+  public String getArrivalDate() {
+    return this.arrivalDate;
   }
 
-  public HelperItineraryDto setLatestDeliveryDate(String latestDeliveryDate) {
-    this.latestDeliveryDate = latestDeliveryDate;
+  public HelperItineraryDto setArrivalDate(String arrivalDate) {
+    this.arrivalDate = arrivalDate;
     return this;
   }
 
-  public void unsetLatestDeliveryDate() {
-    this.latestDeliveryDate = null;
+  public void unsetArrivalDate() {
+    this.arrivalDate = null;
   }
 
-  /** Returns true if field latestDeliveryDate is set (has been assigned a value) and false otherwise */
-  public boolean isSetLatestDeliveryDate() {
-    return this.latestDeliveryDate != null;
+  /** Returns true if field arrivalDate is set (has been assigned a value) and false otherwise */
+  public boolean isSetArrivalDate() {
+    return this.arrivalDate != null;
   }
 
-  public void setLatestDeliveryDateIsSet(boolean value) {
+  public void setArrivalDateIsSet(boolean value) {
     if (!value) {
-      this.latestDeliveryDate = null;
+      this.arrivalDate = null;
     }
   }
 
@@ -371,35 +371,35 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
       }
       break;
 
-    case FROM_LOCATIONID:
+    case DEPARTURE_CITY_ID:
       if (value == null) {
-        unsetFromLocationid();
+        unsetDepartureCityId();
       } else {
-        setFromLocationid((Integer)value);
+        setDepartureCityId((Integer)value);
       }
       break;
 
-    case LATEST_PICKUP_DATE:
+    case DEPARTURE_DATE:
       if (value == null) {
-        unsetLatestPickupDate();
+        unsetDepartureDate();
       } else {
-        setLatestPickupDate((String)value);
+        setDepartureDate((String)value);
       }
       break;
 
-    case TO_LOCATION_ID:
+    case ARRIVAL_CITY_ID:
       if (value == null) {
-        unsetToLocationId();
+        unsetArrivalCityId();
       } else {
-        setToLocationId((Integer)value);
+        setArrivalCityId((Integer)value);
       }
       break;
 
-    case LATEST_DELIVERY_DATE:
+    case ARRIVAL_DATE:
       if (value == null) {
-        unsetLatestDeliveryDate();
+        unsetArrivalDate();
       } else {
-        setLatestDeliveryDate((String)value);
+        setArrivalDate((String)value);
       }
       break;
 
@@ -414,17 +414,17 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     case USER_ID:
       return Long.valueOf(getUserId());
 
-    case FROM_LOCATIONID:
-      return Integer.valueOf(getFromLocationid());
+    case DEPARTURE_CITY_ID:
+      return Integer.valueOf(getDepartureCityId());
 
-    case LATEST_PICKUP_DATE:
-      return getLatestPickupDate();
+    case DEPARTURE_DATE:
+      return getDepartureDate();
 
-    case TO_LOCATION_ID:
-      return Integer.valueOf(getToLocationId());
+    case ARRIVAL_CITY_ID:
+      return Integer.valueOf(getArrivalCityId());
 
-    case LATEST_DELIVERY_DATE:
-      return getLatestDeliveryDate();
+    case ARRIVAL_DATE:
+      return getArrivalDate();
 
     }
     throw new IllegalStateException();
@@ -441,14 +441,14 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
       return isSetId();
     case USER_ID:
       return isSetUserId();
-    case FROM_LOCATIONID:
-      return isSetFromLocationid();
-    case LATEST_PICKUP_DATE:
-      return isSetLatestPickupDate();
-    case TO_LOCATION_ID:
-      return isSetToLocationId();
-    case LATEST_DELIVERY_DATE:
-      return isSetLatestDeliveryDate();
+    case DEPARTURE_CITY_ID:
+      return isSetDepartureCityId();
+    case DEPARTURE_DATE:
+      return isSetDepartureDate();
+    case ARRIVAL_CITY_ID:
+      return isSetArrivalCityId();
+    case ARRIVAL_DATE:
+      return isSetArrivalDate();
     }
     throw new IllegalStateException();
   }
@@ -484,39 +484,39 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
         return false;
     }
 
-    boolean this_present_fromLocationid = true;
-    boolean that_present_fromLocationid = true;
-    if (this_present_fromLocationid || that_present_fromLocationid) {
-      if (!(this_present_fromLocationid && that_present_fromLocationid))
+    boolean this_present_departureCityId = true;
+    boolean that_present_departureCityId = true;
+    if (this_present_departureCityId || that_present_departureCityId) {
+      if (!(this_present_departureCityId && that_present_departureCityId))
         return false;
-      if (this.fromLocationid != that.fromLocationid)
-        return false;
-    }
-
-    boolean this_present_latestPickupDate = true && this.isSetLatestPickupDate();
-    boolean that_present_latestPickupDate = true && that.isSetLatestPickupDate();
-    if (this_present_latestPickupDate || that_present_latestPickupDate) {
-      if (!(this_present_latestPickupDate && that_present_latestPickupDate))
-        return false;
-      if (!this.latestPickupDate.equals(that.latestPickupDate))
+      if (this.departureCityId != that.departureCityId)
         return false;
     }
 
-    boolean this_present_toLocationId = true;
-    boolean that_present_toLocationId = true;
-    if (this_present_toLocationId || that_present_toLocationId) {
-      if (!(this_present_toLocationId && that_present_toLocationId))
+    boolean this_present_departureDate = true && this.isSetDepartureDate();
+    boolean that_present_departureDate = true && that.isSetDepartureDate();
+    if (this_present_departureDate || that_present_departureDate) {
+      if (!(this_present_departureDate && that_present_departureDate))
         return false;
-      if (this.toLocationId != that.toLocationId)
+      if (!this.departureDate.equals(that.departureDate))
         return false;
     }
 
-    boolean this_present_latestDeliveryDate = true && this.isSetLatestDeliveryDate();
-    boolean that_present_latestDeliveryDate = true && that.isSetLatestDeliveryDate();
-    if (this_present_latestDeliveryDate || that_present_latestDeliveryDate) {
-      if (!(this_present_latestDeliveryDate && that_present_latestDeliveryDate))
+    boolean this_present_arrivalCityId = true;
+    boolean that_present_arrivalCityId = true;
+    if (this_present_arrivalCityId || that_present_arrivalCityId) {
+      if (!(this_present_arrivalCityId && that_present_arrivalCityId))
         return false;
-      if (!this.latestDeliveryDate.equals(that.latestDeliveryDate))
+      if (this.arrivalCityId != that.arrivalCityId)
+        return false;
+    }
+
+    boolean this_present_arrivalDate = true && this.isSetArrivalDate();
+    boolean that_present_arrivalDate = true && that.isSetArrivalDate();
+    if (this_present_arrivalDate || that_present_arrivalDate) {
+      if (!(this_present_arrivalDate && that_present_arrivalDate))
+        return false;
+      if (!this.arrivalDate.equals(that.arrivalDate))
         return false;
     }
 
@@ -537,25 +537,25 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     if (present_userId)
       list.add(userId);
 
-    boolean present_fromLocationid = true;
-    list.add(present_fromLocationid);
-    if (present_fromLocationid)
-      list.add(fromLocationid);
+    boolean present_departureCityId = true;
+    list.add(present_departureCityId);
+    if (present_departureCityId)
+      list.add(departureCityId);
 
-    boolean present_latestPickupDate = true && (isSetLatestPickupDate());
-    list.add(present_latestPickupDate);
-    if (present_latestPickupDate)
-      list.add(latestPickupDate);
+    boolean present_departureDate = true && (isSetDepartureDate());
+    list.add(present_departureDate);
+    if (present_departureDate)
+      list.add(departureDate);
 
-    boolean present_toLocationId = true;
-    list.add(present_toLocationId);
-    if (present_toLocationId)
-      list.add(toLocationId);
+    boolean present_arrivalCityId = true;
+    list.add(present_arrivalCityId);
+    if (present_arrivalCityId)
+      list.add(arrivalCityId);
 
-    boolean present_latestDeliveryDate = true && (isSetLatestDeliveryDate());
-    list.add(present_latestDeliveryDate);
-    if (present_latestDeliveryDate)
-      list.add(latestDeliveryDate);
+    boolean present_arrivalDate = true && (isSetArrivalDate());
+    list.add(present_arrivalDate);
+    if (present_arrivalDate)
+      list.add(arrivalDate);
 
     return list.hashCode();
   }
@@ -588,42 +588,42 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetFromLocationid()).compareTo(other.isSetFromLocationid());
+    lastComparison = Boolean.valueOf(isSetDepartureCityId()).compareTo(other.isSetDepartureCityId());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetFromLocationid()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fromLocationid, other.fromLocationid);
+    if (isSetDepartureCityId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.departureCityId, other.departureCityId);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetLatestPickupDate()).compareTo(other.isSetLatestPickupDate());
+    lastComparison = Boolean.valueOf(isSetDepartureDate()).compareTo(other.isSetDepartureDate());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetLatestPickupDate()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.latestPickupDate, other.latestPickupDate);
+    if (isSetDepartureDate()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.departureDate, other.departureDate);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetToLocationId()).compareTo(other.isSetToLocationId());
+    lastComparison = Boolean.valueOf(isSetArrivalCityId()).compareTo(other.isSetArrivalCityId());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetToLocationId()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.toLocationId, other.toLocationId);
+    if (isSetArrivalCityId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.arrivalCityId, other.arrivalCityId);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetLatestDeliveryDate()).compareTo(other.isSetLatestDeliveryDate());
+    lastComparison = Boolean.valueOf(isSetArrivalDate()).compareTo(other.isSetArrivalDate());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetLatestDeliveryDate()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.latestDeliveryDate, other.latestDeliveryDate);
+    if (isSetArrivalDate()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.arrivalDate, other.arrivalDate);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -658,27 +658,27 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     sb.append(this.userId);
     first = false;
     if (!first) sb.append(", ");
-    sb.append("fromLocationid:");
-    sb.append(this.fromLocationid);
+    sb.append("departureCityId:");
+    sb.append(this.departureCityId);
     first = false;
     if (!first) sb.append(", ");
-    sb.append("latestPickupDate:");
-    if (this.latestPickupDate == null) {
+    sb.append("departureDate:");
+    if (this.departureDate == null) {
       sb.append("null");
     } else {
-      sb.append(this.latestPickupDate);
+      sb.append(this.departureDate);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("toLocationId:");
-    sb.append(this.toLocationId);
+    sb.append("arrivalCityId:");
+    sb.append(this.arrivalCityId);
     first = false;
     if (!first) sb.append(", ");
-    sb.append("latestDeliveryDate:");
-    if (this.latestDeliveryDate == null) {
+    sb.append("arrivalDate:");
+    if (this.arrivalDate == null) {
       sb.append("null");
     } else {
-      sb.append(this.latestDeliveryDate);
+      sb.append(this.arrivalDate);
     }
     first = false;
     sb.append(")");
@@ -688,13 +688,13 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // alas, we cannot check 'userId' because it's a primitive and you chose the non-beans generator.
-    // alas, we cannot check 'fromLocationid' because it's a primitive and you chose the non-beans generator.
-    if (latestPickupDate == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'latestPickupDate' was not present! Struct: " + toString());
+    // alas, we cannot check 'departureCityId' because it's a primitive and you chose the non-beans generator.
+    if (departureDate == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'departureDate' was not present! Struct: " + toString());
     }
-    // alas, we cannot check 'toLocationId' because it's a primitive and you chose the non-beans generator.
-    if (latestDeliveryDate == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'latestDeliveryDate' was not present! Struct: " + toString());
+    // alas, we cannot check 'arrivalCityId' because it's a primitive and you chose the non-beans generator.
+    if (arrivalDate == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'arrivalDate' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -751,34 +751,34 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // FROM_LOCATIONID
+          case 3: // DEPARTURE_CITY_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.fromLocationid = iprot.readI32();
-              struct.setFromLocationidIsSet(true);
+              struct.departureCityId = iprot.readI32();
+              struct.setDepartureCityIdIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // LATEST_PICKUP_DATE
+          case 4: // DEPARTURE_DATE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.latestPickupDate = iprot.readString();
-              struct.setLatestPickupDateIsSet(true);
+              struct.departureDate = iprot.readString();
+              struct.setDepartureDateIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // TO_LOCATION_ID
+          case 5: // ARRIVAL_CITY_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.toLocationId = iprot.readI32();
-              struct.setToLocationIdIsSet(true);
+              struct.arrivalCityId = iprot.readI32();
+              struct.setArrivalCityIdIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // LATEST_DELIVERY_DATE
+          case 6: // ARRIVAL_DATE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.latestDeliveryDate = iprot.readString();
-              struct.setLatestDeliveryDateIsSet(true);
+              struct.arrivalDate = iprot.readString();
+              struct.setArrivalDateIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -794,11 +794,11 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
       if (!struct.isSetUserId()) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'userId' was not found in serialized data! Struct: " + toString());
       }
-      if (!struct.isSetFromLocationid()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'fromLocationid' was not found in serialized data! Struct: " + toString());
+      if (!struct.isSetDepartureCityId()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'departureCityId' was not found in serialized data! Struct: " + toString());
       }
-      if (!struct.isSetToLocationId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'toLocationId' was not found in serialized data! Struct: " + toString());
+      if (!struct.isSetArrivalCityId()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'arrivalCityId' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
@@ -815,20 +815,20 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
       oprot.writeFieldBegin(USER_ID_FIELD_DESC);
       oprot.writeI64(struct.userId);
       oprot.writeFieldEnd();
-      oprot.writeFieldBegin(FROM_LOCATIONID_FIELD_DESC);
-      oprot.writeI32(struct.fromLocationid);
+      oprot.writeFieldBegin(DEPARTURE_CITY_ID_FIELD_DESC);
+      oprot.writeI32(struct.departureCityId);
       oprot.writeFieldEnd();
-      if (struct.latestPickupDate != null) {
-        oprot.writeFieldBegin(LATEST_PICKUP_DATE_FIELD_DESC);
-        oprot.writeString(struct.latestPickupDate);
+      if (struct.departureDate != null) {
+        oprot.writeFieldBegin(DEPARTURE_DATE_FIELD_DESC);
+        oprot.writeString(struct.departureDate);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(TO_LOCATION_ID_FIELD_DESC);
-      oprot.writeI32(struct.toLocationId);
+      oprot.writeFieldBegin(ARRIVAL_CITY_ID_FIELD_DESC);
+      oprot.writeI32(struct.arrivalCityId);
       oprot.writeFieldEnd();
-      if (struct.latestDeliveryDate != null) {
-        oprot.writeFieldBegin(LATEST_DELIVERY_DATE_FIELD_DESC);
-        oprot.writeString(struct.latestDeliveryDate);
+      if (struct.arrivalDate != null) {
+        oprot.writeFieldBegin(ARRIVAL_DATE_FIELD_DESC);
+        oprot.writeString(struct.arrivalDate);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -849,10 +849,10 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
     public void write(org.apache.thrift.protocol.TProtocol prot, HelperItineraryDto struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.userId);
-      oprot.writeI32(struct.fromLocationid);
-      oprot.writeString(struct.latestPickupDate);
-      oprot.writeI32(struct.toLocationId);
-      oprot.writeString(struct.latestDeliveryDate);
+      oprot.writeI32(struct.departureCityId);
+      oprot.writeString(struct.departureDate);
+      oprot.writeI32(struct.arrivalCityId);
+      oprot.writeString(struct.arrivalDate);
       BitSet optionals = new BitSet();
       if (struct.isSetId()) {
         optionals.set(0);
@@ -868,14 +868,14 @@ public class HelperItineraryDto implements org.apache.thrift.TBase<HelperItinera
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.userId = iprot.readI64();
       struct.setUserIdIsSet(true);
-      struct.fromLocationid = iprot.readI32();
-      struct.setFromLocationidIsSet(true);
-      struct.latestPickupDate = iprot.readString();
-      struct.setLatestPickupDateIsSet(true);
-      struct.toLocationId = iprot.readI32();
-      struct.setToLocationIdIsSet(true);
-      struct.latestDeliveryDate = iprot.readString();
-      struct.setLatestDeliveryDateIsSet(true);
+      struct.departureCityId = iprot.readI32();
+      struct.setDepartureCityIdIsSet(true);
+      struct.departureDate = iprot.readString();
+      struct.setDepartureDateIsSet(true);
+      struct.arrivalCityId = iprot.readI32();
+      struct.setArrivalCityIdIsSet(true);
+      struct.arrivalDate = iprot.readString();
+      struct.setArrivalDateIsSet(true);
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         struct.id = iprot.readI64();

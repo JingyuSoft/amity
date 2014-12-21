@@ -4,10 +4,10 @@ namespace java com.jingyusoft.amity.thrift.generated
 struct HelperItineraryDto {
 	1: optional i64 id,
 	2: required i64 userId,
-	3: required i32 fromLocationid,
-	4: required string latestPickupDate,
-	5: required i32 toLocationId,
-	6: required string latestDeliveryDate
+	3: required i32 departureCityId,
+	4: required string departureDate,
+	5: required i32 arrivalCityId,
+	6: required string arrivalDate
 }
 
 struct CreateHelperItineraryRequest {
@@ -16,7 +16,7 @@ struct CreateHelperItineraryRequest {
 
 struct CreateHelperItineraryResponse {
 	1: required i32 errorCode,
-	2: required i32 itineraryId
+	2: required i64 itineraryId
 }
 
 service ItineraryThriftService {

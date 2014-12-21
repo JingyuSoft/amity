@@ -186,4 +186,9 @@ public class AmityUser {
 
 		return entity;
 	}
+
+	@Override
+	public String toString() {
+		return "AmityUser [id=" + id + ", emailAddress=" + emailAddress + "]";
+	}
 }

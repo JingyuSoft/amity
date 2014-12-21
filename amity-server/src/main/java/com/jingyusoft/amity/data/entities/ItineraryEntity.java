@@ -31,77 +31,45 @@ public class ItineraryEntity {
 	private AmityUserEntity user;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "from_city", foreignKey = @ForeignKey(name = "fk_help_request_from_city"))
+	@JoinColumn(name = "departure_city", foreignKey = @ForeignKey(name = "fk_itinerary_from_city"))
 	@Audited(withModifiedFlag = true)
-	private CityEntity fromCity;
-
-	@Column(name = "from_latitude", nullable = true)
-	@Audited(withModifiedFlag = true)
-	private Double fromLatitude;
-
-	@Column(name = "from_longitude", nullable = true)
-	@Audited(withModifiedFlag = true)
-	private Double fromLongitude;
+	private CityEntity departureCity;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "to_city", foreignKey = @ForeignKey(name = "fk_help_request_to_city"))
+	@JoinColumn(name = "arrival_city", foreignKey = @ForeignKey(name = "fk_itinerary_to_city"))
 	@Audited(withModifiedFlag = true)
-	private CityEntity toCity;
+	private CityEntity arrivalCity;
 
-	@Column(name = "to_latitude", nullable = true)
-	@Audited(withModifiedFlag = true)
-	private Double toLatitude;
-
-	@Column(name = "to_longitude", nullable = true)
-	@Audited(withModifiedFlag = true)
-	private Double toLongitude;
-
-	@Column(name = "from_date", columnDefinition = "DATE")
+	@Column(name = "departure_date", columnDefinition = "DATE", nullable = false)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	private DateTime fromDate;
+	private DateTime departureDate;
 
-	@Column(name = "to_date", columnDefinition = "DATE")
+	@Column(name = "arrival_date", columnDefinition = "DATE", nullable = false)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	private DateTime toDate;
+	private DateTime arrivalDate;
 
 	@Version
 	@Column(name = "version_lock")
 	private long versionLock;
 
-	public CityEntity getFromCity() {
-		return fromCity;
+	public CityEntity getArrivalCity() {
+		return arrivalCity;
 	}
 
-	public DateTime getFromDate() {
-		return fromDate;
+	public DateTime getArrivalDate() {
+		return arrivalDate;
 	}
 
-	public Double getFromLatitude() {
-		return fromLatitude;
+	public CityEntity getDepartureCity() {
+		return departureCity;
 	}
 
-	public Double getFromLongitude() {
-		return fromLongitude;
+	public DateTime getDepartureDate() {
+		return departureDate;
 	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public CityEntity getToCity() {
-		return toCity;
-	}
-
-	public DateTime getToDate() {
-		return toDate;
-	}
-
-	public Double getToLatitude() {
-		return toLatitude;
-	}
-
-	public Double getToLongitude() {
-		return toLongitude;
 	}
 
 	public AmityUserEntity getUser() {
@@ -112,40 +80,24 @@ public class ItineraryEntity {
 		return versionLock;
 	}
 
-	public void setFromCity(CityEntity fromCity) {
-		this.fromCity = fromCity;
+	public void setArrivalCity(CityEntity arrivalCity) {
+		this.arrivalCity = arrivalCity;
 	}
 
-	public void setFromDate(DateTime fromDate) {
-		this.fromDate = fromDate;
+	public void setArrivalDate(DateTime arrivalDate) {
+		this.arrivalDate = arrivalDate;
 	}
 
-	public void setFromLatitude(Double fromLatitude) {
-		this.fromLatitude = fromLatitude;
+	public void setDepartureCity(CityEntity departureCity) {
+		this.departureCity = departureCity;
 	}
 
-	public void setFromLongitude(Double fromLongitude) {
-		this.fromLongitude = fromLongitude;
+	public void setDepartureDate(DateTime departureDate) {
+		this.departureDate = departureDate;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public void setToCity(CityEntity toCity) {
-		this.toCity = toCity;
-	}
-
-	public void setToDate(DateTime toDate) {
-		this.toDate = toDate;
-	}
-
-	public void setToLatitude(Double toLatitude) {
-		this.toLatitude = toLatitude;
-	}
-
-	public void setToLongitude(Double toLongitude) {
-		this.toLongitude = toLongitude;
 	}
 
 	public void setUser(AmityUserEntity user) {

@@ -39,7 +39,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("CreateHelperItineraryResponse");
 
   private static final org.apache.thrift.protocol.TField ERROR_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("errorCode", org.apache.thrift.protocol.TType.I32, (short)1);
-  private static final org.apache.thrift.protocol.TField ITINERARY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("itineraryId", org.apache.thrift.protocol.TType.I32, (short)2);
+  private static final org.apache.thrift.protocol.TField ITINERARY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("itineraryId", org.apache.thrift.protocol.TType.I64, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,7 +48,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
   }
 
   public int errorCode; // required
-  public int itineraryId; // required
+  public long itineraryId; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -121,7 +121,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
     tmpMap.put(_Fields.ERROR_CODE, new org.apache.thrift.meta_data.FieldMetaData("errorCode", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.ITINERARY_ID, new org.apache.thrift.meta_data.FieldMetaData("itineraryId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(CreateHelperItineraryResponse.class, metaDataMap);
   }
@@ -131,7 +131,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
 
   public CreateHelperItineraryResponse(
     int errorCode,
-    int itineraryId)
+    long itineraryId)
   {
     this();
     this.errorCode = errorCode;
@@ -184,11 +184,11 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ERRORCODE_ISSET_ID, value);
   }
 
-  public int getItineraryId() {
+  public long getItineraryId() {
     return this.itineraryId;
   }
 
-  public CreateHelperItineraryResponse setItineraryId(int itineraryId) {
+  public CreateHelperItineraryResponse setItineraryId(long itineraryId) {
     this.itineraryId = itineraryId;
     setItineraryIdIsSet(true);
     return this;
@@ -221,7 +221,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
       if (value == null) {
         unsetItineraryId();
       } else {
-        setItineraryId((Integer)value);
+        setItineraryId((Long)value);
       }
       break;
 
@@ -234,7 +234,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
       return Integer.valueOf(getErrorCode());
 
     case ITINERARY_ID:
-      return Integer.valueOf(getItineraryId());
+      return Long.valueOf(getItineraryId());
 
     }
     throw new IllegalStateException();
@@ -417,8 +417,8 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
             }
             break;
           case 2: // ITINERARY_ID
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.itineraryId = iprot.readI32();
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.itineraryId = iprot.readI64();
               struct.setItineraryIdIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -449,7 +449,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
       oprot.writeI32(struct.errorCode);
       oprot.writeFieldEnd();
       oprot.writeFieldBegin(ITINERARY_ID_FIELD_DESC);
-      oprot.writeI32(struct.itineraryId);
+      oprot.writeI64(struct.itineraryId);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -469,7 +469,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
     public void write(org.apache.thrift.protocol.TProtocol prot, CreateHelperItineraryResponse struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI32(struct.errorCode);
-      oprot.writeI32(struct.itineraryId);
+      oprot.writeI64(struct.itineraryId);
     }
 
     @Override
@@ -477,7 +477,7 @@ public class CreateHelperItineraryResponse implements org.apache.thrift.TBase<Cr
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.errorCode = iprot.readI32();
       struct.setErrorCodeIsSet(true);
-      struct.itineraryId = iprot.readI32();
+      struct.itineraryId = iprot.readI64();
       struct.setItineraryIdIsSet(true);
     }
   }

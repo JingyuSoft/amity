@@ -20,30 +20,30 @@
 @interface HelperItineraryDto : NSObject <TBase, NSCoding> {
   int64_t __id;
   int64_t __userId;
-  int32_t __fromLocationid;
-  NSString * __latestPickupDate;
-  int32_t __toLocationId;
-  NSString * __latestDeliveryDate;
+  int32_t __departureCityId;
+  NSString * __departureDate;
+  int32_t __arrivalCityId;
+  NSString * __arrivalDate;
 
   BOOL __id_isset;
   BOOL __userId_isset;
-  BOOL __fromLocationid_isset;
-  BOOL __latestPickupDate_isset;
-  BOOL __toLocationId_isset;
-  BOOL __latestDeliveryDate_isset;
+  BOOL __departureCityId_isset;
+  BOOL __departureDate_isset;
+  BOOL __arrivalCityId_isset;
+  BOOL __arrivalDate_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, getter=id, setter=setId:) int64_t id;
 @property (nonatomic, getter=userId, setter=setUserId:) int64_t userId;
-@property (nonatomic, getter=fromLocationid, setter=setFromLocationid:) int32_t fromLocationid;
-@property (nonatomic, retain, getter=latestPickupDate, setter=setLatestPickupDate:) NSString * latestPickupDate;
-@property (nonatomic, getter=toLocationId, setter=setToLocationId:) int32_t toLocationId;
-@property (nonatomic, retain, getter=latestDeliveryDate, setter=setLatestDeliveryDate:) NSString * latestDeliveryDate;
+@property (nonatomic, getter=departureCityId, setter=setDepartureCityId:) int32_t departureCityId;
+@property (nonatomic, retain, getter=departureDate, setter=setDepartureDate:) NSString * departureDate;
+@property (nonatomic, getter=arrivalCityId, setter=setArrivalCityId:) int32_t arrivalCityId;
+@property (nonatomic, retain, getter=arrivalDate, setter=setArrivalDate:) NSString * arrivalDate;
 #endif
 
 - (id) init;
-- (id) initWithId: (int64_t) id userId: (int64_t) userId fromLocationid: (int32_t) fromLocationid latestPickupDate: (NSString *) latestPickupDate toLocationId: (int32_t) toLocationId latestDeliveryDate: (NSString *) latestDeliveryDate;
+- (id) initWithId: (int64_t) id userId: (int64_t) userId departureCityId: (int32_t) departureCityId departureDate: (NSString *) departureDate arrivalCityId: (int32_t) arrivalCityId arrivalDate: (NSString *) arrivalDate;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -63,28 +63,28 @@
 - (BOOL) userIdIsSet;
 
 #if !__has_feature(objc_arc)
-- (int32_t) fromLocationid;
-- (void) setFromLocationid: (int32_t) fromLocationid;
+- (int32_t) departureCityId;
+- (void) setDepartureCityId: (int32_t) departureCityId;
 #endif
-- (BOOL) fromLocationidIsSet;
+- (BOOL) departureCityIdIsSet;
 
 #if !__has_feature(objc_arc)
-- (NSString *) latestPickupDate;
-- (void) setLatestPickupDate: (NSString *) latestPickupDate;
+- (NSString *) departureDate;
+- (void) setDepartureDate: (NSString *) departureDate;
 #endif
-- (BOOL) latestPickupDateIsSet;
+- (BOOL) departureDateIsSet;
 
 #if !__has_feature(objc_arc)
-- (int32_t) toLocationId;
-- (void) setToLocationId: (int32_t) toLocationId;
+- (int32_t) arrivalCityId;
+- (void) setArrivalCityId: (int32_t) arrivalCityId;
 #endif
-- (BOOL) toLocationIdIsSet;
+- (BOOL) arrivalCityIdIsSet;
 
 #if !__has_feature(objc_arc)
-- (NSString *) latestDeliveryDate;
-- (void) setLatestDeliveryDate: (NSString *) latestDeliveryDate;
+- (NSString *) arrivalDate;
+- (void) setArrivalDate: (NSString *) arrivalDate;
 #endif
-- (BOOL) latestDeliveryDateIsSet;
+- (BOOL) arrivalDateIsSet;
 
 @end
 
@@ -116,7 +116,7 @@
 
 @interface CreateHelperItineraryResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
-  int32_t __itineraryId;
+  int64_t __itineraryId;
 
   BOOL __errorCode_isset;
   BOOL __itineraryId_isset;
@@ -124,11 +124,11 @@
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
-@property (nonatomic, getter=itineraryId, setter=setItineraryId:) int32_t itineraryId;
+@property (nonatomic, getter=itineraryId, setter=setItineraryId:) int64_t itineraryId;
 #endif
 
 - (id) init;
-- (id) initWithErrorCode: (int32_t) errorCode itineraryId: (int32_t) itineraryId;
+- (id) initWithErrorCode: (int32_t) errorCode itineraryId: (int64_t) itineraryId;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -142,8 +142,8 @@
 - (BOOL) errorCodeIsSet;
 
 #if !__has_feature(objc_arc)
-- (int32_t) itineraryId;
-- (void) setItineraryId: (int32_t) itineraryId;
+- (int64_t) itineraryId;
+- (void) setItineraryId: (int64_t) itineraryId;
 #endif
 - (BOOL) itineraryIdIsSet;
 

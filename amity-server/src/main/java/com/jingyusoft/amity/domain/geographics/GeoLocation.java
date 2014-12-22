@@ -29,4 +29,9 @@ public class GeoLocation {
 	public double getLongitude() {
 		return longitude;
 	}
+
+	@Override
+	public String toString() {
+		return "[" + latitude + ", " + longitude + "]";
+	}
 }

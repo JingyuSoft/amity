@@ -1,6 +1,7 @@
 package com.jingyusoft.amity.programs;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.code.geocoder.model.GeocodeResponse;
-import com.google.code.geocoder.model.GeocoderResult;
+import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.domain.geographics.GeoLocation;
 import com.jingyusoft.amity.services.GoogleGeoService;
 
@@ -44,6 +45,11 @@ public class GeoCoderConsole extends TestConsoleBase {
 		public double getLongitude() {
 			return longitude;
 		}
+
+		@Override
+		public String toString() {
+			return StringMessage.with("{} ({}, {})", cityName, latitude, longitude);
+		}
 	}
 
 	@Resource
@@ -57,7 +63,7 @@ public class GeoCoderConsole extends TestConsoleBase {
 	protected void startConsole() {
 
 		Query query = entityManager
-				.createNativeQuery("SELECT concat(ifnull(ci.display_name, ci.city_name), ', ', co.country_name), ci.latitude, ci.longitude FROM city ci INNER JOIN country co ON ci.country_id = co.id limit 10000");
+				.createNativeQuery("SELECT concat(ifnull(ci.display_name, ci.city_name), ', ', co.country_name), ci.latitude, ci.longitude FROM city ci INNER JOIN country co ON ci.country_id = co.id AND co.country_name = 'China' limit 100");
 
 		@SuppressWarnings("unchecked")
 		List<Object[]> list = query.getResultList();
@@ -68,17 +74,25 @@ public class GeoCoderConsole extends TestConsoleBase {
 
 		for (HelperCity city : helpers) {
 
+			GeoLocation amityLocation = GeoLocation.from(city.getLatitude(), city.getLongitude());
+
 			GeocodeResponse geocoderResponse = googleGeoService.search(city.getCityName());
-			for (GeocoderResult result : geocoderResponse.getResults()) {
+			List<GeoLocation> googleLocations = geocoderResponse
+					.getResults()
+					.stream()
+					.map(item -> GeoLocation.from(item.getGeometry().getLocation().getLat().doubleValue(), item
+							.getGeometry().getLocation().getLng().doubleValue())).collect(Collectors.toList());
+
+			Optional<GeoLocation> googleLocationOptional = googleLocations.stream().min(
+					(a, b) -> amityLocation.distanceTo(a) <= amityLocation.distanceTo(b) ? -1 : 1);
+
+			if (googleLocationOptional.isPresent()) {
+				GeoLocation googleLocation = googleLocationOptional.get();
+
 				StringBuilder sb = new StringBuilder();
 				sb.append(StringUtils.rightPad(city.getCityName(), 40));
 
-				GeoLocation amityLocation = GeoLocation.from(city.getLatitude(), city.getLongitude());
 				sb.append(StringUtils.rightPad(amityLocation.toString(), 30));
-
-				GeoLocation googleLocation = GeoLocation.from(
-						result.getGeometry().getLocation().getLat().doubleValue(), result.getGeometry().getLocation()
-								.getLng().doubleValue());
 				sb.append(StringUtils.rightPad(googleLocation.toString(), 30));
 
 				double distance = amityLocation.distanceTo(googleLocation);

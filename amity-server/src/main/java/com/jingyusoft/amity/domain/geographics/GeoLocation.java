@@ -1,5 +1,7 @@
 package com.jingyusoft.amity.domain.geographics;
 
+import java.text.DecimalFormat;
+
 import net.jcip.annotations.Immutable;
 
 @Immutable
@@ -32,6 +34,7 @@ public class GeoLocation {
 
 	@Override
 	public String toString() {
-		return "[" + latitude + ", " + longitude + "]";
+		DecimalFormat df = new DecimalFormat("#.####");
+		return "[" + df.format(latitude) + ", " + df.format(longitude) + "]";
 	}
 }

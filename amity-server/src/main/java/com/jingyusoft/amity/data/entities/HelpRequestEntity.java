@@ -26,6 +26,10 @@ public class HelpRequestEntity {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_help_request_user"))
+	private AmityUserEntity amityUser;
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "from_city", foreignKey = @ForeignKey(name = "fk_help_request_from_city"))
 	@Audited(withModifiedFlag = true)
 	private CityEntity fromCity;
@@ -51,24 +55,28 @@ public class HelpRequestEntity {
 	@Audited(withModifiedFlag = true)
 	private Double toLongitude;
 
-	@Column(name = "from_date", columnDefinition = "DATE")
+	@Column(name = "from_date_time")
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	private DateTime fromDate;
+	private DateTime fromDateTime;
 
-	@Column(name = "to_date", columnDefinition = "DATE")
+	@Column(name = "to_date_time")
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	private DateTime toDate;
+	private DateTime toDateTime;
 
 	@Version
 	@Column(name = "version_lock")
 	private long versionLock;
 
+	public AmityUserEntity getAmityUser() {
+		return amityUser;
+	}
+
 	public CityEntity getFromCity() {
 		return fromCity;
 	}
 
-	public DateTime getFromDate() {
-		return fromDate;
+	public DateTime getFromDateTime() {
+		return fromDateTime;
 	}
 
 	public Double getFromLatitude() {
@@ -87,8 +95,8 @@ public class HelpRequestEntity {
 		return toCity;
 	}
 
-	public DateTime getToDate() {
-		return toDate;
+	public DateTime getToDateTime() {
+		return toDateTime;
 	}
 
 	public Double getToLatitude() {
@@ -103,12 +111,16 @@ public class HelpRequestEntity {
 		return versionLock;
 	}
 
+	public void setAmityUser(AmityUserEntity amityUser) {
+		this.amityUser = amityUser;
+	}
+
 	public void setFromCity(CityEntity fromCity) {
 		this.fromCity = fromCity;
 	}
 
-	public void setFromDate(DateTime fromDate) {
-		this.fromDate = fromDate;
+	public void setFromDateTime(DateTime fromDateTime) {
+		this.fromDateTime = fromDateTime;
 	}
 
 	public void setFromLatitude(Double fromLatitude) {
@@ -127,8 +139,8 @@ public class HelpRequestEntity {
 		this.toCity = toCity;
 	}
 
-	public void setToDate(DateTime toDate) {
-		this.toDate = toDate;
+	public void setToDateTime(DateTime toDateTime) {
+		this.toDateTime = toDateTime;
 	}
 
 	public void setToLatitude(Double toLatitude) {

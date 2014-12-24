@@ -14,6 +14,7 @@ import com.jingyusoft.amity.data.dao.UserAccountDao;
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
 import com.jingyusoft.amity.data.repositories.AmityUserRepository;
 import com.jingyusoft.amity.domain.AmityUser;
+import com.jingyusoft.amity.domain.AmityUserType;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -52,6 +53,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public AmityUser registerAmityUser(String emailAddress, String password) {
 		AmityUserEntity amityUserEntity = new AmityUserEntity();
+		amityUserEntity.setUserType(AmityUserType.AMITY.getCode());
 		amityUserEntity.setEmailAddress(emailAddress);
 		amityUserEntity.setPasswordSand(SecurityUtils.generateRandomString(16));
 		final String encryptedPassword = AuthenticationUtils.encryptPassword(password,

@@ -18,6 +18,7 @@
 		base-package="com.jingyusoft.amity.authentication,
 					  com.jingyusoft.amity.data,
 		              com.jingyusoft.amity.repository,
+		              com.jingyusoft.amity.services,
 		              com.jingyusoft.amity.refdata,
 		              com.jingyusoft.amity.users" />
 

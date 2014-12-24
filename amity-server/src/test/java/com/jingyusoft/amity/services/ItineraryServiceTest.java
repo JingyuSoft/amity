@@ -2,12 +2,20 @@ package com.jingyusoft.amity.services;
 
 import javax.annotation.Resource;
 
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.joda.time.DateTime;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
+import com.jingyusoft.amity.domain.AmityUser;
+import com.jingyusoft.amity.domain.Itinerary;
+import com.jingyusoft.amity.refdata.CitySearcher;
 import com.jingyusoft.amity.users.UserAccountService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,7 +28,17 @@ public class ItineraryServiceTest {
 	@Resource
 	private UserAccountService userAccountService;
 
+	@Resource
+	private CitySearcher citySearcher;
+
 	@Test
-	public void testItineraryCrud() {
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void testItineraryCrud() throws ParseException {
+		AmityUser amityUser = userAccountService.registerAmityUser("univer.shi@gmail.com", "dummy");
+		int departureCity = citySearcher.searchCities("Beijing", 1).get(0).getId();
+		int arrivalCity = citySearcher.searchCities("Shanghai", 1).get(0).getId();
+		Itinerary itinerary = itineraryService.createItinerary(amityUser.getId(), departureCity, DateTime.now(),
+				arrivalCity, DateTime.now());
+		Assert.assertNotNull(itinerary);
 	}
 }

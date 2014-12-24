@@ -18,6 +18,9 @@ DROP TABLE IF EXISTS `itinerary`;
 DROP TABLE IF EXISTS `facebook_user`;
 DROP TABLE IF EXISTS `amity_user`;
 
+--
+-- Tables below are reference data tables and require additional effort to setup
+--
 DROP TABLE IF EXISTS `city`;
 DROP TABLE IF EXISTS `region`;
 DROP TABLE IF EXISTS `country`;

@@ -194,7 +194,6 @@ public class ThriftClientFactory {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private synchronized <U> void returnClient(final U client, final HostPort hostPort) {
 
 		final String clientClassName = client.getClass().getName();

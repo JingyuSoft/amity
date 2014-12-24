@@ -40,13 +40,13 @@ public class ItineraryEntity {
 	@Audited(withModifiedFlag = true)
 	private CityEntity arrivalCity;
 
-	@Column(name = "departure_date", columnDefinition = "DATE", nullable = false)
+	@Column(name = "departure_date_time", nullable = false)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	private DateTime departureDate;
+	private DateTime departureDateTime;
 
-	@Column(name = "arrival_date", columnDefinition = "DATE", nullable = false)
+	@Column(name = "arrival_date_time", nullable = false)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
-	private DateTime arrivalDate;
+	private DateTime arrivalDateTime;
 
 	@Version
 	@Column(name = "version_lock")
@@ -56,16 +56,16 @@ public class ItineraryEntity {
 		return arrivalCity;
 	}
 
-	public DateTime getArrivalDate() {
-		return arrivalDate;
+	public DateTime getArrivalDateTime() {
+		return arrivalDateTime;
 	}
 
 	public CityEntity getDepartureCity() {
 		return departureCity;
 	}
 
-	public DateTime getDepartureDate() {
-		return departureDate;
+	public DateTime getDepartureDateTime() {
+		return departureDateTime;
 	}
 
 	public Long getId() {
@@ -84,16 +84,16 @@ public class ItineraryEntity {
 		this.arrivalCity = arrivalCity;
 	}
 
-	public void setArrivalDate(DateTime arrivalDate) {
-		this.arrivalDate = arrivalDate;
+	public void setArrivalDateTime(DateTime arrivalDateTime) {
+		this.arrivalDateTime = arrivalDateTime;
 	}
 
 	public void setDepartureCity(CityEntity departureCity) {
 		this.departureCity = departureCity;
 	}
 
-	public void setDepartureDate(DateTime departureDate) {
-		this.departureDate = departureDate;
+	public void setDepartureDateTime(DateTime departureDateTime) {
+		this.departureDateTime = departureDateTime;
 	}
 
 	public void setId(Long id) {

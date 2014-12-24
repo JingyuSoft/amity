@@ -13,19 +13,19 @@ public class Itinerary {
 
 	private City departureCity;
 
-	private DateTime departureDate;
+	private DateTime departureDateTime;
 
 	private City arrivalCity;
 
-	private DateTime arrivalDate;
+	private DateTime arrivalDateTime;
 
 	public Itinerary(final ItineraryEntity entity) {
 		itineraryId = entity.getId();
 		amityUser = new AmityUser(entity.getUser());
 		departureCity = new City(entity.getDepartureCity());
-		departureDate = entity.getDepartureDate();
+		departureDateTime = entity.getDepartureDateTime();
 		arrivalCity = new City(entity.getArrivalCity());
-		arrivalDate = entity.getArrivalDate();
+		arrivalDateTime = entity.getArrivalDateTime();
 	}
 
 	public AmityUser getAmityUser() {
@@ -36,24 +36,20 @@ public class Itinerary {
 		return arrivalCity;
 	}
 
-	public DateTime getArrivalDate() {
-		return arrivalDate;
+	public DateTime getArrivalDateTime() {
+		return arrivalDateTime;
 	}
 
 	public City getDepartureCity() {
 		return departureCity;
 	}
 
-	public DateTime getDepartureDate() {
-		return departureDate;
+	public DateTime getDepartureDateTime() {
+		return departureDateTime;
 	}
 
 	public Long getItineraryId() {
 		return itineraryId;
-	}
-
-	public final boolean isCreated() {
-		return itineraryId != null;
 	}
 
 	public void setAmityUser(AmityUser amityUser) {
@@ -64,16 +60,16 @@ public class Itinerary {
 		this.arrivalCity = arrivalCity;
 	}
 
-	public void setArrivalDate(DateTime arrivalDate) {
-		this.arrivalDate = arrivalDate;
+	public void setArrivalDateTime(DateTime arrivalDateTime) {
+		this.arrivalDateTime = arrivalDateTime;
 	}
 
 	public void setDepartureCity(City departureCity) {
 		this.departureCity = departureCity;
 	}
 
-	public void setDepartureDate(DateTime departureDate) {
-		this.departureDate = departureDate;
+	public void setDepartureDateTime(DateTime departureDateTime) {
+		this.departureDateTime = departureDateTime;
 	}
 
 	public void setItineraryId(Long itineraryId) {
@@ -83,7 +79,7 @@ public class Itinerary {
 	@Override
 	public String toString() {
 		return "Itinerary [itineraryId=" + itineraryId + ", amityUser=" + amityUser + ", departureCity="
-				+ departureCity + ", departureDate=" + departureDate + ", arrivalCity=" + arrivalCity
-				+ ", arrivalDate=" + arrivalDate + "]";
+				+ departureCity + ", departureDateTime=" + departureDateTime + ", arrivalCity=" + arrivalCity
+				+ ", arrivalDateTime=" + arrivalDateTime + "]";
 	}
 }

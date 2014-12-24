@@ -39,15 +39,15 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Itinerary createItinerary(final long amityUserId, final int departureCityId, final DateTime departureDate,
-			final int arrivalCityId, final DateTime arrivalDate) {
+	public Itinerary createItinerary(final long amityUserId, final int departureCityId,
+			final DateTime departureDateTime, final int arrivalCityId, final DateTime arrivalDateTime) {
 
 		ItineraryEntity entity = new ItineraryEntity();
 		entity.setUser(amityUserRepository.getOne(amityUserId));
 		entity.setDepartureCity(cityRepository.getOne(departureCityId));
-		entity.setDepartureDate(departureDate);
+		entity.setDepartureDateTime(departureDateTime);
 		entity.setArrivalCity(cityRepository.getOne(arrivalCityId));
-		entity.setArrivalDate(arrivalDate);
+		entity.setArrivalDateTime(arrivalDateTime);
 
 		entity = itineraryRepository.saveAndFlush(entity);
 		Itinerary itinerary = new Itinerary(entity);
@@ -55,5 +55,33 @@ public class ItineraryServiceImpl implements ItineraryService {
 		LOGGER.info("New itinerary created. " + itinerary.toString());
 
 		return itinerary;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void deleteItinerary(long itineraryId) {
+		itineraryRepository.delete(itineraryId);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public Itinerary getItinerary(long itineraryId) {
+		return new Itinerary(itineraryRepository.getOne(itineraryId));
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Itinerary updateItinerary(long itineraryId, int departureCityId, DateTime departureDate, int arrivalCityId,
+			DateTime arrivalDate) {
+
+		ItineraryEntity itineraryEntity = itineraryRepository.getOne(itineraryId);
+		itineraryEntity.setDepartureCity(cityRepository.getOne(departureCityId));
+		itineraryEntity.setDepartureDateTime(departureDate);
+		itineraryEntity.setArrivalCity(cityRepository.getOne(arrivalCityId));
+		itineraryEntity.setArrivalDateTime(arrivalDate);
+
+		itineraryEntity = itineraryRepository.saveAndFlush(itineraryEntity);
+
+		return new Itinerary(itineraryEntity);
 	}
 }

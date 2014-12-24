@@ -9,11 +9,16 @@ import java.util.Base64;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.jingyusoft.amity.AmityException;
 
 public final class SecurityUtils {
+
+	public static final String generateRandomString(final int length) {
+		return RandomStringUtils.random(length, true, true);
+	}
 
 	public static final String getBase64SHA256Hash(final String value) {
 		return Base64.getEncoder().encodeToString(getSHA256Hash(value));

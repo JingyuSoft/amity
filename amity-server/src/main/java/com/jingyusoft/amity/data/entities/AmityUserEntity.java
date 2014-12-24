@@ -88,7 +88,6 @@ public class AmityUserEntity {
 	private long versionLock;
 
 	public AmityUserEntity() {
-		setPasswordSand(DEFAULT_PASSWORD_SAND);
 	}
 
 	public String getAlias() {

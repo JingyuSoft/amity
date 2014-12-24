@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jingyusoft.amity.common.AmityEnvironment;
@@ -19,7 +18,7 @@ import com.jingyusoft.amity.common.StringMessage;
 
 public class SpringMain {
 
-	public static ApplicationContext getApplicationContext() {
+	public static ClassPathXmlApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
 
@@ -86,5 +85,5 @@ public class SpringMain {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
-	private static ApplicationContext applicationContext = null;
+	private static ClassPathXmlApplicationContext applicationContext = null;
 }

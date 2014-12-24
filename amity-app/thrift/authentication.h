@@ -264,6 +264,85 @@
 @end
 
 @interface LoginAmityAccountRequest : NSObject <TBase, NSCoding> {
+  NSString * __emailAddress;
+  NSString * __plainPassword;
+
+  BOOL __emailAddress_isset;
+  BOOL __plainPassword_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=emailAddress, setter=setEmailAddress:) NSString * emailAddress;
+@property (nonatomic, retain, getter=plainPassword, setter=setPlainPassword:) NSString * plainPassword;
+#endif
+
+- (id) init;
+- (id) initWithEmailAddress: (NSString *) emailAddress plainPassword: (NSString *) plainPassword;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (NSString *) emailAddress;
+- (void) setEmailAddress: (NSString *) emailAddress;
+#endif
+- (BOOL) emailAddressIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) plainPassword;
+- (void) setPlainPassword: (NSString *) plainPassword;
+#endif
+- (BOOL) plainPasswordIsSet;
+
+@end
+
+@interface LoginAmityAccountResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  AmityToken * __sessionToken;
+  AmityUserDto * __amityUser;
+
+  BOOL __errorCode_isset;
+  BOOL __sessionToken_isset;
+  BOOL __amityUser_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=sessionToken, setter=setSessionToken:) AmityToken * sessionToken;
+@property (nonatomic, retain, getter=amityUser, setter=setAmityUser:) AmityUserDto * amityUser;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode sessionToken: (AmityToken *) sessionToken amityUser: (AmityUserDto *) amityUser;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityToken *) sessionToken;
+- (void) setSessionToken: (AmityToken *) sessionToken;
+#endif
+- (BOOL) sessionTokenIsSet;
+
+#if !__has_feature(objc_arc)
+- (AmityUserDto *) amityUser;
+- (void) setAmityUser: (AmityUserDto *) amityUser;
+#endif
+- (BOOL) amityUserIsSet;
+
+@end
+
+@interface AuthenticateAmityAccountRequest : NSObject <TBase, NSCoding> {
   int64_t __amityUserId;
   AmityToken * __authToken;
 
@@ -298,7 +377,7 @@
 
 @end
 
-@interface LoginAmityAccountResponse : NSObject <TBase, NSCoding> {
+@interface AuthenticateAmityAccountResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   AmityToken * __sessionToken;
   AmityUserDto * __amityUser;
@@ -451,6 +530,7 @@
 @protocol AuthenticationThriftService <NSObject>
 - (LoginFacebookAccountResponse *) loginFacebookAccount: (LoginFacebookAccountRequest *) request;  // throws TException
 - (LoginAmityAccountResponse *) loginAmityAccount: (LoginAmityAccountRequest *) request;  // throws TException
+- (AuthenticateAmityAccountResponse *) authenticateAmityAccount: (AuthenticateAmityAccountRequest *) request;  // throws TException
 - (UpdateAmityAccountResponse *) updateAmityAccount: (UpdateAmityAccountRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 

@@ -12,9 +12,9 @@ import com.jingyusoft.amity.domain.Gender;
 import com.jingyusoft.amity.thrift.factories.ThriftClientFactory;
 import com.jingyusoft.amity.thrift.factories.ThriftClientFactory.ThriftClientHolder;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
+import com.jingyusoft.amity.thrift.generated.AuthenticateAmityAccountRequest;
+import com.jingyusoft.amity.thrift.generated.AuthenticateAmityAccountResponse;
 import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
-import com.jingyusoft.amity.thrift.generated.LoginAmityAccountRequest;
-import com.jingyusoft.amity.thrift.generated.LoginAmityAccountResponse;
 import com.jingyusoft.amity.thrift.generated.SessionCredentials;
 import com.jingyusoft.amity.thrift.generated.UpdateAmityAccountRequest;
 import com.jingyusoft.amity.thrift.generated.UpdateAmityAccountResponse;
@@ -47,8 +47,8 @@ public class ThriftTestConsole extends TestConsoleBase {
 		try (ThriftClientHolder<AuthenticationThriftService.Iface> holder = thriftClientFactory.getClient(hostPort,
 				AuthenticationThriftService.Iface.class)) {
 
-			LoginAmityAccountResponse loginResponse = holder.getClient().loginAmityAccount(
-					new LoginAmityAccountRequest().setAmityUserId(1).setAuthToken(
+			AuthenticateAmityAccountResponse loginResponse = holder.getClient().authenticateAmityAccount(
+					new AuthenticateAmityAccountRequest().setAmityUserId(1).setAuthToken(
 							new AmityToken("kfWYuHC3ELUE1Gdw1NDktTSZlxyjzLFBC+JIBmDb398=")));
 
 			UpdateAmityAccountResponse updateResponse = holder.getClient().updateAmityAccount(

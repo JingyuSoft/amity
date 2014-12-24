@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
 
+import com.jingyusoft.amity.authentication.AmityUserAuthenticationResult;
 import com.jingyusoft.amity.authentication.AuthenticationService;
 import com.jingyusoft.amity.authentication.SessionService;
 import com.jingyusoft.amity.common.ErrorCodes;
@@ -13,6 +14,8 @@ import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.domain.Gender;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 import com.jingyusoft.amity.thrift.generated.AmityUserDto;
+import com.jingyusoft.amity.thrift.generated.AuthenticateAmityAccountRequest;
+import com.jingyusoft.amity.thrift.generated.AuthenticateAmityAccountResponse;
 import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
 import com.jingyusoft.amity.thrift.generated.LoginAmityAccountRequest;
 import com.jingyusoft.amity.thrift.generated.LoginAmityAccountResponse;
@@ -36,39 +39,64 @@ public class AuthenticationThriftServiceImpl implements AuthenticationThriftServ
 	private UserAccountService userAccountService;
 
 	@Override
-	public LoginAmityAccountResponse loginAmityAccount(LoginAmityAccountRequest request) throws TException {
-		AmityUser amityUser = authenticationService.authenticateAmityUser(request.getAmityUserId(),
+	public AuthenticateAmityAccountResponse authenticateAmityAccount(AuthenticateAmityAccountRequest request)
+			throws TException {
+		AmityUserAuthenticationResult result = authenticationService.authenticateAmityUser(request.getAmityUserId(),
 				request.getAuthToken());
 
-		if (amityUser != null) {
+		switch (result.getAuthenticationResult()) {
+		case SUCCESS:
+			AmityUser amityUser = result.getAmityUser();
+			AuthenticateAmityAccountResponse response = new AuthenticateAmityAccountResponse()
+			.setSessionToken(sessionService.createSession(amityUser.getId()));
+			AmityUserDto amityUserDto = amityUser.toDto();
+			amityUserDto.setAvatar(userAccountService.getAvatar(amityUser.getId()));
+			response.setAmityUser(amityUserDto);
+			return response;
+		default:
+			return new AuthenticateAmityAccountResponse(ErrorCodes.UNAUTHORIZED);
+		}
+	}
+
+	@Override
+	public LoginAmityAccountResponse loginAmityAccount(LoginAmityAccountRequest request) throws TException {
+		AmityUserAuthenticationResult result = authenticationService.amityUserLogin(request.getEmailAddress(),
+				request.getPlainPassword());
+		switch (result.getAuthenticationResult()) {
+		case SUCCESS:
+			AmityUser amityUser = result.getAmityUser();
 			LoginAmityAccountResponse response = new LoginAmityAccountResponse().setSessionToken(sessionService
 					.createSession(amityUser.getId()));
 			AmityUserDto amityUserDto = amityUser.toDto();
 			amityUserDto.setAvatar(userAccountService.getAvatar(amityUser.getId()));
 			response.setAmityUser(amityUserDto);
 			return response;
-		} else {
+		default:
 			return new LoginAmityAccountResponse(ErrorCodes.UNAUTHORIZED);
 		}
 	}
 
 	@Override
 	public LoginFacebookAccountResponse loginFacebookAccount(LoginFacebookAccountRequest request) throws TException {
-		AmityUser amityUser = authenticationService.authenticateFacebookAccount(request.getFacebookToken());
+		AmityUserAuthenticationResult result = authenticationService.authenticateFacebookAccount(request
+				.getFacebookToken());
 
-		if (amityUser == null) {
+		switch (result.getAuthenticationResult()) {
+		case SUCCESS:
+			AmityUser amityUser = result.getAmityUser();
+			LoginFacebookAccountResponse response = new LoginFacebookAccountResponse();
+			response.setAmityUserId(amityUser.getId());
+			response.setAuthToken(new AmityToken(amityUser.getAuthToken()));
+			response.setSessionToken(sessionService.createSession(amityUser.getId()));
+			AmityUserDto amityUserDto = amityUser.toDto();
+			amityUserDto.setAvatar(userAccountService.getAvatar(amityUser.getId()));
+			response.setAmityUser(amityUserDto);
+
+			return response;
+
+		default:
 			return new LoginFacebookAccountResponse(ErrorCodes.UNAUTHORIZED);
 		}
-
-		LoginFacebookAccountResponse response = new LoginFacebookAccountResponse();
-		response.setAmityUserId(amityUser.getId());
-		response.setAuthToken(new AmityToken(amityUser.getAuthToken()));
-		response.setSessionToken(sessionService.createSession(amityUser.getId()));
-		AmityUserDto amityUserDto = amityUser.toDto();
-		amityUserDto.setAvatar(userAccountService.getAvatar(amityUser.getId()));
-		response.setAmityUser(amityUserDto);
-
-		return response;
 	}
 
 	@Override

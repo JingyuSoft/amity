@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/amity-server/src/main/java/com/jingyusoft/amity/programs/TestConsole.java"/>
+<listEntry value="/amity-server/src/main/java/com/jingyusoft/amity/programs/SpringMain.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.jingyusoft.amity.programs.TestConsole"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="com.jingyusoft.amity.programs.CitySearchConsole"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.jingyusoft.amity.programs.SpringMain"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="com.jingyusoft.amity.programs.ThriftTestConsole"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="amity-server"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dapplication.context=/com/jingyusoft/amity/config/application-context-test-console.xml&#13;&#10;-Dconfig.mode=dev-univer&#13;&#10;-Djdbc.password=${password_prompt:database password}&#13;&#10;-Dlogback.configurationFile=logback-dev.xml"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dapplication.context=/com/jingyusoft/amity/config/application-context-test-console.xml&#13;&#10;-Dconfig.mode=dev-remote-univer&#13;&#10;-Djdbc.password=${password_prompt:database password}&#13;&#10;-Dlogback.configurationFile=logback-dev.xml"/>
 </launchConfiguration>

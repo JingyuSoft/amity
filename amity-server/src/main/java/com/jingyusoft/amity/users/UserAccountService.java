@@ -1,5 +1,7 @@
 package com.jingyusoft.amity.users;
 
+import java.util.Optional;
+
 import com.jingyusoft.amity.domain.AmityUser;
 
 public interface UserAccountService {
@@ -14,6 +16,17 @@ public interface UserAccountService {
 	 * @return Amity user
 	 */
 	AmityUser getAmityUser(long amityUserId);
+
+	/**
+	 *
+	 * Get Amity user by email address
+	 *
+	 * @param emailAddress
+	 *            Email address
+	 *
+	 * @return Amity User
+	 */
+	Optional<AmityUser> getAmityUserByEmail(final String emailAddress);
 
 	/**
 	 *

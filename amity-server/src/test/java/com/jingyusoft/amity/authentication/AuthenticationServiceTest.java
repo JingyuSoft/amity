@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jingyusoft.amity.config.UnitTestConfigConstants;
-import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.testgroups.DatabaseRequired;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,8 +27,8 @@ public class AuthenticationServiceTest {
 		final String facebookToken = System.getProperty("facebook.token");
 
 		if (!StringUtils.isEmpty(facebookToken)) {
-			AmityUser amityUser = authenticationService.authenticateFacebookAccount(facebookToken);
-			Assert.assertNotNull(amityUser);
+			AmityUserAuthenticationResult result = authenticationService.authenticateFacebookAccount(facebookToken);
+			Assert.assertEquals(AuthenticationResult.SUCCESS, result.getAuthenticationResult());
 		}
 	}
 }

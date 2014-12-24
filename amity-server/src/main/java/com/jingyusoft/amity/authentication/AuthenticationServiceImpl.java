@@ -1,5 +1,7 @@
 package com.jingyusoft.amity.authentication;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +20,7 @@ import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.domain.AmityUserType;
 import com.jingyusoft.amity.domain.Gender;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
+import com.jingyusoft.amity.users.UserAccountService;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -31,25 +34,44 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Resource
 	private FacebookUserRepository facebookUserRepository;
 
-	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
-	public AmityUser authenticateAmityUser(long amityUserId, AmityToken authToken) {
-		AmityUserEntity entity = amityUserRepository.getOne(amityUserId);
-		if (entity != null && StringUtils.equals(authToken.getValue(), entity.getAuthToken())) {
-			entity.setLastLoginDateTime(DateTime.now());
-			amityUserRepository.saveAndFlush(entity);
-			return new AmityUser(entity);
-		}
+	@Resource
+	private UserAccountService userAccountService;
 
-		return null;
+	@Override
+	public AmityUserAuthenticationResult amityUserLogin(String emailAddress, String plainPassword) {
+		Optional<AmityUser> amityUserOptional = userAccountService.getAmityUserByEmail(emailAddress);
+		if (amityUserOptional.isPresent()) {
+			AmityUser amityUser = amityUserOptional.get();
+			if (StringUtils.equals(amityUser.getEncryptedPassword(),
+					AuthenticationUtils.encryptPassword(plainPassword, amityUser.getPasswordSand()))) {
+				return AmityUserAuthenticationResult.success(amityUser);
+			} else {
+				return AmityUserAuthenticationResult.fail(AuthenticationResult.PASSWORD_INCORRECT);
+			}
+		} else {
+			return AmityUserAuthenticationResult.fail(AuthenticationResult.EMAIL_ADDRESS_NOT_FOUND);
+		}
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public AmityUser authenticateFacebookAccount(String facebookToken) {
+	public AmityUserAuthenticationResult authenticateAmityUser(long amityUserId, AmityToken authToken) {
+		AmityUserEntity entity = amityUserRepository.getOne(amityUserId);
+		if (entity != null && StringUtils.equals(authToken.getValue(), entity.getAuthToken())) {
+			entity.setLastLoginDateTime(DateTime.now());
+			amityUserRepository.saveAndFlush(entity);
+			return AmityUserAuthenticationResult.success(new AmityUser(entity));
+		}
+
+		return AmityUserAuthenticationResult.fail(AuthenticationResult.USER_ID_NOT_FOUND);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public AmityUserAuthenticationResult authenticateFacebookAccount(String facebookToken) {
 		FacebookUserInfo facebookUserInfo = facebookAuthenticationService.getUserInfo(facebookToken);
 		if (facebookUserInfo == null) {
-			return null;
+			return AmityUserAuthenticationResult.fail(AuthenticationResult.INVALID_TOKEN);
 		}
 
 		if (!facebookUserRepository.exists(facebookUserInfo.getId())) {
@@ -70,11 +92,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			facebookUserEntity.setAmityUser(amityUserEntity);
 			facebookUserRepository.saveAndFlush(facebookUserEntity);
 
-			return new AmityUser(amityUserEntity);
+			return AmityUserAuthenticationResult.success(new AmityUser(amityUserEntity));
 		} else {
 			AmityUserEntity amityUserEntity = facebookUserRepository.getOne(facebookUserInfo.getId()).getAmityUser();
 			amityUserRepository.saveAndFlush(amityUserEntity);
-			return new AmityUser(amityUserEntity);
+			return AmityUserAuthenticationResult.success(new AmityUser(amityUserEntity));
 		}
 	}
 }

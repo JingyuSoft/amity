@@ -1,11 +1,12 @@
 package com.jingyusoft.amity.authentication;
 
-import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.thrift.generated.AmityToken;
 
 public interface AuthenticationService {
 
-	AmityUser authenticateAmityUser(final long amityUserId, AmityToken authToken);
+	AmityUserAuthenticationResult amityUserLogin(final String emailAddress, final String plainPassword);
 
-	AmityUser authenticateFacebookAccount(final String facebookToken);
+	AmityUserAuthenticationResult authenticateAmityUser(final long amityUserId, AmityToken authToken);
+
+	AmityUserAuthenticationResult authenticateFacebookAccount(final String facebookToken);
 }

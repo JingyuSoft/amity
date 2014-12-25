@@ -10,15 +10,15 @@ struct HelperItineraryDto {
 	6: required string arrivalDate
 }
 
-struct CreateHelperItineraryRequest {
+struct CreateItineraryRequest {
 	1: HelperItineraryDto itinerary
 }
 
-struct CreateHelperItineraryResponse {
+struct CreateItineraryResponse {
 	1: required i32 errorCode,
 	2: required i64 itineraryId
 }
 
 service ItineraryThriftService {
-    CreateHelperItineraryResponse createItinerary(1: CreateHelperItineraryRequest request, 2: authentication.SessionCredentials credentials)
+    CreateItineraryResponse createItinerary(1: CreateItineraryRequest request, 2: authentication.SessionCredentials credentials)
 }

@@ -52,7 +52,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 		entity = itineraryRepository.saveAndFlush(entity);
 		Itinerary itinerary = new Itinerary(entity);
 
-		LOGGER.info("New itinerary created. " + itinerary.toString());
+		LOGGER.info("New itinerary created. " + itinerary);
 
 		return itinerary;
 	}

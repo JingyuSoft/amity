@@ -88,7 +88,7 @@
 
 @end
 
-@interface CreateHelperItineraryRequest : NSObject <TBase, NSCoding> {
+@interface CreateItineraryRequest : NSObject <TBase, NSCoding> {
   HelperItineraryDto * __itinerary;
 
   BOOL __itinerary_isset;
@@ -114,7 +114,7 @@
 
 @end
 
-@interface CreateHelperItineraryResponse : NSObject <TBase, NSCoding> {
+@interface CreateItineraryResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   int64_t __itineraryId;
 
@@ -150,7 +150,7 @@
 @end
 
 @protocol ItineraryThriftService <NSObject>
-- (CreateHelperItineraryResponse *) createItinerary: (CreateHelperItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (CreateItineraryResponse *) createItinerary: (CreateItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface ItineraryThriftServiceClient : NSObject <ItineraryThriftService> {

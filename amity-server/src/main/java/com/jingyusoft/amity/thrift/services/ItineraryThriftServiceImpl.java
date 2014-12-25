@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.Itinerary;
+import com.jingyusoft.amity.refdata.CityCache;
 import com.jingyusoft.amity.services.ItineraryService;
 import com.jingyusoft.amity.thrift.generated.CreateItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.CreateItineraryResponse;
@@ -18,6 +19,7 @@ import com.jingyusoft.amity.thrift.generated.DeleteItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.DeleteItineraryResponse;
 import com.jingyusoft.amity.thrift.generated.GetItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.GetItineraryResponse;
+import com.jingyusoft.amity.thrift.generated.ItineraryDto;
 import com.jingyusoft.amity.thrift.generated.ItineraryThriftService;
 import com.jingyusoft.amity.thrift.generated.ListItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.ListItineraryResponse;
@@ -34,6 +36,9 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 
 	@Resource
 	private ItineraryService itineraryService;
+
+	@Resource
+	private CityCache cityCache;
 
 	@Override
 	public CreateItineraryResponse createItinerary(CreateItineraryRequest request, SessionCredentials credentials)
@@ -70,7 +75,10 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 		if (itinerary == null) {
 			return new GetItineraryResponse(ErrorCodes.ITINERARY_NOT_FOUND_BY_ID);
 		} else {
-			return new GetItineraryResponse().setItinerary(itinerary.toDto());
+			ItineraryDto itineraryDto = itinerary.toDto();
+			itineraryDto.setDepartureCity(itinerary.getDepartureCity().toDto());
+			itineraryDto.setArrivalCity(itinerary.getArrivalCity().toDto());
+			return new GetItineraryResponse().setItinerary(itineraryDto);
 		}
 	}
 
@@ -79,7 +87,12 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 			throws TException {
 
 		return new ListItineraryResponse().setItineraries(itineraryService.listItineraries(request.getAmityUserId())
-				.stream().map(item -> item.toDto()).collect(Collectors.toList()));
+				.stream().map(item -> {
+					ItineraryDto itineraryDto = item.toDto();
+					itineraryDto.setDepartureCity(item.getDepartureCity().toDto());
+					itineraryDto.setArrivalCity(item.getArrivalCity().toDto());
+					return itineraryDto;
+				}).collect(Collectors.toList()));
 	}
 
 	@Override

@@ -44,6 +44,8 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
   private static final org.apache.thrift.protocol.TField DEPARTURE_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("departureDate", org.apache.thrift.protocol.TType.STRING, (short)4);
   private static final org.apache.thrift.protocol.TField ARRIVAL_CITY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("arrivalCityId", org.apache.thrift.protocol.TType.I32, (short)5);
   private static final org.apache.thrift.protocol.TField ARRIVAL_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("arrivalDate", org.apache.thrift.protocol.TType.STRING, (short)6);
+  private static final org.apache.thrift.protocol.TField DEPARTURE_CITY_FIELD_DESC = new org.apache.thrift.protocol.TField("departureCity", org.apache.thrift.protocol.TType.STRUCT, (short)7);
+  private static final org.apache.thrift.protocol.TField ARRIVAL_CITY_FIELD_DESC = new org.apache.thrift.protocol.TField("arrivalCity", org.apache.thrift.protocol.TType.STRUCT, (short)8);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -57,6 +59,8 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
   public String departureDate; // required
   public int arrivalCityId; // required
   public String arrivalDate; // optional
+  public com.jingyusoft.amity.thrift.generated.CityDto departureCity; // optional
+  public com.jingyusoft.amity.thrift.generated.CityDto arrivalCity; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -65,7 +69,9 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
     DEPARTURE_CITY_ID((short)3, "departureCityId"),
     DEPARTURE_DATE((short)4, "departureDate"),
     ARRIVAL_CITY_ID((short)5, "arrivalCityId"),
-    ARRIVAL_DATE((short)6, "arrivalDate");
+    ARRIVAL_DATE((short)6, "arrivalDate"),
+    DEPARTURE_CITY((short)7, "departureCity"),
+    ARRIVAL_CITY((short)8, "arrivalCity");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -92,6 +98,10 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
           return ARRIVAL_CITY_ID;
         case 6: // ARRIVAL_DATE
           return ARRIVAL_DATE;
+        case 7: // DEPARTURE_CITY
+          return DEPARTURE_CITY;
+        case 8: // ARRIVAL_CITY
+          return ARRIVAL_CITY;
         default:
           return null;
       }
@@ -137,7 +147,7 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
   private static final int __DEPARTURECITYID_ISSET_ID = 2;
   private static final int __ARRIVALCITYID_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.ID,_Fields.ARRIVAL_DATE};
+  private static final _Fields optionals[] = {_Fields.ID,_Fields.ARRIVAL_DATE,_Fields.DEPARTURE_CITY,_Fields.ARRIVAL_CITY};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -153,6 +163,10 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.ARRIVAL_DATE, new org.apache.thrift.meta_data.FieldMetaData("arrivalDate", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.DEPARTURE_CITY, new org.apache.thrift.meta_data.FieldMetaData("departureCity", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.jingyusoft.amity.thrift.generated.CityDto.class)));
+    tmpMap.put(_Fields.ARRIVAL_CITY, new org.apache.thrift.meta_data.FieldMetaData("arrivalCity", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.jingyusoft.amity.thrift.generated.CityDto.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ItineraryDto.class, metaDataMap);
   }
@@ -191,6 +205,12 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
     if (other.isSetArrivalDate()) {
       this.arrivalDate = other.arrivalDate;
     }
+    if (other.isSetDepartureCity()) {
+      this.departureCity = new com.jingyusoft.amity.thrift.generated.CityDto(other.departureCity);
+    }
+    if (other.isSetArrivalCity()) {
+      this.arrivalCity = new com.jingyusoft.amity.thrift.generated.CityDto(other.arrivalCity);
+    }
   }
 
   public ItineraryDto deepCopy() {
@@ -209,6 +229,8 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
     setArrivalCityIdIsSet(false);
     this.arrivalCityId = 0;
     this.arrivalDate = null;
+    this.departureCity = null;
+    this.arrivalCity = null;
   }
 
   public long getId() {
@@ -351,6 +373,54 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
     }
   }
 
+  public com.jingyusoft.amity.thrift.generated.CityDto getDepartureCity() {
+    return this.departureCity;
+  }
+
+  public ItineraryDto setDepartureCity(com.jingyusoft.amity.thrift.generated.CityDto departureCity) {
+    this.departureCity = departureCity;
+    return this;
+  }
+
+  public void unsetDepartureCity() {
+    this.departureCity = null;
+  }
+
+  /** Returns true if field departureCity is set (has been assigned a value) and false otherwise */
+  public boolean isSetDepartureCity() {
+    return this.departureCity != null;
+  }
+
+  public void setDepartureCityIsSet(boolean value) {
+    if (!value) {
+      this.departureCity = null;
+    }
+  }
+
+  public com.jingyusoft.amity.thrift.generated.CityDto getArrivalCity() {
+    return this.arrivalCity;
+  }
+
+  public ItineraryDto setArrivalCity(com.jingyusoft.amity.thrift.generated.CityDto arrivalCity) {
+    this.arrivalCity = arrivalCity;
+    return this;
+  }
+
+  public void unsetArrivalCity() {
+    this.arrivalCity = null;
+  }
+
+  /** Returns true if field arrivalCity is set (has been assigned a value) and false otherwise */
+  public boolean isSetArrivalCity() {
+    return this.arrivalCity != null;
+  }
+
+  public void setArrivalCityIsSet(boolean value) {
+    if (!value) {
+      this.arrivalCity = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case ID:
@@ -401,6 +471,22 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
       }
       break;
 
+    case DEPARTURE_CITY:
+      if (value == null) {
+        unsetDepartureCity();
+      } else {
+        setDepartureCity((com.jingyusoft.amity.thrift.generated.CityDto)value);
+      }
+      break;
+
+    case ARRIVAL_CITY:
+      if (value == null) {
+        unsetArrivalCity();
+      } else {
+        setArrivalCity((com.jingyusoft.amity.thrift.generated.CityDto)value);
+      }
+      break;
+
     }
   }
 
@@ -423,6 +509,12 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
 
     case ARRIVAL_DATE:
       return getArrivalDate();
+
+    case DEPARTURE_CITY:
+      return getDepartureCity();
+
+    case ARRIVAL_CITY:
+      return getArrivalCity();
 
     }
     throw new IllegalStateException();
@@ -447,6 +539,10 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
       return isSetArrivalCityId();
     case ARRIVAL_DATE:
       return isSetArrivalDate();
+    case DEPARTURE_CITY:
+      return isSetDepartureCity();
+    case ARRIVAL_CITY:
+      return isSetArrivalCity();
     }
     throw new IllegalStateException();
   }
@@ -518,6 +614,24 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
         return false;
     }
 
+    boolean this_present_departureCity = true && this.isSetDepartureCity();
+    boolean that_present_departureCity = true && that.isSetDepartureCity();
+    if (this_present_departureCity || that_present_departureCity) {
+      if (!(this_present_departureCity && that_present_departureCity))
+        return false;
+      if (!this.departureCity.equals(that.departureCity))
+        return false;
+    }
+
+    boolean this_present_arrivalCity = true && this.isSetArrivalCity();
+    boolean that_present_arrivalCity = true && that.isSetArrivalCity();
+    if (this_present_arrivalCity || that_present_arrivalCity) {
+      if (!(this_present_arrivalCity && that_present_arrivalCity))
+        return false;
+      if (!this.arrivalCity.equals(that.arrivalCity))
+        return false;
+    }
+
     return true;
   }
 
@@ -554,6 +668,16 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
     list.add(present_arrivalDate);
     if (present_arrivalDate)
       list.add(arrivalDate);
+
+    boolean present_departureCity = true && (isSetDepartureCity());
+    list.add(present_departureCity);
+    if (present_departureCity)
+      list.add(departureCity);
+
+    boolean present_arrivalCity = true && (isSetArrivalCity());
+    list.add(present_arrivalCity);
+    if (present_arrivalCity)
+      list.add(arrivalCity);
 
     return list.hashCode();
   }
@@ -626,6 +750,26 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetDepartureCity()).compareTo(other.isSetDepartureCity());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDepartureCity()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.departureCity, other.departureCity);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetArrivalCity()).compareTo(other.isSetArrivalCity());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetArrivalCity()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.arrivalCity, other.arrivalCity);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -681,6 +825,26 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
       }
       first = false;
     }
+    if (isSetDepartureCity()) {
+      if (!first) sb.append(", ");
+      sb.append("departureCity:");
+      if (this.departureCity == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.departureCity);
+      }
+      first = false;
+    }
+    if (isSetArrivalCity()) {
+      if (!first) sb.append(", ");
+      sb.append("arrivalCity:");
+      if (this.arrivalCity == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.arrivalCity);
+      }
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -694,6 +858,12 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
     }
     // alas, we cannot check 'arrivalCityId' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
+    if (departureCity != null) {
+      departureCity.validate();
+    }
+    if (arrivalCity != null) {
+      arrivalCity.validate();
+    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -780,6 +950,24 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 7: // DEPARTURE_CITY
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.departureCity = new com.jingyusoft.amity.thrift.generated.CityDto();
+              struct.departureCity.read(iprot);
+              struct.setDepartureCityIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 8: // ARRIVAL_CITY
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.arrivalCity = new com.jingyusoft.amity.thrift.generated.CityDto();
+              struct.arrivalCity.read(iprot);
+              struct.setArrivalCityIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -830,6 +1018,20 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
           oprot.writeFieldEnd();
         }
       }
+      if (struct.departureCity != null) {
+        if (struct.isSetDepartureCity()) {
+          oprot.writeFieldBegin(DEPARTURE_CITY_FIELD_DESC);
+          struct.departureCity.write(oprot);
+          oprot.writeFieldEnd();
+        }
+      }
+      if (struct.arrivalCity != null) {
+        if (struct.isSetArrivalCity()) {
+          oprot.writeFieldBegin(ARRIVAL_CITY_FIELD_DESC);
+          struct.arrivalCity.write(oprot);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -858,12 +1060,24 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
       if (struct.isSetArrivalDate()) {
         optionals.set(1);
       }
-      oprot.writeBitSet(optionals, 2);
+      if (struct.isSetDepartureCity()) {
+        optionals.set(2);
+      }
+      if (struct.isSetArrivalCity()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetId()) {
         oprot.writeI64(struct.id);
       }
       if (struct.isSetArrivalDate()) {
         oprot.writeString(struct.arrivalDate);
+      }
+      if (struct.isSetDepartureCity()) {
+        struct.departureCity.write(oprot);
+      }
+      if (struct.isSetArrivalCity()) {
+        struct.arrivalCity.write(oprot);
       }
     }
 
@@ -878,7 +1092,7 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
       struct.setDepartureDateIsSet(true);
       struct.arrivalCityId = iprot.readI32();
       struct.setArrivalCityIdIsSet(true);
-      BitSet incoming = iprot.readBitSet(2);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.id = iprot.readI64();
         struct.setIdIsSet(true);
@@ -886,6 +1100,16 @@ public class ItineraryDto implements org.apache.thrift.TBase<ItineraryDto, Itine
       if (incoming.get(1)) {
         struct.arrivalDate = iprot.readString();
         struct.setArrivalDateIsSet(true);
+      }
+      if (incoming.get(2)) {
+        struct.departureCity = new com.jingyusoft.amity.thrift.generated.CityDto();
+        struct.departureCity.read(iprot);
+        struct.setDepartureCityIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.arrivalCity = new com.jingyusoft.amity.thrift.generated.CityDto();
+        struct.arrivalCity.read(iprot);
+        struct.setArrivalCityIsSet(true);
       }
     }
   }

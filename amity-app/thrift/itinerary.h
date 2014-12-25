@@ -16,6 +16,7 @@
 #import "TBase.h"
 
 #import "authentication.h"
+#import "refdata.h"
 
 @interface ItineraryDto : NSObject <TBase, NSCoding> {
   int64_t __id;
@@ -24,6 +25,8 @@
   NSString * __departureDate;
   int32_t __arrivalCityId;
   NSString * __arrivalDate;
+  CityDto * __departureCity;
+  CityDto * __arrivalCity;
 
   BOOL __id_isset;
   BOOL __userId_isset;
@@ -31,6 +34,8 @@
   BOOL __departureDate_isset;
   BOOL __arrivalCityId_isset;
   BOOL __arrivalDate_isset;
+  BOOL __departureCity_isset;
+  BOOL __arrivalCity_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -40,10 +45,12 @@
 @property (nonatomic, retain, getter=departureDate, setter=setDepartureDate:) NSString * departureDate;
 @property (nonatomic, getter=arrivalCityId, setter=setArrivalCityId:) int32_t arrivalCityId;
 @property (nonatomic, retain, getter=arrivalDate, setter=setArrivalDate:) NSString * arrivalDate;
+@property (nonatomic, retain, getter=departureCity, setter=setDepartureCity:) CityDto * departureCity;
+@property (nonatomic, retain, getter=arrivalCity, setter=setArrivalCity:) CityDto * arrivalCity;
 #endif
 
 - (id) init;
-- (id) initWithId: (int64_t) id userId: (int64_t) userId departureCityId: (int32_t) departureCityId departureDate: (NSString *) departureDate arrivalCityId: (int32_t) arrivalCityId arrivalDate: (NSString *) arrivalDate;
+- (id) initWithId: (int64_t) id userId: (int64_t) userId departureCityId: (int32_t) departureCityId departureDate: (NSString *) departureDate arrivalCityId: (int32_t) arrivalCityId arrivalDate: (NSString *) arrivalDate departureCity: (CityDto *) departureCity arrivalCity: (CityDto *) arrivalCity;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -85,6 +92,18 @@
 - (void) setArrivalDate: (NSString *) arrivalDate;
 #endif
 - (BOOL) arrivalDateIsSet;
+
+#if !__has_feature(objc_arc)
+- (CityDto *) departureCity;
+- (void) setDepartureCity: (CityDto *) departureCity;
+#endif
+- (BOOL) departureCityIsSet;
+
+#if !__has_feature(objc_arc)
+- (CityDto *) arrivalCity;
+- (void) setArrivalCity: (CityDto *) arrivalCity;
+#endif
+- (BOOL) arrivalCityIsSet;
 
 @end
 

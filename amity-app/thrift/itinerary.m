@@ -16,6 +16,7 @@
 #import "TBase.h"
 
 #import "authentication.h"
+#import "refdata.h"
 
 #import "itinerary.h"
 
@@ -29,7 +30,7 @@
   return self;
 }
 
-- (id) initWithId: (int64_t) id userId: (int64_t) userId departureCityId: (int32_t) departureCityId departureDate: (NSString *) departureDate arrivalCityId: (int32_t) arrivalCityId arrivalDate: (NSString *) arrivalDate
+- (id) initWithId: (int64_t) id userId: (int64_t) userId departureCityId: (int32_t) departureCityId departureDate: (NSString *) departureDate arrivalCityId: (int32_t) arrivalCityId arrivalDate: (NSString *) arrivalDate departureCity: (CityDto *) departureCity arrivalCity: (CityDto *) arrivalCity
 {
   self = [super init];
   __id = id;
@@ -44,6 +45,10 @@
   __arrivalCityId_isset = YES;
   __arrivalDate = [arrivalDate retain_stub];
   __arrivalDate_isset = YES;
+  __departureCity = [departureCity retain_stub];
+  __departureCity_isset = YES;
+  __arrivalCity = [arrivalCity retain_stub];
+  __arrivalCity_isset = YES;
   return self;
 }
 
@@ -80,6 +85,16 @@
     __arrivalDate = [[decoder decodeObjectForKey: @"arrivalDate"] retain_stub];
     __arrivalDate_isset = YES;
   }
+  if ([decoder containsValueForKey: @"departureCity"])
+  {
+    __departureCity = [[decoder decodeObjectForKey: @"departureCity"] retain_stub];
+    __departureCity_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"arrivalCity"])
+  {
+    __arrivalCity = [[decoder decodeObjectForKey: @"arrivalCity"] retain_stub];
+    __arrivalCity_isset = YES;
+  }
   return self;
 }
 
@@ -109,12 +124,22 @@
   {
     [encoder encodeObject: __arrivalDate forKey: @"arrivalDate"];
   }
+  if (__departureCity_isset)
+  {
+    [encoder encodeObject: __departureCity forKey: @"departureCity"];
+  }
+  if (__arrivalCity_isset)
+  {
+    [encoder encodeObject: __arrivalCity forKey: @"arrivalCity"];
+  }
 }
 
 - (void) dealloc
 {
   [__departureDate release_stub];
   [__arrivalDate release_stub];
+  [__departureCity release_stub];
+  [__arrivalCity release_stub];
   [super dealloc_stub];
 }
 
@@ -228,6 +253,48 @@
   __arrivalDate_isset = NO;
 }
 
+- (CityDto *) departureCity {
+  return [[__departureCity retain_stub] autorelease_stub];
+}
+
+- (void) setDepartureCity: (CityDto *) departureCity {
+  [departureCity retain_stub];
+  [__departureCity release_stub];
+  __departureCity = departureCity;
+  __departureCity_isset = YES;
+}
+
+- (BOOL) departureCityIsSet {
+  return __departureCity_isset;
+}
+
+- (void) unsetDepartureCity {
+  [__departureCity release_stub];
+  __departureCity = nil;
+  __departureCity_isset = NO;
+}
+
+- (CityDto *) arrivalCity {
+  return [[__arrivalCity retain_stub] autorelease_stub];
+}
+
+- (void) setArrivalCity: (CityDto *) arrivalCity {
+  [arrivalCity retain_stub];
+  [__arrivalCity release_stub];
+  __arrivalCity = arrivalCity;
+  __arrivalCity_isset = YES;
+}
+
+- (BOOL) arrivalCityIsSet {
+  return __arrivalCity_isset;
+}
+
+- (void) unsetArrivalCity {
+  [__arrivalCity release_stub];
+  __arrivalCity = nil;
+  __arrivalCity_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -291,6 +358,26 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 7:
+        if (fieldType == TType_STRUCT) {
+          CityDto *fieldValue = [[CityDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setDepartureCity: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 8:
+        if (fieldType == TType_STRUCT) {
+          CityDto *fieldValue = [[CityDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setArrivalCity: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -336,6 +423,20 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__departureCity_isset) {
+    if (__departureCity != nil) {
+      [outProtocol writeFieldBeginWithName: @"departureCity" type: TType_STRUCT fieldID: 7];
+      [__departureCity write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__arrivalCity_isset) {
+    if (__arrivalCity != nil) {
+      [outProtocol writeFieldBeginWithName: @"arrivalCity" type: TType_STRUCT fieldID: 8];
+      [__arrivalCity write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -374,6 +475,10 @@
   [ms appendFormat: @"%i", __arrivalCityId];
   [ms appendString: @",arrivalDate:"];
   [ms appendFormat: @"\"%@\"", __arrivalDate];
+  [ms appendString: @",departureCity:"];
+  [ms appendFormat: @"%@", __departureCity];
+  [ms appendString: @",arrivalCity:"];
+  [ms appendFormat: @"%@", __arrivalCity];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

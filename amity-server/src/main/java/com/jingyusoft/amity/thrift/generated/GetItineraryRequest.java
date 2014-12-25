@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 public class GetItineraryRequest implements org.apache.thrift.TBase<GetItineraryRequest, GetItineraryRequest._Fields>, java.io.Serializable, Cloneable, Comparable<GetItineraryRequest> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetItineraryRequest");
 
-  private static final org.apache.thrift.protocol.TField ITINERARY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("itineraryId", org.apache.thrift.protocol.TType.I32, (short)1);
+  private static final org.apache.thrift.protocol.TField ITINERARY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("itineraryId", org.apache.thrift.protocol.TType.I64, (short)1);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -46,7 +46,7 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
     schemes.put(TupleScheme.class, new GetItineraryRequestTupleSchemeFactory());
   }
 
-  public int itineraryId; // required
+  public long itineraryId; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -113,7 +113,7 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.ITINERARY_ID, new org.apache.thrift.meta_data.FieldMetaData("itineraryId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetItineraryRequest.class, metaDataMap);
   }
@@ -122,7 +122,7 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
   }
 
   public GetItineraryRequest(
-    int itineraryId)
+    long itineraryId)
   {
     this();
     this.itineraryId = itineraryId;
@@ -147,11 +147,11 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
     this.itineraryId = 0;
   }
 
-  public int getItineraryId() {
+  public long getItineraryId() {
     return this.itineraryId;
   }
 
-  public GetItineraryRequest setItineraryId(int itineraryId) {
+  public GetItineraryRequest setItineraryId(long itineraryId) {
     this.itineraryId = itineraryId;
     setItineraryIdIsSet(true);
     return this;
@@ -176,7 +176,7 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
       if (value == null) {
         unsetItineraryId();
       } else {
-        setItineraryId((Integer)value);
+        setItineraryId((Long)value);
       }
       break;
 
@@ -186,7 +186,7 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
   public Object getFieldValue(_Fields field) {
     switch (field) {
     case ITINERARY_ID:
-      return Integer.valueOf(getItineraryId());
+      return Long.valueOf(getItineraryId());
 
     }
     throw new IllegalStateException();
@@ -330,8 +330,8 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
         }
         switch (schemeField.id) {
           case 1: // ITINERARY_ID
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.itineraryId = iprot.readI32();
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.itineraryId = iprot.readI64();
               struct.setItineraryIdIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -356,7 +356,7 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
 
       oprot.writeStructBegin(STRUCT_DESC);
       oprot.writeFieldBegin(ITINERARY_ID_FIELD_DESC);
-      oprot.writeI32(struct.itineraryId);
+      oprot.writeI64(struct.itineraryId);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -375,13 +375,13 @@ public class GetItineraryRequest implements org.apache.thrift.TBase<GetItinerary
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, GetItineraryRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
-      oprot.writeI32(struct.itineraryId);
+      oprot.writeI64(struct.itineraryId);
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, GetItineraryRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      struct.itineraryId = iprot.readI32();
+      struct.itineraryId = iprot.readI64();
       struct.setItineraryIdIsSet(true);
     }
   }

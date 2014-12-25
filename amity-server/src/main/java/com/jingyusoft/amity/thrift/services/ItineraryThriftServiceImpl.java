@@ -1,5 +1,7 @@
 package com.jingyusoft.amity.thrift.services;
 
+import java.util.stream.Collectors;
+
 import javax.annotation.Resource;
 
 import org.apache.thrift.TException;
@@ -17,6 +19,8 @@ import com.jingyusoft.amity.thrift.generated.DeleteItineraryResponse;
 import com.jingyusoft.amity.thrift.generated.GetItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.GetItineraryResponse;
 import com.jingyusoft.amity.thrift.generated.ItineraryThriftService;
+import com.jingyusoft.amity.thrift.generated.ListItineraryRequest;
+import com.jingyusoft.amity.thrift.generated.ListItineraryResponse;
 import com.jingyusoft.amity.thrift.generated.SessionCredentials;
 import com.jingyusoft.amity.thrift.generated.UpdateItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.UpdateItineraryResponse;
@@ -68,6 +72,14 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 		} else {
 			return new GetItineraryResponse().setItinerary(itinerary.toDto());
 		}
+	}
+
+	@Override
+	public ListItineraryResponse listItineries(ListItineraryRequest request, SessionCredentials credentials)
+			throws TException {
+
+		return new ListItineraryResponse().setItineraries(itineraryService.listItineraries(request.getAmityUserId())
+				.stream().map(item -> item.toDto()).collect(Collectors.toList()));
 	}
 
 	@Override

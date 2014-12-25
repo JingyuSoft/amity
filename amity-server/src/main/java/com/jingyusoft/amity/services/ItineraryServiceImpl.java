@@ -1,5 +1,8 @@
 package com.jingyusoft.amity.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.annotation.Resource;
 
 import org.joda.time.DateTime;
@@ -9,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jingyusoft.amity.common.AmityLogger;
+import com.jingyusoft.amity.data.dao.ItineraryDao;
 import com.jingyusoft.amity.data.entities.ItineraryEntity;
 import com.jingyusoft.amity.data.repositories.AmityUserRepository;
 import com.jingyusoft.amity.data.repositories.CityRepository;
@@ -24,6 +28,9 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Resource
 	private ItineraryRepository itineraryRepository;
+
+	@Resource
+	private ItineraryDao itineraryDao;
 
 	@Resource
 	private AmityUserRepository amityUserRepository;
@@ -72,6 +79,12 @@ public class ItineraryServiceImpl implements ItineraryService {
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public Itinerary getItinerary(long itineraryId) {
 		return new Itinerary(itineraryRepository.getOne(itineraryId));
+	}
+
+	@Override
+	public List<Itinerary> listItineraries(long amityUserId) {
+		return itineraryDao.listItineraries(amityUserId).stream().map(item -> new Itinerary(item))
+				.collect(Collectors.toList());
 	}
 
 	@Override

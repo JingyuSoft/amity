@@ -10,6 +10,24 @@ struct ItineraryDto {
 	6: optional string arrivalDate
 }
 
+struct GetItineraryRequest {
+	1: required i64 itineraryId
+}
+
+struct GetItineraryResponse {
+	1: required i32 errorCode,
+	2: optional ItineraryDto itinerary
+}
+
+struct ListItineraryRequest {
+	1: required i64 amityUserId
+}
+
+struct ListItineraryResponse {
+	1: required i32 errorCode,
+	2: optional list<ItineraryDto> itineraries
+}
+
 struct CreateItineraryRequest {
 	1: ItineraryDto itinerary
 }
@@ -17,15 +35,6 @@ struct CreateItineraryRequest {
 struct CreateItineraryResponse {
 	1: required i32 errorCode,
 	2: required i64 itineraryId
-}
-
-struct GetItineraryRequest {
-	1: required i32 itineraryId
-}
-
-struct GetItineraryResponse {
-	1: required i32 errorCode,
-	2: optional ItineraryDto itinerary
 }
 
 struct UpdateItineraryRequest {
@@ -37,7 +46,7 @@ struct UpdateItineraryResponse {
 }
 
 struct DeleteItineraryRequest {
-	1: required i32 itineraryId
+	1: required i64 itineraryId
 }
 
 struct DeleteItineraryResponse {
@@ -46,6 +55,7 @@ struct DeleteItineraryResponse {
 
 service ItineraryThriftService {
 	GetItineraryResponse getItinerary(1: GetItineraryRequest request, 2: authentication.SessionCredentials credentials)
+	ListItineraryResponse listItineries(1: ListItineraryRequest request, 2: authentication.SessionCredentials credentials)
     CreateItineraryResponse createItinerary(1: CreateItineraryRequest request, 2: authentication.SessionCredentials credentials)
     UpdateItineraryResponse updateItinerary(1: UpdateItineraryRequest request, 2: authentication.SessionCredentials credentials)
     DeleteItineraryResponse deleteItinerary(1: DeleteItineraryRequest request, 2: authentication.SessionCredentials credentials)

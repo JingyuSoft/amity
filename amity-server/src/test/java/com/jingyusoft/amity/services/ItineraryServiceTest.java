@@ -1,5 +1,7 @@
 package com.jingyusoft.amity.services;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -37,11 +39,15 @@ public class ItineraryServiceTest {
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Category(DatabaseRequired.class)
 	public void testItineraryCrud() throws ParseException {
+
 		AmityUser amityUser = userAccountService.registerAmityUser("univer.shi@gmail.com", "dummy");
 		int departureCity = citySearcher.searchCities("Beijing", 1).get(0).getId();
 		int arrivalCity = citySearcher.searchCities("Shanghai", 1).get(0).getId();
 		Itinerary itinerary = itineraryService.createItinerary(amityUser.getId(), departureCity, DateTime.now(),
 				arrivalCity, DateTime.now());
 		Assert.assertNotNull(itinerary);
+
+		List<Itinerary> list = itineraryService.listItineraries(amityUser.getId());
+		Assert.assertEquals(1, list.size());
 	}
 }

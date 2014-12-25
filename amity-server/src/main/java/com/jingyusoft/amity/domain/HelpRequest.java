@@ -1,11 +1,36 @@
 package com.jingyusoft.amity.domain;
 
+import javax.annotation.Resource;
+
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.data.entities.HelpRequestEntity;
 import com.jingyusoft.amity.domain.geographics.City;
+import com.jingyusoft.amity.refdata.CityCache;
 
 public class HelpRequest {
+
+	@Service
+	private static class Factory {
+
+		@Resource
+		private CityCache cityCache;
+
+		public HelpRequest fromEntity(HelpRequestEntity entity) {
+
+			HelpRequest helpRequest = new HelpRequest();
+
+			helpRequest.helpRequestId = entity.getId();
+			helpRequest.amityUser = new AmityUser(entity.getAmityUser());
+			helpRequest.fromCity = cityCache.get(entity.getFromCity().getId());
+			helpRequest.fromDateTime = entity.getFromDateTime();
+			helpRequest.toCity = cityCache.get(entity.getToCity().getId());
+			helpRequest.toDateTime = entity.getToDateTime();
+
+			return helpRequest;
+		}
+	}
 
 	private Long helpRequestId;
 
@@ -19,13 +44,7 @@ public class HelpRequest {
 
 	private DateTime toDateTime;
 
-	public HelpRequest(HelpRequestEntity entity) {
-		helpRequestId = entity.getId();
-		amityUser = new AmityUser(entity.getAmityUser());
-		fromCity = new City(entity.getFromCity());
-		fromDateTime = entity.getFromDateTime();
-		toCity = new City(entity.getToCity());
-		toDateTime = entity.getToDateTime();
+	private HelpRequest() {
 	}
 
 	public AmityUser getAmityUser() {

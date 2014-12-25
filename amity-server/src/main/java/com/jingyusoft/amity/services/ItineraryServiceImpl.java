@@ -18,7 +18,6 @@ import com.jingyusoft.amity.data.repositories.AmityUserRepository;
 import com.jingyusoft.amity.data.repositories.CityRepository;
 import com.jingyusoft.amity.data.repositories.ItineraryRepository;
 import com.jingyusoft.amity.domain.Itinerary;
-import com.jingyusoft.amity.refdata.CityCache;
 import com.jingyusoft.amity.users.UserAccountService;
 
 @Service
@@ -42,7 +41,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 	private UserAccountService userAccountService;
 
 	@Resource
-	private CityCache cityCache;
+	private Itinerary.Factory itineraryFactory;
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -57,7 +56,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 		entity.setArrivalDateTime(arrivalDateTime);
 
 		entity = itineraryRepository.saveAndFlush(entity);
-		Itinerary itinerary = new Itinerary(entity);
+		Itinerary itinerary = itineraryFactory.fromEntity(entity);
 
 		LOGGER.info("New itinerary created. " + itinerary);
 
@@ -78,13 +77,17 @@ public class ItineraryServiceImpl implements ItineraryService {
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public Itinerary getItinerary(long itineraryId) {
-		return new Itinerary(itineraryRepository.getOne(itineraryId));
+		ItineraryEntity itineraryEntity = itineraryRepository.getOne(itineraryId);
+		Itinerary itinerary = itineraryFactory.fromEntity(itineraryEntity);
+		return itinerary;
 	}
 
 	@Override
 	public List<Itinerary> listItineraries(long amityUserId) {
-		return itineraryDao.listItineraries(amityUserId).stream().map(item -> new Itinerary(item))
-				.collect(Collectors.toList());
+		return itineraryDao.listItineraries(amityUserId).stream().map(item -> {
+			Itinerary itinerary = itineraryFactory.fromEntity(item);
+			return itinerary;
+		}).collect(Collectors.toList());
 	}
 
 	@Override
@@ -105,6 +108,6 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 		itineraryEntity = itineraryRepository.saveAndFlush(itineraryEntity);
 
-		return new Itinerary(itineraryEntity);
+		return itineraryFactory.fromEntity(itineraryEntity);
 	}
 }

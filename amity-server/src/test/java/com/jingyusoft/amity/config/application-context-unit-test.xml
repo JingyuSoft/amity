@@ -10,7 +10,7 @@
                   classpath:config-${config.mode:test}.properties" />
 
 	<import resource="application-context-data-source.xml" />
-	
+
 	<bean id="testDataPreparer" class="com.jingyusoft.amity.testdata.TestDataPreparer" />
 	<bean id="testDataDao" class="com.jingyusoft.amity.testdata.TestDataDaoImpl" />
 
@@ -20,6 +20,7 @@
 		              com.jingyusoft.amity.repository,
 		              com.jingyusoft.amity.services,
 		              com.jingyusoft.amity.refdata,
+		              com.jingyusoft.amity.domain,
 		              com.jingyusoft.amity.users" />
 
 </beans>

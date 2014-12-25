@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
-	<diskStore path="java.io.tmpdir" />
+	<diskStore path="ehcache.disk.store.dir" />
 
 	<cache name="org.hibernate.cache.UpdateTimestampsCache"
 		maxElementsInMemory="50000" eternal="true" overflowToDisk="true" />

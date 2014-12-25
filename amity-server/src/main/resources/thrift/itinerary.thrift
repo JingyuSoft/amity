@@ -1,17 +1,17 @@
 include "authentication.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
-struct HelperItineraryDto {
+struct ItineraryDto {
 	1: optional i64 id,
 	2: required i64 userId,
 	3: required i32 departureCityId,
 	4: required string departureDate,
 	5: required i32 arrivalCityId,
-	6: required string arrivalDate
+	6: optional string arrivalDate
 }
 
 struct CreateItineraryRequest {
-	1: HelperItineraryDto itinerary
+	1: ItineraryDto itinerary
 }
 
 struct CreateItineraryResponse {

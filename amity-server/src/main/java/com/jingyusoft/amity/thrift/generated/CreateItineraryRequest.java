@@ -46,7 +46,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
     schemes.put(TupleScheme.class, new CreateItineraryRequestTupleSchemeFactory());
   }
 
-  public HelperItineraryDto itinerary; // required
+  public ItineraryDto itinerary; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -111,7 +111,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.ITINERARY, new org.apache.thrift.meta_data.FieldMetaData("itinerary", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, HelperItineraryDto.class)));
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ItineraryDto.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(CreateItineraryRequest.class, metaDataMap);
   }
@@ -120,7 +120,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
   }
 
   public CreateItineraryRequest(
-    HelperItineraryDto itinerary)
+    ItineraryDto itinerary)
   {
     this();
     this.itinerary = itinerary;
@@ -131,7 +131,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
    */
   public CreateItineraryRequest(CreateItineraryRequest other) {
     if (other.isSetItinerary()) {
-      this.itinerary = new HelperItineraryDto(other.itinerary);
+      this.itinerary = new ItineraryDto(other.itinerary);
     }
   }
 
@@ -144,11 +144,11 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
     this.itinerary = null;
   }
 
-  public HelperItineraryDto getItinerary() {
+  public ItineraryDto getItinerary() {
     return this.itinerary;
   }
 
-  public CreateItineraryRequest setItinerary(HelperItineraryDto itinerary) {
+  public CreateItineraryRequest setItinerary(ItineraryDto itinerary) {
     this.itinerary = itinerary;
     return this;
   }
@@ -174,7 +174,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
       if (value == null) {
         unsetItinerary();
       } else {
-        setItinerary((HelperItineraryDto)value);
+        setItinerary((ItineraryDto)value);
       }
       break;
 
@@ -333,7 +333,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
         switch (schemeField.id) {
           case 1: // ITINERARY
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.itinerary = new HelperItineraryDto();
+              struct.itinerary = new ItineraryDto();
               struct.itinerary.read(iprot);
               struct.setItineraryIsSet(true);
             } else { 
@@ -392,7 +392,7 @@ public class CreateItineraryRequest implements org.apache.thrift.TBase<CreateIti
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
-        struct.itinerary = new HelperItineraryDto();
+        struct.itinerary = new ItineraryDto();
         struct.itinerary.read(iprot);
         struct.setItineraryIsSet(true);
       }

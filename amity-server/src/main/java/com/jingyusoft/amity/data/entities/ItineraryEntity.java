@@ -44,7 +44,7 @@ public class ItineraryEntity {
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime departureDateTime;
 
-	@Column(name = "arrival_date_time", nullable = false)
+	@Column(name = "arrival_date_time", nullable = true)
 	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime arrivalDateTime;
 

@@ -17,7 +17,7 @@
 
 #import "authentication.h"
 
-@interface HelperItineraryDto : NSObject <TBase, NSCoding> {
+@interface ItineraryDto : NSObject <TBase, NSCoding> {
   int64_t __id;
   int64_t __userId;
   int32_t __departureCityId;
@@ -89,17 +89,17 @@
 @end
 
 @interface CreateItineraryRequest : NSObject <TBase, NSCoding> {
-  HelperItineraryDto * __itinerary;
+  ItineraryDto * __itinerary;
 
   BOOL __itinerary_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=itinerary, setter=setItinerary:) HelperItineraryDto * itinerary;
+@property (nonatomic, retain, getter=itinerary, setter=setItinerary:) ItineraryDto * itinerary;
 #endif
 
 - (id) init;
-- (id) initWithItinerary: (HelperItineraryDto *) itinerary;
+- (id) initWithItinerary: (ItineraryDto *) itinerary;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -107,8 +107,8 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (HelperItineraryDto *) itinerary;
-- (void) setItinerary: (HelperItineraryDto *) itinerary;
+- (ItineraryDto *) itinerary;
+- (void) setItinerary: (ItineraryDto *) itinerary;
 #endif
 - (BOOL) itineraryIsSet;
 

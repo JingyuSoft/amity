@@ -19,7 +19,7 @@
 
 #import "itinerary.h"
 
-@implementation HelperItineraryDto
+@implementation ItineraryDto
 
 - (id) init
 {
@@ -301,7 +301,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"HelperItineraryDto"];
+  [outProtocol writeStructBeginWithName: @"ItineraryDto"];
   if (__id_isset) {
     [outProtocol writeFieldBeginWithName: @"id" type: TType_I64 fieldID: 1];
     [outProtocol writeI64: __id];
@@ -358,14 +358,10 @@
     @throw [TProtocolException exceptionWithName: @"TProtocolException"
                                reason: @"Required field 'arrivalCityId' is not set."];
   }
-  if (!__arrivalDate_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'arrivalDate' is not set."];
-  }
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"HelperItineraryDto("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"ItineraryDto("];
   [ms appendString: @"id:"];
   [ms appendFormat: @"%qi", __id];
   [ms appendString: @",userId:"];
@@ -394,7 +390,7 @@
   return self;
 }
 
-- (id) initWithItinerary: (HelperItineraryDto *) itinerary
+- (id) initWithItinerary: (ItineraryDto *) itinerary
 {
   self = [super init];
   __itinerary = [itinerary retain_stub];
@@ -427,11 +423,11 @@
   [super dealloc_stub];
 }
 
-- (HelperItineraryDto *) itinerary {
+- (ItineraryDto *) itinerary {
   return [[__itinerary retain_stub] autorelease_stub];
 }
 
-- (void) setItinerary: (HelperItineraryDto *) itinerary {
+- (void) setItinerary: (ItineraryDto *) itinerary {
   [itinerary retain_stub];
   [__itinerary release_stub];
   __itinerary = itinerary;
@@ -465,7 +461,7 @@
     {
       case 1:
         if (fieldType == TType_STRUCT) {
-          HelperItineraryDto *fieldValue = [[HelperItineraryDto alloc] init];
+          ItineraryDto *fieldValue = [[ItineraryDto alloc] init];
           [fieldValue read: inProtocol];
           [self setItinerary: fieldValue];
           [fieldValue release_stub];

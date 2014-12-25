@@ -1,6 +1,14 @@
 include "authentication.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
+struct CountryDto {
+	1: required i32 id,
+	2: required string code
+	3: required string name,
+	4: required string continentCode,
+	5: required string continentName,
+}
+
 struct CityDto {
 	1: required i32 id,
 	2: required string name,
@@ -8,14 +16,6 @@ struct CityDto {
 	4: required CountryDto country,
 	5: required double latitude,
 	6: required double longitude
-}
-
-struct CountryDto {
-	1: required i32 id,
-	2: required string code
-	3: required string name,
-	4: required string continentCode,
-	5: required string continentName,
 }
 
 struct CitySearchResultDto {

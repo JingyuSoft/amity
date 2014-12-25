@@ -49,5 +49,7 @@ public class ItineraryServiceTest {
 
 		List<Itinerary> list = itineraryService.listItineraries(amityUser.getId());
 		Assert.assertEquals(1, list.size());
+		Assert.assertNotNull(list.get(0).getDepartureCity());
+		Assert.assertNotNull(list.get(0).getDepartureCity().getCountry());
 	}
 }

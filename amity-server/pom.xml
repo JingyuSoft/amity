@@ -78,6 +78,12 @@
 									<extraArgument>-Dconfig.mode=qa</extraArgument>
 									<extraArgument>-Djdbc.password.file=/srv/amity-server/amity-database-password-qa</extraArgument>
 									<extraArgument>-Dlogback.configurationFile=logback-qa.xml</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote=true</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.port=8541</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.local.only=false</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.authenticate=true</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.access.file=/jingyusoft/amity/secure/amity-server-jmx.access</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.password.file=/jingyusoft/amity/secure/amity-server-jmx.password</extraArgument>
 								</extraArguments>
 							</jvmSettings>
 						</program>

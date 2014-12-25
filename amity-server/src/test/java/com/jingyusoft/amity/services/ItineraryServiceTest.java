@@ -6,6 +6,7 @@ import org.apache.lucene.queryparser.classic.ParseException;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,6 +17,7 @@ import com.jingyusoft.amity.config.UnitTestConfigConstants;
 import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.domain.Itinerary;
 import com.jingyusoft.amity.refdata.CitySearcher;
+import com.jingyusoft.amity.testgroups.DatabaseRequired;
 import com.jingyusoft.amity.users.UserAccountService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,6 +35,7 @@ public class ItineraryServiceTest {
 
 	@Test
 	@Transactional(propagation = Propagation.REQUIRED)
+	@Category(DatabaseRequired.class)
 	public void testItineraryCrud() throws ParseException {
 		AmityUser amityUser = userAccountService.registerAmityUser("univer.shi@gmail.com", "dummy");
 		int departureCity = citySearcher.searchCities("Beijing", 1).get(0).getId();

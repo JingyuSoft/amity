@@ -147,7 +147,7 @@ public class CityDto implements org.apache.thrift.TBase<CityDto, CityDto._Fields
     tmpMap.put(_Fields.DISPLAY_NAME, new org.apache.thrift.meta_data.FieldMetaData("displayName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.COUNTRY, new org.apache.thrift.meta_data.FieldMetaData("country", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT        , "CountryDto")));
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, CountryDto.class)));
     tmpMap.put(_Fields.LATITUDE, new org.apache.thrift.meta_data.FieldMetaData("latitude", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.LONGITUDE, new org.apache.thrift.meta_data.FieldMetaData("longitude", org.apache.thrift.TFieldRequirementType.REQUIRED, 
@@ -190,7 +190,7 @@ public class CityDto implements org.apache.thrift.TBase<CityDto, CityDto._Fields
       this.displayName = other.displayName;
     }
     if (other.isSetCountry()) {
-      this.country = other.country;
+      this.country = new CountryDto(other.country);
     }
     this.latitude = other.latitude;
     this.longitude = other.longitude;
@@ -702,6 +702,9 @@ public class CityDto implements org.apache.thrift.TBase<CityDto, CityDto._Fields
     // alas, we cannot check 'latitude' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'longitude' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
+    if (country != null) {
+      country.validate();
+    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {

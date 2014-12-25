@@ -19,6 +19,342 @@
 
 #import "refdata.h"
 
+@implementation CountryDto
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name continentCode: (NSString *) continentCode continentName: (NSString *) continentName
+{
+  self = [super init];
+  __id = id;
+  __id_isset = YES;
+  __code = [code retain_stub];
+  __code_isset = YES;
+  __name = [name retain_stub];
+  __name_isset = YES;
+  __continentCode = [continentCode retain_stub];
+  __continentCode_isset = YES;
+  __continentName = [continentName retain_stub];
+  __continentName_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"id"])
+  {
+    __id = [decoder decodeInt32ForKey: @"id"];
+    __id_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"code"])
+  {
+    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
+    __code_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"name"])
+  {
+    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
+    __name_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"continentCode"])
+  {
+    __continentCode = [[decoder decodeObjectForKey: @"continentCode"] retain_stub];
+    __continentCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"continentName"])
+  {
+    __continentName = [[decoder decodeObjectForKey: @"continentName"] retain_stub];
+    __continentName_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__id_isset)
+  {
+    [encoder encodeInt32: __id forKey: @"id"];
+  }
+  if (__code_isset)
+  {
+    [encoder encodeObject: __code forKey: @"code"];
+  }
+  if (__name_isset)
+  {
+    [encoder encodeObject: __name forKey: @"name"];
+  }
+  if (__continentCode_isset)
+  {
+    [encoder encodeObject: __continentCode forKey: @"continentCode"];
+  }
+  if (__continentName_isset)
+  {
+    [encoder encodeObject: __continentName forKey: @"continentName"];
+  }
+}
+
+- (void) dealloc
+{
+  [__code release_stub];
+  [__name release_stub];
+  [__continentCode release_stub];
+  [__continentName release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) id {
+  return __id;
+}
+
+- (void) setId: (int32_t) id {
+  __id = id;
+  __id_isset = YES;
+}
+
+- (BOOL) idIsSet {
+  return __id_isset;
+}
+
+- (void) unsetId {
+  __id_isset = NO;
+}
+
+- (NSString *) code {
+  return [[__code retain_stub] autorelease_stub];
+}
+
+- (void) setCode: (NSString *) code {
+  [code retain_stub];
+  [__code release_stub];
+  __code = code;
+  __code_isset = YES;
+}
+
+- (BOOL) codeIsSet {
+  return __code_isset;
+}
+
+- (void) unsetCode {
+  [__code release_stub];
+  __code = nil;
+  __code_isset = NO;
+}
+
+- (NSString *) name {
+  return [[__name retain_stub] autorelease_stub];
+}
+
+- (void) setName: (NSString *) name {
+  [name retain_stub];
+  [__name release_stub];
+  __name = name;
+  __name_isset = YES;
+}
+
+- (BOOL) nameIsSet {
+  return __name_isset;
+}
+
+- (void) unsetName {
+  [__name release_stub];
+  __name = nil;
+  __name_isset = NO;
+}
+
+- (NSString *) continentCode {
+  return [[__continentCode retain_stub] autorelease_stub];
+}
+
+- (void) setContinentCode: (NSString *) continentCode {
+  [continentCode retain_stub];
+  [__continentCode release_stub];
+  __continentCode = continentCode;
+  __continentCode_isset = YES;
+}
+
+- (BOOL) continentCodeIsSet {
+  return __continentCode_isset;
+}
+
+- (void) unsetContinentCode {
+  [__continentCode release_stub];
+  __continentCode = nil;
+  __continentCode_isset = NO;
+}
+
+- (NSString *) continentName {
+  return [[__continentName retain_stub] autorelease_stub];
+}
+
+- (void) setContinentName: (NSString *) continentName {
+  [continentName retain_stub];
+  [__continentName release_stub];
+  __continentName = continentName;
+  __continentName_isset = YES;
+}
+
+- (BOOL) continentNameIsSet {
+  return __continentName_isset;
+}
+
+- (void) unsetContinentName {
+  [__continentName release_stub];
+  __continentName = nil;
+  __continentName_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setContinentCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setContinentName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"CountryDto"];
+  if (__id_isset) {
+    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __id];
+    [outProtocol writeFieldEnd];
+  }
+  if (__code_isset) {
+    if (__code != nil) {
+      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __code];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__name_isset) {
+    if (__name != nil) {
+      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
+      [outProtocol writeString: __name];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__continentCode_isset) {
+    if (__continentCode != nil) {
+      [outProtocol writeFieldBeginWithName: @"continentCode" type: TType_STRING fieldID: 4];
+      [outProtocol writeString: __continentCode];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__continentName_isset) {
+    if (__continentName != nil) {
+      [outProtocol writeFieldBeginWithName: @"continentName" type: TType_STRING fieldID: 5];
+      [outProtocol writeString: __continentName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__id_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'id' is not set."];
+  }
+  if (!__code_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'code' is not set."];
+  }
+  if (!__name_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'name' is not set."];
+  }
+  if (!__continentCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'continentCode' is not set."];
+  }
+  if (!__continentName_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'continentName' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"CountryDto("];
+  [ms appendString: @"id:"];
+  [ms appendFormat: @"%i", __id];
+  [ms appendString: @",code:"];
+  [ms appendFormat: @"\"%@\"", __code];
+  [ms appendString: @",name:"];
+  [ms appendFormat: @"\"%@\"", __name];
+  [ms appendString: @",continentCode:"];
+  [ms appendFormat: @"\"%@\"", __continentCode];
+  [ms appendString: @",continentName:"];
+  [ms appendFormat: @"\"%@\"", __continentName];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation CityDto
 
 - (id) init
@@ -29,7 +365,7 @@
   return self;
 }
 
-- (id) initWithId: (int32_t) id name: (NSString *) name displayName: (NSString *) displayName country: (CountryDto) country latitude: (double) latitude longitude: (double) longitude
+- (id) initWithId: (int32_t) id name: (NSString *) name displayName: (NSString *) displayName country: (CountryDto *) country latitude: (double) latitude longitude: (double) longitude
 {
   self = [super init];
   __id = id;
@@ -387,342 +723,6 @@
   [ms appendFormat: @"%f", __latitude];
   [ms appendString: @",longitude:"];
   [ms appendFormat: @"%f", __longitude];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@implementation CountryDto
-
-- (id) init
-{
-  self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name continentCode: (NSString *) continentCode continentName: (NSString *) continentName
-{
-  self = [super init];
-  __id = id;
-  __id_isset = YES;
-  __code = [code retain_stub];
-  __code_isset = YES;
-  __name = [name retain_stub];
-  __name_isset = YES;
-  __continentCode = [continentCode retain_stub];
-  __continentCode_isset = YES;
-  __continentName = [continentName retain_stub];
-  __continentName_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"id"])
-  {
-    __id = [decoder decodeInt32ForKey: @"id"];
-    __id_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"code"])
-  {
-    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
-    __code_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"name"])
-  {
-    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
-    __name_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"continentCode"])
-  {
-    __continentCode = [[decoder decodeObjectForKey: @"continentCode"] retain_stub];
-    __continentCode_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"continentName"])
-  {
-    __continentName = [[decoder decodeObjectForKey: @"continentName"] retain_stub];
-    __continentName_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__id_isset)
-  {
-    [encoder encodeInt32: __id forKey: @"id"];
-  }
-  if (__code_isset)
-  {
-    [encoder encodeObject: __code forKey: @"code"];
-  }
-  if (__name_isset)
-  {
-    [encoder encodeObject: __name forKey: @"name"];
-  }
-  if (__continentCode_isset)
-  {
-    [encoder encodeObject: __continentCode forKey: @"continentCode"];
-  }
-  if (__continentName_isset)
-  {
-    [encoder encodeObject: __continentName forKey: @"continentName"];
-  }
-}
-
-- (void) dealloc
-{
-  [__code release_stub];
-  [__name release_stub];
-  [__continentCode release_stub];
-  [__continentName release_stub];
-  [super dealloc_stub];
-}
-
-- (int32_t) id {
-  return __id;
-}
-
-- (void) setId: (int32_t) id {
-  __id = id;
-  __id_isset = YES;
-}
-
-- (BOOL) idIsSet {
-  return __id_isset;
-}
-
-- (void) unsetId {
-  __id_isset = NO;
-}
-
-- (NSString *) code {
-  return [[__code retain_stub] autorelease_stub];
-}
-
-- (void) setCode: (NSString *) code {
-  [code retain_stub];
-  [__code release_stub];
-  __code = code;
-  __code_isset = YES;
-}
-
-- (BOOL) codeIsSet {
-  return __code_isset;
-}
-
-- (void) unsetCode {
-  [__code release_stub];
-  __code = nil;
-  __code_isset = NO;
-}
-
-- (NSString *) name {
-  return [[__name retain_stub] autorelease_stub];
-}
-
-- (void) setName: (NSString *) name {
-  [name retain_stub];
-  [__name release_stub];
-  __name = name;
-  __name_isset = YES;
-}
-
-- (BOOL) nameIsSet {
-  return __name_isset;
-}
-
-- (void) unsetName {
-  [__name release_stub];
-  __name = nil;
-  __name_isset = NO;
-}
-
-- (NSString *) continentCode {
-  return [[__continentCode retain_stub] autorelease_stub];
-}
-
-- (void) setContinentCode: (NSString *) continentCode {
-  [continentCode retain_stub];
-  [__continentCode release_stub];
-  __continentCode = continentCode;
-  __continentCode_isset = YES;
-}
-
-- (BOOL) continentCodeIsSet {
-  return __continentCode_isset;
-}
-
-- (void) unsetContinentCode {
-  [__continentCode release_stub];
-  __continentCode = nil;
-  __continentCode_isset = NO;
-}
-
-- (NSString *) continentName {
-  return [[__continentName retain_stub] autorelease_stub];
-}
-
-- (void) setContinentName: (NSString *) continentName {
-  [continentName retain_stub];
-  [__continentName release_stub];
-  __continentName = continentName;
-  __continentName_isset = YES;
-}
-
-- (BOOL) continentNameIsSet {
-  return __continentName_isset;
-}
-
-- (void) unsetContinentName {
-  [__continentName release_stub];
-  __continentName = nil;
-  __continentName_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self setId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 3:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 4:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setContinentCode: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 5:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setContinentName: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"CountryDto"];
-  if (__id_isset) {
-    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: __id];
-    [outProtocol writeFieldEnd];
-  }
-  if (__code_isset) {
-    if (__code != nil) {
-      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
-      [outProtocol writeString: __code];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__name_isset) {
-    if (__name != nil) {
-      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
-      [outProtocol writeString: __name];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__continentCode_isset) {
-    if (__continentCode != nil) {
-      [outProtocol writeFieldBeginWithName: @"continentCode" type: TType_STRING fieldID: 4];
-      [outProtocol writeString: __continentCode];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__continentName_isset) {
-    if (__continentName != nil) {
-      [outProtocol writeFieldBeginWithName: @"continentName" type: TType_STRING fieldID: 5];
-      [outProtocol writeString: __continentName];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (void) validate {
-  // check for required fields
-  if (!__id_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'id' is not set."];
-  }
-  if (!__code_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'code' is not set."];
-  }
-  if (!__name_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'name' is not set."];
-  }
-  if (!__continentCode_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'continentCode' is not set."];
-  }
-  if (!__continentName_isset) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
-                               reason: @"Required field 'continentName' is not set."];
-  }
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"CountryDto("];
-  [ms appendString: @"id:"];
-  [ms appendFormat: @"%i", __id];
-  [ms appendString: @",code:"];
-  [ms appendFormat: @"\"%@\"", __code];
-  [ms appendString: @",name:"];
-  [ms appendFormat: @"\"%@\"", __name];
-  [ms appendString: @",continentCode:"];
-  [ms appendFormat: @"\"%@\"", __continentCode];
-  [ms appendString: @",continentName:"];
-  [ms appendFormat: @"\"%@\"", __continentName];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

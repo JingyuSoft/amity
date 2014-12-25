@@ -59,8 +59,13 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void deleteItinerary(long itineraryId) {
-		itineraryRepository.delete(itineraryId);
+	public boolean deleteItinerary(long itineraryId) {
+		if (itineraryRepository.exists(itineraryId)) {
+			itineraryRepository.delete(itineraryId);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -75,6 +80,11 @@ public class ItineraryServiceImpl implements ItineraryService {
 			DateTime arrivalDate) {
 
 		ItineraryEntity itineraryEntity = itineraryRepository.getOne(itineraryId);
+
+		if (itineraryEntity == null) {
+			return null;
+		}
+
 		itineraryEntity.setDepartureCity(cityRepository.getOne(departureCityId));
 		itineraryEntity.setDepartureDateTime(departureDate);
 		itineraryEntity.setArrivalCity(cityRepository.getOne(arrivalCityId));

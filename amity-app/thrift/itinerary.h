@@ -149,8 +149,176 @@
 
 @end
 
+@interface GetItineraryRequest : NSObject <TBase, NSCoding> {
+  int32_t __itineraryId;
+
+  BOOL __itineraryId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=itineraryId, setter=setItineraryId:) int32_t itineraryId;
+#endif
+
+- (id) init;
+- (id) initWithItineraryId: (int32_t) itineraryId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) itineraryId;
+- (void) setItineraryId: (int32_t) itineraryId;
+#endif
+- (BOOL) itineraryIdIsSet;
+
+@end
+
+@interface GetItineraryResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  ItineraryDto * __itinerary;
+
+  BOOL __errorCode_isset;
+  BOOL __itinerary_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=itinerary, setter=setItinerary:) ItineraryDto * itinerary;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode itinerary: (ItineraryDto *) itinerary;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (ItineraryDto *) itinerary;
+- (void) setItinerary: (ItineraryDto *) itinerary;
+#endif
+- (BOOL) itineraryIsSet;
+
+@end
+
+@interface UpdateItineraryRequest : NSObject <TBase, NSCoding> {
+  ItineraryDto * __itinerary;
+
+  BOOL __itinerary_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=itinerary, setter=setItinerary:) ItineraryDto * itinerary;
+#endif
+
+- (id) init;
+- (id) initWithItinerary: (ItineraryDto *) itinerary;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (ItineraryDto *) itinerary;
+- (void) setItinerary: (ItineraryDto *) itinerary;
+#endif
+- (BOOL) itineraryIsSet;
+
+@end
+
+@interface UpdateItineraryResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+
+  BOOL __errorCode_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+@end
+
+@interface DeleteItineraryRequest : NSObject <TBase, NSCoding> {
+  int32_t __itineraryId;
+
+  BOOL __itineraryId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=itineraryId, setter=setItineraryId:) int32_t itineraryId;
+#endif
+
+- (id) init;
+- (id) initWithItineraryId: (int32_t) itineraryId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) itineraryId;
+- (void) setItineraryId: (int32_t) itineraryId;
+#endif
+- (BOOL) itineraryIdIsSet;
+
+@end
+
+@interface DeleteItineraryResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+
+  BOOL __errorCode_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+@end
+
 @protocol ItineraryThriftService <NSObject>
+- (GetItineraryResponse *) getItinerary: (GetItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 - (CreateItineraryResponse *) createItinerary: (CreateItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (UpdateItineraryResponse *) updateItinerary: (UpdateItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (DeleteItineraryResponse *) deleteItinerary: (DeleteItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface ItineraryThriftServiceClient : NSObject <ItineraryThriftService> {

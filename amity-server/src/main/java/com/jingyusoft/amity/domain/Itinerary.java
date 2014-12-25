@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 
 import com.jingyusoft.amity.data.entities.ItineraryEntity;
 import com.jingyusoft.amity.domain.geographics.City;
+import com.jingyusoft.amity.thrift.generated.ItineraryDto;
 
 public class Itinerary {
 
@@ -74,6 +75,13 @@ public class Itinerary {
 
 	public void setItineraryId(Long itineraryId) {
 		this.itineraryId = itineraryId;
+	}
+
+	public ItineraryDto toDto() {
+		return new ItineraryDto().setId(getItineraryId()).setUserId(amityUser.getId())
+				.setDepartureCityId(departureCity.getId()).setDepartureDate(departureDateTime.toString())
+				.setArrivalCityId(getArrivalCity().getId())
+				.setArrivalDate(arrivalDateTime != null ? arrivalDateTime.toString() : null);
 	}
 
 	@Override

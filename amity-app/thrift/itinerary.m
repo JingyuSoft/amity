@@ -672,10 +672,1155 @@
 
 @end
 
+@implementation GetItineraryRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithItineraryId: (int32_t) itineraryId
+{
+  self = [super init];
+  __itineraryId = itineraryId;
+  __itineraryId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"itineraryId"])
+  {
+    __itineraryId = [decoder decodeInt32ForKey: @"itineraryId"];
+    __itineraryId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__itineraryId_isset)
+  {
+    [encoder encodeInt32: __itineraryId forKey: @"itineraryId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (int32_t) itineraryId {
+  return __itineraryId;
+}
+
+- (void) setItineraryId: (int32_t) itineraryId {
+  __itineraryId = itineraryId;
+  __itineraryId_isset = YES;
+}
+
+- (BOOL) itineraryIdIsSet {
+  return __itineraryId_isset;
+}
+
+- (void) unsetItineraryId {
+  __itineraryId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setItineraryId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetItineraryRequest"];
+  if (__itineraryId_isset) {
+    [outProtocol writeFieldBeginWithName: @"itineraryId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __itineraryId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__itineraryId_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'itineraryId' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetItineraryRequest("];
+  [ms appendString: @"itineraryId:"];
+  [ms appendFormat: @"%i", __itineraryId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation GetItineraryResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode itinerary: (ItineraryDto *) itinerary
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  __itinerary = [itinerary retain_stub];
+  __itinerary_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"itinerary"])
+  {
+    __itinerary = [[decoder decodeObjectForKey: @"itinerary"] retain_stub];
+    __itinerary_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+  if (__itinerary_isset)
+  {
+    [encoder encodeObject: __itinerary forKey: @"itinerary"];
+  }
+}
+
+- (void) dealloc
+{
+  [__itinerary release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (ItineraryDto *) itinerary {
+  return [[__itinerary retain_stub] autorelease_stub];
+}
+
+- (void) setItinerary: (ItineraryDto *) itinerary {
+  [itinerary retain_stub];
+  [__itinerary release_stub];
+  __itinerary = itinerary;
+  __itinerary_isset = YES;
+}
+
+- (BOOL) itineraryIsSet {
+  return __itinerary_isset;
+}
+
+- (void) unsetItinerary {
+  [__itinerary release_stub];
+  __itinerary = nil;
+  __itinerary_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          ItineraryDto *fieldValue = [[ItineraryDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setItinerary: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetItineraryResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (__itinerary_isset) {
+    if (__itinerary != nil) {
+      [outProtocol writeFieldBeginWithName: @"itinerary" type: TType_STRUCT fieldID: 2];
+      [__itinerary write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetItineraryResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",itinerary:"];
+  [ms appendFormat: @"%@", __itinerary];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation UpdateItineraryRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithItinerary: (ItineraryDto *) itinerary
+{
+  self = [super init];
+  __itinerary = [itinerary retain_stub];
+  __itinerary_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"itinerary"])
+  {
+    __itinerary = [[decoder decodeObjectForKey: @"itinerary"] retain_stub];
+    __itinerary_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__itinerary_isset)
+  {
+    [encoder encodeObject: __itinerary forKey: @"itinerary"];
+  }
+}
+
+- (void) dealloc
+{
+  [__itinerary release_stub];
+  [super dealloc_stub];
+}
+
+- (ItineraryDto *) itinerary {
+  return [[__itinerary retain_stub] autorelease_stub];
+}
+
+- (void) setItinerary: (ItineraryDto *) itinerary {
+  [itinerary retain_stub];
+  [__itinerary release_stub];
+  __itinerary = itinerary;
+  __itinerary_isset = YES;
+}
+
+- (BOOL) itineraryIsSet {
+  return __itinerary_isset;
+}
+
+- (void) unsetItinerary {
+  [__itinerary release_stub];
+  __itinerary = nil;
+  __itinerary_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          ItineraryDto *fieldValue = [[ItineraryDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setItinerary: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"UpdateItineraryRequest"];
+  if (__itinerary_isset) {
+    if (__itinerary != nil) {
+      [outProtocol writeFieldBeginWithName: @"itinerary" type: TType_STRUCT fieldID: 1];
+      [__itinerary write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__itinerary_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'itinerary' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"UpdateItineraryRequest("];
+  [ms appendString: @"itinerary:"];
+  [ms appendFormat: @"%@", __itinerary];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation UpdateItineraryResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"UpdateItineraryResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"UpdateItineraryResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation DeleteItineraryRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithItineraryId: (int32_t) itineraryId
+{
+  self = [super init];
+  __itineraryId = itineraryId;
+  __itineraryId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"itineraryId"])
+  {
+    __itineraryId = [decoder decodeInt32ForKey: @"itineraryId"];
+    __itineraryId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__itineraryId_isset)
+  {
+    [encoder encodeInt32: __itineraryId forKey: @"itineraryId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (int32_t) itineraryId {
+  return __itineraryId;
+}
+
+- (void) setItineraryId: (int32_t) itineraryId {
+  __itineraryId = itineraryId;
+  __itineraryId_isset = YES;
+}
+
+- (BOOL) itineraryIdIsSet {
+  return __itineraryId_isset;
+}
+
+- (void) unsetItineraryId {
+  __itineraryId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setItineraryId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"DeleteItineraryRequest"];
+  if (__itineraryId_isset) {
+    [outProtocol writeFieldBeginWithName: @"itineraryId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __itineraryId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__itineraryId_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'itineraryId' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"DeleteItineraryRequest("];
+  [ms appendString: @"itineraryId:"];
+  [ms appendFormat: @"%i", __itineraryId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation DeleteItineraryResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"DeleteItineraryResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"DeleteItineraryResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 
 @implementation itineraryConstants
 + (void) initialize {
 }
+@end
+
+@interface getItinerary_args : NSObject <TBase, NSCoding> {
+  GetItineraryRequest * __request;
+  SessionCredentials * __credentials;
+
+  BOOL __request_isset;
+  BOOL __credentials_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) GetItineraryRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (GetItineraryRequest *) request credentials: (SessionCredentials *) credentials;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (GetItineraryRequest *) request;
+- (void) setRequest: (GetItineraryRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
+
+@end
+
+@implementation getItinerary_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (GetItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [__credentials release_stub];
+  [super dealloc_stub];
+}
+
+- (GetItineraryRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (GetItineraryRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          GetItineraryRequest *fieldValue = [[GetItineraryRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"getItinerary_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"getItinerary_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface GetItinerary_result : NSObject <TBase, NSCoding> {
+  GetItineraryResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) GetItineraryResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (GetItineraryResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (GetItineraryResponse *) success;
+- (void) setSuccess: (GetItineraryResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation GetItinerary_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (GetItineraryResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (GetItineraryResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (GetItineraryResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          GetItineraryResponse *fieldValue = [[GetItineraryResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetItinerary_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetItinerary_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
 @end
 
 @interface createItinerary_args : NSObject <TBase, NSCoding> {
@@ -1042,6 +2187,734 @@
 
 @end
 
+@interface updateItinerary_args : NSObject <TBase, NSCoding> {
+  UpdateItineraryRequest * __request;
+  SessionCredentials * __credentials;
+
+  BOOL __request_isset;
+  BOOL __credentials_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) UpdateItineraryRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (UpdateItineraryRequest *) request credentials: (SessionCredentials *) credentials;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (UpdateItineraryRequest *) request;
+- (void) setRequest: (UpdateItineraryRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
+
+@end
+
+@implementation updateItinerary_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (UpdateItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [__credentials release_stub];
+  [super dealloc_stub];
+}
+
+- (UpdateItineraryRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (UpdateItineraryRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          UpdateItineraryRequest *fieldValue = [[UpdateItineraryRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"updateItinerary_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"updateItinerary_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface UpdateItinerary_result : NSObject <TBase, NSCoding> {
+  UpdateItineraryResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) UpdateItineraryResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (UpdateItineraryResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (UpdateItineraryResponse *) success;
+- (void) setSuccess: (UpdateItineraryResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation UpdateItinerary_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (UpdateItineraryResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (UpdateItineraryResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (UpdateItineraryResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          UpdateItineraryResponse *fieldValue = [[UpdateItineraryResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"UpdateItinerary_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"UpdateItinerary_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface deleteItinerary_args : NSObject <TBase, NSCoding> {
+  DeleteItineraryRequest * __request;
+  SessionCredentials * __credentials;
+
+  BOOL __request_isset;
+  BOOL __credentials_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) DeleteItineraryRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (DeleteItineraryRequest *) request credentials: (SessionCredentials *) credentials;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (DeleteItineraryRequest *) request;
+- (void) setRequest: (DeleteItineraryRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
+
+@end
+
+@implementation deleteItinerary_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (DeleteItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [__credentials release_stub];
+  [super dealloc_stub];
+}
+
+- (DeleteItineraryRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (DeleteItineraryRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          DeleteItineraryRequest *fieldValue = [[DeleteItineraryRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"deleteItinerary_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"deleteItinerary_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface DeleteItinerary_result : NSObject <TBase, NSCoding> {
+  DeleteItineraryResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) DeleteItineraryResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (DeleteItineraryResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (DeleteItineraryResponse *) success;
+- (void) setSuccess: (DeleteItineraryResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation DeleteItinerary_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (DeleteItineraryResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (DeleteItineraryResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (DeleteItineraryResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          DeleteItineraryResponse *fieldValue = [[DeleteItineraryResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"DeleteItinerary_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"DeleteItinerary_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation ItineraryThriftServiceClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -1061,6 +2934,51 @@
   [inProtocol release_stub];
   [outProtocol release_stub];
   [super dealloc_stub];
+}
+
+- (void) send_getItinerary: (GetItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [outProtocol writeMessageBeginWithName: @"getItinerary" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"getItinerary_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (GetItineraryResponse *) recv_getItinerary
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  GetItinerary_result * result = [[[GetItinerary_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"getItinerary failed: unknown result"];
+}
+
+- (GetItineraryResponse *) getItinerary: (GetItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [self send_getItinerary : request credentials: credentials];
+  return [self recv_getItinerary];
 }
 
 - (void) send_createItinerary: (CreateItineraryRequest *) request credentials: (SessionCredentials *) credentials
@@ -1108,6 +3026,96 @@
   return [self recv_createItinerary];
 }
 
+- (void) send_updateItinerary: (UpdateItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [outProtocol writeMessageBeginWithName: @"updateItinerary" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"updateItinerary_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (UpdateItineraryResponse *) recv_updateItinerary
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  UpdateItinerary_result * result = [[[UpdateItinerary_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"updateItinerary failed: unknown result"];
+}
+
+- (UpdateItineraryResponse *) updateItinerary: (UpdateItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [self send_updateItinerary : request credentials: credentials];
+  return [self recv_updateItinerary];
+}
+
+- (void) send_deleteItinerary: (DeleteItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [outProtocol writeMessageBeginWithName: @"deleteItinerary" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"deleteItinerary_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (DeleteItineraryResponse *) recv_deleteItinerary
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  DeleteItinerary_result * result = [[[DeleteItinerary_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"deleteItinerary failed: unknown result"];
+}
+
+- (DeleteItineraryResponse *) deleteItinerary: (DeleteItineraryRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [self send_deleteItinerary : request credentials: credentials];
+  return [self recv_deleteItinerary];
+}
+
 @end
 
 @implementation ItineraryThriftServiceProcessor
@@ -1121,12 +3129,36 @@
   mService = [service retain_stub];
   mMethodMap = [[NSMutableDictionary dictionary] retain_stub];
   {
+    SEL s = @selector(process_getItinerary_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"getItinerary"];
+  }
+  {
     SEL s = @selector(process_createItinerary_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"createItinerary"];
+  }
+  {
+    SEL s = @selector(process_updateItinerary_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"updateItinerary"];
+  }
+  {
+    SEL s = @selector(process_deleteItinerary_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"deleteItinerary"];
   }
   return self;
 }
@@ -1169,6 +3201,23 @@
   return YES;
 }
 
+- (void) process_getItinerary_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  getItinerary_args * args = [[getItinerary_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  GetItinerary_result * result = [[GetItinerary_result alloc] init];
+  [result setSuccess: [mService getItinerary: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"getItinerary"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
 - (void) process_createItinerary_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
 {
   createItinerary_args * args = [[createItinerary_args alloc] init];
@@ -1177,6 +3226,40 @@
   CreateItinerary_result * result = [[CreateItinerary_result alloc] init];
   [result setSuccess: [mService createItinerary: [args request] credentials: [args credentials]]];
   [outProtocol writeMessageBeginWithName: @"createItinerary"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_updateItinerary_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  updateItinerary_args * args = [[updateItinerary_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  UpdateItinerary_result * result = [[UpdateItinerary_result alloc] init];
+  [result setSuccess: [mService updateItinerary: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"updateItinerary"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_deleteItinerary_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  deleteItinerary_args * args = [[deleteItinerary_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  DeleteItinerary_result * result = [[DeleteItinerary_result alloc] init];
+  [result setSuccess: [mService deleteItinerary: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"deleteItinerary"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

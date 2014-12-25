@@ -9,7 +9,7 @@ public interface ItineraryService {
 	Itinerary createItinerary(final long amityUserId, final int departureCityId, final DateTime departureDate,
 			final int arrivalCityId, final DateTime arrivalDate);
 
-	void deleteItinerary(final long itineraryId);
+	boolean deleteItinerary(final long itineraryId);
 
 	Itinerary getItinerary(final long itineraryId);
 

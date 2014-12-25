@@ -12,9 +12,13 @@ import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.ErrorCodes;
+import com.jingyusoft.amity.domain.geographics.City;
+import com.jingyusoft.amity.refdata.CityCache;
 import com.jingyusoft.amity.refdata.CitySearchResult;
 import com.jingyusoft.amity.refdata.CitySearcher;
 import com.jingyusoft.amity.thrift.generated.CitySearchResultDto;
+import com.jingyusoft.amity.thrift.generated.GetCityRequest;
+import com.jingyusoft.amity.thrift.generated.GetCityResponse;
 import com.jingyusoft.amity.thrift.generated.RefDataThriftService;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesRequest;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesResponse;
@@ -29,6 +33,20 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 
 	@Resource
 	private CitySearcher citySearcher;
+
+	@Resource
+	private CityCache cityCache;
+
+	@Override
+	public GetCityResponse getCity(GetCityRequest request, SessionCredentials credentials) throws TException {
+
+		City city = cityCache.get(request.getId());
+		if (city == null) {
+			return new GetCityResponse(ErrorCodes.CITY_NOT_FOUND_BY_ID);
+		}
+
+		return new GetCityResponse().setCity(city.toDto());
+	}
 
 	@Override
 	public SearchCitiesResponse searchCities(SearchCitiesRequest request, SessionCredentials credentials)

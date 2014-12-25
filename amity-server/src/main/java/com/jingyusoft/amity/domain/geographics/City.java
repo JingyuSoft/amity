@@ -1,6 +1,7 @@
 package com.jingyusoft.amity.domain.geographics;
 
 import com.jingyusoft.amity.data.entities.CityEntity;
+import com.jingyusoft.amity.thrift.generated.CityDto;
 
 public class City extends LocationBase {
 
@@ -45,5 +46,10 @@ public class City extends LocationBase {
 
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+
+	public CityDto toDto() {
+		return new CityDto().setId(getId()).setName(getName()).setDisplayName(displayName).setCountry(country.toDto())
+				.setLatitude(geoLocation.getLatitude()).setLongitude(geoLocation.getLongitude());
 	}
 }

@@ -19,6 +19,716 @@
 
 #import "refdata.h"
 
+@implementation CityDto
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithId: (int32_t) id name: (NSString *) name displayName: (NSString *) displayName country: (CountryDto) country latitude: (double) latitude longitude: (double) longitude
+{
+  self = [super init];
+  __id = id;
+  __id_isset = YES;
+  __name = [name retain_stub];
+  __name_isset = YES;
+  __displayName = [displayName retain_stub];
+  __displayName_isset = YES;
+  __country = [country retain_stub];
+  __country_isset = YES;
+  __latitude = latitude;
+  __latitude_isset = YES;
+  __longitude = longitude;
+  __longitude_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"id"])
+  {
+    __id = [decoder decodeInt32ForKey: @"id"];
+    __id_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"name"])
+  {
+    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
+    __name_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"displayName"])
+  {
+    __displayName = [[decoder decodeObjectForKey: @"displayName"] retain_stub];
+    __displayName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"country"])
+  {
+    __country = [[decoder decodeObjectForKey: @"country"] retain_stub];
+    __country_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"latitude"])
+  {
+    __latitude = [decoder decodeDoubleForKey: @"latitude"];
+    __latitude_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"longitude"])
+  {
+    __longitude = [decoder decodeDoubleForKey: @"longitude"];
+    __longitude_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__id_isset)
+  {
+    [encoder encodeInt32: __id forKey: @"id"];
+  }
+  if (__name_isset)
+  {
+    [encoder encodeObject: __name forKey: @"name"];
+  }
+  if (__displayName_isset)
+  {
+    [encoder encodeObject: __displayName forKey: @"displayName"];
+  }
+  if (__country_isset)
+  {
+    [encoder encodeObject: __country forKey: @"country"];
+  }
+  if (__latitude_isset)
+  {
+    [encoder encodeDouble: __latitude forKey: @"latitude"];
+  }
+  if (__longitude_isset)
+  {
+    [encoder encodeDouble: __longitude forKey: @"longitude"];
+  }
+}
+
+- (void) dealloc
+{
+  [__name release_stub];
+  [__displayName release_stub];
+  [__country release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) id {
+  return __id;
+}
+
+- (void) setId: (int32_t) id {
+  __id = id;
+  __id_isset = YES;
+}
+
+- (BOOL) idIsSet {
+  return __id_isset;
+}
+
+- (void) unsetId {
+  __id_isset = NO;
+}
+
+- (NSString *) name {
+  return [[__name retain_stub] autorelease_stub];
+}
+
+- (void) setName: (NSString *) name {
+  [name retain_stub];
+  [__name release_stub];
+  __name = name;
+  __name_isset = YES;
+}
+
+- (BOOL) nameIsSet {
+  return __name_isset;
+}
+
+- (void) unsetName {
+  [__name release_stub];
+  __name = nil;
+  __name_isset = NO;
+}
+
+- (NSString *) displayName {
+  return [[__displayName retain_stub] autorelease_stub];
+}
+
+- (void) setDisplayName: (NSString *) displayName {
+  [displayName retain_stub];
+  [__displayName release_stub];
+  __displayName = displayName;
+  __displayName_isset = YES;
+}
+
+- (BOOL) displayNameIsSet {
+  return __displayName_isset;
+}
+
+- (void) unsetDisplayName {
+  [__displayName release_stub];
+  __displayName = nil;
+  __displayName_isset = NO;
+}
+
+- (CountryDto *) country {
+  return [[__country retain_stub] autorelease_stub];
+}
+
+- (void) setCountry: (CountryDto *) country {
+  [country retain_stub];
+  [__country release_stub];
+  __country = country;
+  __country_isset = YES;
+}
+
+- (BOOL) countryIsSet {
+  return __country_isset;
+}
+
+- (void) unsetCountry {
+  [__country release_stub];
+  __country = nil;
+  __country_isset = NO;
+}
+
+- (double) latitude {
+  return __latitude;
+}
+
+- (void) setLatitude: (double) latitude {
+  __latitude = latitude;
+  __latitude_isset = YES;
+}
+
+- (BOOL) latitudeIsSet {
+  return __latitude_isset;
+}
+
+- (void) unsetLatitude {
+  __latitude_isset = NO;
+}
+
+- (double) longitude {
+  return __longitude;
+}
+
+- (void) setLongitude: (double) longitude {
+  __longitude = longitude;
+  __longitude_isset = YES;
+}
+
+- (BOOL) longitudeIsSet {
+  return __longitude_isset;
+}
+
+- (void) unsetLongitude {
+  __longitude_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setDisplayName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_STRUCT) {
+          CountryDto *fieldValue = [[CountryDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCountry: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setLatitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setLongitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"CityDto"];
+  if (__id_isset) {
+    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __id];
+    [outProtocol writeFieldEnd];
+  }
+  if (__name_isset) {
+    if (__name != nil) {
+      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __name];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__displayName_isset) {
+    if (__displayName != nil) {
+      [outProtocol writeFieldBeginWithName: @"displayName" type: TType_STRING fieldID: 3];
+      [outProtocol writeString: __displayName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__country_isset) {
+    if (__country != nil) {
+      [outProtocol writeFieldBeginWithName: @"country" type: TType_STRUCT fieldID: 4];
+      [__country write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__latitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 5];
+    [outProtocol writeDouble: __latitude];
+    [outProtocol writeFieldEnd];
+  }
+  if (__longitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 6];
+    [outProtocol writeDouble: __longitude];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__id_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'id' is not set."];
+  }
+  if (!__name_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'name' is not set."];
+  }
+  if (!__country_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'country' is not set."];
+  }
+  if (!__latitude_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'latitude' is not set."];
+  }
+  if (!__longitude_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'longitude' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"CityDto("];
+  [ms appendString: @"id:"];
+  [ms appendFormat: @"%i", __id];
+  [ms appendString: @",name:"];
+  [ms appendFormat: @"\"%@\"", __name];
+  [ms appendString: @",displayName:"];
+  [ms appendFormat: @"\"%@\"", __displayName];
+  [ms appendString: @",country:"];
+  [ms appendFormat: @"%@", __country];
+  [ms appendString: @",latitude:"];
+  [ms appendFormat: @"%f", __latitude];
+  [ms appendString: @",longitude:"];
+  [ms appendFormat: @"%f", __longitude];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation CountryDto
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name continentCode: (NSString *) continentCode continentName: (NSString *) continentName
+{
+  self = [super init];
+  __id = id;
+  __id_isset = YES;
+  __code = [code retain_stub];
+  __code_isset = YES;
+  __name = [name retain_stub];
+  __name_isset = YES;
+  __continentCode = [continentCode retain_stub];
+  __continentCode_isset = YES;
+  __continentName = [continentName retain_stub];
+  __continentName_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"id"])
+  {
+    __id = [decoder decodeInt32ForKey: @"id"];
+    __id_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"code"])
+  {
+    __code = [[decoder decodeObjectForKey: @"code"] retain_stub];
+    __code_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"name"])
+  {
+    __name = [[decoder decodeObjectForKey: @"name"] retain_stub];
+    __name_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"continentCode"])
+  {
+    __continentCode = [[decoder decodeObjectForKey: @"continentCode"] retain_stub];
+    __continentCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"continentName"])
+  {
+    __continentName = [[decoder decodeObjectForKey: @"continentName"] retain_stub];
+    __continentName_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__id_isset)
+  {
+    [encoder encodeInt32: __id forKey: @"id"];
+  }
+  if (__code_isset)
+  {
+    [encoder encodeObject: __code forKey: @"code"];
+  }
+  if (__name_isset)
+  {
+    [encoder encodeObject: __name forKey: @"name"];
+  }
+  if (__continentCode_isset)
+  {
+    [encoder encodeObject: __continentCode forKey: @"continentCode"];
+  }
+  if (__continentName_isset)
+  {
+    [encoder encodeObject: __continentName forKey: @"continentName"];
+  }
+}
+
+- (void) dealloc
+{
+  [__code release_stub];
+  [__name release_stub];
+  [__continentCode release_stub];
+  [__continentName release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) id {
+  return __id;
+}
+
+- (void) setId: (int32_t) id {
+  __id = id;
+  __id_isset = YES;
+}
+
+- (BOOL) idIsSet {
+  return __id_isset;
+}
+
+- (void) unsetId {
+  __id_isset = NO;
+}
+
+- (NSString *) code {
+  return [[__code retain_stub] autorelease_stub];
+}
+
+- (void) setCode: (NSString *) code {
+  [code retain_stub];
+  [__code release_stub];
+  __code = code;
+  __code_isset = YES;
+}
+
+- (BOOL) codeIsSet {
+  return __code_isset;
+}
+
+- (void) unsetCode {
+  [__code release_stub];
+  __code = nil;
+  __code_isset = NO;
+}
+
+- (NSString *) name {
+  return [[__name retain_stub] autorelease_stub];
+}
+
+- (void) setName: (NSString *) name {
+  [name retain_stub];
+  [__name release_stub];
+  __name = name;
+  __name_isset = YES;
+}
+
+- (BOOL) nameIsSet {
+  return __name_isset;
+}
+
+- (void) unsetName {
+  [__name release_stub];
+  __name = nil;
+  __name_isset = NO;
+}
+
+- (NSString *) continentCode {
+  return [[__continentCode retain_stub] autorelease_stub];
+}
+
+- (void) setContinentCode: (NSString *) continentCode {
+  [continentCode retain_stub];
+  [__continentCode release_stub];
+  __continentCode = continentCode;
+  __continentCode_isset = YES;
+}
+
+- (BOOL) continentCodeIsSet {
+  return __continentCode_isset;
+}
+
+- (void) unsetContinentCode {
+  [__continentCode release_stub];
+  __continentCode = nil;
+  __continentCode_isset = NO;
+}
+
+- (NSString *) continentName {
+  return [[__continentName retain_stub] autorelease_stub];
+}
+
+- (void) setContinentName: (NSString *) continentName {
+  [continentName retain_stub];
+  [__continentName release_stub];
+  __continentName = continentName;
+  __continentName_isset = YES;
+}
+
+- (BOOL) continentNameIsSet {
+  return __continentName_isset;
+}
+
+- (void) unsetContinentName {
+  [__continentName release_stub];
+  __continentName = nil;
+  __continentName_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setContinentCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setContinentName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"CountryDto"];
+  if (__id_isset) {
+    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __id];
+    [outProtocol writeFieldEnd];
+  }
+  if (__code_isset) {
+    if (__code != nil) {
+      [outProtocol writeFieldBeginWithName: @"code" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __code];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__name_isset) {
+    if (__name != nil) {
+      [outProtocol writeFieldBeginWithName: @"name" type: TType_STRING fieldID: 3];
+      [outProtocol writeString: __name];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__continentCode_isset) {
+    if (__continentCode != nil) {
+      [outProtocol writeFieldBeginWithName: @"continentCode" type: TType_STRING fieldID: 4];
+      [outProtocol writeString: __continentCode];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__continentName_isset) {
+    if (__continentName != nil) {
+      [outProtocol writeFieldBeginWithName: @"continentName" type: TType_STRING fieldID: 5];
+      [outProtocol writeString: __continentName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__id_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'id' is not set."];
+  }
+  if (!__code_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'code' is not set."];
+  }
+  if (!__name_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'name' is not set."];
+  }
+  if (!__continentCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'continentCode' is not set."];
+  }
+  if (!__continentName_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'continentName' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"CountryDto("];
+  [ms appendString: @"id:"];
+  [ms appendFormat: @"%i", __id];
+  [ms appendString: @",code:"];
+  [ms appendFormat: @"\"%@\"", __code];
+  [ms appendString: @",name:"];
+  [ms appendFormat: @"\"%@\"", __name];
+  [ms appendString: @",continentCode:"];
+  [ms appendFormat: @"\"%@\"", __continentCode];
+  [ms appendString: @",continentName:"];
+  [ms appendFormat: @"\"%@\"", __continentName];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation CitySearchResultDto
 
 - (id) init
@@ -553,6 +1263,298 @@
 
 @end
 
+@implementation GetCityRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithId: (int32_t) id
+{
+  self = [super init];
+  __id = id;
+  __id_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"id"])
+  {
+    __id = [decoder decodeInt32ForKey: @"id"];
+    __id_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__id_isset)
+  {
+    [encoder encodeInt32: __id forKey: @"id"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (int32_t) id {
+  return __id;
+}
+
+- (void) setId: (int32_t) id {
+  __id = id;
+  __id_isset = YES;
+}
+
+- (BOOL) idIsSet {
+  return __id_isset;
+}
+
+- (void) unsetId {
+  __id_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetCityRequest"];
+  if (__id_isset) {
+    [outProtocol writeFieldBeginWithName: @"id" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __id];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__id_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'id' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetCityRequest("];
+  [ms appendString: @"id:"];
+  [ms appendFormat: @"%i", __id];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation GetCityResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode city: (CityDto *) city
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  __city = [city retain_stub];
+  __city_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"city"])
+  {
+    __city = [[decoder decodeObjectForKey: @"city"] retain_stub];
+    __city_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+  if (__city_isset)
+  {
+    [encoder encodeObject: __city forKey: @"city"];
+  }
+}
+
+- (void) dealloc
+{
+  [__city release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (CityDto *) city {
+  return [[__city retain_stub] autorelease_stub];
+}
+
+- (void) setCity: (CityDto *) city {
+  [city retain_stub];
+  [__city release_stub];
+  __city = city;
+  __city_isset = YES;
+}
+
+- (BOOL) cityIsSet {
+  return __city_isset;
+}
+
+- (void) unsetCity {
+  [__city release_stub];
+  __city = nil;
+  __city_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          CityDto *fieldValue = [[CityDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCity: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetCityResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (__city_isset) {
+    if (__city != nil) {
+      [outProtocol writeFieldBeginWithName: @"city" type: TType_STRUCT fieldID: 2];
+      [__city write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetCityResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",city:"];
+  [ms appendFormat: @"%@", __city];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 
 @implementation refdataConstants
 + (void) initialize {
@@ -923,6 +1925,370 @@
 
 @end
 
+@interface getCity_args : NSObject <TBase, NSCoding> {
+  GetCityRequest * __request;
+  SessionCredentials * __credentials;
+
+  BOOL __request_isset;
+  BOOL __credentials_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) GetCityRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (GetCityRequest *) request credentials: (SessionCredentials *) credentials;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (GetCityRequest *) request;
+- (void) setRequest: (GetCityRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
+
+@end
+
+@implementation getCity_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (GetCityRequest *) request credentials: (SessionCredentials *) credentials
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [__credentials release_stub];
+  [super dealloc_stub];
+}
+
+- (GetCityRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (GetCityRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          GetCityRequest *fieldValue = [[GetCityRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"getCity_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"getCity_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface GetCity_result : NSObject <TBase, NSCoding> {
+  GetCityResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) GetCityResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (GetCityResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (GetCityResponse *) success;
+- (void) setSuccess: (GetCityResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation GetCity_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (GetCityResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (GetCityResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (GetCityResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          GetCityResponse *fieldValue = [[GetCityResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetCity_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetCity_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation RefDataThriftServiceClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -989,6 +2355,51 @@
   return [self recv_searchCities];
 }
 
+- (void) send_getCity: (GetCityRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [outProtocol writeMessageBeginWithName: @"getCity" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"getCity_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (GetCityResponse *) recv_getCity
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  GetCity_result * result = [[[GetCity_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"getCity failed: unknown result"];
+}
+
+- (GetCityResponse *) getCity: (GetCityRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [self send_getCity : request credentials: credentials];
+  return [self recv_getCity];
+}
+
 @end
 
 @implementation RefDataThriftServiceProcessor
@@ -1008,6 +2419,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"searchCities"];
+  }
+  {
+    SEL s = @selector(process_getCity_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"getCity"];
   }
   return self;
 }
@@ -1058,6 +2477,23 @@
   SearchCities_result * result = [[SearchCities_result alloc] init];
   [result setSuccess: [mService searchCities: [args request] credentials: [args credentials]]];
   [outProtocol writeMessageBeginWithName: @"searchCities"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_getCity_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  getCity_args * args = [[getCity_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  GetCity_result * result = [[GetCity_result alloc] init];
+  [result setSuccess: [mService getCity: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"getCity"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

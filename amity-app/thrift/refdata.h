@@ -17,6 +17,139 @@
 
 #import "authentication.h"
 
+@interface CityDto : NSObject <TBase, NSCoding> {
+  int32_t __id;
+  NSString * __name;
+  NSString * __displayName;
+  CountryDto __country;
+  double __latitude;
+  double __longitude;
+
+  BOOL __id_isset;
+  BOOL __name_isset;
+  BOOL __displayName_isset;
+  BOOL __country_isset;
+  BOOL __latitude_isset;
+  BOOL __longitude_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=id, setter=setId:) int32_t id;
+@property (nonatomic, retain, getter=name, setter=setName:) NSString * name;
+@property (nonatomic, retain, getter=displayName, setter=setDisplayName:) NSString * displayName;
+@property (nonatomic, retain, getter=country, setter=setCountry:) CountryDto country;
+@property (nonatomic, getter=latitude, setter=setLatitude:) double latitude;
+@property (nonatomic, getter=longitude, setter=setLongitude:) double longitude;
+#endif
+
+- (id) init;
+- (id) initWithId: (int32_t) id name: (NSString *) name displayName: (NSString *) displayName country: (CountryDto) country latitude: (double) latitude longitude: (double) longitude;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) id;
+- (void) setId: (int32_t) id;
+#endif
+- (BOOL) idIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) name;
+- (void) setName: (NSString *) name;
+#endif
+- (BOOL) nameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) displayName;
+- (void) setDisplayName: (NSString *) displayName;
+#endif
+- (BOOL) displayNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (CountryDto) country;
+- (void) setCountry: (CountryDto) country;
+#endif
+- (BOOL) countryIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) latitude;
+- (void) setLatitude: (double) latitude;
+#endif
+- (BOOL) latitudeIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) longitude;
+- (void) setLongitude: (double) longitude;
+#endif
+- (BOOL) longitudeIsSet;
+
+@end
+
+@interface CountryDto : NSObject <TBase, NSCoding> {
+  int32_t __id;
+  NSString * __code;
+  NSString * __name;
+  NSString * __continentCode;
+  NSString * __continentName;
+
+  BOOL __id_isset;
+  BOOL __code_isset;
+  BOOL __name_isset;
+  BOOL __continentCode_isset;
+  BOOL __continentName_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=id, setter=setId:) int32_t id;
+@property (nonatomic, retain, getter=code, setter=setCode:) NSString * code;
+@property (nonatomic, retain, getter=name, setter=setName:) NSString * name;
+@property (nonatomic, retain, getter=continentCode, setter=setContinentCode:) NSString * continentCode;
+@property (nonatomic, retain, getter=continentName, setter=setContinentName:) NSString * continentName;
+#endif
+
+- (id) init;
+- (id) initWithId: (int32_t) id code: (NSString *) code name: (NSString *) name continentCode: (NSString *) continentCode continentName: (NSString *) continentName;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) id;
+- (void) setId: (int32_t) id;
+#endif
+- (BOOL) idIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) code;
+- (void) setCode: (NSString *) code;
+#endif
+- (BOOL) codeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) name;
+- (void) setName: (NSString *) name;
+#endif
+- (BOOL) nameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) continentCode;
+- (void) setContinentCode: (NSString *) continentCode;
+#endif
+- (BOOL) continentCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) continentName;
+- (void) setContinentName: (NSString *) continentName;
+#endif
+- (BOOL) continentNameIsSet;
+
+@end
+
 @interface CitySearchResultDto : NSObject <TBase, NSCoding> {
   int32_t __id;
   NSString * __displayName;
@@ -122,8 +255,70 @@
 
 @end
 
+@interface GetCityRequest : NSObject <TBase, NSCoding> {
+  int32_t __id;
+
+  BOOL __id_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=id, setter=setId:) int32_t id;
+#endif
+
+- (id) init;
+- (id) initWithId: (int32_t) id;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) id;
+- (void) setId: (int32_t) id;
+#endif
+- (BOOL) idIsSet;
+
+@end
+
+@interface GetCityResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  CityDto * __city;
+
+  BOOL __errorCode_isset;
+  BOOL __city_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=city, setter=setCity:) CityDto * city;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode city: (CityDto *) city;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (CityDto *) city;
+- (void) setCity: (CityDto *) city;
+#endif
+- (BOOL) cityIsSet;
+
+@end
+
 @protocol RefDataThriftService <NSObject>
 - (SearchCitiesResponse *) searchCities: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (GetCityResponse *) getCity: (GetCityRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface RefDataThriftServiceClient : NSObject <RefDataThriftService> {

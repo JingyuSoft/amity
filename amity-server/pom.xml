@@ -86,6 +86,7 @@
 									<extraArgument>-Dcom.sun.management.jmxremote.access.file=/jingyusoft/amity/secure/amity-server-jmx.access</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.password.file=/jingyusoft/amity/secure/amity-server-jmx.password</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.ssl=false</extraArgument>
+									<extraArgument>-Djava.rmi.server.hostname=jingyusoft.com</extraArgument>
 								</extraArguments>
 							</jvmSettings>
 						</program>
@@ -111,6 +112,7 @@
 									<extraArgument>-Dcom.sun.management.jmxremote.access.file=/jingyusoft/amity/secure/amity-server-jmx.access</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.password.file=/jingyusoft/amity/secure/amity-server-jmx.password</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.ssl=false</extraArgument>
+									<extraArgument>-Djava.rmi.server.hostname=jingyusoft.com</extraArgument>
 								</extraArguments>
 							</jvmSettings>
 						</program>

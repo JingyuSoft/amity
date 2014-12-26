@@ -81,6 +81,7 @@
 									<extraArgument>-Dehcache.disk.store.dir=/jingyusoft/amity/qa/ehcache</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote=true</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.port=8541</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.rmi.port=8542</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.local.only=false</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.authenticate=true</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.access.file=/jingyusoft/amity/secure/amity-server-jmx.access</extraArgument>
@@ -107,6 +108,7 @@
 									<extraArgument>-Dehcache.disk.store.dir=/jingyusoft/amity/qa-univer/ehcache</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote=true</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.port=8641</extraArgument>
+									<extraArgument>-Dcom.sun.management.jmxremote.rmi.port=8642</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.local.only=false</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.authenticate=true</extraArgument>
 									<extraArgument>-Dcom.sun.management.jmxremote.access.file=/jingyusoft/amity/secure/amity-server-jmx.access</extraArgument>

@@ -1,6 +1,6 @@
 package com.jingyusoft.amity.common;
 
-import org.jadira.usertype.spi.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 public abstract class DateTimeUtils {

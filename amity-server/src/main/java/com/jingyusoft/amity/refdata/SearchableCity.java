@@ -2,13 +2,16 @@ package com.jingyusoft.amity.refdata;
 
 public class SearchableCity {
 
-	private final Integer id;
+	private Integer id;
 
-	private final String cityName;
+	private String cityName;
 
-	private final String countryName;
+	private String countryName;
 
-	private final String cityDisplayName;
+	private String cityDisplayName;
+
+	public SearchableCity() {
+	}
 
 	public SearchableCity(Integer id, String cityName, final String cityDisplayName, String countryName) {
 		this.id = id;
@@ -31,6 +34,22 @@ public class SearchableCity {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public void setCityDisplayName(String cityDisplayName) {
+		this.cityDisplayName = cityDisplayName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

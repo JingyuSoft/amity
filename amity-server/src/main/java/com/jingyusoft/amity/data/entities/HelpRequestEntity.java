@@ -16,6 +16,8 @@ import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
+import com.jingyusoft.amity.data.DataConstants;
+
 @Entity
 @Table(name = "help_request")
 public class HelpRequestEntity {
@@ -56,11 +58,11 @@ public class HelpRequestEntity {
 	private Double toLongitude;
 
 	@Column(name = "from_date_time")
-	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = DataConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime fromDateTime;
 
 	@Column(name = "to_date_time")
-	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = DataConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime toDateTime;
 
 	@Version

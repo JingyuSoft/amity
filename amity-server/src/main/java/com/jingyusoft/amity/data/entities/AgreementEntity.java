@@ -17,6 +17,8 @@ import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
+import com.jingyusoft.amity.data.DataConstants;
+
 @Entity
 @Table(name = "agreement")
 @Audited(withModifiedFlag = true)
@@ -36,7 +38,7 @@ public class AgreementEntity {
 	private AmityUserEntity helper;
 
 	@Column(name = "create_date_time", nullable = false)
-	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = DataConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime createDateTime;
 
 	@Version

@@ -13,6 +13,8 @@ import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 
+import com.jingyusoft.amity.data.DataConstants;
+
 @Entity
 @Table(name = "amity_user")
 public class AmityUserEntity {
@@ -68,11 +70,11 @@ public class AmityUserEntity {
 	private String avatar;
 
 	@Column(name = "register_date_time", nullable = false)
-	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = DataConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime registerDateTime;
 
 	@Column(name = "last_login_date_time", nullable = true)
-	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = DataConstants.JODA_TIME_PERSISTENT_CLASS)
 	@Audited(withModifiedFlag = true)
 	private DateTime lastLoginDateTime;
 

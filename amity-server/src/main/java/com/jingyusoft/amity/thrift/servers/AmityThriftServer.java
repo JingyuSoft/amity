@@ -71,9 +71,9 @@ public class AmityThriftServer {
 					}
 				});
 
-				startDataServer(false);
+				startThriftServer(false);
 			}
-		}).start();
+		}, "AmityServer").start();
 
 		new Thread(new Runnable() {
 
@@ -87,20 +87,20 @@ public class AmityThriftServer {
 					}
 				});
 
-				startDataServer(true);
+				startThriftServer(true);
 			}
-		}).start();
+		}, "AmityServer-SSL").start();
 	}
 
-	private void startDataServer(boolean ssl) {
+	private void startThriftServer(boolean ssl) {
 
 		try {
 			TServer amityServer = thriftServerFactory.create(new TProcessor[] {
 					new AmityService.Processor<AmityService.Iface>(amityService),
 					new AuthenticationThriftService.Processor<AuthenticationThriftService.Iface>(
 							authenticationThriftService),
-							new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService),
-							new RefDataThriftService.Processor<>(refDataThriftService) }, ssl, handlers);
+					new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService),
+					new RefDataThriftService.Processor<>(refDataThriftService) }, ssl, handlers);
 			LOGGER.info("Amity server started on {}:{}", host, getPort(ssl));
 			amityServer.serve();
 

@@ -41,11 +41,11 @@ public class ItineraryEntity {
 	private CityEntity arrivalCity;
 
 	@Column(name = "departure_date_time", nullable = false)
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime departureDateTime;
 
 	@Column(name = "arrival_date_time", nullable = true)
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime arrivalDateTime;
 
 	@Version

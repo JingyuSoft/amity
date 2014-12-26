@@ -56,11 +56,11 @@ public class HelpRequestEntity {
 	private Double toLongitude;
 
 	@Column(name = "from_date_time")
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime fromDateTime;
 
 	@Column(name = "to_date_time")
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime toDateTime;
 
 	@Version

@@ -9,6 +9,7 @@ import org.jadira.usertype.spi.utils.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import com.jingyusoft.amity.common.DateTimeUtils;
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.Itinerary;
 import com.jingyusoft.amity.refdata.CityCache;
@@ -30,10 +31,6 @@ import com.jingyusoft.amity.thrift.generated.UpdateItineraryResponse;
 @Service
 public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface {
 
-	private static DateTime safeParseDateTime(final String dateTimeString) {
-		return StringUtils.isNotEmpty(dateTimeString) ? DateTime.parse(dateTimeString) : null;
-	}
-
 	@Resource
 	private ItineraryService itineraryService;
 
@@ -50,8 +47,8 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 		}
 
 		Itinerary itinerary = itineraryService.createItinerary(credentials.getAmityUserId(), request.getItinerary()
-				.getDepartureCityId(), safeParseDateTime(request.getItinerary().getDepartureDate()), request
-				.getItinerary().getArrivalCityId(), safeParseDateTime(request.getItinerary().getArrivalDate()));
+				.getDepartureCityId(), DateTimeUtils.safeParse(request.getItinerary().getDepartureDate()), request
+				.getItinerary().getArrivalCityId(), DateTimeUtils.safeParse(request.getItinerary().getArrivalDate()));
 
 		return new CreateItineraryResponse().setItineraryId(itinerary.getItineraryId());
 	}
@@ -100,8 +97,8 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 			throws TException {
 
 		Itinerary itinerary = itineraryService.updateItinerary(request.getItinerary().getId(), request.getItinerary()
-				.getDepartureCityId(), safeParseDateTime(request.getItinerary().getDepartureDate()), request
-				.getItinerary().getArrivalCityId(), safeParseDateTime(request.getItinerary().getArrivalDate()));
+				.getDepartureCityId(), DateTimeUtils.safeParse(request.getItinerary().getDepartureDate()), request
+				.getItinerary().getArrivalCityId(), DateTimeUtils.safeParse(request.getItinerary().getArrivalDate()));
 
 		if (itinerary == null) {
 			return new UpdateItineraryResponse(ErrorCodes.ITINERARY_NOT_FOUND_BY_ID);

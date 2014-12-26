@@ -68,11 +68,11 @@ public class AmityUserEntity {
 	private String avatar;
 
 	@Column(name = "register_date_time", nullable = false)
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime registerDateTime;
 
 	@Column(name = "last_login_date_time", nullable = true)
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	@Audited(withModifiedFlag = true)
 	private DateTime lastLoginDateTime;
 

@@ -36,7 +36,7 @@ public class AgreementEntity {
 	private AmityUserEntity helper;
 
 	@Column(name = "create_date_time", nullable = false)
-	@Type(type = Constants.JODA_TIME_PERSISTENT_CLASS)
+	@Type(type = EntityConstants.JODA_TIME_PERSISTENT_CLASS)
 	private DateTime createDateTime;
 
 	@Version

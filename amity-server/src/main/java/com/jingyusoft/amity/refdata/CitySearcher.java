@@ -37,6 +37,8 @@ import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ImmutableList;
@@ -46,7 +48,8 @@ import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
 
 @Component
-public class CitySearcher {
+@ManagedResource(objectName = "com.jingyusoft.amity.refdata:type=CitySearcher")
+public class CitySearcher implements CitySearcherMXBean {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CitySearcher.class);
 
@@ -74,6 +77,12 @@ public class CitySearcher {
 				throw WrappedException.insteadOf(e);
 			}
 		}
+	}
+
+	@Override
+	@ManagedOperation
+	public void dummy() {
+		System.err.println("Dummy");
 	}
 
 	@PostConstruct

@@ -67,6 +67,14 @@ public class SpringMain {
 			applicationContext = new ClassPathXmlApplicationContext(applicationContextFile);
 			LOGGER.info("Spring main started successfullly. " + applicationContext.getBeanDefinitionCount()
 					+ " beans created.");
+			//
+			// Map<String, Object> managedObjects = applicationContext.getBeansWithAnnotation(ManagedResource.class);
+			// for (Object managedObject : managedObjects.values()) {
+			// MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+			// ObjectName objectName = new ObjectName(managedObject.getClass().getAnnotation(ManagedResource.class)
+			// .objectName());
+			// mbs.registerMBean(managedObject, objectName);
+			// }
 		} catch (Exception e) {
 			LOGGER.error("Failed to load Spring application context", e);
 			AmityExceptionHandler.handle("Failed to initialize application context", e);

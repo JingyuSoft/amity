@@ -20,8 +20,9 @@
 		              com.jingyusoft.amity.thrift.factories,
 		              com.jingyusoft.amity.thrift.servers" />
 
+	<context:mbean-export />
+
 	<bean id="testConsole" class="com.jingyusoft.amity.programs.TestConsole" />
 
 	<bean id="citySearchConsole" class="com.jingyusoft.amity.programs.CitySearchConsole" />
-
 </beans>

@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import org.apache.thrift.TException;
-import org.jadira.usertype.spi.utils.lang.StringUtils;
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.jingyusoft.amity.common.DateTimeUtils;
@@ -40,11 +38,6 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 	@Override
 	public CreateItineraryResponse createItinerary(CreateItineraryRequest request, SessionCredentials credentials)
 			throws TException {
-
-		DateTime arrivalDate = null;
-		if (StringUtils.isNotEmpty(request.getItinerary().getArrivalDate())) {
-			arrivalDate = DateTime.parse(request.getItinerary().getArrivalDate());
-		}
 
 		Itinerary itinerary = itineraryService.createItinerary(credentials.getAmityUserId(), request.getItinerary()
 				.getDepartureCityId(), DateTimeUtils.safeParse(request.getItinerary().getDepartureDate()), request

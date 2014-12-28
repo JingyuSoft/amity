@@ -24,6 +24,9 @@ fout = open(sys.argv[2], 'w')
 generate_java_header(fout)
 
 for line in fin:
+	if line.startswith('--'):
+		continue
+
 	m = re.split('\s+', line)
 	code = m[0]
 	name = m[1]

@@ -63,5 +63,4 @@ public class HelpRequestThriftServiceImpl implements HelpRequestThriftService.If
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

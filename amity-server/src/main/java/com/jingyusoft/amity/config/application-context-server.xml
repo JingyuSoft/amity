@@ -6,7 +6,7 @@
 
 	<import resource="application-context-shared.xml" />
 	<import resource="application-context-data-source.xml" />
-	
+
 	<context:component-scan
 		base-package="com.jingyusoft.amity.data,
 					  com.jingyusoft.amity.authentication,
@@ -19,6 +19,8 @@
 		              com.jingyusoft.amity.thrift.services,
 		              com.jingyusoft.amity.thrift.factories,
 		              com.jingyusoft.amity.thrift.servers" />
+
+	<context:mbean-export />
 
 	<!-- Aspect -->
 	<bean id="authenticationAspect"

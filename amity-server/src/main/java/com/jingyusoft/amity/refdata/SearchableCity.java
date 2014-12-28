@@ -10,14 +10,11 @@ public class SearchableCity {
 
 	private String cityDisplayName;
 
-	public SearchableCity() {
-	}
+	private Double latitude;
 
-	public SearchableCity(Integer id, String cityName, final String cityDisplayName, String countryName) {
-		this.id = id;
-		this.cityName = cityName;
-		this.cityDisplayName = cityDisplayName;
-		this.countryName = countryName;
+	private Double longitude;
+
+	public SearchableCity() {
 	}
 
 	public String getCityName() {
@@ -36,6 +33,14 @@ public class SearchableCity {
 		return id;
 	}
 
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
 	public void setCityDisplayName(String cityDisplayName) {
 		this.cityDisplayName = cityDisplayName;
 	}
@@ -50,6 +55,14 @@ public class SearchableCity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
 	}
 
 	@Override

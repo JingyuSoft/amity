@@ -14,7 +14,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.IntField;
+import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -93,11 +93,11 @@ public class CitySearcher {
 		try (IndexWriter indexWriter = new IndexWriter(index, indexWriterConfig)) {
 			for (SearchableCity searchableCity : searchableCities) {
 				Document document = new Document();
-				document.add(new IntField("id", searchableCity.getId(), Field.Store.YES));
+				document.add(new StoredField("id", searchableCity.getId()));
 				document.add(new TextField("city", searchableCity.getCityName().toLowerCase(), Field.Store.YES));
 				document.add(new TextField("country", searchableCity.getCountryName().toLowerCase(), Field.Store.YES));
-				document.add(new TextField("displayName", searchableCity.getDisplayName() + ", "
-						+ searchableCity.getCountryName(), Field.Store.YES));
+				document.add(new StoredField("displayName", searchableCity.getDisplayName() + ", "
+						+ searchableCity.getCountryName()));
 				try {
 					indexWriter.addDocument(document);
 				} catch (IOException e) {
@@ -166,6 +166,7 @@ public class CitySearcher {
 		PrefixQuery countryTermQuery = new PrefixQuery(new Term("country", pattern));
 		query.add(countryTermQuery, BooleanClause.Occur.SHOULD);
 
+		// TODO: May need to cache the reader to improve performance
 		try (IndexReader reader = DirectoryReader.open(index)) {
 			IndexSearcher searcher = new IndexSearcher(reader);
 

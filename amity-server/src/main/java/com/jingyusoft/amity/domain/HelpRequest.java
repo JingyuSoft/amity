@@ -12,7 +12,7 @@ import com.jingyusoft.amity.refdata.CityCache;
 public class HelpRequest {
 
 	@Service
-	private static class Factory {
+	public static class Factory {
 
 		@Resource
 		private CityCache cityCache;
@@ -22,7 +22,7 @@ public class HelpRequest {
 			HelpRequest helpRequest = new HelpRequest();
 
 			helpRequest.helpRequestId = entity.getId();
-			helpRequest.amityUser = new AmityUser(entity.getAmityUser());
+			helpRequest.amityUser = new AmityUser(entity.getUser());
 			helpRequest.fromCity = cityCache.get(entity.getFromCity().getId());
 			helpRequest.fromDateTime = entity.getFromDateTime();
 			helpRequest.toCity = cityCache.get(entity.getToCity().getId());

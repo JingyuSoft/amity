@@ -550,6 +550,6 @@
 - (id<AuthenticationThriftService>) service;
 @end
 
-@interface authenticationConstants : NSObject {
+@interface AuthenticationConstants : NSObject {
 }
 @end

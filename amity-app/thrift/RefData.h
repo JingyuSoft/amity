@@ -337,6 +337,6 @@
 - (id<RefDataThriftService>) service;
 @end
 
-@interface refdataConstants : NSObject {
+@interface RefDataConstants : NSObject {
 }
 @end

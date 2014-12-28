@@ -18,7 +18,7 @@
 #import "authentication.h"
 #import "refdata.h"
 
-#import "itinerary.h"
+#import "Itinerary.h"
 
 @implementation ItineraryDto
 
@@ -1869,7 +1869,7 @@
 @end
 
 
-@implementation itineraryConstants
+@implementation ItineraryConstants
 + (void) initialize {
 }
 @end

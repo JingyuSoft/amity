@@ -29,7 +29,7 @@ public class HelpRequestEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_help_request_user"))
-	private AmityUserEntity amityUser;
+	private AmityUserEntity user;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "from_city", foreignKey = @ForeignKey(name = "fk_help_request_from_city"))
@@ -69,8 +69,8 @@ public class HelpRequestEntity {
 	@Column(name = "version_lock")
 	private long versionLock;
 
-	public AmityUserEntity getAmityUser() {
-		return amityUser;
+	public AmityUserEntity getUser() {
+		return user;
 	}
 
 	public CityEntity getFromCity() {
@@ -113,8 +113,8 @@ public class HelpRequestEntity {
 		return versionLock;
 	}
 
-	public void setAmityUser(AmityUserEntity amityUser) {
-		this.amityUser = amityUser;
+	public void setUser(AmityUserEntity user) {
+		this.user = user;
 	}
 
 	public void setFromCity(CityEntity fromCity) {

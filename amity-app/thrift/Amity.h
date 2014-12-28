@@ -37,6 +37,6 @@
 - (id<AmityService>) service;
 @end
 
-@interface amityConstants : NSObject {
+@interface AmityConstants : NSObject {
 }
 @end

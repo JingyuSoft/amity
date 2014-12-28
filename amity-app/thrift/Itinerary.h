@@ -418,6 +418,6 @@
 - (id<ItineraryThriftService>) service;
 @end
 
-@interface itineraryConstants : NSObject {
+@interface ItineraryConstants : NSObject {
 }
 @end

@@ -16,7 +16,7 @@
 #import "TBase.h"
 
 
-#import "authentication.h"
+#import "Authentication.h"
 
 @implementation AmityToken
 
@@ -2653,7 +2653,7 @@
 @end
 
 
-@implementation authenticationConstants
+@implementation AuthenticationConstants
 + (void) initialize {
 }
 @end

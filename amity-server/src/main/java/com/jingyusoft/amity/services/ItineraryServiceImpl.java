@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jingyusoft.amity.common.AmityLogger;
-import com.jingyusoft.amity.data.dao.ItineraryDao;
 import com.jingyusoft.amity.data.entities.ItineraryEntity;
 import com.jingyusoft.amity.data.repositories.AmityUserRepository;
 import com.jingyusoft.amity.data.repositories.CityRepository;
@@ -27,9 +26,6 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Resource
 	private ItineraryRepository itineraryRepository;
-
-	@Resource
-	private ItineraryDao itineraryDao;
 
 	@Resource
 	private AmityUserRepository amityUserRepository;
@@ -84,7 +80,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Override
 	public List<Itinerary> listItineraries(long amityUserId) {
-		return itineraryDao.listItineraries(amityUserId).stream().map(item -> {
+		return itineraryRepository.listItineraries(amityUserId).stream().map(item -> {
 			Itinerary itinerary = itineraryFactory.fromEntity(item);
 			return itinerary;
 		}).collect(Collectors.toList());

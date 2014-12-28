@@ -17,10 +17,10 @@
 
 #import "authentication.h"
 
-#import "amity.h"
+#import "Amity.h"
 
 
-@implementation amityConstants
+@implementation AmityConstants
 + (void) initialize {
 }
 @end

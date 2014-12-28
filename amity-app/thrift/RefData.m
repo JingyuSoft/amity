@@ -17,7 +17,7 @@
 
 #import "authentication.h"
 
-#import "refdata.h"
+#import "RefData.h"
 
 @implementation CountryDto
 
@@ -1556,7 +1556,7 @@
 @end
 
 
-@implementation refdataConstants
+@implementation RefDataConstants
 + (void) initialize {
 }
 @end

@@ -1,5 +1,5 @@
-include "authentication.thrift"
-include "refdata.thrift"
+include "Authentication.thrift"
+include "RefData.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
 struct HelpRequestDto {
@@ -9,8 +9,8 @@ struct HelpRequestDto {
 	4: required string fromDate,
 	5: required i32 toCityId,
 	6: optional string toDate,
-	7: optional refdata.CityDto fromCity,
-	8: optional refdata.CityDto toCity,
+	7: optional RefData.CityDto fromCity,
+	8: optional RefData.CityDto toCity,
 }
 
 struct GetHelpRequestRequest {
@@ -57,9 +57,9 @@ struct DeleteHelpRequestResponse {
 }
 
 service HelpRequestThriftService {
-	GetHelpRequestResponse getHelpRequest(1: GetHelpRequestRequest request, 2: authentication.SessionCredentials credentials)
-	ListHelpRequestResponse listHelpRequests(1: ListHelpRequestRequest request, 2: authentication.SessionCredentials credentials)
-    CreateHelpRequestResponse createHelpRequest(1: CreateHelpRequestRequest request, 2: authentication.SessionCredentials credentials)
-    UpdateHelpRequestResponse updateHelpRequest(1: UpdateHelpRequestRequest request, 2: authentication.SessionCredentials credentials)
-    DeleteHelpRequestResponse deleteHelpRequest(1: DeleteHelpRequestRequest request, 2: authentication.SessionCredentials credentials)
+	GetHelpRequestResponse getHelpRequest(1: GetHelpRequestRequest request, 2: Authentication.SessionCredentials credentials)
+	ListHelpRequestResponse listHelpRequests(1: ListHelpRequestRequest request, 2: Authentication.SessionCredentials credentials)
+    CreateHelpRequestResponse createHelpRequest(1: CreateHelpRequestRequest request, 2: Authentication.SessionCredentials credentials)
+    UpdateHelpRequestResponse updateHelpRequest(1: UpdateHelpRequestRequest request, 2: Authentication.SessionCredentials credentials)
+    DeleteHelpRequestResponse deleteHelpRequest(1: DeleteHelpRequestRequest request, 2: Authentication.SessionCredentials credentials)
 }

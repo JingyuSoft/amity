@@ -15,8 +15,8 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
-#import "authentication.h"
-#import "refdata.h"
+#import "Authentication.h"
+#import "RefData.h"
 
 #import "Itinerary.h"
 

@@ -1,5 +1,5 @@
-include "authentication.thrift"
-include "refdata.thrift"
+include "Authentication.thrift"
+include "RefData.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
 struct ItineraryDto {
@@ -9,8 +9,8 @@ struct ItineraryDto {
 	4: required string departureDate,
 	5: required i32 arrivalCityId,
 	6: optional string arrivalDate,
-	7: optional refdata.CityDto departureCity,
-	8: optional refdata.CityDto arrivalCity,
+	7: optional RefData.CityDto departureCity,
+	8: optional RefData.CityDto arrivalCity,
 }
 
 struct GetItineraryRequest {
@@ -57,9 +57,9 @@ struct DeleteItineraryResponse {
 }
 
 service ItineraryThriftService {
-	GetItineraryResponse getItinerary(1: GetItineraryRequest request, 2: authentication.SessionCredentials credentials)
-	ListItineraryResponse listItineries(1: ListItineraryRequest request, 2: authentication.SessionCredentials credentials)
-    CreateItineraryResponse createItinerary(1: CreateItineraryRequest request, 2: authentication.SessionCredentials credentials)
-    UpdateItineraryResponse updateItinerary(1: UpdateItineraryRequest request, 2: authentication.SessionCredentials credentials)
-    DeleteItineraryResponse deleteItinerary(1: DeleteItineraryRequest request, 2: authentication.SessionCredentials credentials)
+	GetItineraryResponse getItinerary(1: GetItineraryRequest request, 2: Authentication.SessionCredentials credentials)
+	ListItineraryResponse listItineries(1: ListItineraryRequest request, 2: Authentication.SessionCredentials credentials)
+    CreateItineraryResponse createItinerary(1: CreateItineraryRequest request, 2: Authentication.SessionCredentials credentials)
+    UpdateItineraryResponse updateItinerary(1: UpdateItineraryRequest request, 2: Authentication.SessionCredentials credentials)
+    DeleteItineraryResponse deleteItinerary(1: DeleteItineraryRequest request, 2: Authentication.SessionCredentials credentials)
 }

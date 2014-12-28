@@ -15,7 +15,7 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
-#import "authentication.h"
+#import "Authentication.h"
 
 @interface CountryDto : NSObject <TBase, NSCoding> {
   int32_t __id;

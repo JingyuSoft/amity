@@ -1,4 +1,3 @@
-include "authentication.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
 service AmityService {

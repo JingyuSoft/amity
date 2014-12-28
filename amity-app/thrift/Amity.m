@@ -15,7 +15,6 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
-#import "authentication.h"
 
 #import "Amity.h"
 

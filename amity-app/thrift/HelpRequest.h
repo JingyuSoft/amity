@@ -15,8 +15,8 @@
 #import "TObjective-C.h"
 #import "TBase.h"
 
-#import "authentication.h"
-#import "refdata.h"
+#import "Authentication.h"
+#import "RefData.h"
 
 @interface HelpRequestDto : NSObject <TBase, NSCoding> {
   int64_t __id;

@@ -1,4 +1,4 @@
-include "authentication.thrift"
+include "Authentication.thrift"
 namespace java com.jingyusoft.amity.thrift.generated
 
 struct CountryDto {
@@ -43,6 +43,6 @@ struct GetCityResponse {
 }
 
 service RefDataThriftService {
-	SearchCitiesResponse searchCities(1: SearchCitiesRequest request, 2: authentication.SessionCredentials credentials)
-	GetCityResponse getCity(1: GetCityRequest request, 2: authentication.SessionCredentials credentials)
+	SearchCitiesResponse searchCities(1: SearchCitiesRequest request, 2: Authentication.SessionCredentials credentials)
+	GetCityResponse getCity(1: GetCityRequest request, 2: Authentication.SessionCredentials credentials)
 }

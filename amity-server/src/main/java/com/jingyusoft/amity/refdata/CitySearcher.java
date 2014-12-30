@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -52,6 +54,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
@@ -72,13 +75,19 @@ public class CitySearcher implements CitySearcherMXBean {
 
 	private final IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LATEST, analyzer);
 
+	private IndexReader indexReader;
+
+	private IndexSearcher indexSearcher;
+
+	private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
 	@Resource
 	private CityCache cityCache;
 
 	@Resource
 	private CityDao cityDao;
 
-	public void deleteIndex() {
+	private void deleteIndex() {
 		File dir = new File(indexDirName);
 		if (dir.exists()) {
 			try {
@@ -87,12 +96,6 @@ public class CitySearcher implements CitySearcherMXBean {
 				throw WrappedException.insteadOf(e);
 			}
 		}
-	}
-
-	@Override
-	@ManagedOperation
-	public void dummy() {
-		System.err.println("Dummy");
 	}
 
 	/**
@@ -112,6 +115,7 @@ public class CitySearcher implements CitySearcherMXBean {
 	 */
 	public List<NearestCityResult> getNearestCities(final double latitude, final double longitude, double delta,
 			int maxCount) {
+
 		Validate.exclusiveBetween(-90, 90, latitude);
 		Validate.inclusiveBetween(-180, 180, longitude);
 
@@ -146,10 +150,10 @@ public class CitySearcher implements CitySearcherMXBean {
 		query.add(latitudeQuery, BooleanClause.Occur.MUST);
 		query.add(longitudeQuery, BooleanClause.Occur.MUST);
 
-		try (IndexReader reader = DirectoryReader.open(index)) {
-			IndexSearcher searcher = new IndexSearcher(reader);
+		try {
+			readWriteLock.readLock().lock();
 
-			TopDocs topDocs = searcher.search(query, maxCount);
+			TopDocs topDocs = indexSearcher.search(query, maxCount);
 			if (topDocs.scoreDocs.length == maxCount) {
 				return getNearestCities(latitude, longitude, delta * 0.7, maxCount);
 			} else if (topDocs.scoreDocs.length == 0) {
@@ -160,7 +164,7 @@ public class CitySearcher implements CitySearcherMXBean {
 						.stream()
 						.map(item -> {
 							try {
-								return searcher.doc(item.doc);
+								return indexSearcher.doc(item.doc);
 							} catch (Exception e) {
 								throw WrappedException.insteadOf(e);
 							}
@@ -173,6 +177,8 @@ public class CitySearcher implements CitySearcherMXBean {
 			throw WrappedException.insteadOf(e);
 		} catch (NumberFormatException e) {
 			throw WrappedException.insteadOf(e);
+		} finally {
+			readWriteLock.readLock().unlock();
 		}
 	}
 
@@ -189,6 +195,13 @@ public class CitySearcher implements CitySearcherMXBean {
 	private void initialize() {
 
 		initializeIndex();
+
+		try {
+			indexReader = DirectoryReader.open(index);
+			indexSearcher = new IndexSearcher(indexReader);
+		} catch (IOException e) {
+			throw WrappedException.insteadOf(e);
+		}
 	}
 
 	private void initializeFromDatabase() {
@@ -224,44 +237,74 @@ public class CitySearcher implements CitySearcherMXBean {
 	}
 
 	private void initializeIndex() {
-		if (StringUtils.isBlank(indexDirName)) {
-			LOGGER.info("Creating in memory index...");
-			index = new RAMDirectory();
 
-			initializeFromDatabase();
-		} else {
-			File indexDir = new File(indexDirName);
-			if (indexDir.exists()) {
-				try {
-					index = new NIOFSDirectory(indexDir);
-				} catch (IOException e) {
-					LOGGER.error("Failed to load city index from directory [{}]", indexDir);
+		try {
+			readWriteLock.writeLock().lock();
 
-					try {
-						FileUtils.deleteDirectory(indexDir);
-					} catch (IOException ioe) {
-						throw WrappedException.insteadOf(ioe);
-					}
-					LOGGER.info("Index directory [{}] deleted", indexDirName);
-				}
-			}
+			if (StringUtils.isBlank(indexDirName)) {
+				LOGGER.info("Creating in memory index...");
+				index = new RAMDirectory();
 
-			if (index == null) {
-
-				indexDir.mkdirs();
-
-				try {
-					index = new NIOFSDirectory(indexDir);
-				} catch (IOException e) {
-					throw WrappedException.insteadOf(e);
-				}
-			}
-
-			if (FileUtils.listFiles(indexDir, null, false).size() == 0) {
 				initializeFromDatabase();
 			} else {
-				LOGGER.info("Existing index loaded from directory [{}]", indexDirName);
+				File indexDir = new File(indexDirName);
+				if (indexDir.exists()) {
+					try {
+						index = new NIOFSDirectory(indexDir);
+					} catch (IOException e) {
+						LOGGER.error("Failed to load city index from directory [{}]", indexDir);
+
+						try {
+							FileUtils.deleteDirectory(indexDir);
+						} catch (IOException ioe) {
+							throw WrappedException.insteadOf(ioe);
+						}
+						LOGGER.info("Index directory [{}] deleted", indexDirName);
+					}
+				}
+
+				if (index == null) {
+
+					indexDir.mkdirs();
+
+					try {
+						index = new NIOFSDirectory(indexDir);
+					} catch (IOException e) {
+						throw WrappedException.insteadOf(e);
+					}
+				}
+
+				if (FileUtils.listFiles(indexDir, null, false).size() == 0) {
+					initializeFromDatabase();
+				} else {
+					LOGGER.info("Existing index loaded from directory [{}]", indexDirName);
+				}
 			}
+		} finally {
+			readWriteLock.writeLock().unlock();
+		}
+	}
+
+	@Override
+	@ManagedOperation(description = "Rebuild index")
+	public void rebuildIndex() {
+		try {
+			indexReader.close();
+			readWriteLock.writeLock().lock();
+
+			deleteIndex();
+			initializeIndex();
+
+			try {
+				indexReader = DirectoryReader.open(index);
+				indexSearcher = new IndexSearcher(indexReader);
+			} catch (IOException e) {
+				throw WrappedException.insteadOf(e);
+			}
+		} catch (IOException e) {
+			throw new AmityException("Failed to close index reader when rebuilding city index", e);
+		} finally {
+			readWriteLock.writeLock().unlock();
 		}
 	}
 
@@ -277,11 +320,10 @@ public class CitySearcher implements CitySearcherMXBean {
 		PrefixQuery countryTermQuery = new PrefixQuery(new Term("country", pattern));
 		query.add(countryTermQuery, BooleanClause.Occur.SHOULD);
 
-		// TODO: May need to cache the reader to improve performance
-		try (IndexReader reader = DirectoryReader.open(index)) {
-			IndexSearcher searcher = new IndexSearcher(reader);
+		try {
+			readWriteLock.readLock().lock();
 
-			TopFieldDocs topDocs = searcher.search(query, maxCount, new Sort(new SortField("city",
+			TopFieldDocs topDocs = indexSearcher.search(query, maxCount, new Sort(new SortField("city",
 					SortField.Type.STRING)));
 
 			List<CitySearchResult> citySearchResults = Lists.newArrayList();
@@ -291,7 +333,7 @@ public class CitySearcher implements CitySearcherMXBean {
 			int i = 0;
 			for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
 				int docId = scoreDoc.doc;
-				Document doc = searcher.doc(docId);
+				Document doc = indexSearcher.doc(docId);
 
 				CitySearchResult citySearchResult = new CitySearchResult(Integer.parseInt(doc.get("id")),
 						doc.get("displayName"));
@@ -308,12 +350,10 @@ public class CitySearcher implements CitySearcherMXBean {
 					topDocs.scoreDocs.length, criteria);
 
 			return ImmutableList.copyOf(citySearchResults);
-		} catch (NumberFormatException e) {
-			LOGGER.error(e.getMessage(), e);
-			throw WrappedException.insteadOf(e);
 		} catch (IOException e) {
-			LOGGER.error(e.getMessage(), e);
 			throw WrappedException.insteadOf(e);
+		} finally {
+			readWriteLock.readLock().unlock();
 		}
 	}
 }

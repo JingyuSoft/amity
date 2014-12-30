@@ -63,7 +63,7 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 		if (nearestCityResult != null) {
 			City nearestCity = cityCache.get(nearestCityResult.getCityId());
 			LOGGER.debug("Nearest city for [{}, {}] = [{}]", request.getLatitude(), request.getLongitude(),
-					nearestCity.getDisplayName());
+					nearestCity.getName());
 			return new GetNearestCityResponse().setCity(nearestCity.toDto());
 		} else {
 			return new GetNearestCityResponse(ErrorCodes.CITY_NOT_FOUND_BY_LOCATION);

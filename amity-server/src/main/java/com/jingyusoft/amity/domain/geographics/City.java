@@ -19,7 +19,9 @@ public class City extends LocationBase {
 	public City(CityEntity entity) {
 		super(LocationType.CITY, entity.getId(), entity.getCityName());
 
-		displayName = entity.getDisplayName();
+		displayName = entity.getDisplayName() == null ? entity.getCityName() + ", "
+				+ entity.getCountry().getCountryName() : entity.getDisplayName();
+
 		geoLocation = GeoLocation.from(entity.getLatitude(), entity.getLongitude());
 
 		if (entity.getCountry() != null) {

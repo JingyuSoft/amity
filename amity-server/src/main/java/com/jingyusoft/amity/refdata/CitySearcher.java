@@ -89,7 +89,7 @@ public class CitySearcher implements CitySearcherMXBean {
 
 	private void deleteIndex() {
 		File dir = new File(indexDirName);
-		if (dir.exists()) {
+		if (dir.isDirectory() && dir.exists()) {
 			try {
 				FileUtils.deleteDirectory(dir);
 			} catch (IOException e) {
@@ -248,6 +248,7 @@ public class CitySearcher implements CitySearcherMXBean {
 				initializeFromDatabase();
 			} else {
 				File indexDir = new File(indexDirName);
+
 				if (indexDir.exists()) {
 					try {
 						index = new NIOFSDirectory(indexDir);
@@ -261,10 +262,8 @@ public class CitySearcher implements CitySearcherMXBean {
 						}
 						LOGGER.info("Index directory [{}] deleted", indexDirName);
 					}
-				}
-
-				if (index == null) {
-
+				} else {
+					// Create the index directory
 					indexDir.mkdirs();
 
 					try {

@@ -5,9 +5,11 @@ import javax.annotation.Resource;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import com.jingyusoft.amity.common.DateTimeUtils;
 import com.jingyusoft.amity.data.entities.HelpRequestEntity;
 import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.refdata.CityCache;
+import com.jingyusoft.amity.thrift.generated.HelpRequestDto;
 
 public class HelpRequest {
 
@@ -93,6 +95,12 @@ public class HelpRequest {
 
 	public void setToDateTime(DateTime toDateTime) {
 		this.toDateTime = toDateTime;
+	}
+
+	public HelpRequestDto toDto() {
+		return new HelpRequestDto().setId(getHelpRequestId()).setUserId(amityUser.getId())
+				.setFromCityId(fromCity.getId()).setFromDate(DateTimeUtils.toDateString(fromDateTime))
+				.setToCityId(toCity.getId()).setToDate(DateTimeUtils.toDateString(toDateTime));
 	}
 
 	@Override

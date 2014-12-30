@@ -17,6 +17,7 @@ import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.thrift.factories.ThriftServerFactory;
 import com.jingyusoft.amity.thrift.generated.AmityService;
 import com.jingyusoft.amity.thrift.generated.AuthenticationThriftService;
+import com.jingyusoft.amity.thrift.generated.HelpRequestThriftService;
 import com.jingyusoft.amity.thrift.generated.ItineraryThriftService;
 import com.jingyusoft.amity.thrift.generated.RefDataThriftService;
 
@@ -33,6 +34,9 @@ public class AmityThriftServer {
 
 	@Resource
 	private ItineraryThriftService.Iface itineraryThriftService;
+
+	@Resource
+	private HelpRequestThriftService.Iface helpRequestThriftService;
 
 	@Resource
 	private AuthenticationThriftService.Iface authenticationThriftService;
@@ -99,8 +103,9 @@ public class AmityThriftServer {
 					new AmityService.Processor<AmityService.Iface>(amityService),
 					new AuthenticationThriftService.Processor<AuthenticationThriftService.Iface>(
 							authenticationThriftService),
-					new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService),
-					new RefDataThriftService.Processor<>(refDataThriftService) }, ssl, handlers);
+							new ItineraryThriftService.Processor<ItineraryThriftService.Iface>(itineraryThriftService),
+							new HelpRequestThriftService.Processor<HelpRequestThriftService.Iface>(helpRequestThriftService),
+							new RefDataThriftService.Processor<>(refDataThriftService) }, ssl, handlers);
 			LOGGER.info("Amity server started on {}:{}", host, getPort(ssl));
 			amityServer.serve();
 

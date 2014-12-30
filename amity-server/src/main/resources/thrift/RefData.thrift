@@ -42,7 +42,18 @@ struct GetCityResponse {
 	2: optional CityDto city
 }
 
+struct GetNeaerestCityRequest {
+	1: required double latitude,
+	2: required double longitude
+}
+
+struct GetNeaerestCityResponse {
+	1: required i32 errorCode,
+	2: optional CityDto city
+}
+
 service RefDataThriftService {
 	SearchCitiesResponse searchCities(1: SearchCitiesRequest request, 2: Authentication.SessionCredentials credentials)
 	GetCityResponse getCity(1: GetCityRequest request, 2: Authentication.SessionCredentials credentials)
+	GetNeaerestCityResponse getNearestCity(1: GetNeaerestCityRequest request, 2: Authentication.SessionCredentials credentials)
 }

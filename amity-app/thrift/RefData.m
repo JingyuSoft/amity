@@ -1555,6 +1555,345 @@
 
 @end
 
+@implementation GetNeaerestCityRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithLatitude: (double) latitude longitude: (double) longitude
+{
+  self = [super init];
+  __latitude = latitude;
+  __latitude_isset = YES;
+  __longitude = longitude;
+  __longitude_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"latitude"])
+  {
+    __latitude = [decoder decodeDoubleForKey: @"latitude"];
+    __latitude_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"longitude"])
+  {
+    __longitude = [decoder decodeDoubleForKey: @"longitude"];
+    __longitude_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__latitude_isset)
+  {
+    [encoder encodeDouble: __latitude forKey: @"latitude"];
+  }
+  if (__longitude_isset)
+  {
+    [encoder encodeDouble: __longitude forKey: @"longitude"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (double) latitude {
+  return __latitude;
+}
+
+- (void) setLatitude: (double) latitude {
+  __latitude = latitude;
+  __latitude_isset = YES;
+}
+
+- (BOOL) latitudeIsSet {
+  return __latitude_isset;
+}
+
+- (void) unsetLatitude {
+  __latitude_isset = NO;
+}
+
+- (double) longitude {
+  return __longitude;
+}
+
+- (void) setLongitude: (double) longitude {
+  __longitude = longitude;
+  __longitude_isset = YES;
+}
+
+- (BOOL) longitudeIsSet {
+  return __longitude_isset;
+}
+
+- (void) unsetLongitude {
+  __longitude_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setLatitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setLongitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetNeaerestCityRequest"];
+  if (__latitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 1];
+    [outProtocol writeDouble: __latitude];
+    [outProtocol writeFieldEnd];
+  }
+  if (__longitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"longitude" type: TType_DOUBLE fieldID: 2];
+    [outProtocol writeDouble: __longitude];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__latitude_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'latitude' is not set."];
+  }
+  if (!__longitude_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'longitude' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNeaerestCityRequest("];
+  [ms appendString: @"latitude:"];
+  [ms appendFormat: @"%f", __latitude];
+  [ms appendString: @",longitude:"];
+  [ms appendFormat: @"%f", __longitude];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation GetNeaerestCityResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode city: (CityDto *) city
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  __city = [city retain_stub];
+  __city_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"city"])
+  {
+    __city = [[decoder decodeObjectForKey: @"city"] retain_stub];
+    __city_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+  if (__city_isset)
+  {
+    [encoder encodeObject: __city forKey: @"city"];
+  }
+}
+
+- (void) dealloc
+{
+  [__city release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (CityDto *) city {
+  return [[__city retain_stub] autorelease_stub];
+}
+
+- (void) setCity: (CityDto *) city {
+  [city retain_stub];
+  [__city release_stub];
+  __city = city;
+  __city_isset = YES;
+}
+
+- (BOOL) cityIsSet {
+  return __city_isset;
+}
+
+- (void) unsetCity {
+  [__city release_stub];
+  __city = nil;
+  __city_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          CityDto *fieldValue = [[CityDto alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCity: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetNeaerestCityResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (__city_isset) {
+    if (__city != nil) {
+      [outProtocol writeFieldBeginWithName: @"city" type: TType_STRUCT fieldID: 2];
+      [__city write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNeaerestCityResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",city:"];
+  [ms appendFormat: @"%@", __city];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 
 @implementation RefDataConstants
 + (void) initialize {
@@ -2289,6 +2628,370 @@
 
 @end
 
+@interface getNearestCity_args : NSObject <TBase, NSCoding> {
+  GetNeaerestCityRequest * __request;
+  SessionCredentials * __credentials;
+
+  BOOL __request_isset;
+  BOOL __credentials_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) GetNeaerestCityRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (GetNeaerestCityRequest *) request;
+- (void) setRequest: (GetNeaerestCityRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
+
+@end
+
+@implementation getNearestCity_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [__credentials release_stub];
+  [super dealloc_stub];
+}
+
+- (GetNeaerestCityRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (GetNeaerestCityRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          GetNeaerestCityRequest *fieldValue = [[GetNeaerestCityRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"getNearestCity_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"getNearestCity_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface GetNearestCity_result : NSObject <TBase, NSCoding> {
+  GetNeaerestCityResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) GetNeaerestCityResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (GetNeaerestCityResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (GetNeaerestCityResponse *) success;
+- (void) setSuccess: (GetNeaerestCityResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation GetNearestCity_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (GetNeaerestCityResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (GetNeaerestCityResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (GetNeaerestCityResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          GetNeaerestCityResponse *fieldValue = [[GetNeaerestCityResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetNearestCity_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNearestCity_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation RefDataThriftServiceClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -2400,6 +3103,51 @@
   return [self recv_getCity];
 }
 
+- (void) send_getNearestCity: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [outProtocol writeMessageBeginWithName: @"getNearestCity" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"getNearestCity_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (GetNeaerestCityResponse *) recv_getNearestCity
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  GetNearestCity_result * result = [[[GetNearestCity_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"getNearestCity failed: unknown result"];
+}
+
+- (GetNeaerestCityResponse *) getNearestCity: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [self send_getNearestCity : request credentials: credentials];
+  return [self recv_getNearestCity];
+}
+
 @end
 
 @implementation RefDataThriftServiceProcessor
@@ -2427,6 +3175,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"getCity"];
+  }
+  {
+    SEL s = @selector(process_getNearestCity_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"getNearestCity"];
   }
   return self;
 }
@@ -2494,6 +3250,23 @@
   GetCity_result * result = [[GetCity_result alloc] init];
   [result setSuccess: [mService getCity: [args request] credentials: [args credentials]]];
   [outProtocol writeMessageBeginWithName: @"getCity"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_getNearestCity_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  getNearestCity_args * args = [[getNearestCity_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  GetNearestCity_result * result = [[GetNearestCity_result alloc] init];
+  [result setSuccess: [mService getNearestCity: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"getNearestCity"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

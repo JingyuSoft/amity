@@ -316,9 +316,80 @@
 
 @end
 
+@interface GetNeaerestCityRequest : NSObject <TBase, NSCoding> {
+  double __latitude;
+  double __longitude;
+
+  BOOL __latitude_isset;
+  BOOL __longitude_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=latitude, setter=setLatitude:) double latitude;
+@property (nonatomic, getter=longitude, setter=setLongitude:) double longitude;
+#endif
+
+- (id) init;
+- (id) initWithLatitude: (double) latitude longitude: (double) longitude;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (double) latitude;
+- (void) setLatitude: (double) latitude;
+#endif
+- (BOOL) latitudeIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) longitude;
+- (void) setLongitude: (double) longitude;
+#endif
+- (BOOL) longitudeIsSet;
+
+@end
+
+@interface GetNeaerestCityResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  CityDto * __city;
+
+  BOOL __errorCode_isset;
+  BOOL __city_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=city, setter=setCity:) CityDto * city;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode city: (CityDto *) city;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (CityDto *) city;
+- (void) setCity: (CityDto *) city;
+#endif
+- (BOOL) cityIsSet;
+
+@end
+
 @protocol RefDataThriftService <NSObject>
 - (SearchCitiesResponse *) searchCities: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 - (GetCityResponse *) getCity: (GetCityRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (GetNeaerestCityResponse *) getNearestCity: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface RefDataThriftServiceClient : NSObject <RefDataThriftService> {

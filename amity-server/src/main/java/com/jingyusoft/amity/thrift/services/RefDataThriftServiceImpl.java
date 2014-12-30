@@ -55,11 +55,16 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 	public GetNearestCityResponse getNearestCity(GetNearestCityRequest request, SessionCredentials credentials)
 			throws TException {
 
+		LOGGER.debug("Getting nearest city by location [{}, {}]", request.getLatitude(), request.getLongitude());
+
 		NearestCityResult nearestCityResult = citySearcher
 				.getNearestCity(request.getLatitude(), request.getLongitude());
 
 		if (nearestCityResult != null) {
-			return new GetNearestCityResponse().setCity(cityCache.get(nearestCityResult.getCityId()).toDto());
+			City nearestCity = cityCache.get(nearestCityResult.getCityId());
+			LOGGER.debug("Nearest city for [{}, {}] = [{}]", request.getLatitude(), request.getLongitude(),
+					nearestCity.getDisplayName());
+			return new GetNearestCityResponse().setCity(nearestCity.toDto());
 		} else {
 			return new GetNearestCityResponse(ErrorCodes.CITY_NOT_FOUND_BY_LOCATION);
 		}

@@ -41,8 +41,8 @@ public class ItineraryServiceTest {
 	public void testItineraryCrud() throws ParseException {
 
 		AmityUser amityUser = userAccountService.registerAmityUser("univer.shi@gmail.com", "dummy");
-		int departureCity = citySearcher.searchCities("Beijing", 1).get(0).getId();
-		int arrivalCity = citySearcher.searchCities("Shanghai", 1).get(0).getId();
+		int departureCity = citySearcher.searchCitiesByName("Beijing", 1).get(0).getId();
+		int arrivalCity = citySearcher.searchCitiesByName("Shanghai", 1).get(0).getId();
 		Itinerary itinerary = itineraryService.createItinerary(amityUser.getId(), departureCity, DateTime.now(),
 				arrivalCity, DateTime.now());
 		Assert.assertNotNull(itinerary);

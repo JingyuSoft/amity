@@ -58,7 +58,7 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 			maxCount = DEFAULT_SEARCH_RESULT_MAX_COUNT;
 		}
 		try {
-			Collection<CitySearchResult> searchResult = citySearcher.searchCities(query, maxCount);
+			Collection<CitySearchResult> searchResult = citySearcher.searchCitiesByName(query, maxCount);
 			return new SearchCitiesResponse().setCities(searchResult
 					.stream()
 					.map(item -> new CitySearchResultDto().setId(item.getId())

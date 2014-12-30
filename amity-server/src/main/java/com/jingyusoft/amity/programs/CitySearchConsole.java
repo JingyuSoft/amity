@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.lucene.queryparser.classic.ParseException;
 
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.refdata.CitySearcher;
+import com.jingyusoft.amity.refdata.NearestCityResult;
 
 public class CitySearchConsole extends TestConsoleBase {
 
@@ -37,11 +37,11 @@ public class CitySearchConsole extends TestConsoleBase {
 			}
 
 			if (StringUtils.isNotBlank(line)) {
-				try {
-					citySearcher.searchCities(line, 10);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+				String[] elements = line.split(",");
+				NearestCityResult nearestCityResult = citySearcher.getNearestCity(Double.parseDouble(elements[0]),
+						Double.parseDouble(elements[1]));
+				System.err.println(nearestCityResult);
+				// citySearcher.searchCitiesByName(line, 10);
 			}
 		}
 

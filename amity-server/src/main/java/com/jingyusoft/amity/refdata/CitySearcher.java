@@ -2,7 +2,10 @@ package com.jingyusoft.amity.refdata;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -10,9 +13,11 @@ import javax.annotation.Resource;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.DoubleField;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.TextField;
@@ -23,12 +28,16 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.PrefixQuery;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.TopFieldDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.NIOFSDirectory;
@@ -46,6 +55,7 @@ import com.google.common.collect.Lists;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
+import com.jingyusoft.amity.domain.geographics.GeoLocation;
 
 @Component
 @ManagedResource(objectName = "com.jingyusoft.amity.refdata:type=CitySearcher")
@@ -85,6 +95,80 @@ public class CitySearcher implements CitySearcherMXBean {
 		System.err.println("Dummy");
 	}
 
+	public List<NearestCityResult> getNearestCities(final double latitude, final double longitude, double delta) {
+		Validate.exclusiveBetween(-90, 90, latitude);
+		Validate.inclusiveBetween(-180, 180, longitude);
+
+		BooleanQuery query = new BooleanQuery();
+
+		NumericRangeQuery<Double> latitudeQuery = NumericRangeQuery.newDoubleRange("latitude", latitude - delta,
+				latitude + delta, true, true);
+		query.add(latitudeQuery, BooleanClause.Occur.MUST);
+
+		Query longitudeQuery = null;
+		if (longitude - delta < -180) {
+			BooleanQuery booleanQuery = new BooleanQuery();
+			booleanQuery.add(NumericRangeQuery.newDoubleRange("longitude", -180.0, longitude + delta, false, true),
+					Occur.SHOULD);
+			booleanQuery.add(
+					NumericRangeQuery.newDoubleRange("longitude", longitude - delta + 360.0, 180.0, true, true),
+					Occur.SHOULD);
+			longitudeQuery = booleanQuery;
+		} else if (longitude + delta > 180) {
+			BooleanQuery booleanQuery = new BooleanQuery();
+			booleanQuery.add(NumericRangeQuery.newDoubleRange("longitude", longitude - delta, 180.0, true, true),
+					Occur.SHOULD);
+			booleanQuery.add(
+					NumericRangeQuery.newDoubleRange("longitude", -180.0, longitude + delta - 360.0, false, true),
+					Occur.SHOULD);
+			longitudeQuery = booleanQuery;
+		} else {
+			longitudeQuery = NumericRangeQuery.newDoubleRange("longitude", longitude - delta, longitude + delta, true,
+					true);
+		}
+
+		query.add(latitudeQuery, BooleanClause.Occur.MUST);
+		query.add(longitudeQuery, BooleanClause.Occur.MUST);
+
+		try (IndexReader reader = DirectoryReader.open(index)) {
+			IndexSearcher searcher = new IndexSearcher(reader);
+
+			TopDocs topDocs = searcher.search(query, 100);
+			if (topDocs.scoreDocs.length == 100) {
+				return getNearestCities(latitude, longitude, delta * 0.7);
+			} else if (topDocs.scoreDocs.length == 0) {
+				return getNearestCities(latitude, longitude, delta * 2.0);
+			} else {
+				return Arrays
+						.asList(topDocs.scoreDocs)
+						.stream()
+						.map(item -> {
+							try {
+								return searcher.doc(item.doc);
+							} catch (Exception e) {
+								throw WrappedException.insteadOf(e);
+							}
+						})
+						.map(item -> new NearestCityResult(Integer.parseInt(item.get("id")), item.get("displayName"),
+								Double.parseDouble(item.get("latitude")), Double.parseDouble(item.get("longitude"))))
+						.collect(Collectors.toList());
+			}
+		} catch (IOException e) {
+			throw WrappedException.insteadOf(e);
+		} catch (NumberFormatException e) {
+			throw WrappedException.insteadOf(e);
+		}
+	}
+
+	public NearestCityResult getNearestCity(final double latitude, final double longitude) {
+		List<NearestCityResult> nearestCities = getNearestCities(latitude, longitude, 0.1);
+		Optional<NearestCityResult> nearestCity = nearestCities.stream().min((a, b) -> {
+			GeoLocation current = GeoLocation.from(latitude, longitude);
+			return current.distanceTo(a.getGeoLocation()) - current.distanceTo(b.getGeoLocation()) < 0 ? -1 : 1;
+		});
+		return nearestCity.orElse(null);
+	}
+
 	@PostConstruct
 	private void initialize() {
 
@@ -107,6 +191,8 @@ public class CitySearcher implements CitySearcherMXBean {
 				document.add(new TextField("country", searchableCity.getCountryName().toLowerCase(), Field.Store.YES));
 				document.add(new StoredField("displayName", searchableCity.getDisplayName() + ", "
 						+ searchableCity.getCountryName()));
+				document.add(new DoubleField("latitude", searchableCity.getLatitude(), Field.Store.YES));
+				document.add(new DoubleField("longitude", searchableCity.getLongitude(), Field.Store.YES));
 				try {
 					indexWriter.addDocument(document);
 				} catch (IOException e) {
@@ -163,7 +249,7 @@ public class CitySearcher implements CitySearcherMXBean {
 		}
 	}
 
-	public List<CitySearchResult> searchCities(final String criteria, final int maxCount) throws ParseException {
+	public List<CitySearchResult> searchCitiesByName(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria.toLowerCase();
 
 		BooleanQuery query = new BooleanQuery();

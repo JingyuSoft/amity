@@ -43,7 +43,7 @@ public class RefDataThriftService {
 
     public GetCityResponse getCity(GetCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException;
 
-    public GetNeaerestCityResponse getNearestCity(GetNeaerestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException;
+    public GetNearestCityResponse getNearestCity(GetNearestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException;
 
   }
 
@@ -53,7 +53,7 @@ public class RefDataThriftService {
 
     public void getCity(GetCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void getNearestCity(GetNeaerestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getNearestCity(GetNearestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -125,13 +125,13 @@ public class RefDataThriftService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getCity failed: unknown result");
     }
 
-    public GetNeaerestCityResponse getNearestCity(GetNeaerestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException
+    public GetNearestCityResponse getNearestCity(GetNearestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException
     {
       send_getNearestCity(request, credentials);
       return recv_getNearestCity();
     }
 
-    public void send_getNearestCity(GetNeaerestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException
+    public void send_getNearestCity(GetNearestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials) throws org.apache.thrift.TException
     {
       getNearestCity_args args = new getNearestCity_args();
       args.setRequest(request);
@@ -139,7 +139,7 @@ public class RefDataThriftService {
       sendBase("getNearestCity", args);
     }
 
-    public GetNeaerestCityResponse recv_getNearestCity() throws org.apache.thrift.TException
+    public GetNearestCityResponse recv_getNearestCity() throws org.apache.thrift.TException
     {
       getNearestCity_result result = new getNearestCity_result();
       receiveBase(result, "getNearestCity");
@@ -237,7 +237,7 @@ public class RefDataThriftService {
       }
     }
 
-    public void getNearestCity(GetNeaerestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getNearestCity(GetNearestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       getNearestCity_call method_call = new getNearestCity_call(request, credentials, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -245,9 +245,9 @@ public class RefDataThriftService {
     }
 
     public static class getNearestCity_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private GetNeaerestCityRequest request;
+      private GetNearestCityRequest request;
       private com.jingyusoft.amity.thrift.generated.SessionCredentials credentials;
-      public getNearestCity_call(GetNeaerestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public getNearestCity_call(GetNearestCityRequest request, com.jingyusoft.amity.thrift.generated.SessionCredentials credentials, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.request = request;
         this.credentials = credentials;
@@ -262,7 +262,7 @@ public class RefDataThriftService {
         prot.writeMessageEnd();
       }
 
-      public GetNeaerestCityResponse getResult() throws org.apache.thrift.TException {
+      public GetNearestCityResponse getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -472,7 +472,7 @@ public class RefDataThriftService {
       }
     }
 
-    public static class getNearestCity<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getNearestCity_args, GetNeaerestCityResponse> {
+    public static class getNearestCity<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getNearestCity_args, GetNearestCityResponse> {
       public getNearestCity() {
         super("getNearestCity");
       }
@@ -481,10 +481,10 @@ public class RefDataThriftService {
         return new getNearestCity_args();
       }
 
-      public AsyncMethodCallback<GetNeaerestCityResponse> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<GetNearestCityResponse> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<GetNeaerestCityResponse>() { 
-          public void onComplete(GetNeaerestCityResponse o) {
+        return new AsyncMethodCallback<GetNearestCityResponse>() { 
+          public void onComplete(GetNearestCityResponse o) {
             getNearestCity_result result = new getNearestCity_result();
             result.success = o;
             try {
@@ -518,7 +518,7 @@ public class RefDataThriftService {
         return false;
       }
 
-      public void start(I iface, getNearestCity_args args, org.apache.thrift.async.AsyncMethodCallback<GetNeaerestCityResponse> resultHandler) throws TException {
+      public void start(I iface, getNearestCity_args args, org.apache.thrift.async.AsyncMethodCallback<GetNearestCityResponse> resultHandler) throws TException {
         iface.getNearestCity(args.request, args.credentials,resultHandler);
       }
     }
@@ -2221,7 +2221,7 @@ public class RefDataThriftService {
       schemes.put(TupleScheme.class, new getNearestCity_argsTupleSchemeFactory());
     }
 
-    public GetNeaerestCityRequest request; // required
+    public GetNearestCityRequest request; // required
     public com.jingyusoft.amity.thrift.generated.SessionCredentials credentials; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -2290,7 +2290,7 @@ public class RefDataThriftService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.REQUEST, new org.apache.thrift.meta_data.FieldMetaData("request", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GetNeaerestCityRequest.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GetNearestCityRequest.class)));
       tmpMap.put(_Fields.CREDENTIALS, new org.apache.thrift.meta_data.FieldMetaData("credentials", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.jingyusoft.amity.thrift.generated.SessionCredentials.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -2301,7 +2301,7 @@ public class RefDataThriftService {
     }
 
     public getNearestCity_args(
-      GetNeaerestCityRequest request,
+      GetNearestCityRequest request,
       com.jingyusoft.amity.thrift.generated.SessionCredentials credentials)
     {
       this();
@@ -2314,7 +2314,7 @@ public class RefDataThriftService {
      */
     public getNearestCity_args(getNearestCity_args other) {
       if (other.isSetRequest()) {
-        this.request = new GetNeaerestCityRequest(other.request);
+        this.request = new GetNearestCityRequest(other.request);
       }
       if (other.isSetCredentials()) {
         this.credentials = new com.jingyusoft.amity.thrift.generated.SessionCredentials(other.credentials);
@@ -2331,11 +2331,11 @@ public class RefDataThriftService {
       this.credentials = null;
     }
 
-    public GetNeaerestCityRequest getRequest() {
+    public GetNearestCityRequest getRequest() {
       return this.request;
     }
 
-    public getNearestCity_args setRequest(GetNeaerestCityRequest request) {
+    public getNearestCity_args setRequest(GetNearestCityRequest request) {
       this.request = request;
       return this;
     }
@@ -2385,7 +2385,7 @@ public class RefDataThriftService {
         if (value == null) {
           unsetRequest();
         } else {
-          setRequest((GetNeaerestCityRequest)value);
+          setRequest((GetNearestCityRequest)value);
         }
         break;
 
@@ -2592,7 +2592,7 @@ public class RefDataThriftService {
           switch (schemeField.id) {
             case 1: // REQUEST
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.request = new GetNeaerestCityRequest();
+                struct.request = new GetNearestCityRequest();
                 struct.request.read(iprot);
                 struct.setRequestIsSet(true);
               } else { 
@@ -2671,7 +2671,7 @@ public class RefDataThriftService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.request = new GetNeaerestCityRequest();
+          struct.request = new GetNearestCityRequest();
           struct.request.read(iprot);
           struct.setRequestIsSet(true);
         }
@@ -2696,7 +2696,7 @@ public class RefDataThriftService {
       schemes.put(TupleScheme.class, new getNearestCity_resultTupleSchemeFactory());
     }
 
-    public GetNeaerestCityResponse success; // required
+    public GetNearestCityResponse success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -2761,7 +2761,7 @@ public class RefDataThriftService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GetNeaerestCityResponse.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GetNearestCityResponse.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getNearestCity_result.class, metaDataMap);
     }
@@ -2770,7 +2770,7 @@ public class RefDataThriftService {
     }
 
     public getNearestCity_result(
-      GetNeaerestCityResponse success)
+      GetNearestCityResponse success)
     {
       this();
       this.success = success;
@@ -2781,7 +2781,7 @@ public class RefDataThriftService {
      */
     public getNearestCity_result(getNearestCity_result other) {
       if (other.isSetSuccess()) {
-        this.success = new GetNeaerestCityResponse(other.success);
+        this.success = new GetNearestCityResponse(other.success);
       }
     }
 
@@ -2794,11 +2794,11 @@ public class RefDataThriftService {
       this.success = null;
     }
 
-    public GetNeaerestCityResponse getSuccess() {
+    public GetNearestCityResponse getSuccess() {
       return this.success;
     }
 
-    public getNearestCity_result setSuccess(GetNeaerestCityResponse success) {
+    public getNearestCity_result setSuccess(GetNearestCityResponse success) {
       this.success = success;
       return this;
     }
@@ -2824,7 +2824,7 @@ public class RefDataThriftService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((GetNeaerestCityResponse)value);
+          setSuccess((GetNearestCityResponse)value);
         }
         break;
 
@@ -2983,7 +2983,7 @@ public class RefDataThriftService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new GetNeaerestCityResponse();
+                struct.success = new GetNearestCityResponse();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -3042,7 +3042,7 @@ public class RefDataThriftService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new GetNeaerestCityResponse();
+          struct.success = new GetNearestCityResponse();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }

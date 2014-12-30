@@ -1555,7 +1555,7 @@
 
 @end
 
-@implementation GetNeaerestCityRequest
+@implementation GetNearestCityRequest
 
 - (id) init
 {
@@ -1683,7 +1683,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetNeaerestCityRequest"];
+  [outProtocol writeStructBeginWithName: @"GetNearestCityRequest"];
   if (__latitude_isset) {
     [outProtocol writeFieldBeginWithName: @"latitude" type: TType_DOUBLE fieldID: 1];
     [outProtocol writeDouble: __latitude];
@@ -1711,7 +1711,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetNeaerestCityRequest("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNearestCityRequest("];
   [ms appendString: @"latitude:"];
   [ms appendFormat: @"%f", __latitude];
   [ms appendString: @",longitude:"];
@@ -1722,7 +1722,7 @@
 
 @end
 
-@implementation GetNeaerestCityResponse
+@implementation GetNearestCityResponse
 
 - (id) init
 {
@@ -1857,7 +1857,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetNeaerestCityResponse"];
+  [outProtocol writeStructBeginWithName: @"GetNearestCityResponse"];
   if (__errorCode_isset) {
     [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
     [outProtocol writeI32: __errorCode];
@@ -1883,7 +1883,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetNeaerestCityResponse("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNearestCityResponse("];
   [ms appendString: @"errorCode:"];
   [ms appendFormat: @"%i", __errorCode];
   [ms appendString: @",city:"];
@@ -2629,7 +2629,7 @@
 @end
 
 @interface getNearestCity_args : NSObject <TBase, NSCoding> {
-  GetNeaerestCityRequest * __request;
+  GetNearestCityRequest * __request;
   SessionCredentials * __credentials;
 
   BOOL __request_isset;
@@ -2637,12 +2637,12 @@
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=request, setter=setRequest:) GetNeaerestCityRequest * request;
+@property (nonatomic, retain, getter=request, setter=setRequest:) GetNearestCityRequest * request;
 @property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
 #endif
 
 - (id) init;
-- (id) initWithRequest: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials;
+- (id) initWithRequest: (GetNearestCityRequest *) request credentials: (SessionCredentials *) credentials;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -2650,8 +2650,8 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (GetNeaerestCityRequest *) request;
-- (void) setRequest: (GetNeaerestCityRequest *) request;
+- (GetNearestCityRequest *) request;
+- (void) setRequest: (GetNearestCityRequest *) request;
 #endif
 - (BOOL) requestIsSet;
 
@@ -2673,7 +2673,7 @@
   return self;
 }
 
-- (id) initWithRequest: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials
+- (id) initWithRequest: (GetNearestCityRequest *) request credentials: (SessionCredentials *) credentials
 {
   self = [super init];
   __request = [request retain_stub];
@@ -2718,11 +2718,11 @@
   [super dealloc_stub];
 }
 
-- (GetNeaerestCityRequest *) request {
+- (GetNearestCityRequest *) request {
   return [[__request retain_stub] autorelease_stub];
 }
 
-- (void) setRequest: (GetNeaerestCityRequest *) request {
+- (void) setRequest: (GetNearestCityRequest *) request {
   [request retain_stub];
   [__request release_stub];
   __request = request;
@@ -2777,7 +2777,7 @@
     {
       case 1:
         if (fieldType == TType_STRUCT) {
-          GetNeaerestCityRequest *fieldValue = [[GetNeaerestCityRequest alloc] init];
+          GetNearestCityRequest *fieldValue = [[GetNearestCityRequest alloc] init];
           [fieldValue read: inProtocol];
           [self setRequest: fieldValue];
           [fieldValue release_stub];
@@ -2841,17 +2841,17 @@
 @end
 
 @interface GetNearestCity_result : NSObject <TBase, NSCoding> {
-  GetNeaerestCityResponse * __success;
+  GetNearestCityResponse * __success;
 
   BOOL __success_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) GetNeaerestCityResponse * success;
+@property (nonatomic, retain, getter=success, setter=setSuccess:) GetNearestCityResponse * success;
 #endif
 
 - (id) init;
-- (id) initWithSuccess: (GetNeaerestCityResponse *) success;
+- (id) initWithSuccess: (GetNearestCityResponse *) success;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -2859,8 +2859,8 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (GetNeaerestCityResponse *) success;
-- (void) setSuccess: (GetNeaerestCityResponse *) success;
+- (GetNearestCityResponse *) success;
+- (void) setSuccess: (GetNearestCityResponse *) success;
 #endif
 - (BOOL) successIsSet;
 
@@ -2876,7 +2876,7 @@
   return self;
 }
 
-- (id) initWithSuccess: (GetNeaerestCityResponse *) success
+- (id) initWithSuccess: (GetNearestCityResponse *) success
 {
   self = [super init];
   __success = [success retain_stub];
@@ -2909,11 +2909,11 @@
   [super dealloc_stub];
 }
 
-- (GetNeaerestCityResponse *) success {
+- (GetNearestCityResponse *) success {
   return [[__success retain_stub] autorelease_stub];
 }
 
-- (void) setSuccess: (GetNeaerestCityResponse *) success {
+- (void) setSuccess: (GetNearestCityResponse *) success {
   [success retain_stub];
   [__success release_stub];
   __success = success;
@@ -2947,7 +2947,7 @@
     {
       case 0:
         if (fieldType == TType_STRUCT) {
-          GetNeaerestCityResponse *fieldValue = [[GetNeaerestCityResponse alloc] init];
+          GetNearestCityResponse *fieldValue = [[GetNearestCityResponse alloc] init];
           [fieldValue read: inProtocol];
           [self setSuccess: fieldValue];
           [fieldValue release_stub];
@@ -3103,7 +3103,7 @@
   return [self recv_getCity];
 }
 
-- (void) send_getNearestCity: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials
+- (void) send_getNearestCity: (GetNearestCityRequest *) request credentials: (SessionCredentials *) credentials
 {
   [outProtocol writeMessageBeginWithName: @"getNearestCity" type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: @"getNearestCity_args"];
@@ -3123,7 +3123,7 @@
   [[outProtocol transport] flush];
 }
 
-- (GetNeaerestCityResponse *) recv_getNearestCity
+- (GetNearestCityResponse *) recv_getNearestCity
 {
   int msgType = 0;
   [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
@@ -3142,7 +3142,7 @@
                                            reason: @"getNearestCity failed: unknown result"];
 }
 
-- (GetNeaerestCityResponse *) getNearestCity: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials
+- (GetNearestCityResponse *) getNearestCity: (GetNearestCityRequest *) request credentials: (SessionCredentials *) credentials
 {
   [self send_getNearestCity : request credentials: credentials];
   return [self recv_getNearestCity];

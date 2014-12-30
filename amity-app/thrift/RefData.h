@@ -316,7 +316,7 @@
 
 @end
 
-@interface GetNeaerestCityRequest : NSObject <TBase, NSCoding> {
+@interface GetNearestCityRequest : NSObject <TBase, NSCoding> {
   double __latitude;
   double __longitude;
 
@@ -351,7 +351,7 @@
 
 @end
 
-@interface GetNeaerestCityResponse : NSObject <TBase, NSCoding> {
+@interface GetNearestCityResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   CityDto * __city;
 
@@ -389,7 +389,7 @@
 @protocol RefDataThriftService <NSObject>
 - (SearchCitiesResponse *) searchCities: (SearchCitiesRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 - (GetCityResponse *) getCity: (GetCityRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
-- (GetNeaerestCityResponse *) getNearestCity: (GetNeaerestCityRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (GetNearestCityResponse *) getNearestCity: (GetNearestCityRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface RefDataThriftServiceClient : NSObject <RefDataThriftService> {

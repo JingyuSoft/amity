@@ -20,8 +20,8 @@ import com.jingyusoft.amity.refdata.NearestCityResult;
 import com.jingyusoft.amity.thrift.generated.CitySearchResultDto;
 import com.jingyusoft.amity.thrift.generated.GetCityRequest;
 import com.jingyusoft.amity.thrift.generated.GetCityResponse;
-import com.jingyusoft.amity.thrift.generated.GetNeaerestCityRequest;
-import com.jingyusoft.amity.thrift.generated.GetNeaerestCityResponse;
+import com.jingyusoft.amity.thrift.generated.GetNearestCityRequest;
+import com.jingyusoft.amity.thrift.generated.GetNearestCityResponse;
 import com.jingyusoft.amity.thrift.generated.RefDataThriftService;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesRequest;
 import com.jingyusoft.amity.thrift.generated.SearchCitiesResponse;
@@ -52,16 +52,16 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 	}
 
 	@Override
-	public GetNeaerestCityResponse getNearestCity(GetNeaerestCityRequest request, SessionCredentials credentials)
+	public GetNearestCityResponse getNearestCity(GetNearestCityRequest request, SessionCredentials credentials)
 			throws TException {
 
 		NearestCityResult nearestCityResult = citySearcher
 				.getNearestCity(request.getLatitude(), request.getLongitude());
 
 		if (nearestCityResult != null) {
-			return new GetNeaerestCityResponse().setCity(cityCache.get(nearestCityResult.getCityId()).toDto());
+			return new GetNearestCityResponse().setCity(cityCache.get(nearestCityResult.getCityId()).toDto());
 		} else {
-			return new GetNeaerestCityResponse(ErrorCodes.CITY_NOT_FOUND_BY_LOCATION);
+			return new GetNearestCityResponse(ErrorCodes.CITY_NOT_FOUND_BY_LOCATION);
 		}
 	}
 

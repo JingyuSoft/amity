@@ -13,7 +13,7 @@ public class MethodExecutionTimingAspect {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
-	@Around("execution(* *(..)) && @annotation(com.jingyusoft.amity.diagnostics.ExecutionTimed)")
+	@Around("@annotation(com.jingyusoft.amity.diagnostics.ExecutionTimed)")
 	public Object timeExecution(ProceedingJoinPoint joinPoint) {
 		long start = System.nanoTime();
 		try {

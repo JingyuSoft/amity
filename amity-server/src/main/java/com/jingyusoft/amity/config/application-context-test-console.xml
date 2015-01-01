@@ -25,4 +25,5 @@
 	<bean id="testConsole" class="com.jingyusoft.amity.programs.TestConsole" />
 
 	<bean class="com.jingyusoft.amity.diagnostics.MethodExecutionTimingAspect" />
+	
 </beans>

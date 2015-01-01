@@ -58,6 +58,7 @@ import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
+import com.jingyusoft.amity.diagnostics.ExecutionTimed;
 import com.jingyusoft.amity.domain.geographics.GeoLocation;
 
 @Component
@@ -100,21 +101,25 @@ public class CitySearcher implements CitySearcherMXBean {
 
 	/**
 	 *
-	 * Get cities near the specified latitude / longitude within the delta
+	 * Get cities near the specified latitude / longitude within the delta distance
 	 *
 	 * @param latitude
 	 *            The latitude
 	 * @param longitude
 	 *            The longitude
 	 * @param delta
-	 *            The delta of latitude and longitude to specify the rectangle to search cities within it
+	 *            The delta distance in kilometers to specify the rectangle to search cities within it. The search
+	 *            rectangle will be approximately 2 x 2 square delta.
 	 * @param maxCount
 	 *            Maximum number of cities returned in the rectangle
 	 *
 	 * @return List of cities around the specified location
 	 */
-	public List<NearestCityResult> getNearestCities(final double latitude, final double longitude, double delta,
+	@ExecutionTimed
+	public List<NearestCityResult> getNearestCities(final double latitude, final double longitude, double distance,
 			int maxCount) {
+
+		double delta = distance / 111.0;
 
 		Validate.exclusiveBetween(-90, 90, latitude);
 		Validate.inclusiveBetween(-180, 180, longitude);
@@ -155,9 +160,9 @@ public class CitySearcher implements CitySearcherMXBean {
 
 			TopDocs topDocs = indexSearcher.search(query, maxCount);
 			if (topDocs.scoreDocs.length == maxCount) {
-				return getNearestCities(latitude, longitude, delta * 0.7, maxCount);
+				return getNearestCities(latitude, longitude, distance * 0.7, maxCount);
 			} else if (topDocs.scoreDocs.length == 0) {
-				return getNearestCities(latitude, longitude, delta * 2.0, maxCount);
+				return getNearestCities(latitude, longitude, distance * 2.0, maxCount);
 			} else {
 				return Arrays
 						.asList(topDocs.scoreDocs)
@@ -171,7 +176,7 @@ public class CitySearcher implements CitySearcherMXBean {
 						})
 						.map(item -> new NearestCityResult(Integer.parseInt(item.get("id")), item.get("displayName"),
 								Double.parseDouble(item.get("latitude")), Double.parseDouble(item.get("longitude"))))
-								.collect(Collectors.toList());
+						.collect(Collectors.toList());
 			}
 		} catch (IOException e) {
 			throw WrappedException.insteadOf(e);
@@ -183,7 +188,7 @@ public class CitySearcher implements CitySearcherMXBean {
 	}
 
 	public NearestCityResult getNearestCity(final double latitude, final double longitude) {
-		List<NearestCityResult> nearestCities = getNearestCities(latitude, longitude, 0.1, 100);
+		List<NearestCityResult> nearestCities = getNearestCities(latitude, longitude, 10, 100);
 		Optional<NearestCityResult> nearestCity = nearestCities.stream().min((a, b) -> {
 			GeoLocation current = GeoLocation.from(latitude, longitude);
 			return current.distanceTo(a.getGeoLocation()) - current.distanceTo(b.getGeoLocation()) < 0 ? -1 : 1;
@@ -307,6 +312,7 @@ public class CitySearcher implements CitySearcherMXBean {
 		}
 	}
 
+	@ExecutionTimed
 	public List<CitySearchResult> searchCitiesByName(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria.toLowerCase();
 

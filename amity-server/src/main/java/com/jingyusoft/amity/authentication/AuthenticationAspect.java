@@ -18,7 +18,7 @@ import com.jingyusoft.amity.thrift.generated.SessionCredentials;
 @Aspect
 public class AuthenticationAspect {
 
-	private static final Object createErrorResponse(final Class<?> clazz, final String message) {
+	private static final Object createErrorResponse(final Class<?> clazz) {
 		try {
 			Object response = clazz.newInstance();
 
@@ -40,19 +40,10 @@ public class AuthenticationAspect {
 	@Around("execution(public * com.jingyusoft.amity.thrift.services..*.*(.., com.jingyusoft.amity.thrift.generated.SessionCredentials))")
 	public Object authenticate(ProceedingJoinPoint joinPoint) {
 
-		Object lastArg = joinPoint.getArgs()[joinPoint.getArgs().length - 1];
-		if (lastArg == null || !(lastArg instanceof SessionCredentials)) {
-			try {
-				return joinPoint.proceed();
-			} catch (Throwable e) {
-				throw WrappedException.insteadOf(e);
-			}
-		}
-
-		SessionCredentials credentials = (SessionCredentials) joinPoint.getArgs()[1];
+		SessionCredentials credentials = (SessionCredentials) joinPoint.getArgs()[joinPoint.getArgs().length - 1];
 		Class<?> returnType = ((MethodSignature) joinPoint.getSignature()).getReturnType();
 		if (credentials == null) {
-			return createErrorResponse(returnType, "Credentials does not exist");
+			return createErrorResponse(returnType);
 		}
 
 		boolean authenticated = sessionService.validateSessionToken(credentials.getAmityUserId(),
@@ -60,7 +51,7 @@ public class AuthenticationAspect {
 
 		if (!authenticated) {
 			LOGGER.warn("Invalid credentials [{}]", credentials);
-			return createErrorResponse(returnType, "Credentials invalid");
+			return createErrorResponse(returnType);
 		}
 
 		try {

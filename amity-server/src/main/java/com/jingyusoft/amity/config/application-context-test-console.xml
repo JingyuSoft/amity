@@ -24,5 +24,5 @@
 
 	<bean id="testConsole" class="com.jingyusoft.amity.programs.TestConsole" />
 
-	<bean id="citySearchConsole" class="com.jingyusoft.amity.programs.CitySearchConsole" />
+	<bean class="com.jingyusoft.amity.diagnostics.MethodExecutionTimingAspect" />
 </beans>

@@ -7,5 +7,5 @@
 	<context:property-placeholder
 		location="classpath:config-default.properties,
                   classpath:config-${config.mode:default}.properties" />
-
+	
 </beans>

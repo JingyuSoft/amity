@@ -25,5 +25,5 @@
 	<!-- Aspect -->
 	<bean id="authenticationAspect"
 		class="com.jingyusoft.amity.authentication.AuthenticationAspect" />
-
+	
 </beans>

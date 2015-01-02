@@ -25,7 +25,7 @@ import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.domain.geographics.Country;
 
 @Component
-public class CityCache {
+public class CityCache implements LoadingCache<Integer, City> {
 
 	@Component
 	public static class CityCacheLoader extends CacheLoader<Integer, City> {
@@ -34,7 +34,7 @@ public class CityCache {
 		private CityRepository cityRepository;
 
 		@Resource
-		private CountryCache countryCache;
+		private LoadingCache<Integer, Country> countryCache;
 
 		@Override
 		@Transactional(propagation = Propagation.REQUIRED)
@@ -63,14 +63,17 @@ public class CityCache {
 		innerCache = CacheBuilder.newBuilder().build(cacheLoader);
 	}
 
+	@Override
 	public City apply(Integer key) {
 		return innerCache.apply(key);
 	}
 
+	@Override
 	public ConcurrentMap<Integer, City> asMap() {
 		return innerCache.asMap();
 	}
 
+	@Override
 	public void cleanUp() {
 		innerCache.cleanUp();
 	}
@@ -80,6 +83,7 @@ public class CityCache {
 		return innerCache.equals(object);
 	}
 
+	@Override
 	public City get(Integer key) {
 		try {
 			return innerCache.get(key);
@@ -88,6 +92,7 @@ public class CityCache {
 		}
 	}
 
+	@Override
 	public City get(Integer key, Callable<? extends City> valueLoader) {
 		try {
 			return innerCache.get(key, valueLoader);
@@ -96,6 +101,7 @@ public class CityCache {
 		}
 	}
 
+	@Override
 	public ImmutableMap<Integer, City> getAll(Iterable<? extends Integer> keys) {
 		try {
 			return innerCache.getAll(keys);
@@ -104,6 +110,7 @@ public class CityCache {
 		}
 	}
 
+	@Override
 	public ImmutableMap<Integer, City> getAllPresent(Iterable<?> keys) {
 		return innerCache.getAllPresent(keys);
 	}
@@ -116,42 +123,52 @@ public class CityCache {
 		}
 	}
 
+	@Override
 	public City getIfPresent(Object key) {
 		return innerCache.getIfPresent(key);
 	}
 
+	@Override
 	public City getUnchecked(Integer key) {
 		return innerCache.getUnchecked(key);
 	}
 
+	@Override
 	public void invalidate(Object key) {
 		innerCache.invalidate(key);
 	}
 
+	@Override
 	public void invalidateAll() {
 		innerCache.invalidateAll();
 	}
 
+	@Override
 	public void invalidateAll(Iterable<?> keys) {
 		innerCache.invalidateAll(keys);
 	}
 
+	@Override
 	public void put(Integer key, City value) {
 		innerCache.put(key, value);
 	}
 
+	@Override
 	public void putAll(Map<? extends Integer, ? extends City> m) {
 		innerCache.putAll(m);
 	}
 
+	@Override
 	public void refresh(Integer key) {
 		innerCache.refresh(key);
 	}
 
+	@Override
 	public long size() {
 		return innerCache.size();
 	}
 
+	@Override
 	public CacheStats stats() {
 		return innerCache.stats();
 	}

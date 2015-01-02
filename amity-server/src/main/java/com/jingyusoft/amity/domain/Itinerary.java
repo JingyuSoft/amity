@@ -5,10 +5,10 @@ import javax.annotation.Resource;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import com.google.common.cache.LoadingCache;
 import com.jingyusoft.amity.common.DateTimeUtils;
 import com.jingyusoft.amity.data.entities.ItineraryEntity;
 import com.jingyusoft.amity.domain.geographics.City;
-import com.jingyusoft.amity.refdata.CityCache;
 import com.jingyusoft.amity.thrift.generated.ItineraryDto;
 
 public class Itinerary {
@@ -17,15 +17,15 @@ public class Itinerary {
 	public static class Factory {
 
 		@Resource
-		private CityCache cityCache;
+		private LoadingCache<Integer, City> cityCache;
 
 		public Itinerary fromEntity(ItineraryEntity entity) {
 			Itinerary itinerary = new Itinerary();
 			itinerary.itineraryId = entity.getId();
 			itinerary.amityUser = new AmityUser(entity.getUser());
-			itinerary.departureCity = cityCache.get(entity.getDepartureCity().getId());
+			itinerary.departureCity = cityCache.getUnchecked(entity.getDepartureCity().getId());
 			itinerary.departureDateTime = entity.getDepartureDateTime();
-			itinerary.arrivalCity = cityCache.get(entity.getArrivalCity().getId());
+			itinerary.arrivalCity = cityCache.getUnchecked(entity.getArrivalCity().getId());
 			itinerary.arrivalDateTime = entity.getArrivalDateTime();
 			return itinerary;
 		}

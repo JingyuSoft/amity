@@ -10,10 +10,10 @@ import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.google.common.cache.LoadingCache;
 import com.jingyusoft.amity.common.AmityLogger;
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.geographics.City;
-import com.jingyusoft.amity.refdata.CityCache;
 import com.jingyusoft.amity.refdata.CitySearchResult;
 import com.jingyusoft.amity.refdata.CitySearcher;
 import com.jingyusoft.amity.refdata.NearestCityResult;
@@ -38,12 +38,12 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 	private CitySearcher citySearcher;
 
 	@Resource
-	private CityCache cityCache;
+	private LoadingCache<Integer, City> cityCache;
 
 	@Override
 	public GetCityResponse getCity(GetCityRequest request, SessionCredentials credentials) throws TException {
 
-		City city = cityCache.get(request.getId());
+		City city = cityCache.getUnchecked(request.getId());
 		if (city == null) {
 			return new GetCityResponse(ErrorCodes.CITY_NOT_FOUND_BY_ID);
 		}
@@ -61,7 +61,7 @@ public class RefDataThriftServiceImpl implements RefDataThriftService.Iface {
 				.getNearestCity(request.getLatitude(), request.getLongitude());
 
 		if (nearestCityResult != null) {
-			City nearestCity = cityCache.get(nearestCityResult.getCityId());
+			City nearestCity = cityCache.getUnchecked(nearestCityResult.getCityId());
 			LOGGER.debug("Nearest city for [{}, {}] = [{}]", request.getLatitude(), request.getLongitude(),
 					nearestCity.getName());
 			return new GetNearestCityResponse().setCity(nearestCity.toDto());

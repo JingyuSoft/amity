@@ -20,8 +20,6 @@
 		              com.jingyusoft.amity.thrift.factories,
 		              com.jingyusoft.amity.thrift.servers" />
 
-	<context:mbean-export />
-
 	<!-- Aspect -->
 	<bean id="authenticationAspect"
 		class="com.jingyusoft.amity.authentication.AuthenticationAspect" />

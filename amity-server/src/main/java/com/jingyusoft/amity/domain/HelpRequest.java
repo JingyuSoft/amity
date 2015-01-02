@@ -5,10 +5,10 @@ import javax.annotation.Resource;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import com.google.common.cache.LoadingCache;
 import com.jingyusoft.amity.common.DateTimeUtils;
 import com.jingyusoft.amity.data.entities.HelpRequestEntity;
 import com.jingyusoft.amity.domain.geographics.City;
-import com.jingyusoft.amity.refdata.CityCache;
 import com.jingyusoft.amity.thrift.generated.HelpRequestDto;
 
 public class HelpRequest {
@@ -17,7 +17,7 @@ public class HelpRequest {
 	public static class Factory {
 
 		@Resource
-		private CityCache cityCache;
+		private LoadingCache<Integer, City> cityCache;
 
 		public HelpRequest fromEntity(HelpRequestEntity entity) {
 
@@ -25,9 +25,9 @@ public class HelpRequest {
 
 			helpRequest.helpRequestId = entity.getId();
 			helpRequest.amityUser = new AmityUser(entity.getUser());
-			helpRequest.fromCity = cityCache.get(entity.getFromCity().getId());
+			helpRequest.fromCity = cityCache.getUnchecked(entity.getFromCity().getId());
 			helpRequest.fromDateTime = entity.getFromDateTime();
-			helpRequest.toCity = cityCache.get(entity.getToCity().getId());
+			helpRequest.toCity = cityCache.getUnchecked(entity.getToCity().getId());
 			helpRequest.toDateTime = entity.getToDateTime();
 
 			return helpRequest;

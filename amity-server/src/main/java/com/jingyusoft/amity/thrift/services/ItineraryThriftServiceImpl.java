@@ -7,10 +7,11 @@ import javax.annotation.Resource;
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
 
+import com.google.common.cache.LoadingCache;
 import com.jingyusoft.amity.common.DateTimeUtils;
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.Itinerary;
-import com.jingyusoft.amity.refdata.CityCache;
+import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.services.ItineraryService;
 import com.jingyusoft.amity.thrift.generated.CreateItineraryRequest;
 import com.jingyusoft.amity.thrift.generated.CreateItineraryResponse;
@@ -33,7 +34,7 @@ public class ItineraryThriftServiceImpl implements ItineraryThriftService.Iface 
 	private ItineraryService itineraryService;
 
 	@Resource
-	private CityCache cityCache;
+	private LoadingCache<Integer, City> cityCache;
 
 	@Override
 	public CreateItineraryResponse createItinerary(CreateItineraryRequest request, SessionCredentials credentials)

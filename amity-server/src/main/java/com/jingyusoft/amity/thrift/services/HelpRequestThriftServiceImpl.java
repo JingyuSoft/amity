@@ -7,10 +7,11 @@ import javax.annotation.Resource;
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
 
+import com.google.common.cache.LoadingCache;
 import com.jingyusoft.amity.common.DateTimeUtils;
 import com.jingyusoft.amity.common.ErrorCodes;
 import com.jingyusoft.amity.domain.HelpRequest;
-import com.jingyusoft.amity.refdata.CityCache;
+import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.services.HelpRequestService;
 import com.jingyusoft.amity.thrift.generated.CreateHelpRequestRequest;
 import com.jingyusoft.amity.thrift.generated.CreateHelpRequestResponse;
@@ -33,7 +34,7 @@ public class HelpRequestThriftServiceImpl implements HelpRequestThriftService.If
 	private HelpRequestService helpRequestService;
 
 	@Resource
-	private CityCache cityCache;
+	private LoadingCache<Integer, City> cityCache;
 
 	@Override
 	public CreateHelpRequestResponse createHelpRequest(CreateHelpRequestRequest request, SessionCredentials credentials)

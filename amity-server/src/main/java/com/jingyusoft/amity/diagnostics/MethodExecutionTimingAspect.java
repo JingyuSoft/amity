@@ -13,7 +13,10 @@ public class MethodExecutionTimingAspect {
 
 	private static final Logger LOGGER = AmityLogger.getLogger();
 
-	@Around("@annotation(com.jingyusoft.amity.diagnostics.ExecutionTimed)")
+	public MethodExecutionTimingAspect() {
+	}
+
+	@Around("execution(public * com.jingyusoft.amity..*.* (..))")
 	public Object timeExecution(ProceedingJoinPoint joinPoint) {
 		long start = System.nanoTime();
 		try {
@@ -22,7 +25,7 @@ public class MethodExecutionTimingAspect {
 			throw WrappedException.insteadOf(e);
 		} finally {
 			long end = System.nanoTime();
-			long duration = end - start / 1000;
+			long duration = (end - start) / 1000;
 			LOGGER.debug("Method [{}] executed in {} microseconds", joinPoint.getSignature().getDeclaringTypeName()
 					+ "." + joinPoint.getSignature().getName(), duration);
 		}

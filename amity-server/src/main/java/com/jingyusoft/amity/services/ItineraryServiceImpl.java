@@ -1,6 +1,7 @@
 package com.jingyusoft.amity.services;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -17,6 +18,9 @@ import com.jingyusoft.amity.data.repositories.AmityUserRepository;
 import com.jingyusoft.amity.data.repositories.CityRepository;
 import com.jingyusoft.amity.data.repositories.ItineraryRepository;
 import com.jingyusoft.amity.domain.Itinerary;
+import com.jingyusoft.amity.domain.ItinerarySearchOption;
+import com.jingyusoft.amity.domain.geographics.City;
+import com.jingyusoft.amity.refdata.CitySearcher;
 import com.jingyusoft.amity.users.UserAccountService;
 
 @Service
@@ -38,6 +42,9 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 	@Resource
 	private Itinerary.Factory itineraryFactory;
+
+	@Resource
+	private CitySearcher citySearcher;
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -84,6 +91,30 @@ public class ItineraryServiceImpl implements ItineraryService {
 			Itinerary itinerary = itineraryFactory.fromEntity(item);
 			return itinerary;
 		}).collect(Collectors.toList());
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public List<Itinerary> searchItineraries(City departureCity, City arrivalCity, ItinerarySearchOption searchOption) {
+
+		Set<Integer> departureCityIds = citySearcher
+				.getNearestCities(departureCity.getGeoLocation().getLatitude(),
+						departureCity.getGeoLocation().getLongitude(),
+						searchOption.getMaxDistanceToDepartureLocation(), searchOption.getMaxNearbyDepartureCities())
+						.stream().map(item -> item.getCityId()).collect(Collectors.toSet());
+		departureCityIds.add(departureCity.getId());
+
+		Set<Integer> arrivalCityIds = citySearcher
+				.getNearestCities(arrivalCity.getGeoLocation().getLatitude(),
+						arrivalCity.getGeoLocation().getLongitude(), searchOption.getMaxDistanceToArrivalLocation(),
+						searchOption.getMaxNearbyArrivalCities()).stream().map(item -> item.getCityId())
+						.collect(Collectors.toSet());
+		arrivalCityIds.add(arrivalCity.getId());
+
+		List<Itinerary> searchResult = itineraryRepository.searchItineraries(departureCityIds, departureCityIds)
+				.stream().map(item -> itineraryFactory.fromEntity(item)).collect(Collectors.toList());
+
+		return searchResult;
 	}
 
 	@Override

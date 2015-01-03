@@ -4,13 +4,11 @@
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
-			</Pattern>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
 	</appender>
 
-	<appender name="FILE"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.log</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
@@ -23,15 +21,14 @@
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
 
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>2MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
 
-	<appender name="HIBERNATE"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.log</file>
+	<appender name="HIBERNATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.log
+		</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
@@ -43,15 +40,14 @@
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
 
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>2MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
 
-	<appender name="HIBERNATE-SCHEMA"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.schema.log</file>
+	<appender name="HIBERNATE-SCHEMA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.schema.log
+		</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
@@ -63,15 +59,14 @@
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
 
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>2MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
 
-	<appender name="HIBERNATE-SQL"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.sql.log</file>
+	<appender name="HIBERNATE-SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.sql.log
+		</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
@@ -83,15 +78,14 @@
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
 
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>2MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
 
-	<appender name="SPRING"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.spring.log</file>
+	<appender name="SPRING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.spring.log
+		</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
 		</layout>
@@ -103,14 +97,12 @@
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
 
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>2MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
-	
-	<appender name="HIBERNATE-SCHEMA-UPDATE"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+	<appender name="HIBERNATE-SCHEMA-UPDATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.hibernate.schema.update.log</file>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>%msg%n</Pattern>
@@ -123,8 +115,26 @@
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
 
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>20MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="METHOD-EXECUTION-TIMER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.method.execution.timer.log
+		</file>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</layout>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${amity.log.dir:-/var/tmp/logs/unknown}/amity-server.method.execution.timer.%i.log.zip
+			</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>20MB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
@@ -137,13 +147,11 @@
 		<appender-ref ref="HIBERNATE-SQL" />
 	</logger>
 
-	<logger name="org.hibernate.tool.hbm2ddl.SchemaUpdate" level="ALL"
-		additivity="true">
+	<logger name="org.hibernate.tool.hbm2ddl.SchemaUpdate" level="ALL" additivity="true">
 		<appender-ref ref="HIBERNATE-SCHEMA-UPDATE" />
 	</logger>
-	
-	<logger name="org.hibernate.tool.hbm2ddl" level="DEBUG"
-		additivity="true">
+
+	<logger name="org.hibernate.tool.hbm2ddl" level="DEBUG" additivity="true">
 		<appender-ref ref="HIBERNATE-SCHEMA" />
 	</logger>
 
@@ -156,6 +164,11 @@
 	</logger>
 
 	<logger name="net.sf.ehcache" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.jingyusoft.amity.diagnostics.MethodExecutionTimingAspect" level="ALL" additivity="false">
+		<appender-ref ref="METHOD-EXECUTION-TIMER" />
 		<appender-ref ref="STDOUT" />
 	</logger>
 

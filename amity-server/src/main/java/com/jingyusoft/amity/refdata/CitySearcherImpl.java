@@ -117,7 +117,6 @@ public class CitySearcherImpl implements CitySearcher, CitySearcherMXBean {
 	 *
 	 * @return List of cities around the specified location
 	 */
-	@ExecutionTimed
 	@Override
 	public List<NearestCityResult> getNearestCities(final double latitude, final double longitude, double distance,
 			int maxCount) {
@@ -245,6 +244,9 @@ public class CitySearcherImpl implements CitySearcher, CitySearcherMXBean {
 		LOGGER.info("Index on {} cities built into directory [{}]", searchableCities.size(), indexDirName);
 	}
 
+	/**
+	 * Initialize Lucene index from local cache or database
+	 */
 	private void initializeIndex() {
 
 		try {

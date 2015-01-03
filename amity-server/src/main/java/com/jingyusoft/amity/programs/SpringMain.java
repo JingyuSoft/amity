@@ -51,6 +51,9 @@ public class SpringMain {
 			return;
 		}
 
+		// Set the active Spring profile
+		System.setProperty("spring.profiles.active", AmityEnvironment.getWorkingEnvironment().getConfigMode());
+
 		AmityPropertiesRepository amityProperties = new AmityPropertiesRepository();
 		amityProperties.initialize();
 

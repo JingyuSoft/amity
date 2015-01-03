@@ -26,8 +26,14 @@ public class MethodExecutionTimingAspect {
 		} finally {
 			long end = System.nanoTime();
 			long duration = (end - start) / 1000;
-			LOGGER.debug("Method [{}] executed in {} microseconds", joinPoint.getSignature().getDeclaringTypeName()
-					+ "." + joinPoint.getSignature().getName(), duration);
+			final String message = "Method [{}] executed in {} microseconds";
+			final String methodName = joinPoint.getSignature().getDeclaringTypeName() + "."
+					+ joinPoint.getSignature().getName();
+			if (duration > 100000) {
+				LOGGER.warn(message, methodName, duration);
+			} else {
+				LOGGER.info(message, methodName, duration);
+			}
 		}
 	}
 }

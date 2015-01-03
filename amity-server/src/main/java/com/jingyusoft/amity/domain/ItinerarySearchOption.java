@@ -2,20 +2,20 @@ package com.jingyusoft.amity.domain;
 
 public class ItinerarySearchOption {
 
-	private double maxDistanceToDepartureLocation = 20.0;
+	private double departureSearchRadius = 20.0;
 
-	private double maxDistanceToArrivalLocation = 20.0;
+	private double arrivalSearchRadius = 20.0;
 
 	private int maxNearbyDepartureCities = 1000;
 
 	private int maxNearbyArrivalCities = 1000;
 
-	public double getMaxDistanceToArrivalLocation() {
-		return maxDistanceToArrivalLocation;
+	public double getArrivalSearchRadius() {
+		return arrivalSearchRadius;
 	}
 
-	public double getMaxDistanceToDepartureLocation() {
-		return maxDistanceToDepartureLocation;
+	public double getDepartureSearchRadius() {
+		return departureSearchRadius;
 	}
 
 	public int getMaxNearbyArrivalCities() {
@@ -26,12 +26,12 @@ public class ItinerarySearchOption {
 		return maxNearbyDepartureCities;
 	}
 
-	public void setMaxDistanceToArrivalLocation(double maxDistanceToArrivalLocation) {
-		this.maxDistanceToArrivalLocation = maxDistanceToArrivalLocation;
+	public void setArrivalSearchRadius(double arrivalSearchRadius) {
+		this.arrivalSearchRadius = arrivalSearchRadius;
 	}
 
-	public void setMaxDistanceToDepartureLocation(double maxDistanceToDepartureLocation) {
-		this.maxDistanceToDepartureLocation = maxDistanceToDepartureLocation;
+	public void setDepartureSearchRadius(double departureSearchRadius) {
+		this.departureSearchRadius = departureSearchRadius;
 	}
 
 	public void setMaxNearbyArrivalCities(int maxNearbyArrivalCities) {

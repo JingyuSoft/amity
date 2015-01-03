@@ -777,7 +777,7 @@
 
 @end
 
-@implementation ListItineraryRequest
+@implementation ListItinerariesRequest
 
 - (id) init
 {
@@ -869,7 +869,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"ListItineraryRequest"];
+  [outProtocol writeStructBeginWithName: @"ListItinerariesRequest"];
   if (__amityUserId_isset) {
     [outProtocol writeFieldBeginWithName: @"amityUserId" type: TType_I64 fieldID: 1];
     [outProtocol writeI64: __amityUserId];
@@ -888,7 +888,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"ListItineraryRequest("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"ListItinerariesRequest("];
   [ms appendString: @"amityUserId:"];
   [ms appendFormat: @"%qi", __amityUserId];
   [ms appendString: @")"];
@@ -897,7 +897,7 @@
 
 @end
 
-@implementation ListItineraryResponse
+@implementation ListItinerariesResponse
 
 - (id) init
 {
@@ -1042,7 +1042,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"ListItineraryResponse"];
+  [outProtocol writeStructBeginWithName: @"ListItinerariesResponse"];
   if (__errorCode_isset) {
     [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
     [outProtocol writeI32: __errorCode];
@@ -1076,7 +1076,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"ListItineraryResponse("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"ListItinerariesResponse("];
   [ms appendString: @"errorCode:"];
   [ms appendFormat: @"%i", __errorCode];
   [ms appendString: @",itineraries:"];
@@ -1868,6 +1868,613 @@
 
 @end
 
+@implementation SearchItinerariesRequest
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithDepartureCityId: (int32_t) departureCityId departureLatitude: (double) departureLatitude departureLongitude: (double) departureLongitude arrivalCityId: (int32_t) arrivalCityId arrivalLatitude: (double) arrivalLatitude arrivalLongitude: (double) arrivalLongitude departureSearchRadius: (double) departureSearchRadius arrivalSearchRadius: (double) arrivalSearchRadius
+{
+  self = [super init];
+  __departureCityId = departureCityId;
+  __departureCityId_isset = YES;
+  __departureLatitude = departureLatitude;
+  __departureLatitude_isset = YES;
+  __departureLongitude = departureLongitude;
+  __departureLongitude_isset = YES;
+  __arrivalCityId = arrivalCityId;
+  __arrivalCityId_isset = YES;
+  __arrivalLatitude = arrivalLatitude;
+  __arrivalLatitude_isset = YES;
+  __arrivalLongitude = arrivalLongitude;
+  __arrivalLongitude_isset = YES;
+  __departureSearchRadius = departureSearchRadius;
+  __departureSearchRadius_isset = YES;
+  __arrivalSearchRadius = arrivalSearchRadius;
+  __arrivalSearchRadius_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"departureCityId"])
+  {
+    __departureCityId = [decoder decodeInt32ForKey: @"departureCityId"];
+    __departureCityId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"departureLatitude"])
+  {
+    __departureLatitude = [decoder decodeDoubleForKey: @"departureLatitude"];
+    __departureLatitude_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"departureLongitude"])
+  {
+    __departureLongitude = [decoder decodeDoubleForKey: @"departureLongitude"];
+    __departureLongitude_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"arrivalCityId"])
+  {
+    __arrivalCityId = [decoder decodeInt32ForKey: @"arrivalCityId"];
+    __arrivalCityId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"arrivalLatitude"])
+  {
+    __arrivalLatitude = [decoder decodeDoubleForKey: @"arrivalLatitude"];
+    __arrivalLatitude_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"arrivalLongitude"])
+  {
+    __arrivalLongitude = [decoder decodeDoubleForKey: @"arrivalLongitude"];
+    __arrivalLongitude_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"departureSearchRadius"])
+  {
+    __departureSearchRadius = [decoder decodeDoubleForKey: @"departureSearchRadius"];
+    __departureSearchRadius_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"arrivalSearchRadius"])
+  {
+    __arrivalSearchRadius = [decoder decodeDoubleForKey: @"arrivalSearchRadius"];
+    __arrivalSearchRadius_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__departureCityId_isset)
+  {
+    [encoder encodeInt32: __departureCityId forKey: @"departureCityId"];
+  }
+  if (__departureLatitude_isset)
+  {
+    [encoder encodeDouble: __departureLatitude forKey: @"departureLatitude"];
+  }
+  if (__departureLongitude_isset)
+  {
+    [encoder encodeDouble: __departureLongitude forKey: @"departureLongitude"];
+  }
+  if (__arrivalCityId_isset)
+  {
+    [encoder encodeInt32: __arrivalCityId forKey: @"arrivalCityId"];
+  }
+  if (__arrivalLatitude_isset)
+  {
+    [encoder encodeDouble: __arrivalLatitude forKey: @"arrivalLatitude"];
+  }
+  if (__arrivalLongitude_isset)
+  {
+    [encoder encodeDouble: __arrivalLongitude forKey: @"arrivalLongitude"];
+  }
+  if (__departureSearchRadius_isset)
+  {
+    [encoder encodeDouble: __departureSearchRadius forKey: @"departureSearchRadius"];
+  }
+  if (__arrivalSearchRadius_isset)
+  {
+    [encoder encodeDouble: __arrivalSearchRadius forKey: @"arrivalSearchRadius"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc_stub];
+}
+
+- (int32_t) departureCityId {
+  return __departureCityId;
+}
+
+- (void) setDepartureCityId: (int32_t) departureCityId {
+  __departureCityId = departureCityId;
+  __departureCityId_isset = YES;
+}
+
+- (BOOL) departureCityIdIsSet {
+  return __departureCityId_isset;
+}
+
+- (void) unsetDepartureCityId {
+  __departureCityId_isset = NO;
+}
+
+- (double) departureLatitude {
+  return __departureLatitude;
+}
+
+- (void) setDepartureLatitude: (double) departureLatitude {
+  __departureLatitude = departureLatitude;
+  __departureLatitude_isset = YES;
+}
+
+- (BOOL) departureLatitudeIsSet {
+  return __departureLatitude_isset;
+}
+
+- (void) unsetDepartureLatitude {
+  __departureLatitude_isset = NO;
+}
+
+- (double) departureLongitude {
+  return __departureLongitude;
+}
+
+- (void) setDepartureLongitude: (double) departureLongitude {
+  __departureLongitude = departureLongitude;
+  __departureLongitude_isset = YES;
+}
+
+- (BOOL) departureLongitudeIsSet {
+  return __departureLongitude_isset;
+}
+
+- (void) unsetDepartureLongitude {
+  __departureLongitude_isset = NO;
+}
+
+- (int32_t) arrivalCityId {
+  return __arrivalCityId;
+}
+
+- (void) setArrivalCityId: (int32_t) arrivalCityId {
+  __arrivalCityId = arrivalCityId;
+  __arrivalCityId_isset = YES;
+}
+
+- (BOOL) arrivalCityIdIsSet {
+  return __arrivalCityId_isset;
+}
+
+- (void) unsetArrivalCityId {
+  __arrivalCityId_isset = NO;
+}
+
+- (double) arrivalLatitude {
+  return __arrivalLatitude;
+}
+
+- (void) setArrivalLatitude: (double) arrivalLatitude {
+  __arrivalLatitude = arrivalLatitude;
+  __arrivalLatitude_isset = YES;
+}
+
+- (BOOL) arrivalLatitudeIsSet {
+  return __arrivalLatitude_isset;
+}
+
+- (void) unsetArrivalLatitude {
+  __arrivalLatitude_isset = NO;
+}
+
+- (double) arrivalLongitude {
+  return __arrivalLongitude;
+}
+
+- (void) setArrivalLongitude: (double) arrivalLongitude {
+  __arrivalLongitude = arrivalLongitude;
+  __arrivalLongitude_isset = YES;
+}
+
+- (BOOL) arrivalLongitudeIsSet {
+  return __arrivalLongitude_isset;
+}
+
+- (void) unsetArrivalLongitude {
+  __arrivalLongitude_isset = NO;
+}
+
+- (double) departureSearchRadius {
+  return __departureSearchRadius;
+}
+
+- (void) setDepartureSearchRadius: (double) departureSearchRadius {
+  __departureSearchRadius = departureSearchRadius;
+  __departureSearchRadius_isset = YES;
+}
+
+- (BOOL) departureSearchRadiusIsSet {
+  return __departureSearchRadius_isset;
+}
+
+- (void) unsetDepartureSearchRadius {
+  __departureSearchRadius_isset = NO;
+}
+
+- (double) arrivalSearchRadius {
+  return __arrivalSearchRadius;
+}
+
+- (void) setArrivalSearchRadius: (double) arrivalSearchRadius {
+  __arrivalSearchRadius = arrivalSearchRadius;
+  __arrivalSearchRadius_isset = YES;
+}
+
+- (BOOL) arrivalSearchRadiusIsSet {
+  return __arrivalSearchRadius_isset;
+}
+
+- (void) unsetArrivalSearchRadius {
+  __arrivalSearchRadius_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setDepartureCityId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setDepartureLatitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setDepartureLongitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setArrivalCityId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setArrivalLatitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setArrivalLongitude: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setDepartureSearchRadius: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 8:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setArrivalSearchRadius: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SearchItinerariesRequest"];
+  if (__departureCityId_isset) {
+    [outProtocol writeFieldBeginWithName: @"departureCityId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __departureCityId];
+    [outProtocol writeFieldEnd];
+  }
+  if (__departureLatitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"departureLatitude" type: TType_DOUBLE fieldID: 2];
+    [outProtocol writeDouble: __departureLatitude];
+    [outProtocol writeFieldEnd];
+  }
+  if (__departureLongitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"departureLongitude" type: TType_DOUBLE fieldID: 3];
+    [outProtocol writeDouble: __departureLongitude];
+    [outProtocol writeFieldEnd];
+  }
+  if (__arrivalCityId_isset) {
+    [outProtocol writeFieldBeginWithName: @"arrivalCityId" type: TType_I32 fieldID: 4];
+    [outProtocol writeI32: __arrivalCityId];
+    [outProtocol writeFieldEnd];
+  }
+  if (__arrivalLatitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"arrivalLatitude" type: TType_DOUBLE fieldID: 5];
+    [outProtocol writeDouble: __arrivalLatitude];
+    [outProtocol writeFieldEnd];
+  }
+  if (__arrivalLongitude_isset) {
+    [outProtocol writeFieldBeginWithName: @"arrivalLongitude" type: TType_DOUBLE fieldID: 6];
+    [outProtocol writeDouble: __arrivalLongitude];
+    [outProtocol writeFieldEnd];
+  }
+  if (__departureSearchRadius_isset) {
+    [outProtocol writeFieldBeginWithName: @"departureSearchRadius" type: TType_DOUBLE fieldID: 7];
+    [outProtocol writeDouble: __departureSearchRadius];
+    [outProtocol writeFieldEnd];
+  }
+  if (__arrivalSearchRadius_isset) {
+    [outProtocol writeFieldBeginWithName: @"arrivalSearchRadius" type: TType_DOUBLE fieldID: 8];
+    [outProtocol writeDouble: __arrivalSearchRadius];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SearchItinerariesRequest("];
+  [ms appendString: @"departureCityId:"];
+  [ms appendFormat: @"%i", __departureCityId];
+  [ms appendString: @",departureLatitude:"];
+  [ms appendFormat: @"%f", __departureLatitude];
+  [ms appendString: @",departureLongitude:"];
+  [ms appendFormat: @"%f", __departureLongitude];
+  [ms appendString: @",arrivalCityId:"];
+  [ms appendFormat: @"%i", __arrivalCityId];
+  [ms appendString: @",arrivalLatitude:"];
+  [ms appendFormat: @"%f", __arrivalLatitude];
+  [ms appendString: @",arrivalLongitude:"];
+  [ms appendFormat: @"%f", __arrivalLongitude];
+  [ms appendString: @",departureSearchRadius:"];
+  [ms appendFormat: @"%f", __departureSearchRadius];
+  [ms appendString: @",arrivalSearchRadius:"];
+  [ms appendFormat: @"%f", __arrivalSearchRadius];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation SearchItinerariesResponse
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithErrorCode: (int32_t) errorCode itineraries: (NSMutableArray *) itineraries
+{
+  self = [super init];
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+  __itineraries = [itineraries retain_stub];
+  __itineraries_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"errorCode"])
+  {
+    __errorCode = [decoder decodeInt32ForKey: @"errorCode"];
+    __errorCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"itineraries"])
+  {
+    __itineraries = [[decoder decodeObjectForKey: @"itineraries"] retain_stub];
+    __itineraries_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__errorCode_isset)
+  {
+    [encoder encodeInt32: __errorCode forKey: @"errorCode"];
+  }
+  if (__itineraries_isset)
+  {
+    [encoder encodeObject: __itineraries forKey: @"itineraries"];
+  }
+}
+
+- (void) dealloc
+{
+  [__itineraries release_stub];
+  [super dealloc_stub];
+}
+
+- (int32_t) errorCode {
+  return __errorCode;
+}
+
+- (void) setErrorCode: (int32_t) errorCode {
+  __errorCode = errorCode;
+  __errorCode_isset = YES;
+}
+
+- (BOOL) errorCodeIsSet {
+  return __errorCode_isset;
+}
+
+- (void) unsetErrorCode {
+  __errorCode_isset = NO;
+}
+
+- (NSMutableArray *) itineraries {
+  return [[__itineraries retain_stub] autorelease_stub];
+}
+
+- (void) setItineraries: (NSMutableArray *) itineraries {
+  [itineraries retain_stub];
+  [__itineraries release_stub];
+  __itineraries = itineraries;
+  __itineraries_isset = YES;
+}
+
+- (BOOL) itinerariesIsSet {
+  return __itineraries_isset;
+}
+
+- (void) unsetItineraries {
+  [__itineraries release_stub];
+  __itineraries = nil;
+  __itineraries_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setErrorCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_LIST) {
+          int _size5;
+          [inProtocol readListBeginReturningElementType: NULL size: &_size5];
+          NSMutableArray * fieldValue = [[NSMutableArray alloc] initWithCapacity: _size5];
+          int _i6;
+          for (_i6 = 0; _i6 < _size5; ++_i6)
+          {
+            ItineraryDto *_elem7 = [[ItineraryDto alloc] init];
+            [_elem7 read: inProtocol];
+            [fieldValue addObject: _elem7];
+            [_elem7 release_stub];
+          }
+          [inProtocol readListEnd];
+          [self setItineraries: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SearchItinerariesResponse"];
+  if (__errorCode_isset) {
+    [outProtocol writeFieldBeginWithName: @"errorCode" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __errorCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (__itineraries_isset) {
+    if (__itineraries != nil) {
+      [outProtocol writeFieldBeginWithName: @"itineraries" type: TType_LIST fieldID: 2];
+      {
+        [outProtocol writeListBeginWithElementType: TType_STRUCT size: [__itineraries count]];
+        int idx9;
+        for (idx9 = 0; idx9 < [__itineraries count]; idx9++)
+        {
+          [[__itineraries objectAtIndex: idx9] write: outProtocol];
+        }
+        [outProtocol writeListEnd];
+      }
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+  if (!__errorCode_isset) {
+    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+                               reason: @"Required field 'errorCode' is not set."];
+  }
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SearchItinerariesResponse("];
+  [ms appendString: @"errorCode:"];
+  [ms appendFormat: @"%i", __errorCode];
+  [ms appendString: @",itineraries:"];
+  [ms appendFormat: @"%@", __itineraries];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 
 @implementation ItineraryConstants
 + (void) initialize {
@@ -2238,8 +2845,8 @@
 
 @end
 
-@interface listItineries_args : NSObject <TBase, NSCoding> {
-  ListItineraryRequest * __request;
+@interface listItineraries_args : NSObject <TBase, NSCoding> {
+  ListItinerariesRequest * __request;
   SessionCredentials * __credentials;
 
   BOOL __request_isset;
@@ -2247,12 +2854,12 @@
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=request, setter=setRequest:) ListItineraryRequest * request;
+@property (nonatomic, retain, getter=request, setter=setRequest:) ListItinerariesRequest * request;
 @property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
 #endif
 
 - (id) init;
-- (id) initWithRequest: (ListItineraryRequest *) request credentials: (SessionCredentials *) credentials;
+- (id) initWithRequest: (ListItinerariesRequest *) request credentials: (SessionCredentials *) credentials;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -2260,8 +2867,8 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (ListItineraryRequest *) request;
-- (void) setRequest: (ListItineraryRequest *) request;
+- (ListItinerariesRequest *) request;
+- (void) setRequest: (ListItinerariesRequest *) request;
 #endif
 - (BOOL) requestIsSet;
 
@@ -2273,7 +2880,7 @@
 
 @end
 
-@implementation listItineries_args
+@implementation listItineraries_args
 
 - (id) init
 {
@@ -2283,7 +2890,7 @@
   return self;
 }
 
-- (id) initWithRequest: (ListItineraryRequest *) request credentials: (SessionCredentials *) credentials
+- (id) initWithRequest: (ListItinerariesRequest *) request credentials: (SessionCredentials *) credentials
 {
   self = [super init];
   __request = [request retain_stub];
@@ -2328,11 +2935,11 @@
   [super dealloc_stub];
 }
 
-- (ListItineraryRequest *) request {
+- (ListItinerariesRequest *) request {
   return [[__request retain_stub] autorelease_stub];
 }
 
-- (void) setRequest: (ListItineraryRequest *) request {
+- (void) setRequest: (ListItinerariesRequest *) request {
   [request retain_stub];
   [__request release_stub];
   __request = request;
@@ -2387,7 +2994,7 @@
     {
       case 1:
         if (fieldType == TType_STRUCT) {
-          ListItineraryRequest *fieldValue = [[ListItineraryRequest alloc] init];
+          ListItinerariesRequest *fieldValue = [[ListItinerariesRequest alloc] init];
           [fieldValue read: inProtocol];
           [self setRequest: fieldValue];
           [fieldValue release_stub];
@@ -2415,7 +3022,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"listItineries_args"];
+  [outProtocol writeStructBeginWithName: @"listItineraries_args"];
   if (__request_isset) {
     if (__request != nil) {
       [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
@@ -2439,7 +3046,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"listItineries_args("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"listItineraries_args("];
   [ms appendString: @"request:"];
   [ms appendFormat: @"%@", __request];
   [ms appendString: @",credentials:"];
@@ -2450,18 +3057,18 @@
 
 @end
 
-@interface ListItineries_result : NSObject <TBase, NSCoding> {
-  ListItineraryResponse * __success;
+@interface ListItineraries_result : NSObject <TBase, NSCoding> {
+  ListItinerariesResponse * __success;
 
   BOOL __success_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) ListItineraryResponse * success;
+@property (nonatomic, retain, getter=success, setter=setSuccess:) ListItinerariesResponse * success;
 #endif
 
 - (id) init;
-- (id) initWithSuccess: (ListItineraryResponse *) success;
+- (id) initWithSuccess: (ListItinerariesResponse *) success;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -2469,14 +3076,14 @@
 - (void) validate;
 
 #if !__has_feature(objc_arc)
-- (ListItineraryResponse *) success;
-- (void) setSuccess: (ListItineraryResponse *) success;
+- (ListItinerariesResponse *) success;
+- (void) setSuccess: (ListItinerariesResponse *) success;
 #endif
 - (BOOL) successIsSet;
 
 @end
 
-@implementation ListItineries_result
+@implementation ListItineraries_result
 
 - (id) init
 {
@@ -2486,7 +3093,7 @@
   return self;
 }
 
-- (id) initWithSuccess: (ListItineraryResponse *) success
+- (id) initWithSuccess: (ListItinerariesResponse *) success
 {
   self = [super init];
   __success = [success retain_stub];
@@ -2519,11 +3126,11 @@
   [super dealloc_stub];
 }
 
-- (ListItineraryResponse *) success {
+- (ListItinerariesResponse *) success {
   return [[__success retain_stub] autorelease_stub];
 }
 
-- (void) setSuccess: (ListItineraryResponse *) success {
+- (void) setSuccess: (ListItinerariesResponse *) success {
   [success retain_stub];
   [__success release_stub];
   __success = success;
@@ -2557,7 +3164,7 @@
     {
       case 0:
         if (fieldType == TType_STRUCT) {
-          ListItineraryResponse *fieldValue = [[ListItineraryResponse alloc] init];
+          ListItinerariesResponse *fieldValue = [[ListItinerariesResponse alloc] init];
           [fieldValue read: inProtocol];
           [self setSuccess: fieldValue];
           [fieldValue release_stub];
@@ -2575,7 +3182,7 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"ListItineries_result"];
+  [outProtocol writeStructBeginWithName: @"ListItineraries_result"];
 
   if (__success_isset) {
     if (__success != nil) {
@@ -2593,7 +3200,7 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"ListItineries_result("];
+  NSMutableString * ms = [NSMutableString stringWithString: @"ListItineraries_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%@", __success];
   [ms appendString: @")"];
@@ -3694,6 +4301,370 @@
 
 @end
 
+@interface searchItineraries_args : NSObject <TBase, NSCoding> {
+  SearchItinerariesRequest * __request;
+  SessionCredentials * __credentials;
+
+  BOOL __request_isset;
+  BOOL __credentials_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=request, setter=setRequest:) SearchItinerariesRequest * request;
+@property (nonatomic, retain, getter=credentials, setter=setCredentials:) SessionCredentials * credentials;
+#endif
+
+- (id) init;
+- (id) initWithRequest: (SearchItinerariesRequest *) request credentials: (SessionCredentials *) credentials;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (SearchItinerariesRequest *) request;
+- (void) setRequest: (SearchItinerariesRequest *) request;
+#endif
+- (BOOL) requestIsSet;
+
+#if !__has_feature(objc_arc)
+- (SessionCredentials *) credentials;
+- (void) setCredentials: (SessionCredentials *) credentials;
+#endif
+- (BOOL) credentialsIsSet;
+
+@end
+
+@implementation searchItineraries_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithRequest: (SearchItinerariesRequest *) request credentials: (SessionCredentials *) credentials
+{
+  self = [super init];
+  __request = [request retain_stub];
+  __request_isset = YES;
+  __credentials = [credentials retain_stub];
+  __credentials_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"request"])
+  {
+    __request = [[decoder decodeObjectForKey: @"request"] retain_stub];
+    __request_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"credentials"])
+  {
+    __credentials = [[decoder decodeObjectForKey: @"credentials"] retain_stub];
+    __credentials_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__request_isset)
+  {
+    [encoder encodeObject: __request forKey: @"request"];
+  }
+  if (__credentials_isset)
+  {
+    [encoder encodeObject: __credentials forKey: @"credentials"];
+  }
+}
+
+- (void) dealloc
+{
+  [__request release_stub];
+  [__credentials release_stub];
+  [super dealloc_stub];
+}
+
+- (SearchItinerariesRequest *) request {
+  return [[__request retain_stub] autorelease_stub];
+}
+
+- (void) setRequest: (SearchItinerariesRequest *) request {
+  [request retain_stub];
+  [__request release_stub];
+  __request = request;
+  __request_isset = YES;
+}
+
+- (BOOL) requestIsSet {
+  return __request_isset;
+}
+
+- (void) unsetRequest {
+  [__request release_stub];
+  __request = nil;
+  __request_isset = NO;
+}
+
+- (SessionCredentials *) credentials {
+  return [[__credentials retain_stub] autorelease_stub];
+}
+
+- (void) setCredentials: (SessionCredentials *) credentials {
+  [credentials retain_stub];
+  [__credentials release_stub];
+  __credentials = credentials;
+  __credentials_isset = YES;
+}
+
+- (BOOL) credentialsIsSet {
+  return __credentials_isset;
+}
+
+- (void) unsetCredentials {
+  [__credentials release_stub];
+  __credentials = nil;
+  __credentials_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          SearchItinerariesRequest *fieldValue = [[SearchItinerariesRequest alloc] init];
+          [fieldValue read: inProtocol];
+          [self setRequest: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRUCT) {
+          SessionCredentials *fieldValue = [[SessionCredentials alloc] init];
+          [fieldValue read: inProtocol];
+          [self setCredentials: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"searchItineraries_args"];
+  if (__request_isset) {
+    if (__request != nil) {
+      [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+      [__request write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__credentials_isset) {
+    if (__credentials != nil) {
+      [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+      [__credentials write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"searchItineraries_args("];
+  [ms appendString: @"request:"];
+  [ms appendFormat: @"%@", __request];
+  [ms appendString: @",credentials:"];
+  [ms appendFormat: @"%@", __credentials];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface SearchItineraries_result : NSObject <TBase, NSCoding> {
+  SearchItinerariesResponse * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) SearchItinerariesResponse * success;
+#endif
+
+- (id) init;
+- (id) initWithSuccess: (SearchItinerariesResponse *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (SearchItinerariesResponse *) success;
+- (void) setSuccess: (SearchItinerariesResponse *) success;
+#endif
+- (BOOL) successIsSet;
+
+@end
+
+@implementation SearchItineraries_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithSuccess: (SearchItinerariesResponse *) success
+{
+  self = [super init];
+  __success = [success retain_stub];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain_stub];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release_stub];
+  [super dealloc_stub];
+}
+
+- (SearchItinerariesResponse *) success {
+  return [[__success retain_stub] autorelease_stub];
+}
+
+- (void) setSuccess: (SearchItinerariesResponse *) success {
+  [success retain_stub];
+  [__success release_stub];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release_stub];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          SearchItinerariesResponse *fieldValue = [[SearchItinerariesResponse alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SearchItineraries_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (void) validate {
+  // check for required fields
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SearchItineraries_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation ItineraryThriftServiceClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -3760,10 +4731,10 @@
   return [self recv_getItinerary];
 }
 
-- (void) send_listItineries: (ListItineraryRequest *) request credentials: (SessionCredentials *) credentials
+- (void) send_listItineraries: (ListItinerariesRequest *) request credentials: (SessionCredentials *) credentials
 {
-  [outProtocol writeMessageBeginWithName: @"listItineries" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"listItineries_args"];
+  [outProtocol writeMessageBeginWithName: @"listItineraries" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"listItineraries_args"];
   if (request != nil)  {
     [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
     [request write: outProtocol];
@@ -3780,7 +4751,7 @@
   [[outProtocol transport] flush];
 }
 
-- (ListItineraryResponse *) recv_listItineries
+- (ListItinerariesResponse *) recv_listItineraries
 {
   int msgType = 0;
   [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
@@ -3789,20 +4760,20 @@
     [inProtocol readMessageEnd];
     @throw x;
   }
-  ListItineries_result * result = [[[ListItineries_result alloc] init] autorelease_stub];
+  ListItineraries_result * result = [[[ListItineraries_result alloc] init] autorelease_stub];
   [result read: inProtocol];
   [inProtocol readMessageEnd];
   if ([result successIsSet]) {
     return [result success];
   }
   @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"listItineries failed: unknown result"];
+                                           reason: @"listItineraries failed: unknown result"];
 }
 
-- (ListItineraryResponse *) listItineries: (ListItineraryRequest *) request credentials: (SessionCredentials *) credentials
+- (ListItinerariesResponse *) listItineraries: (ListItinerariesRequest *) request credentials: (SessionCredentials *) credentials
 {
-  [self send_listItineries : request credentials: credentials];
-  return [self recv_listItineries];
+  [self send_listItineraries : request credentials: credentials];
+  return [self recv_listItineraries];
 }
 
 - (void) send_createItinerary: (CreateItineraryRequest *) request credentials: (SessionCredentials *) credentials
@@ -3940,6 +4911,51 @@
   return [self recv_deleteItinerary];
 }
 
+- (void) send_searchItineraries: (SearchItinerariesRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [outProtocol writeMessageBeginWithName: @"searchItineraries" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"searchItineraries_args"];
+  if (request != nil)  {
+    [outProtocol writeFieldBeginWithName: @"request" type: TType_STRUCT fieldID: 1];
+    [request write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  if (credentials != nil)  {
+    [outProtocol writeFieldBeginWithName: @"credentials" type: TType_STRUCT fieldID: 2];
+    [credentials write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (SearchItinerariesResponse *) recv_searchItineraries
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  SearchItineraries_result * result = [[[SearchItineraries_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"searchItineraries failed: unknown result"];
+}
+
+- (SearchItinerariesResponse *) searchItineraries: (SearchItinerariesRequest *) request credentials: (SessionCredentials *) credentials
+{
+  [self send_searchItineraries : request credentials: credentials];
+  return [self recv_searchItineraries];
+}
+
 @end
 
 @implementation ItineraryThriftServiceProcessor
@@ -3961,12 +4977,12 @@
     [mMethodMap setValue: invocation forKey: @"getItinerary"];
   }
   {
-    SEL s = @selector(process_listItineries_withSequenceID:inProtocol:outProtocol:);
+    SEL s = @selector(process_listItineraries_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
     [invocation setSelector: s];
     [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"listItineries"];
+    [mMethodMap setValue: invocation forKey: @"listItineraries"];
   }
   {
     SEL s = @selector(process_createItinerary_withSequenceID:inProtocol:outProtocol:);
@@ -3991,6 +5007,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"deleteItinerary"];
+  }
+  {
+    SEL s = @selector(process_searchItineraries_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"searchItineraries"];
   }
   return self;
 }
@@ -4050,14 +5074,14 @@
   [args release_stub];
 }
 
-- (void) process_listItineries_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+- (void) process_listItineraries_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
 {
-  listItineries_args * args = [[listItineries_args alloc] init];
+  listItineraries_args * args = [[listItineraries_args alloc] init];
   [args read: inProtocol];
   [inProtocol readMessageEnd];
-  ListItineries_result * result = [[ListItineries_result alloc] init];
-  [result setSuccess: [mService listItineries: [args request] credentials: [args credentials]]];
-  [outProtocol writeMessageBeginWithName: @"listItineries"
+  ListItineraries_result * result = [[ListItineraries_result alloc] init];
+  [result setSuccess: [mService listItineraries: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"listItineraries"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];
@@ -4109,6 +5133,23 @@
   DeleteItinerary_result * result = [[DeleteItinerary_result alloc] init];
   [result setSuccess: [mService deleteItinerary: [args request] credentials: [args credentials]]];
   [outProtocol writeMessageBeginWithName: @"deleteItinerary"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_searchItineraries_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  searchItineraries_args * args = [[searchItineraries_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  SearchItineraries_result * result = [[SearchItineraries_result alloc] init];
+  [result setSuccess: [mService searchItineraries: [args request] credentials: [args credentials]]];
+  [outProtocol writeMessageBeginWithName: @"searchItineraries"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

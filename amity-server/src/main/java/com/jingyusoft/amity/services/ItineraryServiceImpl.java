@@ -99,16 +99,16 @@ public class ItineraryServiceImpl implements ItineraryService {
 
 		Set<Integer> departureCityIds = citySearcher
 				.getNearestCities(departureCity.getGeoLocation().getLatitude(),
-						departureCity.getGeoLocation().getLongitude(),
-						searchOption.getMaxDistanceToDepartureLocation(), searchOption.getMaxNearbyDepartureCities())
-						.stream().map(item -> item.getCityId()).collect(Collectors.toSet());
+						departureCity.getGeoLocation().getLongitude(), searchOption.getDepartureSearchRadius(),
+						searchOption.getMaxNearbyDepartureCities()).stream().map(item -> item.getCityId())
+				.collect(Collectors.toSet());
 		departureCityIds.add(departureCity.getId());
 
 		Set<Integer> arrivalCityIds = citySearcher
 				.getNearestCities(arrivalCity.getGeoLocation().getLatitude(),
-						arrivalCity.getGeoLocation().getLongitude(), searchOption.getMaxDistanceToArrivalLocation(),
+						arrivalCity.getGeoLocation().getLongitude(), searchOption.getArrivalSearchRadius(),
 						searchOption.getMaxNearbyArrivalCities()).stream().map(item -> item.getCityId())
-						.collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 		arrivalCityIds.add(arrivalCity.getId());
 
 		List<Itinerary> searchResult = itineraryRepository.searchItineraries(departureCityIds, departureCityIds)

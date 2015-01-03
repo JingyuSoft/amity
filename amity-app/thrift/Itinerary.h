@@ -168,7 +168,7 @@
 
 @end
 
-@interface ListItineraryRequest : NSObject <TBase, NSCoding> {
+@interface ListItinerariesRequest : NSObject <TBase, NSCoding> {
   int64_t __amityUserId;
 
   BOOL __amityUserId_isset;
@@ -194,7 +194,7 @@
 
 @end
 
-@interface ListItineraryResponse : NSObject <TBase, NSCoding> {
+@interface ListItinerariesResponse : NSObject <TBase, NSCoding> {
   int32_t __errorCode;
   NSMutableArray * __itineraries;
 
@@ -394,12 +394,137 @@
 
 @end
 
+@interface SearchItinerariesRequest : NSObject <TBase, NSCoding> {
+  int32_t __departureCityId;
+  double __departureLatitude;
+  double __departureLongitude;
+  int32_t __arrivalCityId;
+  double __arrivalLatitude;
+  double __arrivalLongitude;
+  double __departureSearchRadius;
+  double __arrivalSearchRadius;
+
+  BOOL __departureCityId_isset;
+  BOOL __departureLatitude_isset;
+  BOOL __departureLongitude_isset;
+  BOOL __arrivalCityId_isset;
+  BOOL __arrivalLatitude_isset;
+  BOOL __arrivalLongitude_isset;
+  BOOL __departureSearchRadius_isset;
+  BOOL __arrivalSearchRadius_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=departureCityId, setter=setDepartureCityId:) int32_t departureCityId;
+@property (nonatomic, getter=departureLatitude, setter=setDepartureLatitude:) double departureLatitude;
+@property (nonatomic, getter=departureLongitude, setter=setDepartureLongitude:) double departureLongitude;
+@property (nonatomic, getter=arrivalCityId, setter=setArrivalCityId:) int32_t arrivalCityId;
+@property (nonatomic, getter=arrivalLatitude, setter=setArrivalLatitude:) double arrivalLatitude;
+@property (nonatomic, getter=arrivalLongitude, setter=setArrivalLongitude:) double arrivalLongitude;
+@property (nonatomic, getter=departureSearchRadius, setter=setDepartureSearchRadius:) double departureSearchRadius;
+@property (nonatomic, getter=arrivalSearchRadius, setter=setArrivalSearchRadius:) double arrivalSearchRadius;
+#endif
+
+- (id) init;
+- (id) initWithDepartureCityId: (int32_t) departureCityId departureLatitude: (double) departureLatitude departureLongitude: (double) departureLongitude arrivalCityId: (int32_t) arrivalCityId arrivalLatitude: (double) arrivalLatitude arrivalLongitude: (double) arrivalLongitude departureSearchRadius: (double) departureSearchRadius arrivalSearchRadius: (double) arrivalSearchRadius;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) departureCityId;
+- (void) setDepartureCityId: (int32_t) departureCityId;
+#endif
+- (BOOL) departureCityIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) departureLatitude;
+- (void) setDepartureLatitude: (double) departureLatitude;
+#endif
+- (BOOL) departureLatitudeIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) departureLongitude;
+- (void) setDepartureLongitude: (double) departureLongitude;
+#endif
+- (BOOL) departureLongitudeIsSet;
+
+#if !__has_feature(objc_arc)
+- (int32_t) arrivalCityId;
+- (void) setArrivalCityId: (int32_t) arrivalCityId;
+#endif
+- (BOOL) arrivalCityIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) arrivalLatitude;
+- (void) setArrivalLatitude: (double) arrivalLatitude;
+#endif
+- (BOOL) arrivalLatitudeIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) arrivalLongitude;
+- (void) setArrivalLongitude: (double) arrivalLongitude;
+#endif
+- (BOOL) arrivalLongitudeIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) departureSearchRadius;
+- (void) setDepartureSearchRadius: (double) departureSearchRadius;
+#endif
+- (BOOL) departureSearchRadiusIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) arrivalSearchRadius;
+- (void) setArrivalSearchRadius: (double) arrivalSearchRadius;
+#endif
+- (BOOL) arrivalSearchRadiusIsSet;
+
+@end
+
+@interface SearchItinerariesResponse : NSObject <TBase, NSCoding> {
+  int32_t __errorCode;
+  NSMutableArray * __itineraries;
+
+  BOOL __errorCode_isset;
+  BOOL __itineraries_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=errorCode, setter=setErrorCode:) int32_t errorCode;
+@property (nonatomic, retain, getter=itineraries, setter=setItineraries:) NSMutableArray * itineraries;
+#endif
+
+- (id) init;
+- (id) initWithErrorCode: (int32_t) errorCode itineraries: (NSMutableArray *) itineraries;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (void) validate;
+
+#if !__has_feature(objc_arc)
+- (int32_t) errorCode;
+- (void) setErrorCode: (int32_t) errorCode;
+#endif
+- (BOOL) errorCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableArray *) itineraries;
+- (void) setItineraries: (NSMutableArray *) itineraries;
+#endif
+- (BOOL) itinerariesIsSet;
+
+@end
+
 @protocol ItineraryThriftService <NSObject>
 - (GetItineraryResponse *) getItinerary: (GetItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
-- (ListItineraryResponse *) listItineries: (ListItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (ListItinerariesResponse *) listItineraries: (ListItinerariesRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 - (CreateItineraryResponse *) createItinerary: (CreateItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 - (UpdateItineraryResponse *) updateItinerary: (UpdateItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 - (DeleteItineraryResponse *) deleteItinerary: (DeleteItineraryRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
+- (SearchItinerariesResponse *) searchItineraries: (SearchItinerariesRequest *) request credentials: (SessionCredentials *) credentials;  // throws TException
 @end
 
 @interface ItineraryThriftServiceClient : NSObject <ItineraryThriftService> {

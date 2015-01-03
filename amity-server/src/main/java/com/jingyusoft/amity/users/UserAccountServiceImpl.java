@@ -13,7 +13,6 @@ import com.jingyusoft.amity.common.SecurityUtils;
 import com.jingyusoft.amity.data.dao.UserAccountDao;
 import com.jingyusoft.amity.data.entities.AmityUserEntity;
 import com.jingyusoft.amity.data.repositories.AmityUserRepository;
-import com.jingyusoft.amity.diagnostics.ExecutionTimed;
 import com.jingyusoft.amity.domain.AmityUser;
 import com.jingyusoft.amity.domain.AmityUserType;
 
@@ -30,7 +29,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 	private UserAccountDao userAccountDao;
 
 	@Override
-	@ExecutionTimed
 	@Transactional(propagation = Propagation.REQUIRED)
 	public AmityUser getAmityUser(long amityUserId) {
 		return new AmityUser(amityUserRepository.getOne(amityUserId));

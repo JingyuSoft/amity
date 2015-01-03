@@ -59,7 +59,6 @@ import com.jingyusoft.amity.AmityException;
 import com.jingyusoft.amity.common.StringMessage;
 import com.jingyusoft.amity.common.WrappedException;
 import com.jingyusoft.amity.data.dao.CityDao;
-import com.jingyusoft.amity.diagnostics.ExecutionTimed;
 import com.jingyusoft.amity.domain.geographics.City;
 import com.jingyusoft.amity.domain.geographics.GeoLocation;
 
@@ -178,7 +177,7 @@ public class CitySearcherImpl implements CitySearcher, CitySearcherMXBean {
 						})
 						.map(item -> new NearestCityResult(Integer.parseInt(item.get("id")), item.get("displayName"),
 								Double.parseDouble(item.get("latitude")), Double.parseDouble(item.get("longitude"))))
-								.collect(Collectors.toList());
+						.collect(Collectors.toList());
 			}
 		} catch (IOException e) {
 			throw WrappedException.insteadOf(e);
@@ -319,7 +318,6 @@ public class CitySearcherImpl implements CitySearcher, CitySearcherMXBean {
 	}
 
 	@Override
-	@ExecutionTimed
 	public List<CitySearchResult> searchCitiesByName(final String criteria, final int maxCount) throws ParseException {
 		final String pattern = criteria.toLowerCase();
 

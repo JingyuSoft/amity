@@ -1,0 +1,5 @@
+keytool -genkeypair -alias amity-thrift -keyalg RSA -sigalg SHA256withRSA -keystore amity-thrift-key-store.jks
+
+keytool -export -alias amity-thrift -keystore amity-thrift-key-store.jks -rfc -file amity-thrift.cer
+
+keytool -import -alias amity-thrift -file amity-thrift.cer -keystore amity-thrift-trust-store.jks

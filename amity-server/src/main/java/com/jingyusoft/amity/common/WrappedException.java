@@ -18,6 +18,10 @@ public class WrappedException extends RuntimeException {
 		}
 	}
 
+	public static WrappedException wrap(final Throwable t) {
+		return new WrappedException(t);
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public WrappedException(String message, Throwable cause) {
@@ -28,7 +32,7 @@ public class WrappedException extends RuntimeException {
 		super(cause);
 	}
 
-	public final Exception unwrap() {
+	public final Throwable unwrap() {
 		Throwable cause = getCause();
 		while (cause instanceof WrappedException) {
 			cause = cause.getCause();
